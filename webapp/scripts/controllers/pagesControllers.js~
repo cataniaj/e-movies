@@ -18,12 +18,12 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 		}
 	});
 	//Suggestion :		
-	$scope.datasSuggest = [];
+	$scope.datasBest = [];
 	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get suggestions
-		$scope.datasSuggest = data;
+		$scope.datasBest = data;
 		for(i=0;i<data.length;i++){
-			if($scope.datasSuggest[i].poster == "N/A"){
-				$scope.datasSuggest[i].poster = "images/logos/no-image.jpg";
+			if($scope.datasBest[i].poster == "N/A"){
+				$scope.datasBest[i].poster = "images/logos/no-image.jpg";
 			}
 		}
 	});	        

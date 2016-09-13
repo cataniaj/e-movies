@@ -13,9 +13,38 @@
             <p><a href="#/search"> Recherche avancée </a></p>
         </div>
 					
-        <ul class="nav nav-pills pull-right">
-            <li class="active"><a ng-href="#">Meilleurs Ventes</a></li>
+        <ul>
+            <li class="active" ><a ng-href="#">Meilleurs Ventes</a></li>
+            <!-- MEILLEURES VENTES -->
+            <div class="best">
+                <ul>
+                    <li ng-repeat="data in datasBest"> 
+                        <figure>
+                            <a href="#detail/124905">
+                                <img src='{{data.poster}}' alt=""/>
+                                <figcaption> {{data.title}} <br/> {{data.year}} </figcaption>
+                            </a>
+                        </figure>            
+                    </li>
+                </ul>
+            </div>
+           
+                
             <li class="active"><a ng-href="#">Suggestions</a></li>
+            <!-- SUGGESTIONS -->
+            <div class="best">
+                <ul>
+                    <li ng-repeat="data in datasSuggest"> 
+                        <figure>
+                            <a href="#detail/124905">
+                                <img src='{{data.poster}}' alt=""/>
+                                <figcaption> {{data.title}} <br/> {{data.year}} </figcaption>
+                            </a>
+                        </figure>            
+                    </li>
+                </ul>
+            </div>
+
         </ul>
 					
         <div>

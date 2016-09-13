@@ -16,6 +16,10 @@
 	text-decoration:none;
 }
 
+#poster{
+	height:130%;	
+}
+
 figure img{
 	border:1px;
 	width:130px;

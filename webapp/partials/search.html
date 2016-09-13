@@ -1,17 +1,17 @@
 
 <div class="search" ng-controller="searchCtrl">
-	{{datas.length}}						
+							
 	<ul>
 		<li ng-repeat="data in datas | orderBy: orderByPredicate : orderByReverse"> 
 			<figure>
 				<a href="#detail/124905">
-					<img src='{{data.poster}}' alt="" />
+					<img src='{{data.poster}}' alt=""/>
 					<figcaption> {{data.title}} <br/> {{data.year}} </figcaption>
 				</a>
 			<figure>			
 		</li>
 	</ul>
-	
+	{{datas.length}}
     <!--div class="row" ng-show="movies.length > 1">
         <a ng-click="clickPredicateName()" class="col-md-offset-7 col-md-2">Trier par nom</a>
         <a ng-click="clickPredicateRate()" class="col-md-2">Trier par note</a>

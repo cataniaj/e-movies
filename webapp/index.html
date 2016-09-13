@@ -4,6 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="styles/index.css" />
+		<link rel="stylesheet" type="text/css" href="styles/home.css" />
 		<link rel="stylesheet" type="text/css" href="styles/search.css" />
 		<link rel="stylesheet" type="text/css" href="styles/detail.css" />
         <title> Emovies </title>        
@@ -12,7 +13,7 @@
 		<div id="main">
 			<header>
 				<div class="logo">
-                    <img src="images/logos/banniere.png" />
+                    <a href="#home"><img src="images/logos/banniere.png" /></a>
 				</div>				
 			</header>
 			<!--<div class="banniereLogin">
@@ -43,14 +44,16 @@
                     <div class="banniereLogin">
                         <div id="btnLeft">
                             <ul>
-                                <li>back</li>
-                                <li>Acceuil</li>
+                                <li><a href="#back">Retour</a></li>
+
+                                <li><a href="#home">Acceuil</a></li>
                                 <li>Rechercher</li>
                             </ul>
                         </div>
                         <div id="btnRight">
                             <ul>
                                 <li>Connexion/Inscription</li>
+                                <li><a href = "#achat">Achats</a></li>
                                 <li>Panier</li>
                             </ul>
                         </div>
@@ -63,7 +66,7 @@
 			
 			<footer> 
 				<div class="infoFooter">
-					Footer
+					Contact
 				</div>
 			</footer> 
 		</div>

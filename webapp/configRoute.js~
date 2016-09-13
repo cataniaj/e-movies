@@ -31,15 +31,13 @@ routeApp.config(['$routeProvider',
             templateUrl: 'partials/detail.html',
             controller: 'detailCtrl'
         })
-	
+		.otherwise({
+            redirectTo: '/home'
+        })
+
 	.when('/achat', {
             templateUrl: 'partials/achat.html',
             controller: 'achatCtrl'
-        })
-
-
-	.otherwise({
-            redirectTo: '/home'
         });
 	
     }

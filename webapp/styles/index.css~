@@ -27,11 +27,6 @@ header{
 	border-radius: 5px;
 	border:1px;
 }
-
-.logo a{
-	text-decoration:none;
-}
-
 .banniereLogin{
     /*top:23%;*/
     position:fixed;
