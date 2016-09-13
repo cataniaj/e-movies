@@ -1,0 +1,16 @@
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/rest/RestActivator.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/ProductEJB.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/MultiVideo.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/MovieList.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/dao/Dao.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/themoviedatabase/MoviesDB.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/ejb/MovieManagerEJB.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/themoviedatabase/Filter.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/themoviedatabase/SearchEngine.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/themoviedatabase/TvDB.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/VideoEJB.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/FullTvList.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/Support.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/rest/VideosEndpoint.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/Movie.java
+/home/le06/Documents/M2PGI/ECOM/e-movies/src/main/java/fr/imag/e/movies/searchEngine/object/FullTv.java
