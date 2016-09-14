@@ -8,7 +8,7 @@
     <div ng-controller="homeCtrl">					
         <h3 class="text-muted">Rechercher un Film / une Serie</h3>
         <div class="search">
-            <input ng-model="query" type="text" class="txtSearch" placeholder="Titre, Acteur, Realisateur ..." />
+            <input ng-model="query" type="text" class="txtSearch" placeholder="Titre, Acteur, Realisateur ..." pattern="[a-z]{1,15}" title="goodzilla" />
             <button type="submit" ng-click="searchAction()">Rechercher</button>
             <p><a href="#/search"> Recherche avancée </a></p>
         </div>

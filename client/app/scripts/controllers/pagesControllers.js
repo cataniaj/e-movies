@@ -72,3 +72,10 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
     }
 ]);
 
+// Contrôleur de la page detail
+routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http',
+    function($scope, $location, $routeParams, $http){
+			
+    }
+]);
+

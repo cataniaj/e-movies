@@ -1,3 +1,20 @@
 <div class="achat" ng-controller="achatCtrl">
 	Mes achats
+
+	<a href="#openModalj">Open Modal</a>
+	<input type="checkbox" ng-model="displayFavoriteinscrip">
+	<div id="openModal" class="modalDialog" ng-show="displayFavoriteinscrip">
+		<div>
+			<a href="#close" title="Close" class="close">X</a>
+			<h2>Modal Box</h2>
+			<p>This is a sample modal box that can be created using the powers of CSS3.</p>
+			<p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
+		</div>
+	</div>
+
+	<a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" ng-model="displayFavoriteinscrip">Basic Popup</a>
+<div data-role="popup" id="popupBasic" ng-show="displayFavoriteinscrip">
+<p>This is a completely basic popup, no options set.</p>
+</div>
+
 </div>

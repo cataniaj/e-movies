@@ -38,9 +38,9 @@ routeApp.config(['$routeProvider',
         })
 
 
-	.otherwise({
+	/*.otherwise({
             redirectTo: '/home'
-        });
+        });*/
 	
     }
 ]);
