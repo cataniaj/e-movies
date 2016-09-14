@@ -8,6 +8,7 @@ body{
 #main{
 	width:100%; /*900px*/
 	margin: auto;
+        text-align:center;
 }
 
 /*######################################################### HEADER et BANNER	*/

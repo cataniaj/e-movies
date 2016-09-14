@@ -81,9 +81,11 @@ routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
 
 
 routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
-    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){
-	
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){	
         
+        $scope.download = function () {
+            ngDialog.open({ template: 'dialogDownload' });            
+        };
         /** tester dialogue ***/
         $scope.open = function () {
             ngDialog.open({ template: 'dialogLogin' });
