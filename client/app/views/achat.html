@@ -12,23 +12,34 @@
 		</div>
 	</div>
 
-	<a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop" ng-model="displayFavoriteinscrip">Basic Popup</a>
-<div data-role="popup" id="popupBasic" ng-show="displayFavoriteinscrip">
-<p>This is a completely basic popup, no options set.</p>
-</div>
 
-
-<a href="" class="openPaddingLink" ng-click="open()">Open dialog</a>
-    <!-- Template -->
+	<a href="" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline openPaddingLink" data-transition="pop" ng-click="open()">Basic Popup</a>
+<!--a href="" class="openPaddingLink" ng-click="open()">Open dialog</a>
+    <- Template -->
     <script type="text/ng-template" id="dialogLogin">
        <div class="ngdialog-message">
             <h3>Connexion</h3>
-            Identifiant: <input ng-model="logName" type="text" placeholder="mail adress"/>
+            Identifiant: <input ng-model="logName" type="text" placeholder="mail adress" /> <br/>
             Mot de passe: <input ng-model="logPass" type="password" />
             <button type="submit" ng-model="login"> Connexion </button>
             <p>Close this dialog: <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button></p>
 
         </div>
     </script>
+    
+    
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Page 1</a></li>
+      <li><a href="#">Page 2</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+  </div>
+</nav>
 
 </div>

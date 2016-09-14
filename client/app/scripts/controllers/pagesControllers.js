@@ -84,7 +84,7 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){
 	
         
-        /** tester dialogue */
+        /** tester dialogue ***/
         $scope.open = function () {
             ngDialog.open({ template: 'dialogLogin' });
         };
@@ -96,7 +96,6 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
     }
 ]);
 
-
-       
+      
        
 
