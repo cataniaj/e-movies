@@ -32,11 +32,11 @@ header{
 	text-decoration:none;
 }
 
-.banniereLogin{
+.banniereLogin1{
     /*top:23%;*/
     position:fixed;
     width:85%;
-    border:solid 1px black;
+    /*border:solid 1px black;*/
     display:flex;
     flex-wrap: nowrap;
     margin:auto;
@@ -79,7 +79,7 @@ header{
 }
 
 
-
+/**
 
 #btnLeft {
     width:80%;    
@@ -94,18 +94,19 @@ header{
 }
 
 #btnRight {
-    /*width:40%;*/
+    /*width:40%;***
     right:0px;
     text-align:right;
 }
 #btnRight ul>li{
     margin-right:10px;    
 }
+*/
 
 /*######################################################### MIDDLE	*/
 #middle{
 	display:flex;
-	margin-top:20px;
+	/*margin-top:20px;*/
 	margin-bottom:40px;
     width:100%;
 }
