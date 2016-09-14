@@ -1,19 +1,28 @@
-.best ul{
-	display:block;
-	list-style-type:none;
-	margin:0px
-}
-.best ul>li{
-	display:inline-block;
-}
-.best ul>li>figure>a{
+.best table{
+	margin:auto;
+	margin-top: 1%;
+	margin-bottom: 2%;
 	text-decoration:none;
+	text-align: center;
+	border-collapse: collapse;
+	width: 90%;
+
+
 }
 
-.best ul>li>figure{
-	border:1px;
-	width:100px;
-	max-width:100%;
-	height:auto;
-	box-shadow:1 1 30px 10px grey;
+.best table>tr>td>a>img{
+	width: 100px;
+	margin-bottom: 15%;
+	box-shadow: 5px 5px 8px black;
+}
+
+
+.poster1{
+	width: 80%;
+}
+
+h1{
+	font-family:"palatino linotype", palatino, serif;
+	text-transform: capitalize;
+	font-size: 150%;
 }
