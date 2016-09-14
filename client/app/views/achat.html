@@ -17,4 +17,18 @@
 <p>This is a completely basic popup, no options set.</p>
 </div>
 
+
+<a href="" class="openPaddingLink" ng-click="open()">Open dialog</a>
+    <!-- Template -->
+    <script type="text/ng-template" id="dialogLogin">
+       <div class="ngdialog-message">
+            <h3>Connexion</h3>
+            Identifiant: <input ng-model="logName" type="text" placeholder="mail adress"/>
+            Mot de passe: <input ng-model="logPass" type="password" />
+            <button type="submit" ng-model="login"> Connexion </button>
+            <p>Close this dialog: <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button></p>
+
+        </div>
+    </script>
+
 </div>

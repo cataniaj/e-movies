@@ -49,4 +49,4 @@ routeApp.config(['$routeProvider',
 /**
  * Définition des contrôleurs
  */
-var routeAppControllers = angular.module('routeAppControllers', []);
+var routeAppControllers = angular.module('routeAppControllers', ['ngDialog']);

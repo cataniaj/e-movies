@@ -73,9 +73,30 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 ]);
 
 // Contrôleur de la page detail
-routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http',
-    function($scope, $location, $routeParams, $http){
-			
+routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
+            ngDialogProvider.setDefaults({
+                className: 'ngdialog-theme-default',
+            });
+}]);
+
+
+routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){
+	
+        
+        /** tester dialogue */
+        $scope.open = function () {
+            ngDialog.open({ template: 'dialogLogin' });
+        };
+
+        $rootScope.$on('ngDialog.setPadding', function (event, padding){
+            angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
+        });
+
     }
 ]);
+
+
+       
+       
 
