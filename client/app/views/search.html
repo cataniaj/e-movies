@@ -1,17 +1,27 @@
 
-<div class="search" ng-controller="searchCtrl">
-							
-	<ul>
-		<li ng-repeat="data in datas"> 
-			<figure>
-				<a href="#detail/{{data.id}}">
-					<img ng-src='{{data.poster}}' alt=""/>
-					<figcaption> {{data.title}} <br/> {{data.year}} </figcaption>
-				</a>
-			<figure>			
-		</li>
-	</ul>
-	{{datas.length}}
+<div class="search" ng-controller="searchCtrl" >
+    <div>
+    <p id="result"> ({{datas.length}} résultats) </p>
+    </div>
+    <div><center>
+    	<p ng-repeat="data in datas"><a href="#detail/124905"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a>
+        <br>
+        <a href="#detail/124905">{{data.title}} <br/> {{data.year}}</a>
+        </p>
+        </center>
+    </div>
+    <!-- <table ng-repeat="data in datas">
+            <tr>
+            <td><a href="#detail/124905"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a></td></tr>
+            <tr>
+            <td><a href="#detail/124905">{{data.title}} <br/> {{data.year}}</a></td>
+            </tr>
+        </tbody>                         
+    </table>   -->
+</div>
+
+
+	
     <!--div class="row" ng-show="movies.length > 1">
         <a ng-click="clickPredicateName()" class="col-md-offset-7 col-md-2">Trier par nom</a>
         <a ng-click="clickPredicateRate()" class="col-md-2">Trier par note</a>
@@ -20,7 +30,7 @@
         <li ng-repeat="movie in movies | orderBy: orderByPredicate : orderByReverse">
             <div class="row">
                 <div class="col-md-4">
-                    <--img ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}" width="200" height="300"/->
+                    <img ng-src="http://image.tmdb.org/t/p/w500{{movie.poster_path}}" width="200" height="300"/->
                 </div>
                 <div class="col-md-8">
                     <a ng-href="#/info/{{movie.id}}"><h4 ng-bind="movie.title"></h4></a>
@@ -30,7 +40,7 @@
                     </div>
                     <div class="row">
                         <label class="col-md-2">Note:</label>
-                        <!--div class="row col-md-10">
+                        <div class="row col-md-10">
                             <rating class="col-md-6" ng-model="movie.vote_average" max="10" readonly="true"></rating>
                             (<span ng-bind="movie.vote_count"></span>&nbspavis)
                         </div->

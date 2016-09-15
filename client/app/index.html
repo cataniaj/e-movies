@@ -31,7 +31,7 @@
         <title> e-movies </title>        
 	</head>
 	<body  ng-app="routeApp">
-		<div id="main">
+		<div id="main" ng-controler="indexCtrl">
 			<header>
 				<div class="logo" >
                     <a href="#home"><img src="images/logos/banniere.png" /></a>
@@ -43,25 +43,121 @@
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
+
 			    <ul class="nav navbar-nav">
-			      <li><a href="#back">Retour</a></li>
-			      <li class="active"><a href="#home">Accueil</a></li>
-			      <li><a href="#achat">Recherche</a></li>
+			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
+			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
+
+			      <li><a ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
+			      </li>
+			      <li>
+			      	<p ng-show="BtnSearch" class="searchIndex">
+			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
+
+			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee"><span class="glyphicon glyphicon-plus"/></a>
+			            <div ng-show="rechAvancee" id="rechPlus">
+            			<!-- Recherche Avancée : -->
+			            	<form>
+			            	 	<h1>Recherche avancée</h1>
+								  <input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"> Film
+								  <input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"> Série
+							</form> 
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Année de production" pattern="[a-z]{1,15}"/>
+							</p><p><input ng-model="query" type="text" class="txtSearch" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
+							<h3>Genre :</h3>
+							<div class="centre">
+							<table>
+							<tr>
+								  <th><input type="checkbox" name="GenreC" value="Comedie"></th><td>Comédie</td>
+								  <th><input type="checkbox" name="GenreA" value="Aventure"></th><td>Aventure</td>
+								  <th><input type="checkbox" name="GenreD" value="Drame"></th><td>Drame</td>
+								  <th><input type="checkbox" name="GenreF" value="Fantastique"></th><td>Fantastique</td>
+							</tr><tr>
+								  <th><input type="checkbox" name="GenreSF" value="SF"></th><td>Sciences Fiction</td>
+								  <th><input type="checkbox" name="GenreAc" value="Action"></th><td>Action</td>
+								  <th><input type="checkbox" name="GenreT" value="Thriller"></th><td>Thriller</td>
+								  <th><input type="checkbox" name="GenreP" value="Policier"></th><td>Policier</td>
+							</tr><tr>
+								  <th><input type="checkbox" name="GenreM" value="Manga"></th><td>Manga</td>
+								  <th><input type="checkbox" name="GenreDA" value="DA"></th><td>Dessin animé</td>
+							</tr> 
+							</table>
+							<button type="submit" ng-click="searchAction()">Rechercher</button>
+							</div>
+							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
+						</div>
+			      </p>
+			      </li>			        
 			    </ul>
+
+			    <!-- ng-click="isConnect = !isConnect" -->
+			    <!-- Utilisateur non connecté : -->
+			    
 			    <ul class="nav navbar-nav navbar-right">
-			    	<li><a href="#">Connexion</a></li>
-			    	<li><a href="#">Inscription</a></li>
-			    </ul>		  
+			    	<div ng-show=isConnect>
+			    		<li><a href="#">Connexion</a></li>
+			    		<li><a href="#">Inscription</a></li>
+			   		</div>
+
+			    
+			    	<div ng-show=! isConnect>
+						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
+						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
+						    <li><a href="#home" ng-hide="isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
+						  </ul>
+						</li>
+					</div>
+
+					<!-- Panier -->
+					<li><a href="#" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+			    	
+			    </ul>
+  
 			</nav> 
 
-			
+
+			<!-- Menu -->
 			<section id="middle">
                 <div id="middleLeft">
                     <nav>
-                        Menu <input type="checkbox" ng-model="displayFavoriteSeries">
-                        <ul ng-show="displayFavoriteSeries">
-                            <li>Films</li>
-                            <li>Series</li>
+                        <!-- Menu <input type="checkbox" ng-model="displayFavoriteSeries"> -->
+                        <a href="" ng-click="ListMenu=!ListMenu">Menu</a>
+
+                        <!-- <p ng-model="displayFavoriteSeries">Menu</p> -->
+                        <ul ng-show="ListMenu">
+                            <li ng-click="GenreFilm=!GenreFilm"><a href="" >Films</a></li>
+                            <ul ng-show="GenreFilm">
+                            	<li><a href="#">Aventure</a></li>
+                            	<li><a href="#">Action</a></li>
+                            	<li><a href="#">Comédie</a></li>
+                            	<li><a href="#">Fantastique</a></li>
+                            	<li><a href="#">Science-Fiction</a></li>
+                            	<li><a href="#">Thriller</a></li>
+                            	<li><a href="#">Policier</a></li>
+                            	<li><a href="#">Drame</a></li>
+                            	<li><a href="#">Horreur</a></li>
+                            	<li><a href="#">Manga</a></li>
+                            	<li><a href="#">Dessin animé</a></li>                             	
+                            </ul>
+                            <li ng-click="GenreSerie=!GenreSerie"><a href="" >Series</a></li>
+                            <ul ng-show="GenreSerie">
+                            	<li><a href="#">Aventure</a></li>
+                            	<li><a href="#">Action</a></li>
+                            	<li><a href="#">Comédie</a></li>
+                            	<li><a href="#">Fantastique</a></li>
+                            	<li><a href="#">Science-Fiction</a></li>
+                            	<li><a href="#">Thriller</a></li>
+                            	<li><a href="#">Drame</a></li>
+                            	<li><a href="#">Horreur</a></li>
+                            	<li><a href="#">Manga</a></li>
+                            	<li><a href="#">Dessin animé</a></li>                            	
+                            </ul>
                         </ul>
                     </nav>
                 </div>
@@ -99,4 +195,5 @@
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
 		
 	</body>	
+
 </html>

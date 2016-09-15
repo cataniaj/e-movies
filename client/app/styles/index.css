@@ -45,6 +45,64 @@ header{
   padding-top: 70px;
 }
 
+#userIcone{
+	background-color: rgba(0, 0, 255, 0);
+	color:#B3B3B3;
+	margin-top:10%;
+}
+
+.navbar-right{
+	width:10%;
+}
+
+/*Recherche : */
+.searchIndex{
+
+	display: flex;
+	margin-top: 8px;
+	text-align: center;
+	/*margin-right: 0px;*/
+	/*display: inline-block;*/
+	margin-left: 0px;
+	/*width: 250%;*/
+
+}
+
+.searchIndex a{
+	margin-left: 1%;
+}
+
+.txtSearchIndex{
+	/*width: 80%;*/
+	width: 550px;
+}
+
+
+
+.glyphicon-plus{
+	color:white;
+	font-size:110%;
+	margin-bottom: 0px; 
+}
+
+#rechPlus{
+	margin:auto;
+	color: grey;
+	/*text-align: left;*/
+	/*margin-bottom: 10%;*/
+	border-width:1px 2px 3px 2px;
+	/*margin-right: 0px;*/
+}
+
+.centre{
+	/*text-align: center;*/
+}
+
+
+.search table{
+	border-spacing:400px 200px;
+}
+
 
 /*.navBardemoBasicUsage md-content .ext-content {
   padding: 50px;
@@ -142,12 +200,13 @@ header{
 	/*top: 33%;*/
 	/*width: 300px;*/
 	height:66%;
-
+	text-align: left;
 	background-color:#191970;		/*#706b64*/
 	box-shadow: 0px 2px 5px #1cla19;
 	border-radius: 5px;
 	color:white;
-    width:12%;
+    width:13%;
+    margin-left: 0px;
 }
 
 /*######################################################### FOOTER	*/
@@ -278,5 +337,5 @@ body {
 }
 footer {
     display : table-row;
-    height: 100px; /* à titre d'exemple */
+    height: 100px; /* à titre d'exemple *
 }*/
