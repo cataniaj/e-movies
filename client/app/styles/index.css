@@ -21,6 +21,7 @@ header{
 	/*position:fixed;*/
 }
 .logo img{
+
 	text-shadow: black 0px 0px;	
 	width:100%;        
         box-shadow:1 1 30px 10px grey;
@@ -51,6 +52,7 @@ header{
 	margin-top:10%;
 }
 
+<<<<<<< HEAD
 .navbar-right{
 	width:10%;
 	display: inline-flex;
@@ -59,18 +61,48 @@ header{
 /*Recherche : */
 .searchIndex{
 
+=======
+
+
+.navbar-right{
+	margin-right: 0px;
+	display: inline-flex;
+}
+
+.navbar-right a{
+	text-decoration: none;
+	color:#B3B3B3;
+	margin: auto;
+}
+
+.ConnexInscr {
+	margin:auto;
+	color:grey;
+}
+
+/*Recherche : */
+.searchIndex{
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 	display: flex;
 	margin-top: 8px;
 	text-align: center;
 	/*margin-right: 0px;*/
 	/*display: inline-block;*/
 	margin-left: 0px;
+<<<<<<< HEAD
 	/*width: 250%;*/
+=======
+	width: 100%;
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 
 }
 
 .searchIndex a{
 	margin-left: 1%;
+<<<<<<< HEAD
+=======
+	text-align: center;
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 }
 
 .txtSearchIndex{
@@ -78,6 +110,7 @@ header{
 	width: 550px;
 }
 
+<<<<<<< HEAD
 
 
 .glyphicon-plus{
@@ -93,6 +126,75 @@ header{
 	/*margin-bottom: 10%;*/
 	border-width:1px 2px 3px 2px;
 	/*margin-right: 0px;*/
+=======
+.txtSearch2{
+	width: 50%;
+	color: black;
+}
+
+
+
+.rechPlus{
+	/*text-align: center;*/
+	color: grey;
+	border-style: none none none double;
+
+
+	width: 150%;
+
+	/*text-align: left;*/
+	/*margin-bottom: 10%;*/
+	margin-left: 0px;
+	padding-left: 5%;
+}
+
+.rechPlus h1{
+	text-align: left;
+	font-size: 200%;
+
+}
+
+
+.rechPlus h3{
+	text-align: left;
+	font-size: 180%;
+	font-family:"palatino linotype", palatino, serif;
+}
+
+
+
+.rechPlus td{
+
+	text-align: left;
+	width: 27%;
+}
+
+.rechPlus table{
+	table-layout:fixed;
+	border-spacing: 20%;
+	white-space:nowrap;
+
+	/*width: 25%;*/
+	margin:auto;
+	margin-bottom: 2%;
+}
+
+.glyphicon-plus-sign{
+	color: white;
+}
+
+.rechPlus p{
+	text-align: center;
+}
+
+.searchIndex a{
+	text-decoration:none;
+}
+}
+
+.glyphicon-minus-sign{	
+	color: white;
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 }
 
 .centre{

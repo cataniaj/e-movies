@@ -37,10 +37,14 @@
                     <a href="#home"><img src="images/logos/logo1.png" /></a>
 				</div>				
 			</header>
+<<<<<<< HEAD
 
 			<!--Bar de navigation -->
 
 			<nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+=======
+			 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -49,13 +53,18 @@
 			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
 
+<<<<<<< HEAD
 			      <li><a ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
+=======
+			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 			      </li>
 			      <li>
 			      	<p ng-show="BtnSearch" class="searchIndex">
 			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
+<<<<<<< HEAD
 			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee">
 			            <span ng-show="!rechAvancee" class="glyphicon glyphicon-plus"/>
 			            <span ng-show="rechAvancee" class="glyphicon glyphicon-minus"/>
@@ -94,6 +103,51 @@
 							<button type="submit" ng-click="searchAction()">Rechercher</button>
 							</div>
 							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
+=======
+
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="!rechAvancee" class="glyphicon glyphicon-plus-sign"></a>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="rechAvancee" class="glyphicon glyphicon-minus-sign"></a>
+
+
+			            <div ng-show="rechAvancee" class="rechPlus">
+			            <h1>Recherche avancée</h1>
+
+            			<!-- Recherche Avancée : -->
+			            	<table>
+			            		<tbody>
+			            	 	<td><input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"/> Film</td>
+			            	 	<td><input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"/> Série</td></tr>
+			            	 	</tbody>
+							</table>
+							
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Année de production" pattern="[a-z]{1,15}"/>
+							</p><p><input ng-model="query" type="text" class="txtSearch2" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
+							<h3>Genre :</h3>
+							<div>
+							<table>
+							<tbody>
+							<tr>
+								  <td><input type="checkbox" name="GenreC" value="Comedie"> Comédie</td>
+								  <td><input type="checkbox" name="GenreA" value="Aventure"> Aventure</td>
+								  <td><input type="checkbox" name="GenreD" value="Drame"> Drame</td>
+								  <td><input type="checkbox" name="GenreF" value="Fantastique"> Fantastique</td>
+							</tr><tr>
+								  <td><input type="checkbox" name="GenreSF" value="SF"> Sciences Fiction</td>
+								  <td><input type="checkbox" name="GenreAc" value="Action"> Action</td>
+								  <td><input type="checkbox" name="GenreT" value="Thriller"> Thriller</td>
+								  <td><input type="checkbox" name="GenreP" value="Policier"> Policier</td>
+							</tr><tr>
+								  <td><input type="checkbox" name="GenreM" value="Manga"> Manga</td>
+								  <td><input type="checkbox" name="GenreDA" value="DA"> Dessin animé</td>
+							</tr> 
+							</tbody>
+							</table>
+							<button type="submit" ng-click="searchAction()">Rechercher</button>
+							</div>
+							<!-- <a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a> -->
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 						</div>
 			      </p>
 			      </li>			        
@@ -104,6 +158,7 @@
 			    
 			    <div ng-controller="loginCtrl">
 			    <ul class="nav navbar-nav navbar-right" >
+<<<<<<< HEAD
 			    	<div ng-show=!isConnect>
 			    		<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
 			    		<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
@@ -111,6 +166,16 @@
 
 			    
 			    	<div ng-show=isConnect>
+=======
+
+			    	<div ng-show="!isConnect" class="ConnexInscr">
+			    		<li><a href="" ng-click="dialogLogin()"><b>Connexion</b></a> / 
+			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
+			   		</div>
+
+			    
+			    	<div ng-show="isConnect">
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -204,10 +269,18 @@
 		<script type="text/javascript" src="scripts/controllers/loginControllers.js"></script>
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
 		
+<<<<<<< HEAD
 		
 		<!-- DIALOG LOGIN -->
     <script type="text/ng-template" id="dialogLogin">
        <div class="ngdialog-message">
+=======
+	
+		<!-- DIALOG LOGIN -->
+    <script type="text/ng-template" id="dialogLogin" >
+    
+       <div class="ngdialog-message" ng-controller="deconnectCtrl">
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
             <h3>Connexion</h3>
             <form>
                 <div class="form-group">
@@ -221,7 +294,12 @@
                 <div class="checkbox">
                     <label><input type="checkbox"> Remember me</label>
                 </div>
+<<<<<<< HEAD
                 <button type="submit" class="btn btn-default">Envoyer</button>
+=======
+                <button type="submit" class="btn btn-default" ng-click="isConnect=!isConnect;test()">Envoyer</button>
+
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
             </form>
             <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
         </div>
@@ -239,7 +317,11 @@
 			  <h4 class="modal-title">Inscription</h4>
 			</div>
 			<div class="modal-body">
+<<<<<<< HEAD
 				<!--form class="form-group">					  
+=======
+				<form class="form-group">					  
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 					<b>Nom :</b> <input type="text" class="form-control" id="name" placeholder="Nom">
 					<b>Prenom :</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
 					<b>Adresse :</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
@@ -252,8 +334,13 @@
 					<div class="checkbox">
 						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
 					</div>					  
+<<<<<<< HEAD
 				</form-->
 				<form class="form-group">					  
+=======
+				</form>
+				<!--form class="form-group">					  
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 					<input type="text" class="form-control" id="name" placeholder="Nom">
 					</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
 					</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
@@ -266,11 +353,19 @@
 					<div class="checkbox">
 						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
 					</div>					  
+<<<<<<< HEAD
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-primary">Envoyer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+=======
+				</form-->
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-default">Envoyer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 			</div>
 		  </div>
 		  
@@ -305,6 +400,7 @@
 					<tr ng-repeat="data in dataPanier1">
 						<td>{{data[0]}} </td>
 						<td>{{data[1]}}</td>
+<<<<<<< HEAD
 						<td>Copie Numerique</td>
 						<td>{{data[3]}}</td>
 						<td>{{data[4]}}€</td>
@@ -321,6 +417,24 @@
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-primary">Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+=======
+						<td><select id="country" class="form-control" id="sel1"> <option>Copie Numerique</option><option>DVD</option> </select></td>
+						<td>{{data[3]}}€</td>
+						<td>{{data[4]}}</td>
+						<td>{{data[3]*data[4]}}€</td>
+						<td><a href="" ng-click=""><span class="glyphicon glyphicon-trash"></span></a>
+							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
+					</tr>					
+					<tr><td colspan="7"></td></tr>
+					<tr><td colspan="3"></td><td colspan="2"><b>le Total du panier</b></td><td><b>{{dataPanierTotal}}€</b></td><td></td></tr>
+					</tbody>
+				</table>
+					<a href="" ng-click="">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-default">Payer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+>>>>>>> 25d379f21566e55903801a287bfc0b59e7d892af
 			</div>
 		  </div>
 		  
