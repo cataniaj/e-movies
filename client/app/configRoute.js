@@ -52,6 +52,11 @@ routeApp.config(['$routeProvider',
 var routeAppControllers = angular.module('routeAppControllers', ['ngDialog']);
 var dataPanier=[];
 var dataPanierTotal=0;
+var ListMenu=false;
+var GenreFilm = false;
+var GenreSerie = false;
+var BtnSearch = true;
+var isConnect = true;
 
 routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
             ngDialogProvider.setDefaults({

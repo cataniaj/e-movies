@@ -37,28 +37,7 @@
                     <a href="#home"><img src="images/logos/banniere.png" /></a>
 				</div>				
 			</header>
-
-			<!--Bar de navigation -->
-<!-- <<<<<<< HEAD -->
-<!-- 			<div ng-controller="loginCtrl">
-				 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
-					<div class="navbar-header">
-					  <a class="navbar-brand" href="#home">e-movies</a>
-					</div>
-					<ul class="nav navbar-nav">
-					  <li><a href="#back"><span class="glyphicon glyphicon-arrow-left"></span></a></li>
-					  <li class="active"><a href="#home"><span class="glyphicon glyphicon-home"></span></a></li>
-					  <li><a href="#achat"><span class="glyphicon glyphicon-search"></span></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right" style="margin-right:12px" >						
-						<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
-						<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
-                        <li><a href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" ><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-					</ul>		  
-				</nav> 
-			</div> -->
-<!-- ======= -->
-			 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+			 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -67,51 +46,56 @@
 			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
 
-			      <li><a ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
+			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
 			      </li>
 			      <li>
 			      	<p ng-show="BtnSearch" class="searchIndex">
 			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
-			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee">
-			            <span ng-show="!rechAvancee" class="glyphicon glyphicon-plus"/>
-			            <span ng-show="rechAvancee" class="glyphicon glyphicon-minus"/>
-			            </a>
 
-			            <div ng-show="rechAvancee" id="rechPlus">
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="!rechAvancee" class="glyphicon glyphicon-plus-sign"></a>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="rechAvancee" class="glyphicon glyphicon-minus-sign"></a>
+
+
+			            <div ng-show="rechAvancee" class="rechPlus">
+			            <h1>Recherche avancée</h1>
 
             			<!-- Recherche Avancée : -->
-			            	<form>
-			            	 	<h1>Recherche avancée</h1>
-								  <input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"> Film
-								  <input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"> Série
-							</form> 
-							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
-							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
-							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Année de production" pattern="[a-z]{1,15}"/>
-							</p><p><input ng-model="query" type="text" class="txtSearch" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
+			            	<table>
+			            		<tbody>
+			            	 	<td><input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"/> Film</td>
+			            	 	<td><input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"/> Série</td></tr>
+			            	 	</tbody>
+							</table>
+							
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Année de production" pattern="[a-z]{1,15}"/>
+							</p><p><input ng-model="query" type="text" class="txtSearch2" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
 							<h3>Genre :</h3>
-							<div class="centre">
+							<div>
 							<table>
+							<tbody>
 							<tr>
-								  <th><input type="checkbox" name="GenreC" value="Comedie"></th><td>Comédie</td>
-								  <th><input type="checkbox" name="GenreA" value="Aventure"></th><td>Aventure</td>
-								  <th><input type="checkbox" name="GenreD" value="Drame"></th><td>Drame</td>
-								  <th><input type="checkbox" name="GenreF" value="Fantastique"></th><td>Fantastique</td>
+								  <td><input type="checkbox" name="GenreC" value="Comedie"> Comédie</td>
+								  <td><input type="checkbox" name="GenreA" value="Aventure"> Aventure</td>
+								  <td><input type="checkbox" name="GenreD" value="Drame"> Drame</td>
+								  <td><input type="checkbox" name="GenreF" value="Fantastique"> Fantastique</td>
 							</tr><tr>
-								  <th><input type="checkbox" name="GenreSF" value="SF"></th><td>Sciences Fiction</td>
-								  <th><input type="checkbox" name="GenreAc" value="Action"></th><td>Action</td>
-								  <th><input type="checkbox" name="GenreT" value="Thriller"></th><td>Thriller</td>
-								  <th><input type="checkbox" name="GenreP" value="Policier"></th><td>Policier</td>
+								  <td><input type="checkbox" name="GenreSF" value="SF"> Sciences Fiction</td>
+								  <td><input type="checkbox" name="GenreAc" value="Action"> Action</td>
+								  <td><input type="checkbox" name="GenreT" value="Thriller"> Thriller</td>
+								  <td><input type="checkbox" name="GenreP" value="Policier"> Policier</td>
 							</tr><tr>
-								  <th><input type="checkbox" name="GenreM" value="Manga"></th><td>Manga</td>
-								  <th><input type="checkbox" name="GenreDA" value="DA"></th><td>Dessin animé</td>
+								  <td><input type="checkbox" name="GenreM" value="Manga"> Manga</td>
+								  <td><input type="checkbox" name="GenreDA" value="DA"> Dessin animé</td>
 							</tr> 
+							</tbody>
 							</table>
 							<button type="submit" ng-click="searchAction()">Rechercher</button>
 							</div>
-							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
+							<!-- <a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a> -->
 						</div>
 			      </p>
 			      </li>			        
@@ -122,13 +106,14 @@
 			    
 			    <div ng-controller="loginCtrl">
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show=!isConnect>
-			    		<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
-			    		<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
+
+			    	<div ng-show="!isConnect" class="ConnexInscr">
+			    		<li><a href="" ng-click="dialogLogin()"><b>Connexion</b></a> / 
+			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
 			    
-			    	<div ng-show=isConnect>
+			    	<div ng-show="isConnect">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -222,10 +207,11 @@
 		<script type="text/javascript" src="scripts/controllers/loginControllers.js"></script>
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
 		
-		
+	
 		<!-- DIALOG LOGIN -->
-    <script type="text/ng-template" id="dialogLogin">
-       <div class="ngdialog-message">
+    <script type="text/ng-template" id="dialogLogin" >
+    
+       <div class="ngdialog-message" ng-controller="deconnectCtrl">
             <h3>Connexion</h3>
             <form>
                 <div class="form-group">
@@ -239,7 +225,8 @@
                 <div class="checkbox">
                     <label><input type="checkbox"> Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-default">Envoyer</button>
+                <button type="submit" class="btn btn-default" ng-click="isConnect=!isConnect;test()">Envoyer</button>
+
             </form>
             <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
         </div>
