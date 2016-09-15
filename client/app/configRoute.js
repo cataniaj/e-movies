@@ -36,7 +36,7 @@ routeApp.config(['$routeProvider',
             templateUrl: 'views/achat.html',
             controller: 'achatCtrl'
         })
-
+        
 
 		.otherwise({
             redirectTo: '/home'

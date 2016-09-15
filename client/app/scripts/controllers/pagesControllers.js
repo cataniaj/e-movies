@@ -4,9 +4,11 @@
 routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams','$http',
 	function($scope, $location, $routeParams, $http){
         $scope.message = "Bienvenue sur la page d'accueil";
+        $scope.rechAvancee = false;
 		$scope.searchAction = function(){
             $location.path("/search/"+ $scope.query);
 	}
+
 	//Meilleures ventes :		
 	$scope.datasBest = [];
 	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get meilleures ventes
@@ -17,7 +19,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 			}
 		}
 	});
-	//Suggestion :		
+	//Suggestions :		
 	$scope.datasSuggest = [];
 	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get suggestions
 		$scope.datasSuggest = data;
@@ -49,6 +51,9 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 			for(i=0;i<data.length;i++){
 				if($scope.datas[i].poster == "N/A"){
 					$scope.datas[i].poster = "images/logos/no-image.jpg";
+				}
+				if($scope.datas[i].year == "N/A"){
+					$scope.datas[i].year = "(date inconnue)";
 				}
 			}
 		});	
@@ -96,6 +101,31 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
         });
 
     }
+<<<<<<< HEAD
 ]);   
+=======
+]);
+
+
+// Contrôleur de la page index
+routeAppControllers.controller('indexCtrl', ['$scope', '$location','$routeParams','$http',
+	function($scope, $location, $routeParams, $http){
+		//$scope.id = $routeParams.id;	
+
+		$scope.searchAction2 = function(){
+            $location.path("/search/"+ $scope.queryIndex);
+    	} 
+		$scope.ListMenu = false;
+		$scope.GenreFilm = false;
+		$scope.GenreSerie = false;
+
+		$scope.BtnSearch = true;
+		$scope.isConnect = false;
+		
+    }
+]);
+
+      
+>>>>>>> e810f81897353f287399359f83dfda344312e3fc
        
 
