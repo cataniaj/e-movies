@@ -34,34 +34,139 @@
 		<div id="main">
 			<header>
 				<div class="logo" >
-                    <a href="#home"><img src="images/logos/banniere.png" /></a>
+                    <a href="#home"><img src="images/logos/logo1.png" /></a>
 				</div>				
 			</header>
 
 			<!--Bar de navigation -->
-			 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+
+			<nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
+
 			    <ul class="nav navbar-nav">
-			      <li><a href="#back">Retour</a></li>
-			      <li class="active"><a href="#home">Accueil</a></li>
-			      <li><a href="#achat">Recherche</a></li>
+			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
+			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
+
+			      <li><a ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
+			      </li>
+			      <li>
+			      	<p ng-show="BtnSearch" class="searchIndex">
+			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
+
+			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee">
+			            <span ng-show="!rechAvancee" class="glyphicon glyphicon-plus"/>
+			            <span ng-show="rechAvancee" class="glyphicon glyphicon-minus"/>
+			            </a>
+
+			            <div ng-show="rechAvancee" id="rechPlus">
+
+            			<!-- Recherche Avancée : -->
+			            	<form>
+			            	 	<h1>Recherche avancée</h1>
+								  <input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"> Film
+								  <input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"> Série
+							</form> 
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Année de production" pattern="[a-z]{1,15}"/>
+							</p><p><input ng-model="query" type="text" class="txtSearch" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
+							<h3>Genre :</h3>
+							<div class="centre">
+							<table>
+							<tr>
+								  <th><input type="checkbox" name="GenreC" value="Comedie"></th><td>Comédie</td>
+								  <th><input type="checkbox" name="GenreA" value="Aventure"></th><td>Aventure</td>
+								  <th><input type="checkbox" name="GenreD" value="Drame"></th><td>Drame</td>
+								  <th><input type="checkbox" name="GenreF" value="Fantastique"></th><td>Fantastique</td>
+							</tr><tr>
+								  <th><input type="checkbox" name="GenreSF" value="SF"></th><td>Sciences Fiction</td>
+								  <th><input type="checkbox" name="GenreAc" value="Action"></th><td>Action</td>
+								  <th><input type="checkbox" name="GenreT" value="Thriller"></th><td>Thriller</td>
+								  <th><input type="checkbox" name="GenreP" value="Policier"></th><td>Policier</td>
+							</tr><tr>
+								  <th><input type="checkbox" name="GenreM" value="Manga"></th><td>Manga</td>
+								  <th><input type="checkbox" name="GenreDA" value="DA"></th><td>Dessin animé</td>
+							</tr> 
+							</table>
+							<button type="submit" ng-click="searchAction()">Rechercher</button>
+							</div>
+							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
+						</div>
+			      </p>
+			      </li>			        
 			    </ul>
-			    <ul class="nav navbar-nav navbar-right">
-			    	<li><a href="#">Connexion</a></li>
-			    	<li><a href="#">Inscription</a></li>
-			    </ul>		  
+
+			    <!-- ng-click="isConnect = !isConnect" -->
+			    <!-- Utilisateur non connecté : -->
+			    
+			    <div ng-controller="loginCtrl">
+			    <ul class="nav navbar-nav navbar-right" >
+			    	<div ng-show=!isConnect>
+			    		<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
+			    		<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
+			   		</div>
+
+			    
+			    	<div ng-show=isConnect>
+						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
+						  <span class="caret"></span></button>
+						  <ul class="dropdown-menu">
+						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
+						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
+						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
+						  </ul>
+						</li>
+					</div>
+
+					<!-- Panier -->
+					<li><a  href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+			    	
+			    </ul>
+			    </div>
+  
 			</nav> 
 
-			
+
+
+			<!-- Menu -->
 			<section id="middle">
                 <div id="middleLeft">
                     <nav>
-                        Menu <input type="checkbox" ng-model="displayFavoriteSeries">
-                        <ul ng-show="displayFavoriteSeries">
-                            <li>Films</li>
-                            <li>Series</li>
+                        <!-- Menu <input type="checkbox" ng-model="displayFavoriteSeries"> -->
+                        <a href="" ng-click="ListMenu=!ListMenu">Menu</a>
+
+                        <!-- <p ng-model="displayFavoriteSeries">Menu</p> -->
+                        <ul ng-show="ListMenu">
+                            <li ng-click="GenreFilm=!GenreFilm"><a href="" >Films</a></li>
+                            <ul ng-show="GenreFilm">
+                            	<li><a href="#">Aventure</a></li>
+                            	<li><a href="#">Action</a></li>
+                            	<li><a href="#">Comédie</a></li>
+                            	<li><a href="#">Fantastique</a></li>
+                            	<li><a href="#">Science-Fiction</a></li>
+                            	<li><a href="#">Thriller</a></li>
+                            	<li><a href="#">Policier</a></li>
+                            	<li><a href="#">Drame</a></li>
+                            	<li><a href="#">Horreur</a></li>
+                            	<li><a href="#">Manga</a></li>
+                            	<li><a href="#">Dessin animé</a></li>                             	
+                            </ul>
+                            <li ng-click="GenreSerie=!GenreSerie"><a href="" >Series</a></li>
+                            <ul ng-show="GenreSerie">
+                            	<li><a href="#">Aventure</a></li>
+                            	<li><a href="#">Action</a></li>
+                            	<li><a href="#">Comédie</a></li>
+                            	<li><a href="#">Fantastique</a></li>
+                            	<li><a href="#">Science-Fiction</a></li>
+                            	<li><a href="#">Thriller</a></li>
+                            	<li><a href="#">Drame</a></li>
+                            	<li><a href="#">Horreur</a></li>
+                            	<li><a href="#">Manga</a></li>
+                            	<li><a href="#">Dessin animé</a></li>                            	
+                            </ul>
                         </ul>
                     </nav>
                 </div>
@@ -96,7 +201,133 @@
 		<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script-->
 		<script type="text/javascript" src="configRoute.js"></script>
 		<script type="text/javascript" src="scripts/controllers/pagesControllers.js"></script>
+		<script type="text/javascript" src="scripts/controllers/loginControllers.js"></script>
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
 		
+		
+		<!-- DIALOG LOGIN -->
+    <script type="text/ng-template" id="dialogLogin">
+       <div class="ngdialog-message">
+            <h3>Connexion</h3>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd">
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox"> Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-default">Envoyer</button>
+            </form>
+            <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
+        </div>
+    </script>
+	<!-- END DIALOG LOGIN -->
+		
+	<!-- Modal SIGN UP -->
+	  <div class="modal fade" id="dialogSign_up" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Inscription</h4>
+			</div>
+			<div class="modal-body">
+				<!--form class="form-group">					  
+					<b>Nom :</b> <input type="text" class="form-control" id="name" placeholder="Nom">
+					<b>Prenom :</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
+					<b>Adresse :</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
+					<b>Code Postal :</b> <input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> 
+					<b>Pays :</b> <select id="country" class="form-control" id="sel1"> <option>France</option> </select>
+					<b>Telephone :</b> <input type="tel" class="form-control" id="phone" placeholder="Telephone">
+					<b>Email :</b> <input type="email" class="form-control" id="mail" placeholder="Email">
+					<b>Password :</b> <input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
+					<b>Confirm Password :</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">
+					<div class="checkbox">
+						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
+					</div>					  
+				</form-->
+				<form class="form-group">					  
+					<input type="text" class="form-control" id="name" placeholder="Nom">
+					</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
+					</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
+					</b> <input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> 
+					<select id="country" class="form-control" id="sel1"> <option>France</option> </select>
+					<input type="tel" class="form-control" id="phone" placeholder="Telephone">
+					<input type="email" class="form-control" id="mail" placeholder="Email">
+					<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
+					</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">
+					<div class="checkbox">
+						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
+					</div>					  
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Envoyer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+	 <!-- End Modal SIGN UP --> 
+	 
+	 <!-- Modal PANIER -->
+	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Mon Panier</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th>Titre</th>
+						<th>Année</th>
+						<th>Support</th>						
+						<th>Quantité</th>
+						<th>P.U</th>
+						<th>Total</th>
+						<th>Options</th>
+					</tr>
+					</thead>
+					<tbody>					
+					<tr ng-repeat="data in dataPanier1">
+						<td>{{data[0]}} </td>
+						<td>{{data[1]}}</td>
+						<td>Copie Numerique</td>
+						<td>{{data[3]}}</td>
+						<td>{{data[4]}}€</td>
+						<td>{{data[3]*data[4]}}€</td>
+						<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
+							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
+					</tr>					
+					<tr><td colspan="7"></td></tr>
+					<tr><td colspan="3"></td><td colspan="2"><b>le Total du panier</b></td><td><b>{{dataPanierTotal[0]}}€</b></td><td></td></tr>
+					</tbody>
+				</table>
+					<a href="" ng-click="clearPanier()">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Payer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+	 <!-- End Modal PANIER --> 
+  
 	</body>	
+
 </html>

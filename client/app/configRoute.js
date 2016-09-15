@@ -36,11 +36,11 @@ routeApp.config(['$routeProvider',
             templateUrl: 'views/achat.html',
             controller: 'achatCtrl'
         })
+        
 
-
-	/*.otherwise({
+		.otherwise({
             redirectTo: '/home'
-        });*/
+        });
 	
     }
 ]);
@@ -50,3 +50,12 @@ routeApp.config(['$routeProvider',
  * Définition des contrôleurs
  */
 var routeAppControllers = angular.module('routeAppControllers', ['ngDialog']);
+var dataPanier=[];
+var dataPanierTotal=[0];
+// dataPanierTotal.push(0);
+
+routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
+            ngDialogProvider.setDefaults({
+                className: 'ngdialog-theme-default',
+            });
+}]);

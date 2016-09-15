@@ -4,9 +4,11 @@
 routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams','$http',
 	function($scope, $location, $routeParams, $http){
         $scope.message = "Bienvenue sur la page d'accueil";
+        $scope.rechAvancee = false;
 		$scope.searchAction = function(){
             $location.path("/search/"+ $scope.query);
 	}
+
 	//Meilleures ventes :		
 	$scope.datasBest = [];
 	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get meilleures ventes
@@ -17,7 +19,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 			}
 		}
 	});
-	//Suggestion :		
+	//Suggestions :		
 	$scope.datasSuggest = [];
 	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get suggestions
 		$scope.datasSuggest = data;
@@ -50,6 +52,9 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 				if($scope.datas[i].poster == "N/A"){
 					$scope.datas[i].poster = "images/logos/no-image.jpg";
 				}
+				if($scope.datas[i].year == "N/A"){
+					$scope.datas[i].year = "(date inconnue)";
+				}
 			}
 		});	
 
@@ -68,26 +73,27 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 		$http.get('json/jsonUnSeulFilm.php').success(function(data){
 			//alert(data.movies[0].title);
 			$scope.details = data[0];
-		});		
+		});	
+        
+        /** fonction ajout dans panier  **/
+        $scope.addPanier = function (titre, annee, support, quantite, pu) {
+              dataPanier.push(new Array(titre, annee, support, quantite, pu));
+              dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+        };
     }
 ]);
 
-// Contrôleur de la page detail
-routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
-            ngDialogProvider.setDefaults({
-                className: 'ngdialog-theme-default',
-            });
-}]);
-
-
+// Contrôleur de la page achat
 routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
-    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){
-	
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){	
         
-        /** tester dialogue ***/
+        $scope.download = function () {
+            ngDialog.open({ template: 'dialogDownload' });            
+        };
+        /* tester dialogue ***
         $scope.open = function () {
             ngDialog.open({ template: 'dialogLogin' });
-        };
+        };*/
 
         $rootScope.$on('ngDialog.setPadding', function (event, padding){
             angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
@@ -95,6 +101,7 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
 
     }
 ]);
+
 
       
        

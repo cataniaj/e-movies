@@ -4,7 +4,9 @@
 	 background-color:black;
 }*/
 
-.search ul{
+
+
+/*.search ul{
 	display:block;
 	list-style-type:none;
 	margin:0px
@@ -26,4 +28,44 @@ figure img{
 
 figcaption{
 	width:130px;
+}*/
+
+/*.search table{
+	margin:auto;
+	margin-top: 1%;
+	margin-bottom: 2%;
+	text-decoration:none;
+	text-align: center;
+	border-collapse: collapse;
+	width: 10%;
+
+
+}
+
+.search table>tr>td>a>img{
+	width: 100px;
+	margin-bottom: 15%;
+	box-shadow: 5px 5px 8px black;
+}*/
+
+
+.poster1{
+	box-shadow: 5px 5px 8px black;
+}
+
+.search p{
+	width: 25%;
+	display: inline-block;
+	text-align: center;
+	margin-bottom: 3%;
+}
+
+.search p>a{
+	text-decoration:none;
+	display: block;
+	text-align: center;
+}
+
+.search #result{
+	color:grey;
 }
