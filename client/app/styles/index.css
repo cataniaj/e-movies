@@ -53,6 +53,7 @@ header{
 
 .navbar-right{
 	width:10%;
+	display: inline-flex;
 }
 
 /*Recherche : */

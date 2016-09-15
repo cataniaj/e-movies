@@ -97,13 +97,13 @@
 			    <!-- Utilisateur non connecté : -->
 			    
 			    <ul class="nav navbar-nav navbar-right">
-			    	<div ng-show=isConnect>
+			    	<div ng-show=!isConnect>
 			    		<li><a href="#">Connexion</a></li>
 			    		<li><a href="#">Inscription</a></li>
 			   		</div>
 
 			    
-			    	<div ng-show=! isConnect>
+			    	<div ng-show=isConnect>
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
