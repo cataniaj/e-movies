@@ -73,32 +73,37 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 		$http.get('json/jsonUnSeulFilm.php').success(function(data){
 			//alert(data.movies[0].title);
 			$scope.details = data[0];
-		});		
+		});	
+        
+        /** fonction ajout dans panier  **/
+        $scope.addPanier = function (titre, annee, support, quantite, pu) {
+              dataPanier.push(new Array(titre, annee, support, quantite, pu));
+              dataPanierTotal = dataPanierTotal + (quantite*pu);
+            alert(dataPanierTotal);
+        };
     }
 ]);
 
-// Contrôleur de la page detail
-routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
-            ngDialogProvider.setDefaults({
-                className: 'ngdialog-theme-default',
-            });
-}]);
-
-
+// Contrôleur de la page achat
 routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
-    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){
-	
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){	
         
-        /** tester dialogue ***/
+        $scope.download = function () {
+            ngDialog.open({ template: 'dialogDownload' });            
+        };
+        /* tester dialogue ***
         $scope.open = function () {
             ngDialog.open({ template: 'dialogLogin' });
-        };
+        };*/
 
         $rootScope.$on('ngDialog.setPadding', function (event, padding){
             angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
         });
 
     }
+<<<<<<< HEAD
+]);   
+=======
 ]);
 
 
@@ -121,5 +126,6 @@ routeAppControllers.controller('indexCtrl', ['$scope', '$location','$routeParams
 ]);
 
       
+>>>>>>> e810f81897353f287399359f83dfda344312e3fc
        
 

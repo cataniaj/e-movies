@@ -2,6 +2,7 @@
 <div class="detail" ng-controller="detailCtrl">	
 	<div id="poster">
 		<img src="{{details.poster}}" />
+		<a href="" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)">Ajouter Panier</a>
 	</div>
 	<div id="info"> 
 		<h2>{{details.title}}</h2>
@@ -17,4 +18,4 @@
 		</div>
 	</div>
 	
-</div>
+</div>  <!--{{details.title}},{{details.year}},'copie numerique','1','7,00'-->
