@@ -7,12 +7,13 @@ body{
 
 #main{
 	width:100%; /*900px*/
-	margin: auto;
-        text-align:center;
+	text-align: center;
+/*	margin: auto;*/
 }
 
 /*######################################################### HEADER et BANNER	*/
 header{	
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-item: flex-end;
@@ -33,26 +34,26 @@ header{
 	text-decoration:none;
 }
 
-.banniereLogin1{
-    /*top:23%;*/
-    position:fixed;
-    width:85%;
-    /*border:solid 1px black;*/
-    display:flex;
-    flex-wrap: nowrap;
-    margin:auto;
+
+
+.affix {
+	top: 0;
+	width: 100%;
+}	
+
+.affix + .container-fluid {
+  padding-top: 70px;
 }
 
 
-
-.navBardemoBasicUsage md-content .ext-content {
+/*.navBardemoBasicUsage md-content .ext-content {
   padding: 50px;
   margin: 20px;
   background-color: #FFF2E0; }
 
 
 .modalDialog {
-	/*position: fixed;*/
+	/*position: fixed;**
 	font-family: Arial, Helvetica, sans-serif;
 	top: 0;
 	right: 0;
@@ -78,7 +79,7 @@ header{
 	background: -webkit-linear-gradient(#fff, #999);
 	background: -o-linear-gradient(#fff, #999);
 }
-
+*/
 
 /**
 
@@ -109,16 +110,16 @@ header{
 	display:flex;
 	/*margin-top:20px;*/
 	margin-bottom:40px;
-    width:100%;
+    width:99%;
 }
 
 #middleRight{
-    width:85%;
+    width:80%;
     margin-left:2%;
 }
 
 #view{
-    margin-top:7%;
+    margin-top:2%;
     text-align:justify;
 }
 
@@ -131,7 +132,7 @@ header{
 	margin-right:10px;
 }
 .txtSearch{
-	width:82%;
+	width:75%;
 }
 
 /*######################################################### MENU	*/
@@ -139,7 +140,7 @@ header{
 	/*flex:.6;
 	position:fixed;*/
 	/*top: 33%;*/
-	width: 300px;
+	/*width: 300px;*/
 	height:66%;
 
 	background-color:#191970;		/*#706b64*/

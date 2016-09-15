@@ -1,0 +1,9 @@
+
+.listAchat{
+    width:90%;
+    /*vertical-align:center;*/
+}
+
+.listAchat>table>thead>tr{
+    text-align:center;
+}

@@ -6,46 +6,40 @@
     </nav-->
 				
     <div ng-controller="homeCtrl">					
-        <h3 class="text-muted">Rechercher un Film / une Serie</h3>
         <div class="search">
-            <input ng-model="query" type="text" class="txtSearch" placeholder="Titre, Acteur, Realisateur ..." pattern="[a-z]{1,15}" title="goodzilla" />
+            <input ng-model="query" type="text" class="txtSearch" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,15}" title="goodzilla" />
             <button type="submit" ng-click="searchAction()">Rechercher</button>
             <p><a href="#/search"> Recherche avancée </a></p>
         </div>
 					
-        <ul>
-            <li class="active" ><a ng-href="#">Meilleurs Ventes</a></li>
+        
+        	<h1>Meilleures ventes</h1>
             <!-- MEILLEURES VENTES -->
             <div class="best">
-                <ul>
-                    <li ng-repeat="data in datasBest"> 
-                        <figure>
-                            <a href="#detail/124905">
-                                <img src='{{data.poster}}' alt=""/>
-                                <figcaption> {{data.title}} <br/> {{data.year}} </figcaption>
-                            </a>
-                        </figure>            
-                    </li>
-                </ul>
+                        <table>
+                        		<tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905"><img src='{{data.poster}}' class="img-rounded poster1" alt=""/></a></td></tr>
+                                <tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905">{{data.title}} <br/> {{data.year}}</a></td>
+                                </tr>
+                            </tbody>                         
+                        </table>  
             </div>
            
                 
-            <li class="active"><a ng-href="#">Suggestions</a></li>
+            <h1>Suggestions</h1>
             <!-- SUGGESTIONS -->
-            <div class="best">
-                <ul>
-                    <li ng-repeat="data in datasSuggest"> 
-                        <figure>
-                            <a href="#detail/124905">
-                                <img src='{{data.poster}}' alt=""/>
-                                <figcaption> {{data.title}} <br/> {{data.year}} </figcaption>
-                            </a>
-                        </figure>            
-                    </li>
-                </ul>
+             <div class="best">
+                        <table>
+                        		<tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905"><img src='{{data.poster}}' class="img-rounded poster1" alt=""/></a></td></tr>
+                                <tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905">{{data.title}} <br/> {{data.year}}</a></td>
+                                </tr>
+                            </tbody>                         
+                        </table>  
             </div>
 
-        </ul>
 					
         <div>
             <form action="#" ng-submit="addTodo()">
