@@ -13,7 +13,15 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
         $rootScope.$on('ngDialog.setPadding', function (event, padding){
             angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
         });
+	$scope.searchAction2 = function(){
+            $location.path("/search/"+ $scope.queryIndex);
+    	} 
+		$scope.ListMenu = false;
+		$scope.GenreFilm = false;
+		$scope.GenreSerie = false;
 
+		$scope.BtnSearch = true;
+		$scope.isConnect = false;
     }
 ]);   
 

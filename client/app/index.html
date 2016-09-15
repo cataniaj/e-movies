@@ -31,7 +31,7 @@
         <title> e-movies </title>        
 	</head>
 	<body  ng-app="routeApp">
-		<div id="main" ng-controler="indexCtrl">
+		<div id="main">
 			<header>
 				<div class="logo" >
                     <a href="#home"><img src="images/logos/banniere.png" /></a>
@@ -39,8 +39,8 @@
 			</header>
 
 			<!--Bar de navigation -->
-<<<<<<< HEAD
-			<div ng-controller="loginCtrl">
+<!-- <<<<<<< HEAD -->
+<!-- 			<div ng-controller="loginCtrl">
 				 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
 					<div class="navbar-header">
 					  <a class="navbar-brand" href="#home">e-movies</a>
@@ -56,8 +56,8 @@
                         <li><a href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" ><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 					</ul>		  
 				</nav> 
-			</div>
-=======
+			</div> -->
+<!-- ======= -->
 			 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
@@ -74,8 +74,13 @@
 			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
-			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee"><span class="glyphicon glyphicon-plus"/></a>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee">
+			            <span ng-show="rechAvancee" class="glyphicon glyphicon-plus"/>
+			            <span class="glyphicon glyphicon-minus"/>
+			            </a>
+
 			            <div ng-show="rechAvancee" id="rechPlus">
+
             			<!-- Recherche Avancée : -->
 			            	<form>
 			            	 	<h1>Recherche avancée</h1>
@@ -115,10 +120,11 @@
 			    <!-- ng-click="isConnect = !isConnect" -->
 			    <!-- Utilisateur non connecté : -->
 			    
-			    <ul class="nav navbar-nav navbar-right">
+			    <div ng-controller="loginCtrl">
+			    <ul class="nav navbar-nav navbar-right" >
 			    	<div ng-show=!isConnect>
-			    		<li><a href="#">Connexion</a></li>
-			    		<li><a href="#">Inscription</a></li>
+			    		<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
+			    		<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
 			   		</div>
 
 			    
@@ -128,18 +134,19 @@
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
 						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
-						    <li><a href="#home" ng-hide="isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
+						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
 					</div>
 
 					<!-- Panier -->
-					<li><a href="#" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a  href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
 			    </ul>
+			    </div>
   
 			</nav> 
->>>>>>> e810f81897353f287399359f83dfda344312e3fc
+
 
 
 			<!-- Menu -->

@@ -101,31 +101,9 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
         });
 
     }
-<<<<<<< HEAD
-]);   
-=======
 ]);
 
-
-// Contrôleur de la page index
-routeAppControllers.controller('indexCtrl', ['$scope', '$location','$routeParams','$http',
-	function($scope, $location, $routeParams, $http){
-		//$scope.id = $routeParams.id;	
-
-		$scope.searchAction2 = function(){
-            $location.path("/search/"+ $scope.queryIndex);
-    	} 
-		$scope.ListMenu = false;
-		$scope.GenreFilm = false;
-		$scope.GenreSerie = false;
-
-		$scope.BtnSearch = true;
-		$scope.isConnect = false;
-		
-    }
-]);
 
       
->>>>>>> e810f81897353f287399359f83dfda344312e3fc
        
 
