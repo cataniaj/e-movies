@@ -85,14 +85,14 @@ alert('yess');
     }
 ]);   
 
-// routeAppControllers.controller('deconnectCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
-//     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){   
-//       $scope.test=function(){
-//         isConnect=true;
-//       alert(isConnect) ;
-//   }
-//     }
-// ]);   
+ routeAppControllers.controller('loginValidateCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
+     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){   
+       $scope.test=function(){
+         isConnect=true;
+       alert(isConnect) ;
+   }
+     }
+ ]);   
     
     
 
