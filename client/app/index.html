@@ -34,31 +34,13 @@
 		<div id="main">
 			<header>
 				<div class="logo" >
-                    <a href="#home"><img src="images/logos/banniere.png" /></a>
+                    <a href="#home"><img src="images/logos/logo1.png" /></a>
 				</div>				
 			</header>
 
 			<!--Bar de navigation -->
-<!-- <<<<<<< HEAD -->
-<!-- 			<div ng-controller="loginCtrl">
-				 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
-					<div class="navbar-header">
-					  <a class="navbar-brand" href="#home">e-movies</a>
-					</div>
-					<ul class="nav navbar-nav">
-					  <li><a href="#back"><span class="glyphicon glyphicon-arrow-left"></span></a></li>
-					  <li class="active"><a href="#home"><span class="glyphicon glyphicon-home"></span></a></li>
-					  <li><a href="#achat"><span class="glyphicon glyphicon-search"></span></a></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right" style="margin-right:12px" >						
-						<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
-						<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
-                        <li><a href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" ><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-					</ul>		  
-				</nav> 
-			</div> -->
-<!-- ======= -->
-			 <nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+
+			<nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -122,18 +104,18 @@
 			    
 			    <div ng-controller="loginCtrl">
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show=!isConnect>
+			    	<div ng-show=isConnect>
 			    		<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
 			    		<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
 			   		</div>
 
 			    
-			    	<div ng-show=isConnect>
+			    	<div ng-show=!isConnect>
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
-						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
+						    <li><a href="" data-toggle="modal" data-target="#dialogParameter"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
 						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
@@ -248,8 +230,7 @@
 		
 	<!-- Modal SIGN UP -->
 	  <div class="modal fade" id="dialogSign_up" role="dialog">
-		<div class="modal-dialog">
-		
+		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
 			<div class="modal-header">
@@ -257,7 +238,7 @@
 			  <h4 class="modal-title">Inscription</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-group">					  
+				<!--form class="form-group">					  
 					<b>Nom :</b> <input type="text" class="form-control" id="name" placeholder="Nom">
 					<b>Prenom :</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
 					<b>Adresse :</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
@@ -270,8 +251,8 @@
 					<div class="checkbox">
 						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
 					</div>					  
-				</form>
-				<!--form class="form-group">					  
+				</form-->
+				<form class="form-group">					  
 					<input type="text" class="form-control" id="name" placeholder="Nom">
 					</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
 					</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
@@ -282,13 +263,13 @@
 					<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
 					</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">
 					<div class="checkbox">
-						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
+						<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
 					</div>					  
-				</form-->
+				</form>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default">Envoyer</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Envoyer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		  </div>
 		  
@@ -298,8 +279,7 @@
 	 
 	 <!-- Modal PANIER -->
 	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
-		<div class="modal-dialog">
-		
+		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
 			<div class="modal-header">
@@ -323,28 +303,76 @@
 					<tr ng-repeat="data in dataPanier1">
 						<td>{{data[0]}} </td>
 						<td>{{data[1]}}</td>
-						<td><select id="country" class="form-control" id="sel1"> <option>Copie Numerique</option><option>DVD</option> </select></td>
-						<td>{{data[3]}}€</td>
-						<td>{{data[4]}}</td>
+						<td>Copie Numerique</td>
+						<td>{{data[3]}}</td>
+						<td>{{data[4]}}€</td>
 						<td>{{data[3]*data[4]}}€</td>
-						<td><a href="" ng-click=""><span class="glyphicon glyphicon-trash"></span></a>
+						<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
 							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
 					</tr>					
 					<tr><td colspan="7"></td></tr>
-					<tr><td colspan="3"></td><td colspan="2"><b>le Total du panier</b></td><td><b>{{dataPanierTotal}}€</b></td><td></td></tr>
+					<tr><td colspan="3"></td><td colspan="2"><b>le Total du panier</b></td><td><b>{{dataPanierTotal[0]}}€</b></td><td></td></tr>
 					</tbody>
 				</table>
-					<a href="" ng-click="">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
+					<a href="" ng-click="clearPanier()">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default">Payer</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Payer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		  </div>		  
+		</div>		
+	  </div>
+	 <!-- End Modal PANIER --> 
+	 
+	 
+<!-- Modal PARAMETER -->
+	  <div class="modal fade" id="dialogParameter" role="dialog">
+		<div class="modal-dialog">		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Parametres</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover">
+					<tr><td>
+							<div class="paramLeft">
+								<input type="text"  class="form-control" id="name" placeholder="Nom">
+								<input width="50%" class="form-control" type="text" id="pName" placeholder="Prenom">
+								<input type="text" class="form-control" id="adress" placeholder="Adresse"> 
+								<div class="form-inline">					
+									<input type="text" style="width:130px" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000">
+									<select id="country" class="form-control" id="sel1"> <option>France</option> </select>
+								</div>
+								<input type="tel" class="form-control" id="phone" placeholder="Telephone">
+							</div>
+						</td><td>	
+							<div class="paramRight">
+								<input type="email" class="form-control" id="mail" placeholder="Email">
+								<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
+								</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">	
+							</div>
+						</td></tr>
+					<tr><td colspan="2"></td></tr>
+					<tr><td colspan="2">
+						<div class="checkbox">
+								<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
+						</div>
+					</td></tr>
+					<tr><td colspan="2"><a href="" >Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
+				</table>					
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Valider</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		  </div>
 		  
 		</div>
 	  </div>
-	 <!-- End Modal PANIER --> 
+	 <!-- End Modal PARAMETER --> 
   
 	</body>	
 

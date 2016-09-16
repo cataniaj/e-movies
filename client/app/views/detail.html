@@ -2,7 +2,17 @@
 <div class="detail" ng-controller="detailCtrl">	
 	<div id="poster">
 		<img src="{{details.poster}}" />
-		<a href="" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)">Ajouter Panier</a>
+		
+		<div>            
+            <form class="form-group">	
+				<b>Support :<select class="form-control" id="sel1"> <option>Copie Numerique</option><option>DVD</option><option>BluRay</option> </select>
+                <b>Prix Unitaire (€):</b> <input type="text" class="form-control" value="7,00"  disabled>
+            <div class="formAjout">	
+				<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)"><b> Ajouter Panier</b></button>
+            </div>    
+				</form>
+            
+        </div>
 	</div>
 	<div id="info"> 
 		<h2>{{details.title}}</h2>
@@ -16,6 +26,26 @@
 		<div id="synopsis">
 			{{details.overview}}
 		</div>
+		
+		<a href="" data-toggle="modal" data-target="#dialogVideo"> Visionner la Bande Annonce </a>				
 	</div>
+			
+		
+		<!-- Modal VIDEO -->
+	  <div class="modal fade" id="dialogVideo" role="dialog">
+		<div class="modal-dialog">
+				<div class="video">
+                    <iframe width="620px" height="400px" src="https://www.youtube.com/embed/rUYFJJqXLLM"></iframe> 
+                </div>
+		  
+		</div>
+	  </div>
+	 <!-- End Modal VIDEO --> 
+		
+		
 	
 </div>  <!--{{details.title}},{{details.year}},'copie numerique','1','7,00'-->
+
+
+
+				

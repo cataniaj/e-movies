@@ -4,8 +4,7 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
         /** tester dialogue ***/
         $scope.dialogLogin = function () {
             ngDialog.open({ template: 'dialogLogin' });
-        };
-        
+        };        
         
 		/*$scope.dialogSign_up = function () {
             ngDialog.open({ template: 'dialogSign_up' });
@@ -31,14 +30,16 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         $scope.dataPanier1=dataPanier;
         
         $scope.dataPanierTotal=dataPanierTotal;
-        //alert($scope.dataPanier1[3]*$scope.dataPanier1[4]);
-        /*for(i=0;i<$scope.dataPanier1.length;i++){
-            // $scope.dataPanierTotal = $scope.dataPanierTotal + i;  
-alert('yess');            
-        }*/
-            
-        //$scope.dataPanier1="boyret";
-        
+        $scope.clearPanier=function(){
+            while(dataPanier.length){                
+                dataPanier.shift();
+            }
+            dataPanierTotal[0]=0;
+        }
+        $scope.deletePanier=function(index){                       
+            dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][3]*dataPanier[index][4]);
+            dataPanier.splice(index, 1);  
+        }
 
     }
 ]);   

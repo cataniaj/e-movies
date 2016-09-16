@@ -51,7 +51,8 @@ routeApp.config(['$routeProvider',
  */
 var routeAppControllers = angular.module('routeAppControllers', ['ngDialog']);
 var dataPanier=[];
-var dataPanierTotal=0;
+var dataPanierTotal=[0];
+// dataPanierTotal.push(0);
 
 routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
             ngDialogProvider.setDefaults({

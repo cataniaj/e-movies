@@ -104,6 +104,14 @@ header{
 	border-spacing:400px 200px;
 }
 
+/* Parametre */
+.paramLeft{
+	width:80%;
+}
+.paramRight{
+	width:100%;
+        margin-top:50px;
+}
 
 /*.navBardemoBasicUsage md-content .ext-content {
   padding: 50px;
