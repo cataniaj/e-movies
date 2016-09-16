@@ -36,7 +36,7 @@ header{
 }
 
 
-
+/*Barre de navigation*/
 .affix {
 	top: 0;
 	width: 100%;
@@ -78,6 +78,17 @@ header{
 	margin:auto;
 	color:grey;
 }
+
+.PanierVide{
+	text-align: center;
+	margin-top:10%;
+	margin-bottom: 10%;
+
+}
+.PanierVide h3{
+
+}
+
 
 /*Recherche : */
 .searchIndex{
@@ -297,6 +308,7 @@ header{
 
 	padding:35px 50px;
 	background-color: #98C6D2;
+	height: 90px;
 
 	-webkit-border-top-left-radius: 25px;
 -webkit-border-top-right-radius: 25px;
@@ -313,6 +325,30 @@ border-top-right-radius: 25px;
 	font-variant: small-caps;
 	font-weight: 600;
 
+}
+
+/*.modal-dialog{
+	vertical-align: middle;
+}*/
+
+.modal{
+	text-align: center;
+	padding: 0px;
+}
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+  margin:auto;
+  /*padding: 0px;*/
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px; /* Adjusts for spacing */
 }
 
 .modal-content {

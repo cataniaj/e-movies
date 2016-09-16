@@ -123,7 +123,7 @@
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
-						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
+						    <li><a href="" class="btn" data-toggle="modal" data-target="#dialogParameter"><span class="glyphicon glyphicon-cog" style="margin-right:7%;" /> Paramètres</a></li>
 						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
@@ -326,13 +326,13 @@
 	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
-		  <div class="modal-content">
+		  <div class="modal-content" ng-controller="panierCtrl">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Mon Panier</h4>
 			</div>
-			<div class="modal-body">
-				<table class="table table-hover" ng-controller="panierCtrl">
+			<div class="modal-body" ng-show="dansPanier[0]">
+				<table class="table table-hover">
 					<thead>
 					<tr>
 						<th>Titre</th>
@@ -362,10 +362,13 @@
 
 					</tbody>
 				</table>
-					<a href="" ng-click="clearPanier()">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
-			</div>			
+					<a href="" data-toggle="modal" data-target="#deleteP"> Vider Panier<span class="glyphicon glyphicon-trash"></span></a>
+			</div>	
+			<div class="PanierVide" ng-show="!dansPanier[0]">
+				<h3>Le panier est vide !</h3>
+			</div>	
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary">Payer</button>
+				<button type="submit" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" >Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		  </div>		  
@@ -387,14 +390,13 @@
 				<table class="table table-hover">
 					<tr><td>
 							<div class="paramLeft">
-								<input type="text"  class="form-control" id="name" placeholder="Nom">
-								<input width="50%" class="form-control" type="text" id="pName" placeholder="Prenom">
-								<input type="text" class="form-control" id="adress" placeholder="Adresse"> 
-								<div class="form-inline">					
-									<input type="text" style="width:130px" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000">
-									<select id="country" class="form-control" id="sel1"> <option>France</option> </select>
-								</div>
-								<input type="tel" class="form-control" id="phone" placeholder="Telephone">
+								<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
+					<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
+					<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
+					<p style="display: flex; width:40%;">
+					<input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" width:40%;" id="sel1"> <option>France</option> </select>
+					</p>
+					<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
 							</div>
 						</td><td>	
 							<div class="paramRight">
@@ -409,7 +411,7 @@
 								<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
 						</div>
 					</td></tr>
-					<tr><td colspan="2"><a href="" >Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
+					<tr><td colspan="2"><a href="" class="btn" data-toggle="modal" data-target="#deleteC">Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
 				</table>					
 			</div>
 			<div class="modal-footer">
@@ -420,6 +422,49 @@
 		  
 		</div>
 	  </div>
+
+	  <!-- Suppression élément -->
+	  <div class="modal fade" id="deleteP" role="dialog">
+		<div class="modal-dialog" style="margin-right:1%;">		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    	<div class="modal-header" style="background-color:red; height: 30px; color:black; text-align:center;">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h1>Vider le panier</h1>
+				    </div>
+				    <div class="modal-body">
+				        <p>Voulez-vous supprimer tout le panier ?</p>
+				    </div>
+				    <div class="modal-footer" ng-controller="panierCtrl">
+				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Non</a>
+				  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Oui</a>
+		    	</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Suppression compte -->
+	  <div class="modal fade" id="deleteC" role="dialog">
+		<div class="modal-dialog" style="margin-right:1%;">		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    	<div class="modal-header" style="background-color:red; height: 30px; color:black; text-align:center;">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h1>Suppression du compte</h1>
+				    </div>
+				    <div class="modal-body">
+				        <p>Voulez-vous supprimer votre compte ?</p>
+				        <p>Toutes vos données seront supprimées</p>
+				    </div>
+				    <div class="modal-footer" ng-controller="panierCtrl">
+				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogParameter">Non</a>
+				  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" data-toggle="modal" data-target="#dialogParameter">Oui</a>
+		    	</div>
+			</div>
+		</div>
+	</div>
+
+
 	 <!-- End Modal PARAMETER --> 
   
 	</body>	

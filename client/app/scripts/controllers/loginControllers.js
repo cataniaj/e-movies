@@ -33,6 +33,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){	
         /** tester dialogue ***/
         $scope.dataPanier1=dataPanier;
+        $scope.dansPanier=dansPanier;
         
 
         $scope.dataAchat1=dataAchat;
@@ -42,10 +43,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 
         $scope.addAchats = function (){
             dataAchat.push($scope.dataPanier1);
-            dataPanier=[];
-
-
-
+            dataPanier=[];            
             // alert(dataPanier);
         };
 
@@ -59,12 +57,22 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         $scope.clearPanier=function(){
             while(dataPanier.length){                
                 dataPanier.shift();
+                
             }
+
+            dansPanier.shift();
             dataPanierTotal[0]=0;
+            dansPanier[0]=false;
+            
         }
         $scope.deletePanier=function(index){                       
             dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][3]*dataPanier[index][4]);
-            dataPanier.splice(index, 1);  
+            dataPanier.splice(index, 1); 
+
+            if(dataPanier.length == 0){
+                dansPanier.shift();
+                dansPanier[0]=false;
+            }
         }
         //alert($scope.dataPanier1[3]*$scope.dataPanier1[4]);
         /*for(i=0;i<$scope.dataPanier1.length;i++){

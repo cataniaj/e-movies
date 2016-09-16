@@ -52,6 +52,9 @@ routeApp.config(['$routeProvider',
 var routeAppControllers = angular.module('routeAppControllers', ['ngDialog']);
 var dataPanier=[];
 var dataPanierTotal=[0];
+var dansPanier = [false];
+
+
 var dataAchat=[];
 var dataAvis=[];
 

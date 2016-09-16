@@ -69,6 +69,8 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout',
     function($scope, $location, $routeParams, $http, $timeout){
 		//$scope.id = $routeParams.id;	
+
+
 		$scope.details = [];
 		$http.get('json/jsonUnSeulFilm.php').success(function(data){
 			//alert(data.movies[0].title);
@@ -79,6 +81,9 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
         $scope.addPanier = function (titre, annee, support, quantite, pu) {
               dataPanier.push(new Array(titre, annee, support, quantite, pu));
               dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+              dansPanier.shift();
+              dansPanier.push(true);
+
         };
 		
 		//setTimeout(function() { alert("my message"); }, 1);
