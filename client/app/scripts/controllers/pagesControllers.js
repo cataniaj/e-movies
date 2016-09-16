@@ -79,22 +79,11 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
         
         /** fonction ajout dans panier  **/
         $scope.addPanier = function (titre, annee, support, quantite, pu) {
-<<<<<<< HEAD
               dataPanier.push(new Array(titre, annee, support, quantite, pu));
               dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
               dansPanier.shift();
               dansPanier.push(true);
 
-=======
-            dataPanier.push(new Array(titre, annee, support, quantite, pu));
-            dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-            
-             /*setTimeout(function(){  
-                $scope.addInfo=true;
-                //document.getElementById("addInfoId").ng-show=false;
-                alert("Hello" + $scope.addInfo);}, 3000);*/
-           
->>>>>>> 0e2e103231d7fbd6c6a4c366e03ba65c96819798
         };
         
         $scope.supportPrice=function(index){
