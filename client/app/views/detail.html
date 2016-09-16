@@ -5,10 +5,16 @@
 		
 		<div>            
             <form class="form-group">	
-				<b>Support :<select class="form-control" id="sel1"> <option>Copie Numerique</option><option>DVD</option><option>BluRay</option> </select>
-                <b>Prix Unitaire (€):</b> <input type="text" class="form-control" value="7,00"  disabled>
+				<b>Support :<select class="form-control" ng-model="txtDtlSupport"> <option ng-click="supportPrice(1)">Copie Numerique</option><option ng-click="supportPrice(2)">DVD</option><option ng-click="supportPrice(3)">BluRay</option> </select>
+                <b>Prix Unitaire (€):</b> <input type="text" class="form-control"  value={{txtDtlPu}}  disabled>
             <div class="formAjout">	
-				<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)"><span class="glyphicon glyphicon-shopping-cart"> </span> <b>Ajouter au panier</b></button>
+				<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addInfo=!addInfo; addPanier(details.title,details.year,txtDtlSupport,1,txtDtlPu)"><span class="glyphicon glyphicon-shopping-cart"> </span> <b>Ajouter au panier</b></button>
+                
+                <!--a href=""  ng-click="addInfo=!addInfo">meeeeer</a-->
+                <div ng-model="addInfoId" ng-show="addInfo" class="alert alert-info">
+                <strong>Video ajoutée au panier </strong>
+                </div>                
+
             </div>    
 				</form>
             
