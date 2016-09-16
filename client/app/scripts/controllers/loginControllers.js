@@ -4,12 +4,10 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
         /** tester dialogue ***/
 
         $scope.dialogLogin = function () {
-            ngDialog.open({ 
-                template: 'dialogLogin'
-            });
-        };
-        
 
+            ngDialog.open({ template: 'dialogLogin' });
+        };        
+        
 		/*$scope.dialogSign_up = function () {
             ngDialog.open({ template: 'dialogSign_up' });
         };*/
@@ -36,10 +34,10 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         /** tester dialogue ***/
         $scope.dataPanier1=dataPanier;
         
-        $scope.dataPanierTotal1=dataPanierTotal;
 
         $scope.dataAchat1=dataAchat;
         $scope.dataAvis1=dataAvis;
+        $scope.dataPanierTotal=dataPanierTotal;
 
 
         $scope.addAchats = function (){
@@ -56,6 +54,18 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         $scope.addAvis = function (id,titre,annee) {
               dataAvis.push(new Array(titre));
         };
+
+        
+        $scope.clearPanier=function(){
+            while(dataPanier.length){                
+                dataPanier.shift();
+            }
+            dataPanierTotal[0]=0;
+        }
+        $scope.deletePanier=function(index){                       
+            dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][3]*dataPanier[index][4]);
+            dataPanier.splice(index, 1);  
+        }
         //alert($scope.dataPanier1[3]*$scope.dataPanier1[4]);
         /*for(i=0;i<$scope.dataPanier1.length;i++){
             // $scope.dataPanierTotal = $scope.dataPanierTotal + i;  
@@ -63,10 +73,18 @@ alert('yess');
         }*/
             
         //$scope.dataPanier1="boyret";
-        
 
     }
-]);    
+]);   
+
+// routeAppControllers.controller('deconnectCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
+//     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){   
+//       $scope.test=function(){
+//         isConnect=true;
+//       alert(isConnect) ;
+//   }
+//     }
+// ]);   
     
     
 

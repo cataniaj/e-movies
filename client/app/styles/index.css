@@ -52,8 +52,6 @@ header{
 	margin-top:10%;
 }
 
-
-
 .navbar-right{
 	margin-right: 0px;
 	display: inline-flex;
@@ -90,6 +88,7 @@ header{
 	/*width: 80%;*/
 	width: 550px;
 }
+
 
 .txtSearch2{
 	width: 50%;
@@ -169,6 +168,14 @@ header{
 	border-spacing:400px 200px;
 }
 
+/* Parametre */
+.paramLeft{
+	width:80%;
+}
+.paramRight{
+	width:100%;
+        margin-top:50px;
+}
 
 /*Login*/
 .btn-block {

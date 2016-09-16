@@ -37,11 +37,12 @@
 		<div id="main">
 			<header>
 				<div class="logo" >
-                    <a href="#home"><img src="images/logos/banniere.png" /></a>
+                    <a href="#home"><img src="images/logos/logo1.png" /></a>
 				</div>				
 			</header>
 			<div data-spy="affix" data-offset-top="156">
 			 <nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
+
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -49,7 +50,6 @@
 			    <ul class="nav navbar-nav">
 			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
-
 			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
 			      </li>
 			      <li>
@@ -57,6 +57,44 @@
 			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee">
+			            <span ng-show="!rechAvancee" class="glyphicon glyphicon-plus"/>
+			            <span ng-show="rechAvancee" class="glyphicon glyphicon-minus"/>
+			            </a>
+
+			            <div ng-show="rechAvancee" id="rechPlus">
+
+            			<!-- Recherche Avancée : -->
+			            	<form>
+			            	 	<h1>Recherche avancée</h1>
+								  <input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"> Film
+								  <input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"> Série
+							</form> 
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Année de production" pattern="[a-z]{1,15}"/>
+							</p><p><input ng-model="query" type="text" class="txtSearch" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
+							<h3>Genre :</h3>
+							<div class="centre">
+							<table>
+							<tr>
+								  <th><input type="checkbox" name="GenreC" value="Comedie"></th><td>Comédie</td>
+								  <th><input type="checkbox" name="GenreA" value="Aventure"></th><td>Aventure</td>
+								  <th><input type="checkbox" name="GenreD" value="Drame"></th><td>Drame</td>
+								  <th><input type="checkbox" name="GenreF" value="Fantastique"></th><td>Fantastique</td>
+							</tr><tr>
+								  <th><input type="checkbox" name="GenreSF" value="SF"></th><td>Sciences Fiction</td>
+								  <th><input type="checkbox" name="GenreAc" value="Action"></th><td>Action</td>
+								  <th><input type="checkbox" name="GenreT" value="Thriller"></th><td>Thriller</td>
+								  <th><input type="checkbox" name="GenreP" value="Policier"></th><td>Policier</td>
+							</tr><tr>
+								  <th><input type="checkbox" name="GenreM" value="Manga"></th><td>Manga</td>
+								  <th><input type="checkbox" name="GenreDA" value="DA"></th><td>Dessin animé</td>
+							</tr> 
+							</table>
+							<button type="submit" ng-click="searchAction()">Rechercher</button>
+							</div>
+							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
 
 			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="!rechAvancee" class="glyphicon glyphicon-plus-sign"></a>
 			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="rechAvancee" class="glyphicon glyphicon-minus-sign"></a>
@@ -122,7 +160,7 @@
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
-						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
+						    <li><a href="" data-toggle="modal" data-target="#dialogParameter"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
 						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
@@ -215,7 +253,8 @@
 		<script type="text/javascript" src="scripts/controllers/loginControllers.js"></script>
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
 		
-	
+
+		
 		<!-- DIALOG LOGIN -->
     <!-- <script type="text/ng-template" id="dialogLogin" >
     
@@ -280,8 +319,7 @@
 		
 	<!-- Modal SIGN UP -->
 	  <div class="modal fade" id="dialogSign_up" role="dialog">
-		<div class="modal-dialog">
-		
+		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
 			<div class="modal-header">
@@ -289,6 +327,7 @@
 			  <h4 class="modal-title">Inscription</h4>
 			</div>
 			<div class="modal-body">
+
 				<form class="form-group">					  
 					<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
 					<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
@@ -301,30 +340,18 @@
 					<p><input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> </p>
 					<p><input type="password" class="form-control" id="pwd2" placeholder="Confirmer le mot de Passe"></p>
 					<div class="checkbox">
-						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
+						<label><input type="checkbox"> <b>Je souhaite être averti par e-mail des nouveaux ajouts  </b></label>
 					</div>		
 
 					<button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">S'inscrire</button>			  
 				</form>
-				<!--form class="form-group">					  
-					<input type="text" class="form-control" id="name" placeholder="Nom">
-					</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
-					</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
-					</b> <input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> 
-					<select id="country" class="form-control" id="sel1"> <option>France</option> </select>
-					<input type="tel" class="form-control" id="phone" placeholder="Telephone">
-					<input type="email" class="form-control" id="mail" placeholder="Email">
-					<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
-					</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">
-					<div class="checkbox">
-						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
-					</div>					  
-				</form-->
+				
 			</div>
 			<div class="modal-footer">
 				
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
 				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" >Se connecter</a></p>
+
 			</div>
 		  </div>
 		  
@@ -333,9 +360,9 @@
 	 <!-- End Modal SIGN UP --> 
 	 
 	 <!-- Modal PANIER -->
-	  <div class="modal fade" id="dialogPanier" role="dialog">
-		<div class="modal-dialog">
-		
+
+	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
+		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
 			<div class="modal-header">
@@ -359,31 +386,79 @@
 					<tr ng-repeat="data in dataPanier1">
 						<td>{{data[0]}} </td>
 						<td>{{data[1]}}</td>
-						<td><select id="country" class="form-control" id="sel1"> <option>Copie Numerique</option><option>DVD</option> </select></td>
-						<td>{{data[3]}}€</td>
-						<td>{{data[4]}}</td>
+						<td>Copie Numerique</td>
+						<td>{{data[3]}}</td>
+						<td>{{data[4]}}€</td>
 						<td>{{data[3]*data[4]}}€</td>
-						<td><a href="" ng-click=""><span class="glyphicon glyphicon-trash"></span></a>
+						<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
 							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
 					</tr>	
 					<tfoot>
 					<tr><td colspan="7"></td></tr>
-					<tr><td colspan="3"></td><td colspan="2"><b>Total du panier</b></td><td><b>{{dataPanierTotal1}}€</b></td><td></td></tr>
-					</tfoot>				
+
+					<tr><td colspan="3"></td><td colspan="2"><b>Total du panier : </b></td><td><b>{{dataPanierTotal[0]}}€</b></td><td></td></tr>
 
 					</tbody>
 				</table>
-					<a href="" ng-click="">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
+					<a href="" ng-click="clearPanier()">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
+			</div>			
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Payer</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		  </div>		  
+		</div>		
+	  </div>
+	 <!-- End Modal PANIER --> 
+	 
+	 
+<!-- Modal PARAMETER -->
+	  <div class="modal fade" id="dialogParameter" role="dialog">
+		<div class="modal-dialog">		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Parametres</h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-hover">
+					<tr><td>
+							<div class="paramLeft">
+								<input type="text"  class="form-control" id="name" placeholder="Nom">
+								<input width="50%" class="form-control" type="text" id="pName" placeholder="Prenom">
+								<input type="text" class="form-control" id="adress" placeholder="Adresse"> 
+								<div class="form-inline">					
+									<input type="text" style="width:130px" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000">
+									<select id="country" class="form-control" id="sel1"> <option>France</option> </select>
+								</div>
+								<input type="tel" class="form-control" id="phone" placeholder="Telephone">
+							</div>
+						</td><td>	
+							<div class="paramRight">
+								<input type="email" class="form-control" id="mail" placeholder="Email">
+								<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
+								</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">	
+							</div>
+						</td></tr>
+					<tr><td colspan="2"></td></tr>
+					<tr><td colspan="2">
+						<div class="checkbox">
+								<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
+						</div>
+					</td></tr>
+					<tr><td colspan="2"><a href="" >Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
+				</table>					
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default">Payer</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Valider</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		  </div>
 		  
 		</div>
 	  </div>
-	 <!-- End Modal PANIER --> 
+	 <!-- End Modal PARAMETER --> 
   
 	</body>	
 

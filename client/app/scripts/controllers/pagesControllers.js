@@ -66,8 +66,8 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page detail
-routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http',
-    function($scope, $location, $routeParams, $http){
+routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout',
+    function($scope, $location, $routeParams, $http, $timeout){
 		//$scope.id = $routeParams.id;	
 		$scope.details = [];
 		$http.get('json/jsonUnSeulFilm.php').success(function(data){
@@ -78,14 +78,11 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
         /** fonction ajout dans panier  **/
         $scope.addPanier = function (titre, annee, support, quantite, pu) {
               dataPanier.push(new Array(titre, annee, support, quantite, pu));
-              dataPanierTotal = dataPanierTotal + (quantite*pu);
-              $scope.dataPanierTotal = dataPanierTotal;
-            // alert($scope.dataPanierTotal);
+              dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
         };
-
-        
-
-    }
+		
+		//setTimeout(function() { alert("my message"); }, 1);
+	}
 ]);
 
 // Contrôleur de la page achat
