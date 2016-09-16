@@ -37,12 +37,12 @@
 		<div id="main">
 			<header>
 				<div class="logo" >
-                    <a href="#home"><img src="images/logos/logo1.png" /></a>
+                    <a href="#home"><img src="images/logos/banniere.png" /></a>
 				</div>				
 			</header>
+			
 			<div data-spy="affix" data-offset-top="156">
 			 <nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
-
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -50,6 +50,7 @@
 			    <ul class="nav navbar-nav">
 			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
+
 			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
 			      </li>
 			      <li>
@@ -57,44 +58,6 @@
 			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
-			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee">
-			            <span ng-show="!rechAvancee" class="glyphicon glyphicon-plus"/>
-			            <span ng-show="rechAvancee" class="glyphicon glyphicon-minus"/>
-			            </a>
-
-			            <div ng-show="rechAvancee" id="rechPlus">
-
-            			<!-- Recherche Avancée : -->
-			            	<form>
-			            	 	<h1>Recherche avancée</h1>
-								  <input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"> Film
-								  <input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"> Série
-							</form> 
-							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
-							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
-							<p><input ng-model="query" type="text" class="txtSearch" placeholder="Année de production" pattern="[a-z]{1,15}"/>
-							</p><p><input ng-model="query" type="text" class="txtSearch" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
-							<h3>Genre :</h3>
-							<div class="centre">
-							<table>
-							<tr>
-								  <th><input type="checkbox" name="GenreC" value="Comedie"></th><td>Comédie</td>
-								  <th><input type="checkbox" name="GenreA" value="Aventure"></th><td>Aventure</td>
-								  <th><input type="checkbox" name="GenreD" value="Drame"></th><td>Drame</td>
-								  <th><input type="checkbox" name="GenreF" value="Fantastique"></th><td>Fantastique</td>
-							</tr><tr>
-								  <th><input type="checkbox" name="GenreSF" value="SF"></th><td>Sciences Fiction</td>
-								  <th><input type="checkbox" name="GenreAc" value="Action"></th><td>Action</td>
-								  <th><input type="checkbox" name="GenreT" value="Thriller"></th><td>Thriller</td>
-								  <th><input type="checkbox" name="GenreP" value="Policier"></th><td>Policier</td>
-							</tr><tr>
-								  <th><input type="checkbox" name="GenreM" value="Manga"></th><td>Manga</td>
-								  <th><input type="checkbox" name="GenreDA" value="DA"></th><td>Dessin animé</td>
-							</tr> 
-							</table>
-							<button type="submit" ng-click="searchAction()">Rechercher</button>
-							</div>
-							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
 
 			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="!rechAvancee" class="glyphicon glyphicon-plus-sign"></a>
 			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="rechAvancee" class="glyphicon glyphicon-minus-sign"></a>
@@ -160,7 +123,7 @@
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
-						    <li><a href="" data-toggle="modal" data-target="#dialogParameter"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
+						    <li><a href="#"><span class="glyphicon glyphicon-cog"/> Paramètres</a></li>
 						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
@@ -232,7 +195,6 @@
 				</div>
 			</footer> 
 		</div>
-		
 			<!-- bower:js -->
 		<script src="scripts/bower_components/angular/angular.js"></script>
 		<script src="scripts/bower_components/angular-animate/angular-animate.js"></script>

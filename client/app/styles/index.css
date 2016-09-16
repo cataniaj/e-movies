@@ -52,10 +52,21 @@ header{
 	margin-top:10%;
 }
 
+
+.navbar{
+	padding:0px;
+}
+
+.navbar-brand{
+	margin:auto;
+	padding-top: 14px;
+}
 .navbar-right{
 	margin-right: 0px;
 	display: inline-flex;
 }
+
+
 
 .navbar-right a{
 	text-decoration: none;
@@ -88,7 +99,6 @@ header{
 	/*width: 80%;*/
 	width: 550px;
 }
-
 
 .txtSearch2{
 	width: 50%;
@@ -167,6 +177,7 @@ header{
 .search table{
 	border-spacing:400px 200px;
 }
+
 
 /* Parametre */
 .paramLeft{
