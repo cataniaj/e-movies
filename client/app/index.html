@@ -38,9 +38,7 @@
 				</div>				
 			</header>
 
-			<!--Bar de navigation -->
-
-			<nav nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+			 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -48,8 +46,7 @@
 			    <ul class="nav navbar-nav">
 			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
-
-			      <li><a ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
+			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
 			      </li>
 			      <li>
 			      	<p ng-show="BtnSearch" class="searchIndex">
@@ -94,6 +91,49 @@
 							<button type="submit" ng-click="searchAction()">Rechercher</button>
 							</div>
 							<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
+
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="!rechAvancee" class="glyphicon glyphicon-plus-sign"></a>
+			            <a ng-href="#/search" ng-click="rechAvancee = !rechAvancee" ng-show="rechAvancee" class="glyphicon glyphicon-minus-sign"></a>
+
+
+			            <div ng-show="rechAvancee" class="rechPlus">
+			            <h1>Recherche avancée</h1>
+
+            			<!-- Recherche Avancée : -->
+			            	<table>
+			            		<tbody>
+			            	 	<td><input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"/> Film</td>
+			            	 	<td><input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"/> Série</td></tr>
+			            	 	</tbody>
+							</table>
+							
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Titre" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Réalisateur" pattern="[a-z]{1,15}"/></p>
+							<p><input ng-model="query" type="text" class="txtSearch2" placeholder="Année de production" pattern="[a-z]{1,15}"/>
+							</p><p><input ng-model="query" type="text" class="txtSearch2" placeholder="Acteur" pattern="[a-z]{1,15}" t/></p>
+							<h3>Genre :</h3>
+							<div>
+							<table>
+							<tbody>
+							<tr>
+								  <td><input type="checkbox" name="GenreC" value="Comedie"> Comédie</td>
+								  <td><input type="checkbox" name="GenreA" value="Aventure"> Aventure</td>
+								  <td><input type="checkbox" name="GenreD" value="Drame"> Drame</td>
+								  <td><input type="checkbox" name="GenreF" value="Fantastique"> Fantastique</td>
+							</tr><tr>
+								  <td><input type="checkbox" name="GenreSF" value="SF"> Sciences Fiction</td>
+								  <td><input type="checkbox" name="GenreAc" value="Action"> Action</td>
+								  <td><input type="checkbox" name="GenreT" value="Thriller"> Thriller</td>
+								  <td><input type="checkbox" name="GenreP" value="Policier"> Policier</td>
+							</tr><tr>
+								  <td><input type="checkbox" name="GenreM" value="Manga"> Manga</td>
+								  <td><input type="checkbox" name="GenreDA" value="DA"> Dessin animé</td>
+							</tr> 
+							</tbody>
+							</table>
+							<button type="submit" ng-click="searchAction()">Rechercher</button>
+							</div>
+							<!-- <a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a> -->
 						</div>
 			      </p>
 			      </li>			        
@@ -104,13 +144,14 @@
 			    
 			    <div ng-controller="loginCtrl">
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show=isConnect>
-			    		<li><a href="" ng-click="dialogLogin()">Connexion</a></li>
-			    		<li><a href="" data-toggle="modal" data-target="#dialogSign_up">Inscription</a></li>
+
+			    	<div ng-show="!isConnect" class="ConnexInscr">
+			    		<li><a href="" ng-click="dialogLogin()"><b>Connexion</b></a> / 
+			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
 			    
-			    	<div ng-show=!isConnect>
+			    	<div ng-show="isConnect">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -204,10 +245,12 @@
 		<script type="text/javascript" src="scripts/controllers/loginControllers.js"></script>
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
 		
+
 		
 		<!-- DIALOG LOGIN -->
-    <script type="text/ng-template" id="dialogLogin">
-       <div class="ngdialog-message">
+    <script type="text/ng-template" id="dialogLogin" >
+    
+       <div class="ngdialog-message" ng-controller="deconnectCtrl">
             <h3>Connexion</h3>
             <form>
                 <div class="form-group">
@@ -221,7 +264,8 @@
                 <div class="checkbox">
                     <label><input type="checkbox"> Remember me</label>
                 </div>
-                <button type="submit" class="btn btn-default">Envoyer</button>
+                <button type="submit" class="btn btn-default" ng-click="isConnect=!isConnect;test()">Envoyer</button>
+
             </form>
             <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
         </div>
@@ -238,7 +282,7 @@
 			  <h4 class="modal-title">Inscription</h4>
 			</div>
 			<div class="modal-body">
-				<!--form class="form-group">					  
+				<!--form class="form-group">	
 					<b>Nom :</b> <input type="text" class="form-control" id="name" placeholder="Nom">
 					<b>Prenom :</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
 					<b>Adresse :</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
@@ -252,11 +296,12 @@
 						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
 					</div>					  
 				</form-->
-				<form class="form-group">					  
+				
+				<form class="form-group">	
 					<input type="text" class="form-control" id="name" placeholder="Nom">
-					</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
-					</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
-					</b> <input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> 
+					<input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
+					<input type="text" class="form-control" id="adress" placeholder="Adresse"> 
+					<input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> 
 					<select id="country" class="form-control" id="sel1"> <option>France</option> </select>
 					<input type="tel" class="form-control" id="phone" placeholder="Telephone">
 					<input type="email" class="form-control" id="mail" placeholder="Email">
@@ -315,7 +360,7 @@
 					</tbody>
 				</table>
 					<a href="" ng-click="clearPanier()">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
-			</div>
+			</div>			
 			<div class="modal-footer">
 				<button type="submit" class="btn btn-primary">Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>

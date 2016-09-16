@@ -15,12 +15,6 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 	$scope.searchAction2 = function(){
             $location.path("/search/"+ $scope.queryIndex);
     	} 
-		$scope.ListMenu = false;
-		$scope.GenreFilm = false;
-		$scope.GenreSerie = false;
-
-		$scope.BtnSearch = true;
-		$scope.isConnect = false;
     }
 ]);   
 
@@ -40,7 +34,23 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
             dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][3]*dataPanier[index][4]);
             dataPanier.splice(index, 1);  
         }
+        //alert($scope.dataPanier1[3]*$scope.dataPanier1[4]);
+        /*for(i=0;i<$scope.dataPanier1.length;i++){
+            // $scope.dataPanierTotal = $scope.dataPanierTotal + i;  
+alert('yess');            
+        }*/
+            
+        //$scope.dataPanier1="boyret";
 
+    }
+]);   
+
+routeAppControllers.controller('deconnectCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){   
+      $scope.test=function(){
+        isConnect=true;
+      alert(isConnect) ;
+  }
     }
 ]);   
     

@@ -8,7 +8,7 @@
 				<b>Support :<select class="form-control" id="sel1"> <option>Copie Numerique</option><option>DVD</option><option>BluRay</option> </select>
                 <b>Prix Unitaire (€):</b> <input type="text" class="form-control" value="7,00"  disabled>
             <div class="formAjout">	
-				<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)"><b> Ajouter Panier</b></button>
+				<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)"><span class="glyphicon glyphicon-shopping-cart"> </span> <b>Ajouter au panier</b></button>
             </div>    
 				</form>
             
@@ -40,12 +40,32 @@
 		  
 		</div>
 	  </div>
-	 <!-- End Modal VIDEO --> 
+	 <!-- End Modal VIDEO --> 	
 		
 		
-	
+		<!-- Modal SIGN UP -->
+	  <div class="modal fade" id="dialogVideo" role="dialog">
+		<div class="modal-dialog">
+		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Inscription</h4>
+			</div>
+			<div class="modal-body">
+				<div class="video">
+                    <iframe width="520" height="400" src="https://www.youtube.com/embed/rUYFJJqXLLM"></iframe> 
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+			</div>
+		  </div>
+		  
+		</div>
+	  </div>
+	 <!-- End Modal SIGN UP --> 
 </div>  <!--{{details.title}},{{details.year}},'copie numerique','1','7,00'-->
 
 
-
-				
