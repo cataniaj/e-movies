@@ -79,8 +79,12 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
         $scope.addPanier = function (titre, annee, support, quantite, pu) {
               dataPanier.push(new Array(titre, annee, support, quantite, pu));
               dataPanierTotal = dataPanierTotal + (quantite*pu);
-            alert(dataPanierTotal);
+              $scope.dataPanierTotal = dataPanierTotal;
+            // alert($scope.dataPanierTotal);
         };
+
+        
+
     }
 ]);
 

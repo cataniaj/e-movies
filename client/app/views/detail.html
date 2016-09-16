@@ -2,7 +2,11 @@
 <div class="detail" ng-controller="detailCtrl">	
 	<div id="poster">
 		<img src="{{details.poster}}" />
-		<a href="" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00)">Ajouter Panier</a>
+		<div style="text-align:center; margin-top:6%;" >
+		<a href="" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00);" ><p><span class="glyphicon glyphicon-shopping-cart"/></p></a>
+		<a href="" ng-click="addPanier(details.title,details.year,'copie numerique',1,7.00);" ><p> Ajouter au panier</p></a>
+		</div>
+
 	</div>
 	<div id="info"> 
 		<h2>{{details.title}}</h2>

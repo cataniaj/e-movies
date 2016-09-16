@@ -10,6 +10,7 @@
 					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
  					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   					<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  					<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
 
                     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
                     <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog.css">
@@ -25,6 +26,8 @@
 				<link rel="stylesheet" type="text/css" href="styles/home.css" />
 				<link rel="stylesheet" type="text/css" href="styles/detail.css" />
                 <link rel="stylesheet" type="text/css" href="styles/index.css" />
+                <link rel="stylesheet" type="text/css" href="styles/achat.css" />
+
 		
 		
 		
@@ -37,7 +40,8 @@
                     <a href="#home"><img src="images/logos/banniere.png" /></a>
 				</div>				
 			</header>
-			 <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="156">
+			<div data-spy="affix" data-offset-top="156">
+			 <nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -93,7 +97,7 @@
 							</tr> 
 							</tbody>
 							</table>
-							<button type="submit" ng-click="searchAction()">Rechercher</button>
+							<button type="submit" ng-click="searchAction2(); rechAvancee = !rechAvancee">Rechercher</button>
 							</div>
 							<!-- <a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a> -->
 						</div>
@@ -104,11 +108,11 @@
 			    <!-- ng-click="isConnect = !isConnect" -->
 			    <!-- Utilisateur non connecté : -->
 			    
-			    <div ng-controller="loginCtrl">
-			    <ul class="nav navbar-nav navbar-right" >
+			    <div>
 
+			    <ul class="nav navbar-nav navbar-right" >
 			    	<div ng-show="!isConnect" class="ConnexInscr">
-			    		<li><a href="" ng-click="dialogLogin()"><b>Connexion</b></a> / 
+			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
@@ -124,6 +128,7 @@
 						</li>
 					</div>
 
+
 					<!-- Panier -->
 					<li><a  href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
@@ -131,12 +136,8 @@
 			    </div>
   
 			</nav> 
-
-
-
 			<!-- Menu -->
-			<section id="middle">
-                <div id="middleLeft">
+			<div class="middleLeft" id="menu">
                     <nav>
                         <!-- Menu <input type="checkbox" ng-model="displayFavoriteSeries"> -->
                         <a href="" ng-click="ListMenu=!ListMenu">Menu</a>
@@ -173,7 +174,14 @@
                         </ul>
                     </nav>
                 </div>
+
+               </div>
+
+			
+                <!-- <div id="middleLeft" data-spy="affix" data-offset-top="170"> -->
+
                 
+			<section id="middle">
 				<div id="middleRight">                    
                     <div id="view" ng-view>
                     </div>
@@ -209,9 +217,9 @@
 		
 	
 		<!-- DIALOG LOGIN -->
-    <script type="text/ng-template" id="dialogLogin" >
+    <!-- <script type="text/ng-template" id="dialogLogin" >
     
-       <div class="ngdialog-message" ng-controller="deconnectCtrl">
+       <div class="ngdialog-message" ng-controller="loginCtrl">
             <h3>Connexion</h3>
             <form>
                 <div class="form-group">
@@ -230,7 +238,44 @@
             </form>
             <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
         </div>
-    </script>
+    </script> -->
+    <div class="modal fade" id="dialogLogin" role="dialog">
+		<div class="modal-dialog">
+		<div class="modal-content">
+	    	<div class="modal-header">
+	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	          <h4>Connexion</h4>
+	        </div>
+
+	        <div class="modal-body" style="padding:40px 50px;">
+	          <form role="form">
+	            <div class="form-group">
+	              <label for="email">Adresse e-mail:</label>
+	              <input type="email" class="form-control" id="email">
+	            </div>
+	            <div class="form-group">
+	              <label for="psw">Mot de passe</label>
+	              <input type="password" class="form-control" id="pwd">
+	              <p style="text-align:right; "><a href="">Mot de passe oublié</a></p>
+	            </div>
+
+	            <div class="checkbox">
+	                    <label><input type="checkbox">Se souvenir de moi</label>
+	            </div>
+	              <button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">Se connecter</button>
+
+	          </form>
+
+	        </div>
+	        <div class="modal-footer">
+	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
+	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" >S'inscrire</a></p>
+	        </div>
+	    </div>
+	    </div>
+	</div>
+
+
 	<!-- END DIALOG LOGIN -->
 		
 	<!-- Modal SIGN UP -->
@@ -245,18 +290,21 @@
 			</div>
 			<div class="modal-body">
 				<form class="form-group">					  
-					<b>Nom :</b> <input type="text" class="form-control" id="name" placeholder="Nom">
-					<b>Prenom :</b> <input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom">
-					<b>Adresse :</b> <input type="text" class="form-control" id="adress" placeholder="Adresse"> 
-					<b>Code Postal :</b> <input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> 
-					<b>Pays :</b> <select id="country" class="form-control" id="sel1"> <option>France</option> </select>
-					<b>Telephone :</b> <input type="tel" class="form-control" id="phone" placeholder="Telephone">
-					<b>Email :</b> <input type="email" class="form-control" id="mail" placeholder="Email">
-					<b>Password :</b> <input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
-					<b>Confirm Password :</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">
+					<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
+					<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
+					<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
+					<p style="display: flex;">
+					<input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" id="sel1"> <option>France</option> </select>
+					</p>
+					<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
+					<p><input type="email" class="form-control" id="mail" placeholder="E-mail"></p>
+					<p><input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> </p>
+					<p><input type="password" class="form-control" id="pwd2" placeholder="Confirmer le mot de Passe"></p>
 					<div class="checkbox">
 						<label><input type="checkbox"> <b>j'accepte d'etre notifié par mail </b></label>
-					</div>					  
+					</div>		
+
+					<button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">S'inscrire</button>			  
 				</form>
 				<!--form class="form-group">					  
 					<input type="text" class="form-control" id="name" placeholder="Nom">
@@ -274,8 +322,9 @@
 				</form-->
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default">Envoyer</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
+				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" >Se connecter</a></p>
 			</div>
 		  </div>
 		  
@@ -284,7 +333,7 @@
 	 <!-- End Modal SIGN UP --> 
 	 
 	 <!-- Modal PANIER -->
-	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
+	  <div class="modal fade" id="dialogPanier" role="dialog">
 		<div class="modal-dialog">
 		
 		  <!-- Modal content-->
@@ -294,7 +343,7 @@
 			  <h4 class="modal-title">Mon Panier</h4>
 			</div>
 			<div class="modal-body">
-				<table class="table table-hover">
+				<table class="table table-hover" ng-controller="panierCtrl">
 					<thead>
 					<tr>
 						<th>Titre</th>
@@ -316,9 +365,12 @@
 						<td>{{data[3]*data[4]}}€</td>
 						<td><a href="" ng-click=""><span class="glyphicon glyphicon-trash"></span></a>
 							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
-					</tr>					
+					</tr>	
+					<tfoot>
 					<tr><td colspan="7"></td></tr>
-					<tr><td colspan="3"></td><td colspan="2"><b>le Total du panier</b></td><td><b>{{dataPanierTotal}}€</b></td><td></td></tr>
+					<tr><td colspan="3"></td><td colspan="2"><b>Total du panier</b></td><td><b>{{dataPanierTotal1}}€</b></td><td></td></tr>
+					</tfoot>				
+
 					</tbody>
 				</table>
 					<a href="" ng-click="">vider Panier<span class="glyphicon glyphicon-trash"></span></a>
