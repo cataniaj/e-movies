@@ -62,7 +62,7 @@ var ListMenu=false;
 var GenreFilm = false;
 var GenreSerie = false;
 var BtnSearch = true;
-var isConnect = false;
+var isConnect = [false];
 
 routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
             ngDialogProvider.setDefaults({
