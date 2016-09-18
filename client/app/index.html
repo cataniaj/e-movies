@@ -112,13 +112,13 @@
 			    <div>
 
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show="!isConnect" class="ConnexInscr">
+			    	<div ng-show="isConnect" class="ConnexInscr">
 			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
 			    
-			    	<div ng-show="isConnect">
+			    	<div ng-show="!isConnect">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
