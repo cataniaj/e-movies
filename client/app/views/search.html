@@ -1,7 +1,6 @@
 
 <div class="search" ng-controller="searchCtrl" >
-    <div>
-    <p id="result"> ({{datas.length}} résultats) </p>
+    <div><p id="result" style="width:100%; text-align:center;"> ({{datas.length}} résultats) </p>
     </div>
     <div><center>
     	<p ng-repeat="data in datas"><a href="#detail/{{data.id}}"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a>

@@ -58,7 +58,7 @@
 			      </li>
 			      <li>
 			      	<p ng-show="BtnSearch" class="searchIndex">
-			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
+			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, acteur, realisateur ..." pattern="[a-z]{1,50}"/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
 
@@ -120,7 +120,6 @@
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
-			    
 			    	<div ng-show="user">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
@@ -144,7 +143,7 @@
 			<div class="middleLeft" id="menu">
                     <nav>
                         <!-- Menu <input type="checkbox" ng-model="displayFavoriteSeries"> -->
-                        <a href="" ng-click="ListMenu=!ListMenu">Menu</a>
+                        <a href="" ng-click="ListMenu=!ListMenu; GenreFilm=false; GenreSerie=false">Menu</a>
 
                         <!-- <p ng-model="displayFavoriteSeries">Menu</p> -->
                         <ul ng-show="ListMenu">
@@ -194,7 +193,7 @@
 			
 			<footer> 
 				<div class="infoFooter">
-					Contact
+					<a href="">Contact</a>
 				</div>
 			</footer> 
 		</div>
@@ -241,6 +240,7 @@
 	        </div>
 			<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 	        <div class="modal-body" style="padding:40px 50px;">
+	        
 	          <form role="form" name="myFormLogin" >
 	            <div class="form-group">
 					<label for="email">E-mail : </label>
@@ -258,6 +258,7 @@
 					<input type="password" class="form-control" name="pwd" id="pwd" ng-model="vm.pwd" required>					              
 	            </div>
 				<p style="text-align:right; "><a href="">Mot de passe oublié</a></p>				
+
 	            <div class="checkbox">
 	                <label><input type="checkbox" name="notif" id="notif" ng-model="vm.notif"> Se souvenir de moi</label>
 	            </div>
@@ -417,9 +418,9 @@
 						</td></tr>
 					<tr><td colspan="2"></td></tr>
 					<tr><td colspan="2">
-						<div class="checkbox">
-								<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
-						</div>
+					<div class="checkbox">
+						<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
+					</div>
 					</td></tr>
 					<tr><td colspan="2"><a href="" class="btn" data-toggle="modal" data-target="#deleteC">Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
 				</table>					

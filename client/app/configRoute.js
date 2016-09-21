@@ -8,7 +8,8 @@
 var routeApp = angular.module('routeApp', [
     // Dépendances du "module"
     'ngRoute',
-    'routeAppControllers'
+    'routeAppControllers',
+    'ngCookies'
 ]);
 
 /**
@@ -62,13 +63,13 @@ var ListMenu=false;
 var GenreFilm = false;
 var GenreSerie = false;
 var BtnSearch = true;
-var isConnectTab=[false];
 
 routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
             ngDialogProvider.setDefaults({
                 className: 'ngdialog-theme-default',
             });
 }]);
+
 
 routeAppControllers.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
         // keep user logged in after page refresh
