@@ -26,11 +26,10 @@
     <datasource jndi-name="java:jboss/datasources/e-moviesDS"
         pool-name="e-movies" enabled="true"
         use-java-context="true">
-        <connection-url>jdbc:h2:mem:e-movies;DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1</connection-url>
-        <driver>h2</driver>
+        <connection-url>jdbc:mysql://localhost:3306/EmoviesDB</connection-url>
+        <driver>mysql</driver>
         <security>
-            <user-name>sa</user-name>
-            <password>sa</password>
+            <user-name>root</user-name>
         </security>
     </datasource>
 </datasources>

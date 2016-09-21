@@ -20,7 +20,7 @@
    xsi:schemaLocation="
         http://xmlns.jcp.org/xml/ns/persistence
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-   <persistence-unit name="primary">
+   <persistence-unit name="primary" transaction-type="JTA">
       <!-- If you are running in a production environment, add a managed 
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as WEB-INF/e-movies-ds.xml, you
@@ -28,7 +28,7 @@
       <jta-data-source>java:jboss/datasources/e-moviesDS</jta-data-source>
       <properties>
          <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+         <property name="hibernate.hbm2ddl.auto" value="update"/>
          <property name="hibernate.show_sql" value="false" />
       </properties>
    </persistence-unit>
