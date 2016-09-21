@@ -1,5 +1,6 @@
 package fr.imag.producers;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,4 +14,9 @@ public class EntityManagerProducer {
 	@Produces
 	@PersistenceContext
 	private	EntityManager	em;
+	
+	@PostConstruct
+	public void addManyFilm(){
+		System.out.println("------------------------ ok -------------------");
+	}
 }
