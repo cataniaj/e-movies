@@ -6,27 +6,30 @@
         <meta charset="utf-8">
 		
 		
-		<!-- ajouter -->
-					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  					<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  					<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
-
-                    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-                    <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog.css">
-                    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-                    <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog-theme-default.css">
-                    <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog-theme-plain.css">
-                    <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog-custom-width.css">
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>    
+					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">					
                     
                 <!-- FIN AJOUT -->
-                <link rel="stylesheet" type="text/css" href="styles/bibliotheques/ngDialog.min.css" />
+				<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+				
+				<link rel="stylesheet" type="text/css" href="styles/bibliotheques/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="styles/bibliotheques/bootstrap.min-alpha.css" />
+				<link rel="stylesheet" type="text/css" href="styles/bibliotheques/googleapisFonts.css" />
+                <link rel="stylesheet" type="text/css" href="styles/bibliotheques/ngDialog.min.css" /> 
+				
+				<link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog.css">
+				<link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog-theme-default.css">
+                <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog-theme-plain.css">
+                <link rel="stylesheet" href="styles/bibliotheques/dialogues/ngDialog-custom-width.css">                
+				
 				<link rel="stylesheet" type="text/css" href="styles/search.css" />
 				<link rel="stylesheet" type="text/css" href="styles/home.css" />
 				<link rel="stylesheet" type="text/css" href="styles/detail.css" />
                 <link rel="stylesheet" type="text/css" href="styles/index.css" />
                 <link rel="stylesheet" type="text/css" href="styles/achat.css" />
+				
+				<script src="scripts/bibliotheques/jquery.min.js"></script>
+				<script src="scripts/bibliotheques/bootstrap.min.js"></script>
+				<script src="scripts/bibliotheques/angular.min.js"></script>
 
 		
 		
@@ -48,7 +51,7 @@
 			    </div>
 
 			    <ul class="nav navbar-nav">
-			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
+			      <li><a href="" ng-click="back()"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
 
 			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
@@ -112,19 +115,19 @@
 			    <div>
 
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show="!isConnect" class="ConnexInscr">
+			    	<div ng-show="!user" class="ConnexInscr">
 			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
 			    
-			    	<div ng-show="isConnect">
+			    	<div ng-show="user">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
 						    <li><a href="" class="btn" data-toggle="modal" data-target="#dialogParameter"><span class="glyphicon glyphicon-cog" style="margin-right:7%;" /> Paramètres</a></li>
-						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
+						    <li><a href="" ng-click="deconnexion()"><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
 					</div>
@@ -213,35 +216,22 @@
 		<script type="text/javascript" src="configRoute.js"></script>
 		<script type="text/javascript" src="scripts/controllers/pagesControllers.js"></script>
 		<script type="text/javascript" src="scripts/controllers/loginControllers.js"></script>
+		<script type="text/javascript" src="scripts/services/services.js"></script>
 		<script type="text/javascript" src="scripts/controllers/jquery-3.1.0.min.js"></script>
+		
+		<!-- LOGIN / LOGOUT / SIGNUP SERVICES -->
+		<!-- Real user service that uses an api -->
+		<!-- <script src="app-services/user.service.js"></script> -->
+		<!-- Fake user service for demo that uses local storage -->
+		<script src="scripts/services/user.service.local-storage.js"></script>
+		<script src="scripts/services/authentication.service.js"></script>
+		<script src="scripts/services/flash.service.js"></script>
+		<!-- END SERVICES -->
 		
 		
 
 <div ng-controller="loginValidateCtrl">	
-		<!-- DIALOG LOGIN -->
-    <!-- <script type="text/ng-template" id="dialogLogin" >
-    
-       <div class="ngdialog-message" ng-controller="loginCtrl">
-            <h3>Connexion</h3>
-            <form>
-                <div class="form-group">
-                    <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd">
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
-                </div>
-                <button type="submit" class="btn btn-default" ng-click="isConnect=!isConnect;test()">Envoyer</button>
-
-            </form>
-            <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
-        </div>
-    </script> -->
- 
+		<!-- DIALOG LOGIN --> 
     <div class="modal fade" id="dialogLogin" role="dialog">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -249,31 +239,33 @@
 	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4>Connexion</h4>
 	        </div>
-
+			<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 	        <div class="modal-body" style="padding:40px 50px;">
-	          <form role="form" name="myFormLogin">
+	          <form role="form" name="myFormLogin" >
 	            <div class="form-group">
-	              <label for="email">Adresse e-mail:</label>
-	              <input type="email" name="email" class="form-control" ng-model="email" required>                    
+					<label for="email">E-mail : </label>
+					<!--error email-->
+					<span style="color:red" ng-show="myFormLogin.email.$dirty && myFormLogin.email.$invalid">
+						<span ng-show="myFormLogin.email.$error.required">Entrer votre adresse mail *</span>
+						<span ng-show="myFormLogin.email.$error.email">Adresse mail invalide *</span>
+					</span>
+					<input type="email" name="email" id="email"  class="form-control" ng-model="vm.email" required>                    
 	            </div>
 	            <div class="form-group">
-	              <label for="psw">Mot de passe</label>
-	              <input type="password" class="form-control" id="pwd">
-	              <p style="text-align:right; "><a href="">Mot de passe oublié</a></p>
+					<label for="psw">Mot de passe : </label> 
+					<!-- error password-->
+					<span style="color:red" ng-show="myFormLogin.pwd.$touched && myFormLogin.pwd.$invalid">Entrer votre mot de passe *</span> 
+					<input type="password" class="form-control" name="pwd" id="pwd" ng-model="vm.pwd" required>					              
 	            </div>
-	            
-	            <span style="color:red" ng-show="myFormLogin.email.$dirty && myFormLogin.email.$invalid">
-                <span ng-show="myFormLogin.email.$error.required">Email is required.</span>
-                <span ng-show="myFormLogin.email.$error.email">Invalid email address.</span>
-                </span>
-
+				<p style="text-align:right; "><a href="">Mot de passe oublié</a></p>				
 	            <div class="checkbox">
-	                    <label><input type="checkbox">Se souvenir de moi</label>
+	                <label><input type="checkbox" name="notif" id="notif" ng-model="vm.notif"> Se souvenir de moi</label>
 	            </div>
-	              <button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">Se connecter</button>
-
-	          </form>
-
+	            <button type="submit" class="btn btn-block" ng-disabled="myFormLogin.pwd.$invalid || (myFormLogin.email.$dirty && myFormLogin.email.$invalid) || myFormLogin.email.$invalid" ng-click="login()" > Se connecter
+					<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
+				</button>
+	        </form>
+		
 	        </div>
 	        <div class="modal-footer">
 	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
@@ -293,37 +285,38 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Inscription</h4>
 			</div>
+			<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 			<div class="modal-body">
-
-				<form class="form-group" name="myFormSign_up">					  
-					<input type="text"  class="form-control" name="nom" placeholder="nom" required></p>
-					<input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
-					<input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
-					<p style="display: flex;" required>
-					<input type="number" class="form-control" name="number" ng-model="number" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" id="sel1"> <option>France</option> </select>
+				<form class="form-group" name="myFormSign_up" role="form">	
+					<span style="color:red" ng-show="myFormSign_up.nom.$touched && myFormSign_up.nom.$invalid">Nom obligatoire *</span>
+					<input type="text"  class="form-control" name="nom" id="nom" ng-model="user.nom" placeholder="Nom" required>
+					<span style="color:red" ng-show="myFormSign_up.pName.$touched && myFormSign_up.pName.$invalid">Prenom obligatoire *</span>
+					<input width="50%" type="text" class="form-control" name="pName" id="pName" ng-model="user.pName" placeholder="Prenom" required>
+					<input type="text" class="form-control" name="adress" id="adress" ng-model="user.adress" placeholder="Adresse">
+					<p style="display: flex;" >
+					<input type="number" class="form-control" name="zipCode" id="zipCode" ng-model="user.zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" name="country"> <option>France</option> </select>
 					</p>
-					<p><input type="tel" class="form-control"  name="tel" ng-model="tel" placeholder="Telephone"></p>
-					<p><input type="email" name="email" class="form-control" ng-model="email" placeholder="E-mail" required></p>
-					<p><input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> </p>
-					<p><input type="password" class="form-control" id="pwd2" placeholder="Confirmer le mot de Passe"></p>
+					<input type="tel" class="form-control"  name="tel" id="tel" ng-model="user.tel" placeholder="Telephone">
+					<span style="color:red" ng-show="(myFormSign_up.email.$dirty && myFormSign_up.email.$invalid) || myFormSign_up.email.$touched">
+						<span ng-show="myFormSign_up.email.$error.required">Email obligatoire *</span>
+						<span ng-show="myFormSign_up.email.$error.email">Adresse mail invalide *</span>
+					</span>
+					<input type="email" name="email" id="email" class="form-control" ng-model="user.email" placeholder="E-mail" required>
+					<span style="color:red" ng-show="myFormSign_up.pwd1.$touched && myFormSign_up.pwd1.$invalid">Mot de passe obligatoire *</span>
+					<input type="password" class="form-control" name="pwd1" id="pwd1" ng-model="user.pwd1" placeholder="Mot de Passe" required>
+					<span style="color:red" ng-show="myFormSign_up.pwd2.$touched && myFormSign_up.pwd2.$invalid">Confirmer mot de passe obligatoire *</span>
+					<span style="color:red" ng-show="(user.pwd1 != user.pwd2)&& (user.pwd2)">Mots de passe differents *</span>					
+					<input type="password" class="form-control" name="pwd2" id="pwd2" ng-model="user.pwd2" placeholder="Confirmer le mot de Passe" required>
 					<div class="checkbox">
-						<label><input type="checkbox"> <b>Je souhaite être averti par e-mail des nouveaux ajouts  </b></label>
+						<label><input type="checkbox" name="notif" id="notif" ng-model="user.notif"> <b>Je souhaite être averti par e-mail des nouveaux ajouts  </b></label>
 					</div>	
-					
-					
-                    <!--Mail-->
-                    <span style="color:red" ng-show="myFormSign_up.email.$dirty && myFormSign_up.email.$invalid">
-                    <span ng-show="myFormSign_up.email.$error.required">Email is required.</span>
-                    <span ng-show="myFormSign_up.email.$error.email">Invalid email address.</span>
-                    </span>
-
-					<button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">S'inscrire</button>	
-					
-		</form>
 				
+					<button type="submit" class="btn btn-block" ng-disabled="myFormSign_up.nom.$invalid || myFormSign_up.pName.$invalid || myFormSign_up.pwd1.$invalid || (myFormSign_up.email.$dirty && myFormSign_up.email.$invalid) || myFormSign_up.email.$invalid || (user.pwd1 != user.pwd2) || !user.pwd1 || !user.pwd2" ng-click="signUp()" >S'inscrire
+						<img ng-if="dataLoadingSign_up" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
+					</button>		
+				</form>
 			</div>
-			<div class="modal-footer">
-				
+			<div class="modal-footer">				
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
 				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" >Se connecter</a></p>
 
@@ -337,7 +330,7 @@
 
 	 <!-- Modal PANIER -->
 
-	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
+	<div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content" ng-controller="panierCtrl">
@@ -346,6 +339,7 @@
 			  <h4 class="modal-title">Mon Panier</h4>
 			</div>
 			<div class="modal-body" ng-show="dansPanier[0]">
+				<form name="myFormPanier">
 				<table class="table table-hover">
 					<thead>
 					<tr>
@@ -360,12 +354,12 @@
 					</thead>
 					<tbody>					
 					<tr ng-repeat="data in dataPanier1">
-						<td>{{data[0]}} </td>
-						<td>{{data[1]}}</td>
+						<td>{{data[1]}} </td>
 						<td>{{data[2]}}</td>
 						<td>{{data[3]}}</td>
-						<td>{{data[4]}}€</td>
-						<td>{{data[3]*data[4]}}€</td>
+						<td><input type="number" class="form-control" ng-init="txtQuantite=data[4]" ng-model="data[4]" style="width:80px" value={{data[4]}} ng-change="updateQuantite($index, data[4])" min="1" max="5"/></td>
+						<td>{{data[5]}}€</td>
+						<td>{{data[4]*data[5]}}€</td>
 						<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
 							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
 					</tr>	
@@ -376,13 +370,14 @@
 
 					</tbody>
 				</table>
+				</form>
 					<a href="" data-toggle="modal" data-target="#deleteP"> Vider Panier<span class="glyphicon glyphicon-trash"></span></a>
 			</div>	
 			<div class="PanierVide" ng-show="!dansPanier[0]">
 				<h3>Le panier est vide !</h3>
 			</div>	
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" >Payer</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="!dansPanier[0] || !dataPanierTotal[0]" data-dismiss="modal" >Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		  </div>		  
@@ -400,18 +395,19 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Parametres</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body">				
 				<table class="table table-hover">
+				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
-							<div class="paramLeft">
-								<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
-					<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
-					<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
-					<p style="display: flex; width:40%;">
-					<input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" width:40%;" id="sel1"> <option>France</option> </select>
-					</p>
-					<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
-							</div>
+						<div class="paramLeft">
+							<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
+							<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
+							<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
+							<p style="display: flex;">
+							<input type="text" class="form-control" id="zipCode" style="width:80px" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" id="sel1"> <option>France</option> </select>
+							</p>
+							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
+						</div>
 						</td><td>	
 							<div class="paramRight">
 								<input type="email" class="form-control" id="mail" placeholder="Email">
