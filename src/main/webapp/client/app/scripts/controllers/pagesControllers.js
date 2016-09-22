@@ -43,10 +43,10 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		$scope.datas = [];
 		/** pre: string; 
 			post: list de films ou series */
-		/*$http.get('json/jsonListDeFilm.php').success(function(data){
+		//$http.get('json/jsonListDeFilm.php').success(function(data){
         //$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
         //$http.get('https://api.themoviedb.org/3/search/movie?query=jurassic+park&language=fr&api_key=db1096cd136c906c06e7d77b313df0d4').success(function(data){
-			//$scope.datas = data.movies;*/
+			//$scope.datas = data.movies;
 		
 		
 		servicesSearch.searchFilm($scope.query).success(function(data){	
@@ -70,19 +70,19 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page detail
-routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout',
-    function($scope, $location, $routeParams, $http, $timeout){
+routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch',
+    function($scope, $location, $routeParams, $http, $timeout, servicesSearch){
 		$scope.id = $routeParams.id;	
 
 		$scope.details = [];
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
-                    $scope.details = data[0];
+                    $scope.details = data;
 		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
 			//alert(data.movies[0].title);
 			$scope.details = data[0];
 		});*/
-                }
+                });
         
         /** fonction ajout dans panier  **/
         //$scope.addPanier = function (idC, idD, idP , titre, annee, support, quantite, pu) {
@@ -158,8 +158,3 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
 
     }
 ]);
-
-
-      
-       
-

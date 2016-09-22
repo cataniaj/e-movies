@@ -137,6 +137,16 @@ public class Movie extends Product{
 		System.out.println("runtime: "+runtime);
 		System.out.println("trailer: "+trailer);
 	}
+
+	public JsonObject convertToShortJson(){		
+		JsonObject film = Json.createObjectBuilder()
+				.add("title", title)
+				.add("year", year)
+				.add("poster", poster)
+				.add("idTMDB", idTMDB)
+				.build();
+		return film;
+	}
 	
 	// For the administrator: view stock
 	public JsonObject convertToJsonProduct(){

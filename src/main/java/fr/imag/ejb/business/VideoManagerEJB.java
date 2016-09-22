@@ -1,6 +1,5 @@
 package fr.imag.ejb.business;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.JsonObject;
