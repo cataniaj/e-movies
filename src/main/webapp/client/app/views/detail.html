@@ -31,12 +31,16 @@
 				
         <a href="" data-toggle="modal" data-target="#dialogVideo"><strong class="alert alert-info"> Visionner la Bande Annonce 	</strong></a>
 	</div>
+	
+	
 		
 		<!-- Modal VIDEO -->
 	  <div class="modal fade" id="dialogVideo" role="dialog">
 		<div class="modal-dialog">
 				<div class="video">
-                    <iframe width="620px" height="400px" ng-src="{{ details.trailer }}"></iframe> 
+                    <object width="520" height="400"
+data="{{details.trailer}}">
+</object>
                 </div>
 		  
 		</div>
