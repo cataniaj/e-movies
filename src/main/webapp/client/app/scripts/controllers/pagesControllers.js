@@ -39,8 +39,6 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
     function($scope, $location, $routeParams, $http, servicesSearch){
 		$scope.query = $routeParams.query;		
 		$scope.datas = [];
-		
-		$scope.datas = [];
 		/** pre: string; 
 			post: list de films ou series */
 		//$http.get('json/jsonListDeFilm.php').success(function(data){

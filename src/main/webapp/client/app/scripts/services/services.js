@@ -10,7 +10,7 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 		  return $http.get('json/jsonListDeFilm.php');
 		},
 		searchFilm:function(chaine){  
-			return	$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+chaine);
+			return $http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+chaine);
 			//return	$http.get('client/app/json/jsonListDeFilm.php');     
 		},
 		detailsFilm:function(id){  
