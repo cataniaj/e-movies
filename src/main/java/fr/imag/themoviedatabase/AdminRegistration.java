@@ -8,6 +8,7 @@ package fr.imag.themoviedatabase;
 import java.io.StringReader;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.json.Json;
@@ -17,6 +18,8 @@ import javax.json.JsonReader;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import fr.imag.ejb.dbaccess.AdminDatabaseAccessEJB;
+import fr.imag.ejb.dbaccess.MovieDatabaseAccessEJB;
 import fr.imag.entities.Admin;
 import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
@@ -24,9 +27,9 @@ import fr.imag.entities.Product;
 
 @Stateless
 public class AdminRegistration {
-    
-	@Inject
-    private EntityManager em;
+
+	@EJB private AdminDatabaseAccessEJB adminDBaccess;
+	@EJB private MovieDatabaseAccessEJB movieDBaccess;
   
 	private String manyFilm = ""
 			+ "{\"movies\":["
@@ -49,12 +52,10 @@ public class AdminRegistration {
 			+"}";
 	
 	public AdminRegistration(){
-		System.out.println("------------------------------ ok ------------------------------");
 	}
     
     public boolean isAdmin(Admin admin){
-    	Query query = em.createQuery("SELECT a FROM Admin a ");
-    	List<Admin> adminList = query.getResultList();
+    	List<Admin> adminList = adminDBaccess.allAdmin();
     	for(Admin a : adminList){
     		if(a.getIdAdmin().compareTo(admin.getIdAdmin())==0 &&
     				a.getPassword().compareTo(admin.getPassword())==0){
@@ -65,24 +66,15 @@ public class AdminRegistration {
     }
     
     public MovieList allMovies(){
-    	Query query = em.createQuery("SELECT o FROM Movie o ");
-    	List<Movie> allMovie = query.getResultList();
-    	MovieList movies = new MovieList(allMovie);
-    	return movies;
+    	return movieDBaccess.allMovies();
     }
     
     public void cleanMovies(){
-    	Query query = em.createQuery("SELECT o FROM Movie o ");
-    	List<Movie> allMovie = query.getResultList();
-    	for(Movie m : allMovie){
-    		em.remove(m);
-    	}
+    	movieDBaccess.cleanMovies();
     }
     
     public void updateProduct(String idProduct, String newStock, String newPrice){
-    	Product p = (Product)em.find(Product.class, Integer.parseInt(idProduct));
-    	p.setStock(Integer.parseInt(newStock));
-    	p.setPrice(Integer.parseInt(newPrice));
+    	movieDBaccess.updateProduct(idProduct, newStock, newPrice);
     }
     
     public void addMovie(String product){
@@ -134,9 +126,9 @@ public class AdminRegistration {
     	movieCN.setStock(0);
     	movieCN.setSupport("CN");
     	
-    	em.persist(movieDVD);
-    	em.persist(movieBR);
-    	em.persist(movieCN);
+    	adminDBaccess.addProduct(movieDVD);
+    	adminDBaccess.addProduct(movieBR);
+    	adminDBaccess.addProduct(movieCN);
     	
     }
 
@@ -148,6 +140,12 @@ public class AdminRegistration {
 		for(int i=0 ; i<array.size() ; i++){
 			Movie dvd = new Movie();
 			JsonObject filmJson = array.getJsonObject(i);
+			if(movieDBaccess.containsMovie(Integer.parseInt(filmJson.getString("id")))){
+				break;
+			}
+			
+			System.out.println("TEST - -------------------"+filmJson.getString("id"));
+			
 			try{
 				dvd.setTitle(filmJson.getString("title"));
 			}catch(Exception e){}
@@ -187,8 +185,6 @@ public class AdminRegistration {
 			dvd.setPrice((int)(Math.random()*(20-3) + 3));
 			filmList.add(dvd);
 			
-			
-
 			Movie bluray = new Movie();
 			try{
 				bluray.setTitle(filmJson.getString("title"));
@@ -229,8 +225,6 @@ public class AdminRegistration {
 			bluray.setPrice((int)(Math.random()*(20-3) + 3));
 			filmList.add(bluray);
 			
-			
-
 			Movie numeric = new Movie();
 			try{
 				numeric.setTitle(filmJson.getString("title"));
@@ -269,13 +263,13 @@ public class AdminRegistration {
 			}
 			numeric.setStock(0);
 			numeric.setPrice((int)(Math.random()*(20-3) + 3));
-			filmList.add(numeric);
+			
+			adminDBaccess.addProduct(numeric);
+			adminDBaccess.addProduct(dvd);
+			adminDBaccess.addProduct(bluray);
 		}
-		
-
-		for(Movie m : filmList){
-			em.persist(m);
-		}
+	
+		movieDBaccess.chargeDatabase(filmList);
     }
 
 }
