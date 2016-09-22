@@ -40,5 +40,20 @@ public class MovieList extends ArrayList<Movie> {
 		return obj;
 	}
 	
+	public JsonObject convertToJsonArrayResultSiteWeb(){
+		String allFilm = "{\"movies\":[";
+		for(int i=0 ; i<this.size() ; i++){
+			if(i==0){
+				allFilm = allFilm + this.get(i).convertToShortJson().toString();
+			}else{
+				allFilm = allFilm + "," + this.get(i).convertToShortJson().toString();
+			}
+		}
+		allFilm = allFilm + "]}";
+		JsonReader r = Json.createReader(new StringReader(allFilm));
+		JsonObject obj = r.readObject();
+		return obj;
+	}
+	
 
 }

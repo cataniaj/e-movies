@@ -21,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fr.imag.entities.Admin;
+import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
 import fr.imag.themoviedatabase.AdminRegistration;
 
@@ -46,14 +47,26 @@ public class RESTadminEndPoint {
     }
 	
     @GET
-    @Path("/secretDoor")
+    @Path("/allMovies")
+    public String getAllMovies() {
+    	MovieList allMovies;
+    	String result = "";
+    	allMovies = adminRegistration.allMovies();
+    	for(Movie m : allMovies){
+    		result = result + "\n" + m.convertToJsonFull().toString();
+    	}
+        return result;
+    }
+	
+    @GET
+    @Path("/charge")
     public String chargeManyMovies() throws IOException {
     	adminRegistration.chargeAllMovies();
     	return "WhY sO sErIoUs ? o_o";
     }
 	
     @GET
-    @Path("/redemption")
+    @Path("/clean")
     public String removeAllMovies() throws IOException {
     	adminRegistration.cleanMovies();
     	return "HaStA lA vIsTa, BaBy !";

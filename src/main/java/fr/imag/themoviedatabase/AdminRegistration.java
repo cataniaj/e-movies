@@ -24,7 +24,8 @@ import fr.imag.entities.Product;
 
 @Stateless
 public class AdminRegistration {
-    @Inject
+    
+	@Inject
     private EntityManager em;
   
 	private String manyFilm = ""
@@ -172,7 +173,7 @@ public class AdminRegistration {
 				dvd.setYear(filmJson.getString("year"));
 			}catch(Exception e){}
 			try{
-				dvd.setIdTMDB(filmJson.getInt("id"));
+				dvd.setIdTMDB(Integer.parseInt(filmJson.getString("id")));
 			}catch(Exception e){}
 			try{
 				dvd.setPoster(filmJson.getString("poster"));
@@ -214,7 +215,7 @@ public class AdminRegistration {
 				bluray.setYear(filmJson.getString("year"));
 			}catch(Exception e){}
 			try{
-				bluray.setIdTMDB(filmJson.getInt("id"));
+				bluray.setIdTMDB(Integer.parseInt(filmJson.getString("id")));
 			}catch(Exception e){}
 			try{
 				bluray.setPoster(filmJson.getString("poster"));
@@ -256,7 +257,7 @@ public class AdminRegistration {
 				numeric.setYear(filmJson.getString("year"));
 			}catch(Exception e){}
 			try{
-				numeric.setIdTMDB(filmJson.getInt("id"));
+				numeric.setIdTMDB(Integer.parseInt(filmJson.getString("id")));
 			}catch(Exception e){}
 			try{
 				numeric.setPoster(filmJson.getString("poster"));

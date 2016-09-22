@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.json.Json;
@@ -21,6 +22,7 @@ import javax.persistence.Query;
 
 import org.jboss.arquillian.core.api.annotation.Inject;
 
+import fr.imag.ejb.dbaccess.MovieDatabaseAccessEJB;
 import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
 /**
@@ -36,11 +38,9 @@ import fr.imag.entities.MovieList;
 public class SearchEngine {
 
 	/// Exemple url = target/type/title
+	@EJB private MovieDatabaseAccessEJB dbAccess;
 
 	private final String defaultValue = "N/A";
-	
-    @Inject
-    private EntityManager em;
 	
 	// TARGET 
 	private final String allKeyword = "all";
@@ -54,7 +54,7 @@ public class SearchEngine {
 	public SearchEngine(){
 	}
 	
-	public synchronized JsonObject search(String url){
+	public JsonObject search(String url){
 		String[] elementUrl = url.split("/");
 		String target = elementUrl[0];
 		String type = elementUrl[1];
@@ -95,7 +95,7 @@ public class SearchEngine {
     			result.add(m);
     		}
     	}
-    	return result.convertToJsonArray();
+    	return result.convertToJsonArrayResultSiteWeb();
 	}
 	
     private JsonObject searchExactMovie(String id){
@@ -182,8 +182,8 @@ public class SearchEngine {
     }
 
 	private MovieList findAllFilmInOurDataBase(){
-    	Query query = em.createQuery("SELECT m FROM Movie m");
-    	return (MovieList) query.getResultList();
+		MovieList m = new MovieList(dbAccess.findAllFilmInOurDataBase());
+    	return m;
 	}
 
 }
