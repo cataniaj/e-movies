@@ -16,6 +16,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import fr.imag.entities.Movie;
+import fr.imag.entities.MovieList;
+import fr.imag.entities.Product;
 
 @Singleton
 @Local
@@ -27,5 +29,63 @@ public class MovieDatabaseAccessEJB {
 	    	Query query = em.createQuery("SELECT m FROM Movie m");
 	    	return (List<Movie>) query.getResultList();
 		}
-	}
+
+		public synchronized void removeAllMovies(){
+	    	Query query = em.createQuery("SELECT o FROM Movie o ");
+	    	List<Movie> allMovie = query.getResultList();
+	    	for(Movie m : allMovie){
+	    		em.remove(m);
+	    	}
+		}
+		
+		public synchronized void chargeDatabase(MovieList movieList){
+			for(Movie m : movieList){
+		    	Query query = em.createQuery("SELECT o FROM Movie o ");
+		    	List<Movie> allMovies = query.getResultList();
+		    	boolean find = false;
+		    	for(Movie movie : allMovies){
+		    		if(movie.getTitle().compareTo(m.getTitle())==0){
+		    			find = true;
+		    			break;
+		    		}
+		    	}
+		    	if(!find){
+					em.persist(m);
+		    	}
+				find = false;
+			}
+		}
+	    public synchronized MovieList allMovies(){
+	    	Query query = em.createQuery("SELECT o FROM Movie o ");
+	    	List<Movie> allMovie = query.getResultList();
+	    	MovieList movies = new MovieList(allMovie);
+	    	return movies;
+	    }
+	    
+	    public synchronized void cleanMovies(){
+	    	/*Query query = em.createQuery("SELECT o FROM Movie o ");
+	    	List<Movie> allMovie = query.getResultList();
+	    	for(Movie m : allMovie){
+	    		em.remove(m);
+	    	}*/
+	    	em.createNativeQuery("TRUNCATE Table Product").executeUpdate();
+	    	
+	    }
+	    
+	    public synchronized void updateProduct(String idProduct, String newStock, String newPrice){
+	    	Product p = (Product)em.find(Product.class, Integer.parseInt(idProduct));
+	    	p.setStock(Integer.parseInt(newStock));
+	    	p.setPrice(Integer.parseInt(newPrice));
+	    }
+	    
+	    public synchronized boolean containsMovie(int idTMDB){
+	    	MovieList movieList = allMovies();
+	    	for(Movie m : movieList){
+	    		if(m.getIdTMDB() == idTMDB){
+	    			return true;
+	    		}
+	    	}
+	    	return false;
+	    }
+}
 
