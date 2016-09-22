@@ -17,10 +17,6 @@ import javax.ejb.Singleton;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import org.jboss.arquillian.core.api.annotation.Inject;
 
 import fr.imag.ejb.dbaccess.MovieDatabaseAccessEJB;
 import fr.imag.entities.Movie;
