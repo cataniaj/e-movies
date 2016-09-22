@@ -1,0 +1,133 @@
+<div class="achat" ng-controller="achatCtrl">
+
+	<div class="listAchat">
+        <h1>Mes achats</h1>
+        <p style="font-style: oblique; color:grey; margin-left:5%; font-family:New Century Schoolbook, serif;">La liste de tous vos achats</p>            
+        
+        <div>
+        <table class="table table-hover  ">
+            <thead class="thead-inverse"> 
+            <tr>
+                <th>Titre</th>
+                <th>Année</th>
+                <th>Télécharger</th>
+                <th>Avis</th>
+                <th></th>
+                <th>Date Achat</th>
+            </tr>
+            </thead>
+            <!-- <tbody ng-repeat="d in dataAchat"> -->
+
+            <!-- <tr>
+                <td>{{d[0]}} </td>
+				<td>{{d[1]}}</td>
+                <td><button type="button" class="btn openPaddingLink" ng-click="download()">TELECHARGER</button></td>
+                <td><button type="button" class="btn" ng-click="addAvis()">DONNER AVIS</button></td>
+                <td>14/09/2016</td>
+            </tr> -->
+
+            <tbody ng-controller="detailCtrl">
+            <tr>
+                <td>00545</td>
+                <td>Xmen</td>
+                <td>2016</td>
+                <td><button type="button" class="btn openPaddingLink" ng-click="download()" ><span class="glyphicon glyphicon-download-alt"/> TELECHARGER</button></td>
+                <td><button type="button" class="btn disabled">DONNER AVIS</button></td>
+                <td>01/05/2016</td>
+            </tr>
+            <tr>
+                <td>00156</td>
+                <td>Titanic</td>
+                <td>2013</td>
+                <td><button type="button" class="btn openPaddingLink" ng-click="download()"><span class="glyphicon glyphicon-download-alt"/> TELECHARGER</button></td>
+                <td><button type="button" class="btn">DONNER AVIS</button></td>
+                <td>15/06/2015</td>
+            </tr>
+            </tbody>
+        </table>
+
+        </div>
+
+
+
+        <div class="modal fade" id="dialogComment" role="dialog">
+			<div class="modal-dialog">
+			<div class="modal-content">
+		    	<div class="modal-header">
+		    	<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4>Avis</h4>
+		        </div>
+
+		        <div class="modal-body" style="padding:40px 50px;">
+		          <form role="form">
+		            <div class="form-group">
+		              <label for="email">Adresse e-mail:</label>
+		              <input type="email" class="form-control" id="email">
+		            </div>
+		            <div class="form-group">
+		              <label for="psw">Mot de passe</label>
+		              <input type="password" class="form-control" id="pwd">
+		              <p style="text-align:right; "><a href="">Mot de passe oublié</a></p>
+		            </div>
+
+		            <div class="checkbox">
+		                    <label><input type="checkbox">Se souvenir de moi</label>
+		            </div>
+		              <button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">Se connecter</button>
+
+		          </form>
+
+		        </div>
+		        <div class="modal-footer">
+		        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
+		          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" >S'inscrire</a></p>
+		        </div>
+		    </div>
+		    </div>
+		</div>
+
+    </div>
+        
+        <script type="text/ng-template" id="dialogDownload">
+            <div class="ngdialog-message">
+                <h3>download progress</h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar"
+                        aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width:55%">
+                            55% <p id="demo"></p>
+                        </div>
+                    </div>
+            <button class="inline close-this-dialog" ng-click="closeThisDialog()">Cancel</button>                
+                </div>
+        </script>
+        
+         
+        
+        <!-- CONNEXION DIALOG -->
+        
+	<!--a href="" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline openPaddingLink" data-transition="pop" ng-click="open()">Basic Popup</a>
+<-a href="" class="openPaddingLink" ng-click="open()">Open dialog</a>
+    <- Template ->
+    <script type="text/ng-template" id="dialogLogin">
+       <div class="ngdialog-message">
+            <h3>Connexion</h3>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd">
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox"> Remember me</label>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <p>Close this dialog: <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button></p>
+
+        </div>
+    </script-->
+
+</div>
