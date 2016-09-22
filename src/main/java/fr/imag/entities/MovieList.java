@@ -25,6 +25,15 @@ public class MovieList extends ArrayList<Movie> {
 		}
 	}
 	
+	public boolean contains(int idTMDB){
+		for(Movie m : this){
+			if(m.getIdTMDB() == idTMDB){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public JsonObject convertToJsonArray(){
 		String allFilm = "{\"movies\":[";
 		for(int i=0 ; i<this.size() ; i++){

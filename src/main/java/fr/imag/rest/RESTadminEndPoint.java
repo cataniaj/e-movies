@@ -64,20 +64,6 @@ public class RESTadminEndPoint {
     	}
         return result;
     }
-	
-    @GET
-    @Path("/charge")
-    public String chargeManyMovies() throws IOException {
-    	adminRegistration.chargeAllMovies();
-    	return "WhY sO sErIoUs ? o_o";
-    }
-	
-    @GET
-    @Path("/clean")
-    public String removeAllMovies() throws IOException {
-    	adminRegistration.cleanMovies();
-    	return "HaStA lA vIsTa, BaBy !";
-    }
     
     @POST
     @Path("/register")
