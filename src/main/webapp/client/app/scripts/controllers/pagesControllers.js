@@ -78,6 +78,11 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
                     $scope.details = data;
+                    if($scope.details.trailer == "N/A"){
+                    	$scope.bd=false;
+                    } else{
+                    	$scope.bd=true;
+                    }
                     
 		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
 			//alert(data.movies[0].title);
