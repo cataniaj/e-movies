@@ -34,6 +34,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
     }
 ]);
 
+
 // Contrôleur de la page de search
 routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routeParams', '$http', 'servicesSearch', 
     function($scope, $location, $routeParams, $http, servicesSearch){

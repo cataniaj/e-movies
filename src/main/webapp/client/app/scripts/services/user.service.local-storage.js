@@ -9,7 +9,7 @@ routeAppControllers.factory('UserService', ['$q', '$filter', '$timeout',
 				
 				service.GetAll = GetAll;
 				service.GetById = GetById;
-				service.GetByUsername = GetByUsername;
+				service.GetByEmail = GetByEmail;
 				service.Create = Create;
 				service.Update = Update;
 				service.Delete = Delete;			
@@ -29,7 +29,7 @@ routeAppControllers.factory('UserService', ['$q', '$filter', '$timeout',
 					return deferred.promise;
 				}
 
-				function GetByUsername(email) {
+				function GetByEmail(email) {
 					var deferred = $q.defer();
 					var filtered = $filter('filter')(getUsers(), { email: email });
 					var user = filtered.length ? filtered[0] : null;
@@ -42,7 +42,7 @@ routeAppControllers.factory('UserService', ['$q', '$filter', '$timeout',
 
 					// simulate api call with $timeout
 					$timeout(function () {
-						GetByUsername(user.email)
+						GetByEmail(user.email)
 							.then(function (duplicateUser) {
 								if (duplicateUser !== null) {
 									deferred.resolve({ success: false, message: 'Email: "' + user.email + '" est deja pris' });

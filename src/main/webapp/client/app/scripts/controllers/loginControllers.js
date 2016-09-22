@@ -13,12 +13,9 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		
 		// charger l'identifiant du user qui s'etait connecté et qui ne s'est pas déconnecté
         function loadCurrentUser() {
-            UserService.userManage().GetByUsername($rootScope.globals.currentUser.email)
+            UserService.userManage().GetByEmail($rootScope.globals.currentUser.email)
                 .then(function (user) {
                 	usert[0]=true;
-					// $scope.usert = true;
-					//location.reload();
-					// alert($scope.user.email);
                 });
         }
 		
