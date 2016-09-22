@@ -8,7 +8,8 @@
 var routeApp = angular.module('routeApp', [
     // Dépendances du "module"
     'ngRoute',
-    'routeAppControllers'
+    'routeAppControllers',
+    'ngCookies'
 ]);
 
 /**
@@ -39,7 +40,7 @@ routeApp.config(['$routeProvider',
         
 
 		.otherwise({
-            redirectTo: '/home'
+            redirectTo: '/client/app/views/home'
         });
 	
     }
@@ -49,7 +50,7 @@ routeApp.config(['$routeProvider',
 /**
  * Définition des contrôleurs
  */
-var routeAppControllers = angular.module('routeAppControllers', ['ngDialog']);
+var routeAppControllers = angular.module('routeAppControllers', ['ngDialog', 'ngCookies']);
 var dataPanier=[];
 var dataPanierTotal=[0];
 var dansPanier = [false];
@@ -62,10 +63,27 @@ var ListMenu=false;
 var GenreFilm = false;
 var GenreSerie = false;
 var BtnSearch = true;
-var isConnect = false;
 
 routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
             ngDialogProvider.setDefaults({
                 className: 'ngdialog-theme-default',
             });
 }]);
+
+
+routeAppControllers.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
+        // keep user logged in after page refresh
+        $rootScope.globals = $cookieStore.get('globals') || {};
+        if ($rootScope.globals.currentUser) {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+        }
+ 
+        /*$rootScope.$on('$locationChangeStart', function (event, next, current) {
+            // redirect to login page if not logged in and trying to access a restricted page
+            var restrictedPage = $.inArray($location.path(), ['#/home']) === -1;
+            var loggedIn = $rootScope.globals.currentUser;
+            if (restrictedPage && !loggedIn) {
+                $location.path('/home');
+            }
+        });*/
+    }]);

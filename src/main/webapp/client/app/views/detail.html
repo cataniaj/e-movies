@@ -1,25 +1,21 @@
 
 <div class="detail" ng-controller="detailCtrl">	
 	<div id="poster">
-		<img src="{{details.poster}}" />
-		
-		<div>            
-            <form class="form-group">	
-				<b>Support :<select class="form-control" ng-model="txtDtlSupport"> <option ng-click="supportPrice(1)">Copie Numerique</option><option ng-click="supportPrice(2)">DVD</option><option ng-click="supportPrice(3)">BluRay</option> </select>
+		<img src="{{details.poster}}" />		
+        <form class="form-group" name="myFormAddPanierBtn">	
+				<b>Support :<select class="form-control" ng-model="txtDtlSupport" name="txtDtlSupport" required> <option ng-click="supportPrice(1)">Copie Numerique</option><option ng-click="supportPrice(2)">DVD</option><option ng-click="supportPrice(3)">BluRay</option> </select>
                 <b>Prix Unitaire (€):</b> <input type="text" class="form-control"  value={{txtDtlPu}}  disabled>
             <div class="formAjout">	
-				<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addInfo=!addInfo; addPanier(details.title,details.year,txtDtlSupport,1,txtDtlPu)"><span class="glyphicon glyphicon-shopping-cart"> </span> <b>Ajouter au panier</b></button>
-                
-                <!--a href=""  ng-click="addInfo=!addInfo">meeeeer</a-->
-                <div ng-model="addInfoId" ng-show="addInfo" class="alert alert-info">
+				<button type="submit" class="btn btn-primary" ng-disabled="myFormAddPanierBtn.txtDtlSupport.$invalid" data-toggle="modal" data-target="#dialogConfirmAddPanier" ng-click="addInfo=!addInfo; addPanier(details.id,details.title,details.year,txtDtlSupport,1,txtDtlPu)"><span class="glyphicon glyphicon-shopping-cart"> </span> <b>Ajouter au panier</b></button>
+				
+                <div id="addInfoId" ng-show="addInfo" class="alert alert-danger">
                 <strong>Video ajoutée au panier </strong>
                 </div>                
 
             </div>    
-				</form>
-            
-        </div>
+		</form>
 	</div>
+	
 	<div id="info"> 
 		<h2>{{details.title}}</h2>
 		<div id="descriptif">
@@ -32,8 +28,8 @@
 		<div id="synopsis">
 			{{details.overview}}
 		</div>
-		
-		<a href="" data-toggle="modal" data-target="#dialogVideo"> Visionner la Bande Annonce </a>				
+				
+        <a href="" data-toggle="modal" data-target="#dialogVideo"><strong class="alert alert-info"> Visionner la Bande Annonce 	</strong></a>
 	</div>
 			
 		
