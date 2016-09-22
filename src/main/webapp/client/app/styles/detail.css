@@ -6,7 +6,7 @@
 #poster{
 	width:270px;
 	height:auto;
-	margin-top:70px;
+	margin-top:40px;
 }
 
 #synopsis {
@@ -26,6 +26,12 @@
 #info {
 	text-align:justify;
 	margin-left:10px;
+}
+
+#addInfoId{
+	position:fixed;
+	top:10%;
+	right:3px;
 }
 
 .detail img{
