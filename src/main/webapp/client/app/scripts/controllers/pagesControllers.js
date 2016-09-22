@@ -78,6 +78,7 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
                     $scope.details = data;
+                    
 		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
 			//alert(data.movies[0].title);
 			$scope.details = data[0];

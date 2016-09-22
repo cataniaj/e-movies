@@ -46,7 +46,6 @@ routeApp.config(['$routeProvider',
     }
 ]);
 
-
 /**
  * Définition des contrôleurs
  */
@@ -70,7 +69,6 @@ routeAppControllers.config(['ngDialogProvider', function (ngDialogProvider) {
                 className: 'ngdialog-theme-default',
             });
 }]);
-
 
 routeAppControllers.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScope, $location, $cookieStore, $http) {
         // keep user logged in after page refresh
