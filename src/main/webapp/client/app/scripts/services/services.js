@@ -1,5 +1,5 @@
 'use strict'
-
+var way = "localhost:8080";
 /********* 
 	la factory des recherches de videos 
 *********/
@@ -10,15 +10,15 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 		  return $http.get('json/jsonListDeFilm.php');
 		},
 		searchFilm:function(chaine){  
-			return	$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+chaine);
+			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+chaine);
 			//return	$http.get('client/app/json/jsonListDeFilm.php');     
 		},		
 		searchSerie:function(chaine){      
-			return	$http.get('http://localhost:8080/e-movies/rest/videos/search/all/tv/'+chaine);
+			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/tv/'+chaine);
 			//return	$http.get('json/jsonListDeFilm.php'); 			  
 		},
 		searchMulti:function(){      
-			return	$http.get('http://localhost:8080/e-movies/rest/videos/search/all/multi/'+mot);
+			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/multi/'+mot);
 			//return	$http.get('json/jsonListDeFilm.php');       
 		}
   }
@@ -45,7 +45,7 @@ routeAppControllers.factory('userCreationService',['$http',function($http){
       /*
        * Url à définir
        */
-      var url='http://localhost:8080/e-movies/rest/users/createNewAccount';
+      var url='http://'+way+'/e-movies/rest/users/createNewAccount';
       /*
        * transformation sous format json 
        */

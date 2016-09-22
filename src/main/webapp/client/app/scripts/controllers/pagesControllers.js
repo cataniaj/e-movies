@@ -15,7 +15,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 		$scope.datasBest = data;
 		for(i=0;i<data.length;i++){
 			if($scope.datasBest[i].poster == "N/A"){
-				$scope.datasBest[i].poster = "images/logos/no-image.jpg";
+				$scope.datasBest[i].poster = "client/app/images/logos/no-image.jpg";
 			}
 		}
 	});
@@ -25,7 +25,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 		$scope.datasSuggest = data;
 		for(i=0;i<data.length;i++){
 			if($scope.datasSuggest[i].poster == "N/A"){
-				$scope.datasSuggest[i].poster = "images/logos/no-image.jpg";
+				$scope.datasSuggest[i].poster = "client/app/images/logos/no-image.jpg";
 			}
 		}
 	});	        
@@ -54,7 +54,7 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 			$scope.datas = data.movies;
 			for(i=0;i<data.length;i++){
 				if($scope.datas[i].poster == "N/A"){
-					$scope.datas[i].poster = "images/logos/no-image.jpg";
+					$scope.datas[i].poster = "client/app/images/logos/no-image.jpg";
 				}
 				if($scope.datas[i].year == "N/A"){
 					$scope.datas[i].year = "(date inconnue)";
