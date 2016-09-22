@@ -31,13 +31,16 @@
 				
         <a href="" data-toggle="modal" data-target="#dialogVideo"><strong class="alert alert-info"> Visionner la Bande Annonce 	</strong></a>
 	</div>
-			
+	
+	
 		
 		<!-- Modal VIDEO -->
 	  <div class="modal fade" id="dialogVideo" role="dialog">
 		<div class="modal-dialog">
 				<div class="video">
-                    <iframe width="620px" height="400px" src={{details.trailer}}></iframe> 
+                    <object width="520" height="400"
+data="{{details.trailer}}">
+</object>
                 </div>
 		  
 		</div>
@@ -45,29 +48,6 @@
 	 <!-- End Modal VIDEO --> 	
 		
 		
-		<!-- Modal SIGN UP -->
-	  <div class="modal fade" id="dialogVideo" role="dialog">
-		<div class="modal-dialog">
-		
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Inscription</h4>
-			</div>
-			<div class="modal-body">
-				<div class="video">
-                    <iframe width="520" height="400" src="https://www.youtube.com/embed/rUYFJJqXLLM"></iframe> 
-                </div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-			</div>
-		  </div>
-		  
-		</div>
-	  </div>
-	 <!-- End Modal SIGN UP --> 
 </div>  <!--{{details.title}},{{details.year}},'copie numerique','1','7,00'-->
 
 
