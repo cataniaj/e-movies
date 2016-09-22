@@ -14,8 +14,9 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 			//return	$http.get('client/app/json/jsonListDeFilm.php');     
 		},
 		detailsFilm:function(id){  
-			//return	$http.get('http://'+way+'/e-movies/rest/videos/search/exact/movie/'+id);
-			return	$http.get('client/app/json/jsonUnSeulFilm2.php');     
+			return	$http.get('http://'+way+'/e-movies/rest/videos/search/exact/movie/'+id);
+			// return	$http.get('client/app/json/jsonUnSeulFilm2.php');     
+
 		},		
 		searchSerie:function(chaine){      
 			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/tv/'+chaine);
