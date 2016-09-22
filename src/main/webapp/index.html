@@ -115,12 +115,14 @@
 			    <div>
 
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show="!myProfil[0]" class="ConnexInscr">
+
+			    	<div ng-show="!usert[0]" class="ConnexInscr">
+
 			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
-			    	<div ng-show="myProfil[0]">
+			    	<div ng-show="usert[0]">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -216,7 +218,9 @@
 		<script type="text/javascript" src="client/app/scripts/controllers/pagesControllers.js"></script>
 		<script type="text/javascript" src="client/app/scripts/controllers/loginControllers.js"></script>
 		<script type="text/javascript" src="client/app/scripts/services/services.js"></script>
-		<!--script type="text/javascript" src="client/app/scripts/controllers/jquery-3.1.0.min.js"--></script>
+
+		<!-- <script type="text/javascript" src="client/app/scripts/controllers/jquery-3.1.0.min.js"></script> -->
+
 		
 		<!-- LOGIN / LOGOUT / SIGNUP SERVICES -->
 		<!-- Real user service that uses an api -->
@@ -226,7 +230,7 @@
 		<script src="client/app/scripts/services/authentication.service.js"></script>
 		<script src="client/app/scripts/services/flash.service.js"></script>
 		<!-- END SERVICES -->
-		
+
 		
 
 <div ng-controller="loginValidateCtrl">	
@@ -270,7 +274,7 @@
 	        </div>
 	        <div class="modal-footer">
 	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
-	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" >S'inscrire</a></p>
+	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal">S'inscrire</a></p>
 	        </div>
 	    </div>
 	    </div>

@@ -1,13 +1,13 @@
 'use strict'
-
+var way = "localhost:8080";
 /********* 
-//	la factory des recherches de videos 
+	la factory des recherches de videos 
 *********/
 
 routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 	return{
 		search:function(){
-		  return $http.get('client/app/json/jsonListDeFilm.php');
+		  return $http.get('json/jsonListDeFilm.php');
 		},
 		searchFilm:function(chaine){  
 			return	$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+chaine);
@@ -18,16 +18,15 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 			//return	$http.get('client/app/json/jsonListDeFilm.php');     
 		},		
 		searchSerie:function(chaine){      
-			//return	$http.get('http://localhost:8080/e-movies/rest/vidéos/exact/tv/'+chaine);
-			return	$http.get('client/app/json/jsonListDeFilm.php'); 			  
+			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/tv/'+chaine);
+			//return	$http.get('json/jsonListDeFilm.php'); 			  
 		},
 		searchMulti:function(){      
-			//return	$http.get('http://localhost:8080/e-movies/rest/vidéos/exact/multi/'+mot);
-			return	$http.get('client/app/json/jsonListDeFilm.php');       
+			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/multi/'+mot);
+			//return	$http.get('json/jsonListDeFilm.php');       
 		}
   }
 }]);
-
 
 /*********
 //	SERVICE POUR LA CRÉATION D'UN OBJECT User JSON
@@ -41,7 +40,6 @@ routeAppControllers.factory('userCreationJSON',['$http',function($http){
   }
 }}]);
 
-
 /*
  * Service de cration d'envoie d'un Object Nouveau user à la base de donnée
  * avec url à définir ,
@@ -53,7 +51,7 @@ routeAppControllers.factory('userCreationService',['$http',function($http){
 			// creation d'un object javascript
 			var dataObj='{"LastName":lastname, "Firstname":firstname, "Address":address, "ZipCode":codePostal, "City":city, "Country":country, "Email":email ,"Password":passwd}';
 			// Url à définir
-			var url="http://localhost:8080/e-movies/rest/users/CreateNewAccount";
+			var url="http://"+way+"/e-movies/rest/users/CreateNewAccount";
 			// transformation sous format json 
 			var data=eval('('+dataObj+')');			
 			//console.log(data);
