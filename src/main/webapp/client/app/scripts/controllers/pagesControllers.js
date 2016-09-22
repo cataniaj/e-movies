@@ -43,11 +43,16 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		$scope.datas = [];
 		/** pre: string; 
 			post: list de films ou series */
-		/*$http.get('json/jsonListDeFilm.php').success(function(data){
+		//$http.get('json/jsonListDeFilm.php').success(function(data){
         //$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
         //$http.get('https://api.themoviedb.org/3/search/movie?query=jurassic+park&language=fr&api_key=db1096cd136c906c06e7d77b313df0d4').success(function(data){
+<<<<<<< HEAD
 			$scope.datas = data.movies;*/
 
+=======
+			//$scope.datas = data.movies;
+		
+>>>>>>> ba29ff2bd5f87e581e1af23688f98c2b0070d469
 		
 		servicesSearch.searchFilm($scope.query).success(function(data){	
 			//$scope.datas = data;
@@ -72,16 +77,24 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page detail
-routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout',
-    function($scope, $location, $routeParams, $http, $timeout){
-		//$scope.id = $routeParams.id;	
+routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch',
+    function($scope, $location, $routeParams, $http, $timeout, servicesSearch){
+		$scope.id = $routeParams.id;	
 
 		$scope.details = [];
+<<<<<<< HEAD
 
 		$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
+=======
+                
+                servicesSearch.detailsFilm($scope.id).success(function(data){	
+                    $scope.details = data;
+		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
+>>>>>>> ba29ff2bd5f87e581e1af23688f98c2b0070d469
 			//alert(data.movies[0].title);
 			$scope.details = data[0];
-		});	
+		});*/
+                });
         
         /** fonction ajout dans panier  **/
 
@@ -159,8 +172,3 @@ routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParam
 
     }
 ]);
-
-
-      
-       
-

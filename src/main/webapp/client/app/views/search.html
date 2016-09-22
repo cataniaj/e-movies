@@ -3,7 +3,7 @@
     <div><p id="result" style="width:100%; text-align:center;"> ({{datas.length}} résultats) </p>
     </div>
     <div><center>
-    	<p ng-repeat="data in datas"><a href="#detail/{{data.id}}"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a>
+    	<p ng-repeat="data in datas"><a href="#detail/{{data.idTMDB}}"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a>
         <br>
         <a href="#detail/124905">{{data.title}} <br/> {{data.year}}</a>
         </p>
