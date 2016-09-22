@@ -39,22 +39,22 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
     function($scope, $location, $routeParams, $http, servicesSearch){
 		$scope.query = $routeParams.query;		
 		$scope.datas = [];
-		
-		$scope.datas = [];
 		/** pre: string; 
 			post: list de films ou series */
 		//$http.get('json/jsonListDeFilm.php').success(function(data){
         //$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
         //$http.get('https://api.themoviedb.org/3/search/movie?query=jurassic+park&language=fr&api_key=db1096cd136c906c06e7d77b313df0d4').success(function(data){
-			//$scope.datas = data.movies;
 		
 		
 		servicesSearch.searchFilm($scope.query).success(function(data){	
 			//$scope.datas = data;
-                        $scope.datas = data.movies;
-			for(i=0;i<data.length;i++){
+
+			$scope.datas = data.movies;
+			// alert(data.movies.length);
+			for(i=0;i<data.movies.length;i++){
 				if($scope.datas[i].poster == "N/A"){
 					$scope.datas[i].poster = "client/app/images/logos/no-image.jpg";
+					// alert("inside N/A");
 				}
 				if($scope.datas[i].year == "N/A"){
 					$scope.datas[i].year = "(date inconnue)";
@@ -85,6 +85,7 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                 });
         
         /** fonction ajout dans panier  **/
+
         //$scope.addPanier = function (idC, idD, idP , titre, annee, support, quantite, pu) {
         $scope.addPanier = function (produit, support, quantite) {
             //panierFunction(idC,titre, annee, support, quantite, pu);
@@ -133,6 +134,7 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
             }else if(index=="3"){
                 $scope.txtDtlPu = prix;
             }else{
+
                 $scope.txtDtlPu = prix;
             }                
         }

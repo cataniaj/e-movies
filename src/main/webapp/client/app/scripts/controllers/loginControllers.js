@@ -1,8 +1,7 @@
 ﻿
 routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'UserService', 'AuthenticationService',
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, UserService, AuthenticationService){	
-        //$scope.myProfil = false;
-        //myProfil.push(false);
+        $scope.usert = usert;
 		initController();
 		
 		/** tester si l'utilisateur est connecté ou pas ***/		
@@ -16,15 +15,16 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
         function loadCurrentUser() {
             UserService.userManage().GetByUsername($rootScope.globals.currentUser.email)
                 .then(function (user) {
-					myProfil.push(true);
-                                        myProfil.splice(0,1);
+                	usert[0]=true;
+					// $scope.usert = true;
 					//location.reload();
-					//alert($scope.myProfil.email);
+					// alert($scope.user.email);
                 });
         }
 		
 		$scope.deconnexion=function(){
 			AuthenticationService.Authentication().ClearCredentials();
+			usert[0]=false;
 			$scope.$apply();
 			$location.path("/home");
 		}
@@ -120,10 +120,13 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				AuthenticationService.Authentication().Login($scope.vm.email, $scope.vm.pwd, function (response) {
 					if (response.success) {
 						AuthenticationService.Authentication().SetCredentials($scope.vm.email, $scope.vm.pwd);
-						//$location.path('#/home');						
+						// $location.path('#/home');						
 						$scope.$apply();
-						$location.path('/');
+						// $location.path('/');
 						$scope.vm.dataLoading = false;
+
+						usert[0]=true;
+
 					} else {
 						FlashService.Error(response.message);
 						$scope.vm.dataLoading = false;
@@ -151,6 +154,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 							alert("good");
 							$location.path('/');
 							$scope.dataLoadingSign_up = false;
+							usert[0]=true;
 						} else {
 							alert("not good");
 							FlashService.Error(response.message);
