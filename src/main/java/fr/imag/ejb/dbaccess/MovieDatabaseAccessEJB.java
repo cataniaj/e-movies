@@ -44,7 +44,7 @@ public class MovieDatabaseAccessEJB {
 		    	List<Movie> allMovies = query.getResultList();
 		    	boolean find = false;
 		    	for(Movie movie : allMovies){
-		    		if(movie.getTitle().compareTo(m.getTitle())==0){
+		    		if(m.getIdTMDB() == movie.getIdTMDB()){
 		    			find = true;
 		    			break;
 		    		}
@@ -63,11 +63,6 @@ public class MovieDatabaseAccessEJB {
 	    }
 	    
 	    public synchronized void cleanMovies(){
-	    	/*Query query = em.createQuery("SELECT o FROM Movie o ");
-	    	List<Movie> allMovie = query.getResultList();
-	    	for(Movie m : allMovie){
-	    		em.remove(m);
-	    	}*/
 	    	em.createNativeQuery("TRUNCATE Table Product").executeUpdate();
 	    	
 	    }

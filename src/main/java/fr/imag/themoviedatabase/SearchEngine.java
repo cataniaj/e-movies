@@ -87,7 +87,7 @@ public class SearchEngine {
     	MovieList result = new MovieList();
     	for(Movie m : movieList){
     		String movieTitle = m.getTitle().toLowerCase();
-    		if(movieTitle.contains(lowerTitle)){
+    		if(movieTitle.contains(lowerTitle) && !result.contains(m.getIdTMDB())){
     			result.add(m);
     		}
     	}

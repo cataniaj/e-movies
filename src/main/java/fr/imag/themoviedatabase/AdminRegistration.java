@@ -126,9 +126,11 @@ public class AdminRegistration {
     	movieCN.setStock(0);
     	movieCN.setSupport("CN");
     	
-    	adminDBaccess.addProduct(movieDVD);
-    	adminDBaccess.addProduct(movieBR);
-    	adminDBaccess.addProduct(movieCN);
+    	if(!movieDBaccess.containsMovie(movieDVD.getIdTMDB())){
+        	adminDBaccess.addProduct(movieDVD);
+        	adminDBaccess.addProduct(movieBR);
+        	adminDBaccess.addProduct(movieCN);
+    	}
     	
     }
 
@@ -143,8 +145,6 @@ public class AdminRegistration {
 			if(movieDBaccess.containsMovie(Integer.parseInt(filmJson.getString("id")))){
 				break;
 			}
-			
-			System.out.println("TEST - -------------------"+filmJson.getString("id"));
 			
 			try{
 				dvd.setTitle(filmJson.getString("title"));
