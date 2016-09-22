@@ -11,7 +11,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 
 	//Meilleures ventes :		
 	$scope.datasBest = [];
-	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get meilleures ventes
+	$http.get('client/app/json/jsonListDeFilm2.php').success(function(data){ //get meilleures ventes
 		$scope.datasBest = data;
 		for(i=0;i<data.length;i++){
 			if($scope.datasBest[i].poster == "N/A"){
@@ -21,7 +21,7 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 	});
 	//Suggestions :		
 	$scope.datasSuggest = [];
-	$http.get('json/jsonListDeFilm2.php').success(function(data){ //get suggestions
+	$http.get('client/app/json/jsonListDeFilm2.php').success(function(data){ //get suggestions
 		$scope.datasSuggest = data;
 		for(i=0;i<data.length;i++){
 			if($scope.datasSuggest[i].poster == "N/A"){
@@ -53,10 +53,11 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 			//$scope.datas = data;
 
 			$scope.datas = data.movies;
-
-			for(i=0;i<data.length;i++){
+			// alert(data.movies.length);
+			for(i=0;i<data.movies.length;i++){
 				if($scope.datas[i].poster == "N/A"){
 					$scope.datas[i].poster = "client/app/images/logos/no-image.jpg";
+					// alert("inside N/A");
 				}
 				if($scope.datas[i].year == "N/A"){
 					$scope.datas[i].year = "(date inconnue)";

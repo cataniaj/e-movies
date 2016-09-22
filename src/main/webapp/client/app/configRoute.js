@@ -40,7 +40,7 @@ routeApp.config(['$routeProvider',
         
 
 		.otherwise({
-            redirectTo: '/client/app/views/home'
+            redirectTo: '/home'
         });
 	
     }
@@ -55,8 +55,7 @@ var dataPanier=[];
 var dataPanierTotal=[0];
 var dansPanier = [false];
 
-var myProfil=[];
- myProfil.push(false);
+var usert = [false];
  
 var dataAchat=[];
 var dataAvis=[];

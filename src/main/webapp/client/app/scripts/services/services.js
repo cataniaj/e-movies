@@ -47,7 +47,7 @@ routeAppControllers.factory('userCreationService',['$http',function($http){
 			// creation d'un object javascript
 			var dataObj='{"LastName":lastname, "Firstname":firstname, "Address":address, "ZipCode":codePostal, "City":city, "Country":country, "Email":email ,"Password":passwd}';
 			// Url à définir
-			var url="http://localhost:8080/e-movies/rest/users/CreateNewAccount";
+			var url="http://"+way+"/e-movies/rest/users/CreateNewAccount";
 			// transformation sous format json 
 			var data=eval('('+dataObj+')');			
 			//console.log(data);

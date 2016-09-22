@@ -116,13 +116,13 @@
 
 			    <ul class="nav navbar-nav navbar-right" >
 
-			    	<div ng-show="!user" class="ConnexInscr">
+			    	<div ng-show="!usert[0]" class="ConnexInscr">
 
 			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
-			    	<div ng-show="user">
+			    	<div ng-show="usert[0]">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -273,7 +273,7 @@
 	        </div>
 	        <div class="modal-footer">
 	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
-	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" >S'inscrire</a></p>
+	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal">S'inscrire</a></p>
 	        </div>
 	    </div>
 	    </div>
