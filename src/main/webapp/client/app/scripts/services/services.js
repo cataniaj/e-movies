@@ -24,8 +24,9 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
   }
 }]);
 
-//SERVICE POUR LA CRÉATION D'UN OBJECT User JSON
-
+/*********
+//	SERVICE POUR LA CRÉATION D'UN OBJECT User JSON
+********/
 routeAppControllers.factory('userCreationJSON',['$http',function($http){
   return{
   ObjectJsonUser : function(lastname,firstname,address,codePostal,city,country,phone,email,passwd){
@@ -35,99 +36,66 @@ routeAppControllers.factory('userCreationJSON',['$http',function($http){
   }
 }}]);
 
+/*
+ * Service de cration d'envoie d'un Object Nouveau user à la base de donnée
+ * avec url à définir ,
+ * et l'objet data en json comme donnée à envoyé
+ */
 routeAppControllers.factory('userCreationService',['$http',function($http){
-  return{
-    create:function(lastname,firstname,address,codePostal,city,country,phone,email,passwd){
-      /*
-       * creation d'un object javascript
-       */
-      var dataObj='{"LastName":lastname, "Firstname":firstname, "Address":address, "ZipCode":codePostal, "City":city, "Country":country, "Email":email ,"Password":passwd}';
-      /*
-       * Url à définir
-       */
-      var url='http://'+way+'/e-movies/rest/users/createNewAccount';
-      /*
-       * transformation sous format json 
-       */
-      var data=eval('('+dataObj+')')
-      
-      console.log(data);
-      /*
-       * tester le contenu de data
-       */
-      /*return  data.LastName;*/
-      /*
-       * requete post
-       */
-      return $http.post(url,data);
-    }
-  }
-}
-]);
+	return{
+		create:function(lastname,firstname,address,codePostal,city,country,phone,email,passwd){
+			// creation d'un object javascript
+			var dataObj='{"LastName":lastname, "Firstname":firstname, "Address":address, "ZipCode":codePostal, "City":city, "Country":country, "Email":email ,"Password":passwd}';
+			// Url à définir
+			var url="http://localhost:8080/e-movies/rest/users/CreateNewAccount";
+			// transformation sous format json 
+			var data=eval('('+dataObj+')');			
+			//console.log(data);
+			// tester le contenu de data
+			//return  data.LastName;
+			// requete post
+			return $http.post(url,data);
+		}
+	}
+}]);
 
+
+/*********
+//	SERVICE AUTHENTIFICATION
+********/
 routeAppControllers.factory('userAuthService',['$http',function($http){
-  return{
- authenfication: function(pseudo,passwd){
-    var data = $.param({
-               Pseudo: pseudo,
-                Passeword:passwd
-            });
-            var config = {
-                headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-                }
-            }
-       var url="";
-    return $http.post(url,data,config);
-  }
-}}]);
+	return{
+		authenfication: function(pseudo,passwd){
+			var dataObj ='{"Pseudo":pseudo,"Password":passwd}';
+			var url="";
+			var data=eval('('+dataObj+')');
+			//console.log(data)
+			return $http.post(url,data);
+		}
+	}
+}]);
 
-/*routeAppControllers.factory('PanierService',['$http',function($http){
-  return{
-    envoiPanier:function(monTableau){
-      var idProduit=0;
-      var category="";
-      var support="";
-      var quantity=0;
-      var price=0;
-      var lineOrder={};
-      var finaljson=[];
-      for(var ligne in monTableau){
-           idProduit=monTableau[ligne][0];
-            category=monTableau[ligne][1];
-            support=monTableau[ligne][2];
-            quantity=monTableau[ligne][3];
-            price=monTableau[ligne][4];
-            lineOrder="{'id_produit':'"+idProduit+"', 'category':'"+category+"','support':'"+support+"','quantity':"+quantity+"'}";
-      }
-      return lineOrder;
-    }
-    
-     var data = $.param({
-               LastName: lastName,
-              FirstName: firstName,
-               Address:address,
-                ZipCode:codePostal,
-                City:city,
-                Country:country,
-                Email:email,
-                Passeword:passwd
-                
-            });
-        
-            var config = {
-                headers : {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-                }
-            }
-       var url="";
-    return $http.post(url,data,config);
-    
-    
-    
-  }
-  
-}])*/
 
+/*
+ * Service de création de ligne de commande 
+ */
+routeAppControllers.factory('lineOrderCreation',['$http',function($http){
+	return{
+		lineOrder:function(IdProduct,titre,support,quantity){
+			var dataObj ='{"IdProduct":IdProduct,"titre":titre,"Support":support,"Quantity":quantity}';
+			return dataObj;
+		},
+	
+		order:function(MonTab){
+			var dataObj=[];
+			for(var i=0;i<MonTab.length;i++){
+				dataObj.push(this.lineOrder(MonTab[i][0],MonTab[i][1],MonTab[i][2],MonTab[i][3]));
+			}
+			var dataObjJson='dataObj';
+			var data=eval('('+dataObjJson+')');
+			//console.log(data);			
+		}		
+	}
+}]);
 
 

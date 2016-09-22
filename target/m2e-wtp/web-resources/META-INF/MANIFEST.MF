@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: julie
 Build-Jdk: 1.8.0_101
+=======
+Built-By: Jerem
+Build-Jdk: 1.8.0_65
+>>>>>>> origin/Lazizgueye
 Created-By: Maven Integration for Eclipse
 

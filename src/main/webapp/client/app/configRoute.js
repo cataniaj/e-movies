@@ -55,7 +55,9 @@ var dataPanier=[];
 var dataPanierTotal=[0];
 var dansPanier = [false];
 
-
+var myProfil=[];
+ myProfil.push(false);
+ 
 var dataAchat=[];
 var dataAvis=[];
 
