@@ -265,17 +265,18 @@
 	            <div class="checkbox">
 	                <label><input type="checkbox" name="notif" id="notif" ng-model="vm.notif"> Se souvenir de moi</label>
 	            </div>
-	            <button type="submit" class="btn btn-block" ng-disabled="myFormLogin.pwd.$invalid || (myFormLogin.email.$dirty && myFormLogin.email.$invalid) || myFormLogin.email.$invalid" ng-click="login()" > Se connecter
+	            <button type="submit" class="btn btn-block" ng-disabled="myFormLogin.pwd.$invalid || (myFormLogin.email.$dirty && myFormLogin.email.$invalid) || myFormLogin.email.$invalid" ng-click="login()"> Se connecter
 					<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
-				</button>
-	        </form>
-		
+				</button>	
+
+	        </form>		
 	        </div>
 	        <div class="modal-footer">
 	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
 	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal">S'inscrire</a></p>
 	        </div>
 	    </div>
+
 	    </div>
 	</div>
 	<!-- END DIALOG LOGIN -->
@@ -330,7 +331,28 @@
 		</div>
 	  </div>
 	 <!-- End Modal SIGN UP --> 
+
+<!-- <!- Connexion établie ->
+	<div class="modal fade" id="ConnexionOk" role="dialog">
+	    <div class="modal-dialog">		
+		  <!- Modal content->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Connexion établie</h4>
+			</div>
+
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
+			</div>
+		</div>
+	</div> -->
+
+<!-- End modal connexion -->
+
 </div>
+
+
 
 	 <!-- Modal PANIER -->
 

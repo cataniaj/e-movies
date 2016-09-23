@@ -123,6 +123,8 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 						// $location.path('#/home');						
 						$scope.$apply();
 						// $location.path('/');
+
+						$(dialogLogin).modal("hide");
 						$scope.vm.dataLoading = false;
 
 						usert[0]=true;
@@ -153,6 +155,10 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 							FlashService.Success('Registration successful', true);
 							alert("good");
 							$location.path('/');
+
+
+							$(dialogSign_up).modal("hide");
+							$scope.login;
 							$scope.dataLoadingSign_up = false;
 							usert[0]=true;
 						} else {
