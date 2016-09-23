@@ -13,9 +13,12 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		
 		// charger l'identifiant du user qui s'etait connecté et qui ne s'est pas déconnecté
         function loadCurrentUser() {
-            UserService.userManage().GetByEmail($rootScope.globals.currentUser.mail)
+            UserService.userManage().GetByUsername($rootScope.globals.currentUser.email)
                 .then(function (user) {
                 	usert[0]=true;
+					// $scope.usert = true;
+					//location.reload();
+					// alert($scope.user.email);
                 });
         }
 		
@@ -114,10 +117,9 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 	 
 			$scope.login = function(){
 				$scope.vm.dataLoading = true;
-				var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
-				AuthenticationService.Authentication().Login(userLog, function (response) {
+				AuthenticationService.Authentication().Login($scope.vm.email, $scope.vm.pwd, function (response) {
 					if (response.success) {
-						AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);
+						AuthenticationService.Authentication().SetCredentials($scope.vm.email, $scope.vm.pwd);
 						// $location.path('#/home');						
 						$scope.$apply();
 						// $location.path('/');
@@ -134,21 +136,19 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			};	
 			
 			$scope.signUp = function(){
-				var user={"lastName":$scope.user.nom, 
-							"firstName":$scope.user.pName, 
-							"address":$scope.user.adress, 
-							"zipcode":$scope.user.zipCode, 
-							"country":"France",
-							"city":"Grenoble",
+				var user={"laststname":$scope.user.nom, 
+							"firstname":$scope.user.pName, 
+							"adress":$scope.user.adress, 
+							"zipCode":$scope.user.zipCode, 
+							"country":"France", 
 							"phone":$scope.user.tel, 
-							"mail":$scope.user.email, 
+							"email":$scope.user.email, 
 							"password":$scope.user.pwd1,
 							"notification":$scope.user.notif};
 				
 				$scope.dataLoadingSign_up = true;
 				
 				UserService.userManage().Create(user).then(function (response) {
-					console.log(user);
 						if (response.success) {							
 							FlashService.Success('Registration successful', true);
 							alert("good");
@@ -156,7 +156,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 							$scope.dataLoadingSign_up = false;
 							usert[0]=true;
 						} else {
-							alert(response.message);
+							alert("not good");
 							FlashService.Error(response.message);
 							$scope.dataLoadingSign_up = false;
 						}
