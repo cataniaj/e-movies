@@ -9,6 +9,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				
 				service.GetAll = GetAll;
 				service.GetByEmail = GetByEmail;
+				service.GetByUser = GetByUser;
 				service.Create = Create;
 				service.Update = Update;
 				service.Delete = Delete;			
@@ -20,11 +21,48 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 
 				function GetByEmail(email) {
 					//return $http.get('/api/users/' + email).then(handleSuccess, handleError('Error getting user by email'));
-					return $http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Error getting user by email'));
+					//return $http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Error getting user by email'));
+					return $http.post('http://localhost:8080/e-movies/rest/users/login', email).then(handleSuccess, handleError('Erreur: email est deja pris'));
+				}
+
+				function GetByUser(user) {
+					//return $http.get('/api/users/' + email).then(handleSuccess, handleError('Error getting user by email'));
+					//return $http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Error getting user by email'));
+					//return $http.post('http://localhost:8080/e-movies/rest/users/login', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					var req = {
+						 method: 'POST',
+						 url: 'http://localhost:8080/e-movies/rest/users/login',
+						 headers: {
+						   'Content-Type': "application/json"
+						 },
+						 data: { "mail":user.mail,
+						 		"password":user.password }
+						}
+
+					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
 				}
 
 				function Create(user) {
-					return $http.post('/api/users', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					// return $http.post('/api/users', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					// return $http.post('http://localhost:8080/e-movies/rest/users/CreateNewAccount', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					var req = {
+						 method: 'POST',
+						 url: 'http://localhost:8080/e-movies/rest/users/createNewAccount',
+						 headers: {
+						   'Content-Type': "application/json"
+						 },
+						 data: {"lastName":user.lastName, 
+							"firstName":user.firstName, 
+							"address":user.address, 
+							"zipcode":user.zipcode, 
+							"country":user.country,
+							"city":user.city,
+							"phone":user.phone, 
+							"mail":user.mail, 
+							"password":user.password}
+						}
+
+					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
 				}
 
 				function Update(user) {

@@ -11,14 +11,14 @@ routeAppControllers.factory('AuthenticationService', ['$http', '$cookieStore', '
 				service.ClearCredentials = ClearCredentials;
 				return service;
 				
-				function Login(email, password, callback) {
+				function Login(userLog, callback) {
 					/* Dummy authentication for testing, uses $timeout to simulate api call
 					 ----------------------------------------------***/
 					$timeout(function () {
 						var response;
-						UserService.userManage().GetByEmail(email)
+						UserService.userManage().GetByUser(userLog)
 							.then(function (user) {
-								if (user !== null && user.password === password) {
+								if (user !== null && user.password === userLog.password) {
 									response = { success: true };
 								} else {
 									response = { success: false, message: 'email ou mot de passe incorrect' };
