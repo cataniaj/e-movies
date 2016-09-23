@@ -11,12 +11,12 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 		},
 		searchFilm:function(chaine){  
     //   //declaration de la variable représentant l'espace = '+' 
-    //   var plus='+';
+      var plus='+';
     // // déclaration de la  variable à chercher ici "espace"
-    //   var myRegEx=new RegExp(" ","gm");
+      var myRegEx=new RegExp(" ","gm");
     // // newMot reçoit le nouveau mot dans lequel espace est remplacé par '+'
-    //   var newMot=nom.replace(myRegEx,plus);
-			return $http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+chaine);
+       var newMot=chaine.replace(myRegEx,plus);
+			return $http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+newMot);
 
 			//return	$http.get('client/app/json/jsonListDeFilm.php');     
 		},
