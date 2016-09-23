@@ -13,7 +13,7 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		
 		// charger l'identifiant du user qui s'etait connecté et qui ne s'est pas déconnecté
         function loadCurrentUser() {
-            UserService.userManage().GetByUsername($rootScope.globals.currentUser.email)
+            UserService.userManage().GetByEmail($rootScope.globals.currentUser.email)
                 .then(function (user) {
                 	usert[0]=true;
 					// $scope.usert = true;
@@ -119,7 +119,8 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				$scope.vm.dataLoading = true;
 				var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
 				AuthenticationService.Authentication().Login(userLog, function (response) {
-					if (response.success) {
+					
+					if (response.success==true) {
 						AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);
 						// $location.path('#/home');						
 						$scope.$apply();
@@ -154,7 +155,8 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				
 				UserService.userManage().Create(user).then(function (response) {
 						console.log(user);
-						if (response.success) {							
+						alert("yoouut "+response);
+						if ((response.success!="undefined")||(response.success=="200")||(response.success==true)) {							
 							FlashService.Success('Registration successful', true);
 							// alert("good");
 							$location.path('/');

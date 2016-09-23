@@ -25,6 +25,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				}
 
 				function GetByUser(user) {
+					alert(user.mail+','+user.password);
 					var req = {
 						 method: 'POST',
 						 url: 'http://localhost:8080/e-movies/rest/users/login',
@@ -68,7 +69,10 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 
 				// private functions
 				function handleSuccess(res) {
-					return res.data;
+					if(res.status=="200"){
+						return res.data;
+					}
+					return res.status;
 				}
 
 				function handleError(error) {
