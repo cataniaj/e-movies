@@ -116,7 +116,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				$scope.vm.dataLoading = true;
 				var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
 				AuthenticationService.Authentication().Login(userLog, function (response) {
-					if (response.success=="success") {
+					if (response.success) {
 						AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);
 						// $location.path('#/home');						
 						$scope.$apply();
@@ -149,7 +149,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				
 				UserService.userManage().Create(user).then(function (response) {
 					console.log(user);
-						if (response.success=="success") {							
+						if (response.success) {							
 							FlashService.Success('Registration successful', true);
 							alert("good");
 							$location.path('/');

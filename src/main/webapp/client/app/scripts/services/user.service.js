@@ -34,7 +34,6 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 						 data: {"mail":user.mail,
 						 		"password":user.password }
 						}
-
 					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
 				}
 
@@ -56,7 +55,6 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 							"password":user.password                             
                         }
                     }
-
 					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
 				}
 
