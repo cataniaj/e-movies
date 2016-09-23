@@ -85,17 +85,14 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                     	$scope.bd=true;
                     }
                     
-		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
-			//alert(data.movies[0].title);
-			$scope.details = data[0];
-		});*/
+                    /*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
+                            //alert(data.movies[0].title);
+                            $scope.details = data[0];
+                    });*/
                 });
         
         /** fonction ajout dans panier  **/
-
-        //$scope.addPanier = function (idC, idD, idP , titre, annee, support, quantite, pu) {
         $scope.addPanier = function (produit, support, quantite) {
-            //panierFunction(idC,titre, annee, support, quantite, pu);
             if(support=="DVD"){
                 panierFunction(produit.idProductDvd, produit.title, produit.year, support, 1, produit.dvdPrice);
             }else if(support=="BluRay"){
@@ -107,29 +104,29 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 			
             function panierFunction(id, titre, annee, support, quantite, pu){
                 if(dataPanier.length>0){					// test si panier non vide **
-                        for(i=0; i<dataPanier.length; i++){
-                                if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
-                                        dataPanier[i][4]=dataPanier[i][4]+1;
-                                        // on actualiste le panier total
-                                        dataPanierTotal[0]=0;
-                                        for(j=0;j<dataPanier.length;j++){
-                                                dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
-                                        }
-										i=dataPanier.length;
-                                }
-                                else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
-                                        dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
-                                        dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-                                        dansPanier.shift();
-                                        dansPanier.push(true);
-										i=dataPanier.length;
-                                }
+                    for(i=0; i<dataPanier.length; i++){
+                        if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
+                            dataPanier[i][4]=dataPanier[i][4]+1;
+                            // on actualiste le panier total
+                            dataPanierTotal[0]=0;
+                            for(j=0;j<dataPanier.length;j++){
+                                dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
+                            }
+                            i=dataPanier.length;
                         }
+                        else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
+                            dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+                            dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+                            dansPanier.shift();
+                            dansPanier.push(true);
+                            i=dataPanier.length;
+                        }
+                    }
                 }else{ 						// la video n'est pas dans le panier, et panier vide, on l'ajoute donc **/			
-                        dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
-                        dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-                        dansPanier.shift();
-                        dansPanier.push(true);
+                    dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+                    dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+                    dansPanier.shift();
+                    dansPanier.push(true);
                 }
                 $timeout(function() {$scope.addInfo = false;}, 1000);
             }
@@ -141,7 +138,6 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
             }else if(index=="3"){
                 $scope.txtDtlPu = prix;
             }else{
-
                 $scope.txtDtlPu = prix;
             }                
         }

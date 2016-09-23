@@ -20,22 +20,18 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				}
 
 				function GetByEmail(email) {
-					//return $http.get('/api/users/' + email).then(handleSuccess, handleError('Error getting user by email'));
 					//return $http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Error getting user by email'));
-					return $http.post('http://localhost:8080/e-movies/rest/users/login', email).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					return $http.post('http://localhost:8080/e-movies/rest/users/login', email).then(handleSuccess, handleError('Erreur: n\'existe pas'));
 				}
 
 				function GetByUser(user) {
-					//return $http.get('/api/users/' + email).then(handleSuccess, handleError('Error getting user by email'));
-					//return $http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Error getting user by email'));
-					//return $http.post('http://localhost:8080/e-movies/rest/users/login', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
 					var req = {
 						 method: 'POST',
 						 url: 'http://localhost:8080/e-movies/rest/users/login',
 						 headers: {
-						   'Content-Type': "application/json"
-						 },
-						 data: { "mail":user.mail,
+						   'Content-Type': "application/json"                             
+                        },
+						 data: {"mail":user.mail,
 						 		"password":user.password }
 						}
 
@@ -43,8 +39,6 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				}
 
 				function Create(user) {
-					// return $http.post('/api/users', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
-					// return $http.post('http://localhost:8080/e-movies/rest/users/CreateNewAccount', user).then(handleSuccess, handleError('Erreur: email est deja pris'));
 					var req = {
 						 method: 'POST',
 						 url: 'http://localhost:8080/e-movies/rest/users/createNewAccount',
@@ -59,8 +53,9 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 							"city":user.city,
 							"phone":user.phone, 
 							"mail":user.mail, 
-							"password":user.password}
-						}
+							"password":user.password                             
+                        }
+                    }
 
 					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
 				}
@@ -74,7 +69,6 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				}
 
 				// private functions
-
 				function handleSuccess(res) {
 					return res.data;
 				}
