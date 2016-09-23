@@ -54,7 +54,7 @@ public class SearchEngine {
 		String[] elementUrl = url.split("/");
 		String target = elementUrl[0];
 		String type = elementUrl[1];
-		String title = elementUrl[2];
+		String title = elementUrl[2].replaceAll("+", " ");
 		
 		if(target.compareTo(allKeyword) == 0){
 			return searchAll(type, title);
