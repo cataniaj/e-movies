@@ -11,14 +11,14 @@ routeAppControllers.factory('AuthenticationService', ['$http', '$cookieStore', '
 				service.ClearCredentials = ClearCredentials;
 				return service;
 				
-				function Login(userLog, callback) {
+				function Login(username, password, callback) {
 					/* Dummy authentication for testing, uses $timeout to simulate api call
 					 ----------------------------------------------***/
 					$timeout(function () {
 						var response;
-						UserService.userManage().GetByUser(userLog)
+						UserService.userManage().GetByUsername(username)
 							.then(function (user) {
-								if (user !== null && user.password === userLog.password) {
+								if (user !== null && user.password === password) {
 									response = { success: true };
 								} else {
 									response = { success: false, message: 'email ou mot de passe incorrect' };
@@ -29,19 +29,19 @@ routeAppControllers.factory('AuthenticationService', ['$http', '$cookieStore', '
 
 					/* Use this for real authentication
 					 ----------------------------------------------***/
-					//$http.post('/api/authenticate', { email: email, password: password })
+					//$http.post('/api/authenticate', { username: username, password: password })
 					//    .success(function (response) {
 					//        callback(response);
 					//    });
 				}
 				
-				function SetCredentials(email, password) {
-					//var authdata = Base64.encode(email + ':' + password);
+				function SetCredentials(username, password) {
+					//var authdata = Base64.encode(username + ':' + password);
 					var authdata = password;
 
 					$rootScope.globals = {
 						currentUser: {
-							email: email,
+							username: username,
 							authdata: authdata
 						}
 					};
