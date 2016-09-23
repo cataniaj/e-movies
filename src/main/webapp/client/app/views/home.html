@@ -1,0 +1,71 @@
+			
+    <div ng-controller="homeCtrl">					
+        <!-- <div class="search">
+            <input ng-model="query" type="text" class="txtSearch" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,15}" title="goodzilla" />
+            <button type="submit" ng-click="searchAction()">Rechercher</button>
+            <p><a ng-click="rechAvancee = !rechAvancee" ng-hide="rechAvancee"> Recherche avancée </a></p>
+            <div ng-show="rechAvancee" id="rechPlus">
+            	
+            	 <form>
+            	 	<h1>Recherche avancée</h1>
+					  <input type="checkbox" name="TypeF" value="Film" ng-model="displayFavoriteFilms"> Film
+					  <input type="checkbox" name="TypeS" value="Serie" ng-model="displayFavoriteSeries"> Série
+				</form> 
+				<p><input ng-model="query" type="text" class="txtSearch" placeholder="Titre" pattern="[a-z]{1,15}" title="goodzilla"/></p>
+				<p><input ng-model="query" type="text" class="txtSearch" placeholder="Réalisateur" pattern="[a-z]{1,15}" title="goodzilla"/></p>
+				<p><input ng-model="query" type="text" class="txtSearch" placeholder="Année de production" pattern="[a-z]{1,15}" title="goodzilla"/>
+				</p><p><input ng-model="query" type="text" class="txtSearch" placeholder="Acteur" pattern="[a-z]{1,15}" title="goodzilla"/></p>
+				<h3>Genre :</h3>
+				<div class="centre">
+				<table>
+				<tr>
+					  <th><input type="checkbox" name="GenreC" value="Comedie"></th><td>Comédie</td>
+					  <th><input type="checkbox" name="GenreA" value="Aventure"></th><td>Aventure</td>
+					  <th><input type="checkbox" name="GenreD" value="Drame"></th><td>Drame</td>
+					  <th><input type="checkbox" name="GenreF" value="Fantastique"></th><td>Fantastique</td>
+				</tr><tr>
+					  <th><input type="checkbox" name="GenreSF" value="SF"></th><td>Sciences Fiction</td>
+					  <th><input type="checkbox" name="GenreAc" value="Action"></th><td>Action</td>
+					  <th><input type="checkbox" name="GenreT" value="Thriller"></th><td>Thriller</td>
+					  <th><input type="checkbox" name="GenreP" value="Policier"></th><td>Policier</td>
+				</tr><tr>
+					  <th><input type="checkbox" name="GenreM" value="Manga"></th><td>Manga</td>
+					  <th><input type="checkbox" name="GenreDA" value="DA"></th><td>Dessin animé</td>
+				</tr> 
+				</table>
+				<button type="submit" ng-click="searchAction()">Rechercher</button>
+				</div>
+				<a ng-click ="rechAvancee = !rechAvancee" style="margin-left:90%;">Moins</a>
+            </div>
+        </div> -->
+					
+        
+        	<h1>Meilleures ventes</h1>
+            <!-- MEILLEURES VENTES -->
+            <div class="best">
+                        <table>
+                        		<tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a></td></tr>
+                                <tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905"><p id="dataBest">{{data.title}} <br/> {{data.year}}</p></a></td>
+                                </tr>                      
+                        </table>  
+            </div>
+           
+                
+            <h1>Suggestions</h1>
+            <!-- SUGGESTIONS -->
+             <div class="best">
+                        <table>
+                        		<tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905"><img ng-src='{{data.poster}}' class="img-rounded poster1" alt=""/></a></td></tr>
+                                <tr>
+                                <td ng-repeat="data in datasBest"><a href="#detail/124905"><p id="dataSuggest">{{data.title}} <br/> {{data.year}}</p></a></td>
+                                </tr>                      
+                        </table>  
+            </div>
+
+				
+    </div>	
+				
+			<!--/section-->

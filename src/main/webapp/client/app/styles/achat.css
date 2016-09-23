@@ -1,0 +1,26 @@
+
+.listAchat{
+    width:90%;
+    /*vertical-align:center;*/
+}
+
+.listAchat>table>thead>tr{
+    text-align:center;
+}
+.table{
+	margin-top: 3%;
+	text-align: center;
+	color:black;
+	background-color: white;
+	text-align:center;
+	border-collapse: collapse;
+}
+
+.table th{
+	text-align:center;
+}
+
+
+.listAchat button{
+	background-color: #6C6D6D;
+}
