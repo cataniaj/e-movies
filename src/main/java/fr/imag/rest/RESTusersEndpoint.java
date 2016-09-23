@@ -30,24 +30,30 @@ public class RESTusersEndpoint {
 	 * user data from the client
 	 */
 	@POST
-	@Produces({"application/json"})
+	@Produces({"text/plain"})
 	@Consumes({"application/json"})
 	@Path("/createNewAccount")
-	public Response createAnAccount(User user){
+	public String createAnAccount(User user){
 		userMngr.createNewAccount(user);
-		System.out.println(user.toString());
-		return Response.status(200).build();
+		return "success";
 	}
 	
 	@POST
 	@Produces({"application/json"})
 	@Consumes({"application/json"})
 	@Path("/login")
-	public Response login(LoginData data){
+	public String login(LoginData data){
 		User res = userMngr.login(data);
-		if(res != null)
-			System.out.println(res.toString());
-		//System.out.println(data.getMail()+" "+data.getPassword());
-		return Response.status(200).entity(res).build();
+		if(res != null){
+			return "success";
+		}
+		return "error";
+	}
+	@POST
+	@Produces({"application/json"})
+	@Consumes({"application/json"})
+	@Path("/logout")
+	public String logout(){
+			return "success";
 	}
 }
