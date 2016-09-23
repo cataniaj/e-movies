@@ -64,7 +64,6 @@ public class MovieDatabaseAccessEJB {
 	    
 	    public synchronized void cleanMovies(){
 	    	em.createNativeQuery("TRUNCATE Table Product").executeUpdate();
-	    	
 	    }
 	    
 	    public synchronized void updateProduct(String idProduct, String newStock, String newPrice){
