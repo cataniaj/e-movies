@@ -30,7 +30,7 @@ public class RESTusersEndpoint {
 	 * user data from the client
 	 */
 	@POST
-	@Produces({"text/plain"})
+	@Produces({"application/json"})
 	@Consumes({"application/json"})
 	@Path("/createNewAccount")
 	public String createAnAccount(User user){
