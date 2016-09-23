@@ -117,9 +117,10 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 	 
 			$scope.login = function(){
 				$scope.vm.dataLoading = true;
-				AuthenticationService.Authentication().Login($scope.vm.email, $scope.vm.pwd, function (response) {
+				var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
+				AuthenticationService.Authentication().Login(userLog, function (response) {
 					if (response.success) {
-						AuthenticationService.Authentication().SetCredentials($scope.vm.email, $scope.vm.pwd);
+						AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);
 						// $location.path('#/home');						
 						$scope.$apply();
 						// $location.path('/');
@@ -138,22 +139,24 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			};	
 			
 			$scope.signUp = function(){
-				var user={"laststname":$scope.user.nom, 
-							"firstname":$scope.user.pName, 
-							"adress":$scope.user.adress, 
-							"zipCode":$scope.user.zipCode, 
+				var user={"lastName":$scope.user.nom, 
+							"firstName":$scope.user.pName, 
+							"address":$scope.user.adress, 
+							"zipcode":$scope.user.zipCode, 
 							"country":"France", 
+							"city":"Grenoble",
 							"phone":$scope.user.tel, 
-							"email":$scope.user.email, 
+							"mail":$scope.user.email, 
 							"password":$scope.user.pwd1,
 							"notification":$scope.user.notif};
 				
 				$scope.dataLoadingSign_up = true;
 				
 				UserService.userManage().Create(user).then(function (response) {
+						console.log(user);
 						if (response.success) {							
 							FlashService.Success('Registration successful', true);
-							alert("good");
+							// alert("good");
 							$location.path('/');
 
 
