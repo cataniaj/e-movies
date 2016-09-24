@@ -41,5 +41,7 @@ public class CartManagerEJB {
 		dbAccess.decrementOneProduct(idProduct, mail);
 	}
 	
-	// TODO Payer le panier
+	public void payCart(String user){
+		dbAccess.payCart(user);
+	}
 }

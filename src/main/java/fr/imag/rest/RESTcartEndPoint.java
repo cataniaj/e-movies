@@ -12,10 +12,8 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import fr.imag.ejb.business.CartManagerEJB;
@@ -82,8 +80,15 @@ public class RESTcartEndPoint {
     	cartMngr.decrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
     }
     
-    // TODO Payer le panier
-    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/pay")
+    public void pay(String data) {
+		JsonReader r = Json.createReader(new StringReader(data));
+		JsonObject obj = r.readObject();
+    	cartMngr.payCart(obj.getString("mail"));
+    }
+
     
 
 }
