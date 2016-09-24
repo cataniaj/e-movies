@@ -10,20 +10,16 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import fr.imag.ejb.dbaccess.AdminDatabaseAccessEJB;
 import fr.imag.ejb.dbaccess.MovieDatabaseAccessEJB;
 import fr.imag.entities.Admin;
 import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
-import fr.imag.entities.Product;
 
 @Stateless
 public class AdminRegistration {
