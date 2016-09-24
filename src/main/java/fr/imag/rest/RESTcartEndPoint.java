@@ -15,7 +15,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import fr.imag.ejb.business.CartManagerEJB;
 import fr.imag.ejb.business.OrderAllManagerEJB;
@@ -32,12 +34,32 @@ public class RESTcartEndPoint {
 	@Inject private UserManagerEJB userMngr;
 	@Inject private OrderAllManagerEJB orderAllMngr;
 	@Inject private OrderLineManagerEJB orderLineMngr;
+
+    @GET
+    @Path("/getTest")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject getTest(String data){
+    	return cartMngr.cartInJson("Client 1");
+    }
+
+    @POST
+    @Path("/getCart")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonObject getCart(String data){
+		JsonReader r = Json.createReader(new StringReader(data));
+		JsonObject obj = r.readObject();
+    	String user = obj.getString("mail");
+    	return cartMngr.cartInJson(user);
+    }
 	
     @POST
     @Path("/addToCart")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addToCart(String data) { 
-		JsonReader r = Json.createReader(new StringReader(data));
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+    public Response addToCart(String data) { 
+		try{
+    	JsonReader r = Json.createReader(new StringReader(data));
 		JsonObject obj = r.readObject();
 		Cart cartToAdd = new Cart(obj);
 		Cart cartFound = cartMngr.isPresentInTheCart(cartToAdd);
@@ -46,57 +68,87 @@ public class RESTcartEndPoint {
 		}else{
 			cartFound.setQuantity(cartFound.getIdProduct()+1);
 		}
-    }
-    
-    @POST
-    @Path("/removeToCart")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void removeToCart(String data) { 
-		JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-		Cart cartToRemove = new Cart(obj);
-		Cart cartFound = cartMngr.isPresentInTheCart(cartToRemove);
-		if(cartFound == null){
-			cartMngr.removeToCart(cartToRemove.getIdProduct(), cartToRemove.getMailUser());
-		}else{
-			cartFound.setQuantity(cartFound.getIdProduct()-1);
+		return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
+		}catch(Exception e){
+			return Response.status(204).entity("Une erreur est survenue").build();
 		}
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/removeCart")
-    public void removeCart(String data) {
+    @Path("/removeToCart")
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+    public Response removeToCart(String data) { 
 		JsonReader r = Json.createReader(new StringReader(data));
 		JsonObject obj = r.readObject();
-    	cartMngr.removeCart(obj.getString("mail"));
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/increment")
-    public void incrementOneProduct(String data) {
-		JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-    	cartMngr.incrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
-    }
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/decrement")
-    public void decrementOneProduct(String data) {
-		JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-    	cartMngr.decrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
+		Cart cartToRemove = new Cart(obj);
+		Cart cartFound = cartMngr.isPresentInTheCart(cartToRemove);
+		if(cartFound != null){
+			cartMngr.removeToCart(cartToRemove.getIdProduct(), cartToRemove.getMailUser());
+			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
+		}else{
+			return Response.status(204).entity("Une erreur est survenue").build();
+		}
     }
     
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/removeCart")
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+    public Response removeCart(String data) {
+		try{
+			JsonReader r = Json.createReader(new StringReader(data));
+			JsonObject obj = r.readObject();
+	    	cartMngr.removeCart(obj.getString("mail"));
+			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
+		}catch(Exception e){
+			return Response.status(204).entity("Une erreur est survenue").build();
+		}
+    }
+
+    @POST
+    @Path("/increment")
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+    public Response incrementOneProduct(String data) {
+    	try{
+    		JsonReader r = Json.createReader(new StringReader(data));
+    		JsonObject obj = r.readObject();
+        	cartMngr.incrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
+			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
+    	}catch(Exception e){
+			return Response.status(204).entity("Une erreur est survenue").build();
+    	}
+    }
+
+    @POST
+    @Path("/decrement")
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+    public Response decrementOneProduct(String data) {
+    	try{
+    		JsonReader r = Json.createReader(new StringReader(data));
+    		JsonObject obj = r.readObject();
+        	cartMngr.decrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
+			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
+    	}catch(Exception e){
+			return Response.status(204).entity("Une erreur est survenue").build();
+    	}
+    }
+    
+    @POST
     @Path("/pay")
-    public void pay(String data) {
-		JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-    	cartMngr.payCart(obj.getString("mail"));
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+    public Response pay(String data) {
+    	try{
+    		JsonReader r = Json.createReader(new StringReader(data));
+    		JsonObject obj = r.readObject();
+        	cartMngr.payCart(obj.getString("mail"));
+			return Response.status(200).entity("true").build();
+    	}catch(Exception e){
+			return Response.status(204).entity("false").build();
+    	}
     }
     
 
@@ -205,7 +257,7 @@ public class RESTcartEndPoint {
     	System.out.println("---------- Remove product 92 to cart user 2 ----------\n");
     	cartMngr.removeToCart(film4.getIdProduct(), user2.getMail());
     	cartMngr.printTable();
-    	
+    	/*
     	System.out.println("---------- Pay cart user 1 ----------\n");
     	cartMngr.payCart(user1.getMail());
     	cartMngr.printTable();
@@ -229,6 +281,7 @@ public class RESTcartEndPoint {
 
     	System.out.println("----------  All order lines ----------\n");
     	orderLineMngr.printTable();
+    	*/
     }
 
     

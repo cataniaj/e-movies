@@ -5,6 +5,7 @@
 
 package fr.imag.ejb.dbaccess;
 
+import java.io.StringReader;
 import java.util.List;
 
 import javax.ejb.ConcurrencyManagement;
@@ -12,6 +13,9 @@ import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -94,7 +98,6 @@ public class CartDatabaseAccessEJB {
 				"WHERE c.mailUser=:param");
 		query.setParameter("param", user);
 		return (List<Cart>) query.getResultList();
-		
 	}
 	
 	private int totalPrice(List<OrderLine> allCart){
@@ -146,6 +149,21 @@ public class CartDatabaseAccessEJB {
     		c.print();
     	}
 	}
-	
 
+	public JsonObject convertToJsonArray(String user){
+		List<Cart> allCart = allCartForUser(user);
+		String cartListJson = "{\"cart\":[";
+		for(int i=0 ; i<allCart.size() ; i++){
+			if(i==0){
+				cartListJson = cartListJson + allCart.get(i).convertToJson().toString();
+			}else{
+				cartListJson = cartListJson + "," + allCart.get(i).convertToJson().toString();
+			}
+		}
+		cartListJson = cartListJson + "]}";
+		JsonReader r = Json.createReader(new StringReader(cartListJson));
+		JsonObject obj = r.readObject();
+		return obj;
+	}
+	
 }

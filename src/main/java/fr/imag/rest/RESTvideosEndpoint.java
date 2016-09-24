@@ -1,8 +1,14 @@
 package fr.imag.rest;
 
+import java.io.StringReader;
+
 import javax.inject.Inject;
+import javax.json.Json;
 import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -29,5 +35,20 @@ public class RESTvideosEndpoint {
 		String url = target+"/"+type+"/"+title;
 		JsonObject obj = videosMngr.search(url);
 		return Response.status(200).entity(obj).build();
+	}
+	
+	@POST
+	@Consumes({"application/json"})
+	@Produces({"application/json"})
+	@Path("/getStock")
+	public Response stock(String data){
+		try{
+			JsonReader r = Json.createReader(new StringReader(data));
+			JsonObject obj = r.readObject();
+			int stock = videosMngr.getStock(obj.getInt("idProduct"));
+			return Response.status(200).entity(stock).build();
+		}catch(Exception e){
+			return Response.status(204).entity("Une erreur est survenue").build();
+		}
 	}
 }
