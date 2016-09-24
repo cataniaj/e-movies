@@ -8,8 +8,8 @@ package fr.imag.ejb.business;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.json.JsonObject;
 
-import fr.imag.ejb.dbaccess.CartDatabaseAccessEJB;
 import fr.imag.ejb.dbaccess.OrderAllDatabaseAccessEJB;
 import fr.imag.entities.OrderAll;
 
@@ -28,6 +28,10 @@ public class OrderAllManagerEJB {
 	
 	public void clean(){
 		dbAccess.clean();
+	}
+	
+	public JsonObject getAllOrderLine(String user){
+		return dbAccess.getAllOrderLine(user);
 	}
 
 }
