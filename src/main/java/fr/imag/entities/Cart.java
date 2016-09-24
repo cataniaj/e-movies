@@ -102,4 +102,15 @@ public class Cart {
 		this.unitPrice = unitPrice;
 	}
 	
+	public void print(){
+		System.out.println("idCartItem: "+idCartItem);
+		System.out.println("idProduct: "+idProduct);
+		System.out.println("mailUser: "+mailUser);
+		System.out.println("title: "+title);
+		System.out.println("year: "+year);
+		System.out.println("support: "+support);
+		System.out.println("quantity: "+quantity);
+		System.out.println("unitPrice: "+unitPrice+"\n");
+	}
+	
 }

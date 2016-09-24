@@ -15,6 +15,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import fr.imag.ejb.business.OrderAllManagerEJB;
+import fr.imag.ejb.business.OrderLineManagerEJB;
 import fr.imag.entities.Cart;
 import fr.imag.entities.OrderAll;
 import fr.imag.entities.OrderLine;
@@ -25,8 +27,8 @@ import fr.imag.entities.User;
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class CartDatabaseAccessEJB {
 	@Inject EntityManager em;
-	@Inject OrderLineDatabaseAccessEJB orderLineDBaccess;
-	@Inject OrderAllDatabaseAccessEJB orderAllDBaccess;
+	@Inject OrderAllManagerEJB orderAllMngr;
+	@Inject OrderLineManagerEJB orderLineMngr;
 	
 	public Cart isPresentInTheCart(Cart item){
     	Query query = em.createQuery("SELECT c FROM Cart c");
@@ -54,8 +56,15 @@ public class CartDatabaseAccessEJB {
 		em.persist(item);
 	}
 	
-	public void removeToCart(Cart item){
-		em.remove(item);
+	public void removeToCart(int idProduct, String mail){
+    	Query query = em.createQuery("SELECT c FROM Cart c");
+    	List<Cart> allCart = (List<Cart>) query.getResultList();
+    	for(Cart cart : allCart){
+    		if(cart.getMailUser().compareTo(mail) == 0
+    				&& cart.getIdProduct()==idProduct){
+    			em.remove(cart);
+    		}
+    	}
 	}
 	
 	public void incrementOneProduct(int idProduct,  String mail){
@@ -82,7 +91,7 @@ public class CartDatabaseAccessEJB {
 	
 	private List<Cart> allCartForUser(String user){
 		Query query = em.createQuery("SELECT c FROM Cart c "+
-				"WHERE c.user=:param");
+				"WHERE c.mailUser=:param");
 		query.setParameter("param", user);
 		return (List<Cart>) query.getResultList();
 		
@@ -103,15 +112,39 @@ public class CartDatabaseAccessEJB {
 		// Create and save all order lines
 		OrderAll order = new OrderAll();
     	List<Cart> allCart = allCartForUser(user);
-    	List<OrderLine> allOrderLine = orderLineDBaccess.buildOrderLine(allCart, order);
+    	List<OrderLine> allOrderLine = orderLineMngr.buildOrderLine(allCart, order);
     	
     	// Create and save the order
     	order.setUser(customer);
     	order.setAllOrderLine(allOrderLine);
     	order.setPrice(totalPrice(allOrderLine));
-    	orderAllDBaccess.validateOrder(order);
+    	orderAllMngr.validateOrder(order);
     	
     	customer.addAnOrder(order);
+    	
+    	// Remove all cart entries for user
+    	for(Cart cart : allCart){
+    		if(cart.getMailUser().compareTo(user)==0){
+        		em.remove(cart);
+    		}
+    	}
+    	
+	}
+	
+	public void clean(){
+    	Query query = em.createQuery("SELECT c FROM Cart c");
+    	List<Cart> allCart = (List<Cart>) query.getResultList();
+    	for(Cart cart : allCart){
+    		em.remove(cart);
+    	}
+	}
+	
+	public void printTable(){
+    	Query query = em.createQuery("SELECT c FROM Cart c ");
+    	List<Cart> cartList = (List<Cart>) query.getResultList();
+    	for(Cart c : cartList){
+    		c.print();
+    	}
 	}
 	
 
