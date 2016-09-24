@@ -5,6 +5,7 @@
 
 package fr.imag.entities;
 
+import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class Cart {
 		title = item.getString("title");
 		year = item.getString("year");
 		support = item.getString("support");
-		quantity = item.getInt("quantity");
+		quantity = 1;
 		unitPrice = item.getInt("unitPrice");
 	}
 
@@ -100,6 +101,30 @@ public class Cart {
 
 	public void setUnitPrice(int unitPrice) {
 		this.unitPrice = unitPrice;
+	}
+	
+	public JsonObject convertToJson(){
+		JsonObject obj = Json.createObjectBuilder()
+				.add("idProduct", idProduct)
+				.add("mail", mailUser)
+				.add("title", title)
+				.add("year", year)
+				.add("support", support)
+				.add("quantity", quantity)
+				.add("unitPrice", unitPrice)
+				.build();
+		return obj;
+	}
+	
+	public void print(){
+		System.out.println("idCartItem: "+idCartItem);
+		System.out.println("idProduct: "+idProduct);
+		System.out.println("mailUser: "+mailUser);
+		System.out.println("title: "+title);
+		System.out.println("year: "+year);
+		System.out.println("support: "+support);
+		System.out.println("quantity: "+quantity);
+		System.out.println("unitPrice: "+unitPrice+"\n");
 	}
 	
 }

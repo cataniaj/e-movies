@@ -5,7 +5,6 @@
 
 package fr.imag.rest;
 
-import java.io.IOException;
 import java.io.StringReader;
 
 import javax.inject.Inject;

@@ -8,6 +8,7 @@ package fr.imag.ejb.business;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.json.JsonObject;
 
 import fr.imag.ejb.dbaccess.CartDatabaseAccessEJB;
 import fr.imag.entities.Cart;
@@ -25,8 +26,8 @@ public class CartManagerEJB {
 		dbAccess.addToCart(item);
 	}
 	
-	public void removeToCart(Cart item){
-		dbAccess.removeToCart(item);
+	public void removeToCart(int idProduct, String mail){
+		dbAccess.removeToCart(idProduct, mail);
 	}
 	
 	public void removeCart(String mail){
@@ -43,5 +44,17 @@ public class CartManagerEJB {
 	
 	public void payCart(String user){
 		dbAccess.payCart(user);
+	}
+	
+	public void clean(){
+		dbAccess.clean();
+	}
+	
+	public void printTable(){
+		dbAccess.printTable();
+	}
+	
+	public JsonObject cartInJson(String user){
+		return dbAccess.convertToJsonArray(user);
 	}
 }

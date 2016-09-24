@@ -68,7 +68,8 @@ public class OrderLine {
 	}
 
 	public void print(){
-		System.out.print("id: "+idOrderLine);
+		System.out.print("idOrderLine: "+idOrderLine);
+		System.out.print("idProduct: "+idProduct);
 		System.out.print(" quantity: "+quantity);
 		System.out.println(" unitaryPrice: "+unitaryPrice);
 	}
