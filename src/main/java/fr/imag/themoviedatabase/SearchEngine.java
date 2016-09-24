@@ -55,7 +55,6 @@ public class SearchEngine {
 		String target = elementUrl[0];
 		String type = elementUrl[1];
 		String title = elementUrl[2];
-		System.out.println("TEST --------------- "+title);
 		
 		if(target.compareTo(allKeyword) == 0){
 			return searchAll(type, title);

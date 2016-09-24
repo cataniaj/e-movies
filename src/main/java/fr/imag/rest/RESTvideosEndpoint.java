@@ -32,7 +32,6 @@ public class RESTvideosEndpoint {
 			){
 		String url = target+"/"+type+"/"+title;
 		JsonObject obj = videosMngr.search(url);
-		//return obj;
 		return Response.status(200).entity(obj).build();
 	}
 }
