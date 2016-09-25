@@ -332,24 +332,6 @@
 	  </div>
 	 <!-- End Modal SIGN UP --> 
 
-<!-- <!- Connexion établie ->
-	<div class="modal fade" id="ConnexionOk" role="dialog">
-	    <div class="modal-dialog">		
-		  <!- Modal content->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Connexion établie</h4>
-			</div>
-
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
-			</div>
-		</div>
-	</div> -->
-
-<!-- End modal connexion -->
-
 </div>
 
 
@@ -410,17 +392,6 @@
 		</div>		
 	  </div>
 	 <!-- End Modal PANIER --> 
-	 
-	 lastName":$scope.user.nom, 
-							"firstName":$scope.user.pName, 
-							"address":$scope.user.adress, 
-							"zipcode":$scope.user.zipCode, 
-							"country":"France", 
-							"city":"Grenoble",
-							"phone":$scope.user.tel, 
-							"mail":$scope.user.email, 
-							"password":$scope.user.pwd1,
-							"notification":$scope.user.notif};
 
 
 <!-- Modal PARAMETER -->
@@ -432,7 +403,7 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Parametres</h4>
 			</div>
-			<div class="modal-body">				
+			<div class="modal-body" ng-controller="userCtrl">
 				<table class="table table-hover">
 				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
@@ -453,17 +424,17 @@
 							</p>
 							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p> -->
 						</div>
-						</td><td>	
+						<!-- </td><td>	
 							<div class="paramRight">
 								<input type="email" class="form-control" id="mail" placeholder="Email">
 								<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
 								</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">	
 							</div>
-						</td></tr>
+						</td></tr> -->
 					<tr><td colspan="2"></td></tr>
 					<tr><td colspan="2">
 					<div class="checkbox">
-						<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
+						<label><input type="checkbox"> <b>Je souhaite être averti par e-mail des nouveaux ajouts</b></label>
 					</div>
 					</td></tr>
 					<tr><td colspan="2"><a href="" class="btn" data-toggle="modal" data-target="#deleteC">Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
