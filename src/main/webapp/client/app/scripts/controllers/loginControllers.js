@@ -16,6 +16,7 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
             UserService.userManage().GetByUsername($rootScope.globals.currentUser.email)
                 .then(function (user) {
                 	usert[0]=true;
+                	usert[1]= $rootScope.globals.currentUser.email;
 					// $scope.usert = true;
 					//location.reload();
 					// alert($scope.user.email);

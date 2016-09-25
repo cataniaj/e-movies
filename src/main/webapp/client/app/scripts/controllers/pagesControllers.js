@@ -21,9 +21,9 @@ routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams'
 	});
 	//Suggestions :		
 	$scope.datasSuggest = [];
-	$http.get('client/app/json/suggests.php').success(function(data){ //get suggestions
-		$scope.datasSuggest = data;
-		for(i=0;i<data.length;i++){
+	$http.get('client/app/json/suggests.php').success(function(data2){ //get suggestions
+		$scope.datasSuggest = data2;
+		for(i=0;i<data2.length;i++){
 			if($scope.datasSuggest[i].poster == "N/A"){
 				$scope.datasSuggest[i].poster = "client/app/images/logos/no-image.jpg";
 			}
