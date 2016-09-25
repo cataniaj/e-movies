@@ -1,15 +1,11 @@
 package fr.imag.rest;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBElement;
 
 import fr.imag.ejb.business.UserManagerEJB;
 import fr.imag.entities.User;
@@ -33,27 +29,21 @@ public class RESTusersEndpoint {
 	@Produces({"application/json"})
 	@Consumes({"application/json"})
 	@Path("/createNewAccount")
-	public String createAnAccount(User user){
+	public Response createAnAccount(User user){
 		userMngr.createNewAccount(user);
-		return "success";
+		System.out.println(user.toString());
+		return Response.status(200).build();
 	}
 	
 	@POST
 	@Produces({"application/json"})
 	@Consumes({"application/json"})
 	@Path("/login")
-	public String login(LoginData data){
+	public Response login(LoginData data){
 		User res = userMngr.login(data);
-		if(res != null){
-			return "success";
-		}
-		return "error";
-	}
-	@POST
-	@Produces({"application/json"})
-	@Consumes({"application/json"})
-	@Path("/logout")
-	public String logout(){
-			return "success";
+		if(res != null)
+			System.out.println(res.toString());
+		//System.out.println(data.getMail()+" "+data.getPassword());
+		return Response.status(200).entity(res).build();
 	}
 }
