@@ -81,6 +81,7 @@ public class OrderAllDatabaseAccessEJB {
 						String year = m.getYear();
 						JsonObject obj = Json.createObjectBuilder()
 								.add("idProduct", orderLine.getIdProduct())
+								.add("idOrder", order.getIdOrder())
 								.add("title", title)
 								.add("year", year)
 								.add("date", order.getDate())
