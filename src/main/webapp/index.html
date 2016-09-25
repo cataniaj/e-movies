@@ -226,7 +226,7 @@
 		<!-- Real user service that uses an api -->
 		<!-- <script src="app-services/user.service.js"></script> -->
 		<!-- Fake user service for demo that uses local storage -->
-		<script src="client/app/scripts/services/user.service.local-storage.js"></script>
+		<script src="client/app/scripts/services/user.service.js"></script>
 		<script src="client/app/scripts/services/authentication.service.js"></script>
 		<script src="client/app/scripts/services/flash.service.js"></script>
 		<!-- END SERVICES -->
@@ -333,24 +333,6 @@
 	  </div>
 	 <!-- End Modal SIGN UP --> 
 
-<!-- <!- Connexion établie ->
-	<div class="modal fade" id="ConnexionOk" role="dialog">
-	    <div class="modal-dialog">		
-		  <!- Modal content->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Connexion établie</h4>
-			</div>
-
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
-			</div>
-		</div>
-	</div> -->
-
-<!-- End modal connexion -->
-
 </div>
 
 
@@ -411,8 +393,8 @@
 		</div>		
 	  </div>
 	 <!-- End Modal PANIER --> 
-	 
-	 
+
+
 <!-- Modal PARAMETER -->
 	  <div class="modal fade" id="dialogParameter" role="dialog">
 		<div class="modal-dialog">		
@@ -422,30 +404,38 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Parametres</h4>
 			</div>
-			<div class="modal-body">				
+			<div class="modal-body" ng-controller="userCtrl">
 				<table class="table table-hover">
 				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
 						<div class="paramLeft">
-							<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
+							<p>{{user.lastName}}</p>
+							<p>{{user.firstName}}</p>
+							<p>{{user.address}}</p>
+							<p>{{user.zipcode}} {{user.country}}</p>
+							<p>{{user.city}}</p>
+							<p>{{user.phone}}</p>
+							<p>{{user.coins}}</p>
+
+							<!-- <p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
 							<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
 							<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
 							<p style="display: flex;">
 							<input type="text" class="form-control" id="zipCode" style="width:80px" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" id="sel1"> <option>France</option> </select>
 							</p>
-							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
+							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p> -->
 						</div>
-						</td><td>	
+						<!-- </td><td>	
 							<div class="paramRight">
 								<input type="email" class="form-control" id="mail" placeholder="Email">
 								<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
 								</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">	
 							</div>
-						</td></tr>
+						</td></tr> -->
 					<tr><td colspan="2"></td></tr>
 					<tr><td colspan="2">
 					<div class="checkbox">
-						<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
+						<label><input type="checkbox"> <b>Je souhaite être averti par e-mail des nouveaux ajouts</b></label>
 					</div>
 					</td></tr>
 					<tr><td colspan="2"><a href="" class="btn" data-toggle="modal" data-target="#deleteC">Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>

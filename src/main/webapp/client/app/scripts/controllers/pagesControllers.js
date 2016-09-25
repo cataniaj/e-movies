@@ -144,19 +144,14 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 ]);
 
 
-// Contrôleur de la page achat
-routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout','$interval',
-    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval){
-		$scope.toto=0;
-						
-        $scope.download = function () {
-            //ngDialog.open({ template: 'dialogDownload' });  
-			$interval(function() {$scope.toto= $scope.toto+1;}, 2000, 100);
-        };
-        
-        $rootScope.$on('ngDialog.setPadding', function (event, padding){
-            angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
-        });
+// Contrôleur de la page paramètres
+routeAppControllers.controller('userCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch',
+    function($scope, $location, $routeParams, $http, $timeout, servicesSearch){
+		$scope.id = $routeParams.id;	
+
+		servicesUser.detailsUser($scope.id).success(function(data)){
+			$scope.user = data;
+		}	
 
     }
 ]);
