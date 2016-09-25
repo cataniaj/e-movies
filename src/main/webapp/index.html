@@ -411,7 +411,18 @@
 	  </div>
 	 <!-- End Modal PANIER --> 
 	 
-	 
+	 lastName":$scope.user.nom, 
+							"firstName":$scope.user.pName, 
+							"address":$scope.user.adress, 
+							"zipcode":$scope.user.zipCode, 
+							"country":"France", 
+							"city":"Grenoble",
+							"phone":$scope.user.tel, 
+							"mail":$scope.user.email, 
+							"password":$scope.user.pwd1,
+							"notification":$scope.user.notif};
+
+
 <!-- Modal PARAMETER -->
 	  <div class="modal fade" id="dialogParameter" role="dialog">
 		<div class="modal-dialog">		
@@ -426,13 +437,21 @@
 				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
 						<div class="paramLeft">
-							<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
+							<p>{{user.lastName}}</p>
+							<p>{{user.firstName}}</p>
+							<p>{{user.address}}</p>
+							<p>{{user.zipcode}} {{user.country}}</p>
+							<p>{{user.city}}</p>
+							<p>{{user.phone}}</p>
+							<p>{{user.coins}}</p>
+
+							<!-- <p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
 							<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
 							<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
 							<p style="display: flex;">
 							<input type="text" class="form-control" id="zipCode" style="width:80px" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" id="sel1"> <option>France</option> </select>
 							</p>
-							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
+							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p> -->
 						</div>
 						</td><td>	
 							<div class="paramRight">

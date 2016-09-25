@@ -100,9 +100,8 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
     }
 ]);   
 
-
- routeAppControllers.controller('loginValidateCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
-	function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
+ routeAppControllers.controller('loginValidateCtrl', ['$scope', '$modal', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
+	function($scope, $location, $routeParams, $http, $rootScope, modal, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
 			
 			/*var vm = $scope;
 			$scope.login = function(){
