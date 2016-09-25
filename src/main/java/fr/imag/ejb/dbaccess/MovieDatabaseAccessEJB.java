@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import fr.imag.entities.Cart;
 import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
 import fr.imag.entities.Product;
@@ -64,7 +65,6 @@ public class MovieDatabaseAccessEJB {
 	    
 	    public synchronized void cleanMovies(){
 	    	em.createNativeQuery("TRUNCATE Table Product").executeUpdate();
-	    	
 	    }
 	    
 	    public synchronized void updateProduct(String idProduct, String newStock, String newPrice){
@@ -81,6 +81,14 @@ public class MovieDatabaseAccessEJB {
 	    		}
 	    	}
 	    	return false;
+	    }
+	    
+	    public int getStock(int idProduct){
+			Query query = em.createQuery("SELECT m FROM Movie m "+
+					"WHERE m.idProduct=:param");
+			query.setParameter("param", idProduct);
+			Movie m = (Movie) query.getSingleResult();
+			return m.getStock();
 	    }
 }
 
