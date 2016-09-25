@@ -5,9 +5,6 @@
 
 package fr.imag.entities;
 
-
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

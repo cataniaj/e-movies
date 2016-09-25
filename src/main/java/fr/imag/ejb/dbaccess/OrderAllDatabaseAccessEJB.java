@@ -64,36 +64,38 @@ public class OrderAllDatabaseAccessEJB {
 		List<OrderAll> orderList = (List<OrderAll>) query.getResultList();
 		ArrayList<OrderLine> result = new ArrayList<OrderLine>();
 		
+		
+		
+
+		String orderLineListJson = "{\"order\":[";
+		boolean first = true;
 		for(OrderAll order : orderList){
 			if(order.getUser().getMail().compareTo(user) == 0){
 				ArrayList<OrderLine> orderLineList = (ArrayList<OrderLine>) order.getAllOrderLine();
 				for(OrderLine orderLine : orderLineList){
 					if(!contains(result, orderLine.getIdProduct())){
 						result.add(orderLine);
+						int idProduct = orderLine.getIdProduct();
+						Movie m = em.find(Movie.class, idProduct);
+						String title = m.getTitle();
+						String year = m.getYear();
+						JsonObject obj = Json.createObjectBuilder()
+								.add("idProduct", orderLine.getIdProduct())
+								.add("title", title)
+								.add("year", year)
+								.add("date", order.getDate())
+								.build();
+						if(first){
+							orderLineListJson = orderLineListJson + obj.toString();
+							first = false;
+						}else{
+							orderLineListJson = orderLineListJson + "," + obj.toString();
+						}
 					}
 				}
 			}
 		}
 
-		String orderLineListJson = "{\"order\":[";
-		boolean first = true;
-		for(OrderLine orderLine : result){
-			int idProduct = orderLine.getIdProduct();
-			Movie m = em.find(Movie.class, idProduct);
-			String title = m.getTitle();
-			String year = m.getYear();
-			JsonObject obj = Json.createObjectBuilder()
-					.add("idProduct", orderLine.getIdProduct())
-					.add("title", title)
-					.add("year", year)
-					.build();
-			if(first){
-				orderLineListJson = orderLineListJson + obj.toString();
-				first = false;
-			}else{
-				orderLineListJson = orderLineListJson + "," + obj.toString();
-			}
-		}
 		orderLineListJson = orderLineListJson + "]}";
 		JsonReader r = Json.createReader(new StringReader(orderLineListJson));
 		JsonObject obj = r.readObject();

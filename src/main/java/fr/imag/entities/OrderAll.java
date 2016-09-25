@@ -77,6 +77,13 @@ public class OrderAll {
 		this.allOrderLine = allOrderLine;
 	}
 	
+	public String getDate() {
+		int month = date.getMonth();
+		int day = date.getDay();
+		int year = date.getYear();
+		return ""+day+" "+month+" "+year;
+	}
+
 	public void addOneOrderLine(OrderLine orderLine){
 		allOrderLine.add(orderLine);
 	}
