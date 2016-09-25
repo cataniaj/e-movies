@@ -8,7 +8,6 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				var service = {};
 				
 				service.GetAll = GetAll;
-				service.GetByEmail = GetByEmail;
 				service.GetByUser = GetByUser;
 				service.Create = Create;
 				service.Update = Update;
@@ -19,12 +18,8 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 					return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
 				}
 
-				function GetByEmail(email) {
-					//return $http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Error getting user by email'));
-					return $http.post('http://localhost:8080/e-movies/rest/users/login', email).then(handleSuccess, handleError('Erreur: n\'existe pas'));
-				}
-
 				function GetByUser(user) {
+					//alert(user.mail+','+user.password);
 					var req = {
 						 method: 'POST',
 						 url: 'http://localhost:8080/e-movies/rest/users/login',
@@ -33,8 +28,9 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
                         },
 						 data: {"mail":user.mail,
 						 		"password":user.password }
-						}
-					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					}
+					//return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					return	$http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Erreur: email est deja pris')); 
 				}
 
 				function Create(user) {
@@ -68,7 +64,8 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 
 				// private functions
 				function handleSuccess(res) {
-					return res.data;
+					//return res.data;
+					return res;
 				}
 
 				function handleError(error) {

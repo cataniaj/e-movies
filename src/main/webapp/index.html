@@ -26,6 +26,7 @@
 				<link rel="stylesheet" type="text/css" href="client/app/styles/detail.css" />
                 <link rel="stylesheet" type="text/css" href="client/app/styles/index.css" />
                 <link rel="stylesheet" type="text/css" href="client/app/styles/achat.css" />
+                <link rel="stylesheet" type="text/css" href="client/app/styles/paiement.css" />
 				
 				<script src="client/app/scripts/bibliotheques/jquery.min.js"></script>
 				<script src="client/app/scripts/bibliotheques/bootstrap.min.js"></script>
@@ -45,7 +46,7 @@
 			</header>
 			
 			<div data-spy="affix" data-offset-top="156">
-			 <nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
+			<nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
@@ -116,13 +117,13 @@
 
 			    <ul class="nav navbar-nav navbar-right" >
 
-			    	<div ng-show="!usert[0]" class="ConnexInscr">
+			    	<div ng-show="!usert" class="ConnexInscr">
 
 			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
-			    	<div ng-show="usert[0]">
+			    	<div ng-show="usert">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -135,7 +136,7 @@
 
 
 					<!-- Panier -->
-					<li><a  href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a  href="" ng-click="loadPanierI()" data-toggle="modal" data-target="#dialogPanier"  class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
 			    </ul>
 			    </div>
@@ -225,11 +226,10 @@
 		<!-- Real user service that uses an api -->
 		<!-- <script src="app-services/user.service.js"></script> -->
 		<!-- Fake user service for demo that uses local storage -->
-		
-		<!--script src="client/app/scripts/services/user.service.local-storage.js"></script-->
 		<script src="client/app/scripts/services/user.service.js"></script>
 		<script src="client/app/scripts/services/authentication.service.js"></script>
 		<script src="client/app/scripts/services/flash.service.js"></script>
+		<script src="client/app/scripts/services/panier.service.js"></script>
 		<!-- END SERVICES -->
 
 		
@@ -243,7 +243,7 @@
 	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4>Connexion</h4>
 	        </div>
-			<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
+			<div ng-class="{'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 	        <div class="modal-body" style="padding:40px 50px;">
 	        
 	          <form role="form" name="myFormLogin" >
@@ -267,17 +267,18 @@
 	            <div class="checkbox">
 	                <label><input type="checkbox" name="notif" id="notif" ng-model="vm.notif"> Se souvenir de moi</label>
 	            </div>
-	            <button type="submit" class="btn btn-block" ng-disabled="myFormLogin.pwd.$invalid || (myFormLogin.email.$dirty && myFormLogin.email.$invalid) || myFormLogin.email.$invalid" ng-click="login()" > Se connecter
+	            <button type="submit" class="btn btn-block" ng-disabled="myFormLogin.pwd.$invalid || (myFormLogin.email.$dirty && myFormLogin.email.$invalid) || myFormLogin.email.$invalid" ng-click="login()"> Se connecter
 					<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
-				</button>
-	        </form>
-		
+				</button>	
+
+	        </form>		
 	        </div>
 	        <div class="modal-footer">
 	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
-	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal">S'inscrire</a></p>
+	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" ng-click="flash=false;">S'inscrire</a></p>
 	        </div>
 	    </div>
+
 	    </div>
 	</div>
 	<!-- END DIALOG LOGIN -->
@@ -300,7 +301,7 @@
 					<input width="50%" type="text" class="form-control" name="pName" id="pName" ng-model="user.pName" placeholder="Prenom" required>
 					<input type="text" class="form-control" name="adress" id="adress" ng-model="user.adress" placeholder="Adresse">
 					<p style="display: flex;" >
-					<input type="number" class="form-control" name="zipCode" id="zipCode" ng-model="user.zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" name="country"> <option>France</option> </select>
+					<input type="number" class="form-control" name="zipCode" id="zipCode" ng-model="user.zipCode" placeholder="Code Postal" min="0" max="99999" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" name="country"> <option>France</option> </select>
 					</p>
 					<input type="tel" class="form-control"  name="tel" id="tel" ng-model="user.tel" placeholder="Telephone">
 					<span style="color:red" ng-show="(myFormSign_up.email.$dirty && myFormSign_up.email.$invalid) || myFormSign_up.email.$touched">
@@ -324,7 +325,7 @@
 			</div>
 			<div class="modal-footer">				
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
-				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" >Se connecter</a></p>
+				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" ng-click="flash=false;">Se connecter</a></p>
 
 			</div>
 		  </div>
@@ -332,14 +333,17 @@
 		</div>
 	  </div>
 	 <!-- End Modal SIGN UP --> 
+	 
 </div>
+
+
 
 	 <!-- Modal PANIER -->
 
 	<div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
-		  <div class="modal-content" ng-controller="panierCtrl">
+		<div class="modal-content" ng-controller="panierCtrl">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Mon Panier</h4>
@@ -358,8 +362,18 @@
 						<th>Options</th>
 					</tr>
 					</thead>
-					<tbody>					
-					<tr ng-repeat="data in dataPanier1">
+					<tbody>		
+						<tr ng-repeat="data in datasPanier">
+							<td>{{data.title}} </td>
+							<td>{{data.year}}</td>
+							<td>{{data.support}}</td>
+							<td><input type="number" class="form-control" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:80px" value={{data.quantity}} ng-change="updateQuantite($index, data.quantity)" min="1" max="5"/></td>
+							<td>{{data.unitPrice}}€</td>
+							<td>{{data.quantity*data.unitPrice}}€</td>
+							<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
+							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
+						</tr>
+					<!--tr ng-repeat="data in dataPanier1">
 						<td>{{data[1]}} </td>
 						<td>{{data[2]}}</td>
 						<td>{{data[3]}}</td>
@@ -368,7 +382,7 @@
 						<td>{{data[4]*data[5]}}€</td>
 						<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
 							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
-					</tr>	
+					</tr-->	
 					<tfoot>
 					<tr><td colspan="7"></td></tr>
 
@@ -383,17 +397,60 @@
 				<h3>Le panier est vide !</h3>
 			</div>	
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" ng-disabled="!dansPanier[0] || !dataPanierTotal[0]" data-dismiss="modal" >Payer</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="!dansPanier[0] || !dataPanierTotal[0]" ng-click="payer()">Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
-		  </div>		  
+		</div>		  
 		</div>		
-	  </div>
-	 <!-- End Modal PANIER --> 
+	</div>
+		<!-- End Modal PANIER --> 
+		
+	<!-- PAIEMENT -->
+	<!--div class="modal fade" id="paiement" role="dialog">
+	    <div class="modal-dialog">		
+		  <!-- Modal content->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Paiement</h4>
+			</div-->
+			<div class="modal fade" id="paiement" role="dialog">
+				<div class="modal-dialog">
+				<div class="card-bounding">
+					<aside>Card Number:</aside>
+					<div class="card-container">
+						<div class="card-type"></div>
+						<input placeholder="0000 0000 0000 0000" onkeyup="$cc.validate(event)" />
+						<div class="card-valid">&#xea10;</div>
+					</div>
+
+					<div class="card-details clearfix">
+						<div class="expiration">
+							<aside>Expiration Date</aside>
+							<input onkeyup="$cc.expiry.call(this,event)" maxlength="7" placeholder="mm/yyyy" />
+						</div>
+
+						<div class="cvv">
+							<aside>CVV</aside>
+							<input placeholder="XXX"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
+					</div>
+				</div>				
+			</div>
+			</div>
+			<!--div class="modal-footer">
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
+			</div>
+		</div>
+	</div-->
+	<!-- End PAIEMENT -->
 	 
 	 
-<!-- Modal PARAMETER -->
-	  <div class="modal fade" id="dialogParameter" role="dialog">
+	<!-- Modal PARAMETER -->
+	<div class="modal fade" id="dialogParameter" role="dialog">
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
@@ -437,7 +494,7 @@
 		  </div>
 		  
 		</div>
-	  </div>
+	</div>
 
 	  <!-- Suppression élément -->
 	  <div class="modal fade" id="deleteP" role="dialog">

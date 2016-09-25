@@ -1,7 +1,7 @@
 ﻿
-routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'UserService', 'AuthenticationService',
-    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, UserService, AuthenticationService){	
-        $scope.usert = usert;
+routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'UserService', 'AuthenticationService', 'PanierService',
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, UserService, AuthenticationService, PanierService){	
+        //$scope.usert = usert;
 		initController();
 		
 		/** tester si l'utilisateur est connecté ou pas ***/		
@@ -13,29 +13,28 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		
 		// charger l'identifiant du user qui s'etait connecté et qui ne s'est pas déconnecté
         function loadCurrentUser() {
-            UserService.userManage().GetByEmail($rootScope.globals.currentUser.mail)
-                .then(function (user) {
-                	usert[0]=true;
-                });
+			/*alert(AuthenticationService.Authentication().Base64().encode($rootScope.globals.currentUser.authdata));
+			alert(AuthenticationService.Authentication().Base64().decode($rootScope.globals.currentUser.authdata));*/
+			var userLog={"mail":$rootScope.globals.currentUser.email,"password":$rootScope.globals.currentUser.authdata};
+			AuthenticationService.Authentication().Login(userLog, function (response) {
+				if (response.success) {
+					AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);			
+					//$scope.$apply();				
+					$scope.usert=true;
+				} else {
+					AuthenticationService.Authentication().ClearCredentials();	
+				}
+			});
         }
 		
+		// deconnexion		
 		$scope.deconnexion=function(){
 			AuthenticationService.Authentication().ClearCredentials();
-			usert[0]=false;
-			$scope.$apply();
+			$scope.usert=false;
+			//$scope.$apply();
+			window.location.reload();
 			$location.path("/home");
 		}
-		
-        /*$scope.dialogLogin = function () {
-            ngDialog.open({ template: 'dialogLogin' });
-        }; */       
-        
-		/*$scope.dialogSign_up = function () {
-            ngDialog.open({ template: 'dialogSign_up' });
-        };*/
-        /*$rootScope.$on('ngDialog.setPadding', function (event, padding){
-            angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
-        });*/
 
 		// deconnexion
 	   $scope.searchAction2 = function(){
@@ -44,29 +43,41 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		
 		// bouton back de la navigation
 		$scope.back = function () {
-            window.history.back();
+            window.history.back();			
         };  
     }
 ]);   
 
-routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout',
-    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout){	
+
+routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'PanierService',
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, PanierService){	
         /** tester dialogue ***/
         $scope.dataPanier1=dataPanier;
         $scope.dansPanier=dansPanier;
         
+		$scope.datasPanier = [];
 
         $scope.dataAchat1=dataAchat;
         $scope.dataAvis1=dataAvis;
         $scope.dataPanierTotal=dataPanierTotal;
-
-
+		//alert("yooo");
+		if($rootScope.globals.currentUser){
+			loadPanier();
+		}else{
+			$scope.datasPanier=[];
+		}
+		
+		function loadPanier(){
+			if($rootScope.globals.currentUser.email){				
+				var user={"mail":$rootScope.globals.currentUser.email};				
+				PanierService.myPanier(user).success(function(data){ 
+					//alert(data.cart[0]);
+					$scope.datasPanier = data.cart;
+					$scope.dansPanier[0]=true;
+				});
+			}
+		}
         
-        // fonction ajout avis
-        /*$scope.addAvis = function (id,titre,annee) {
-              dataAvis.push(new Array(titre));
-        };*/
-
         $scope.updateQuantite = function (index, qte){                     
             $scope.dataPanier1[index][4]=qte;
 			
@@ -94,74 +105,74 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
                 dansPanier[0]=false;
             }
         }
+		
+		$scope.payer=function(){
+			//alert("yoooo "+$rootScope.globals.currentUser.email);
+			if($rootScope.globals.currentUser){
+				//alert("paiement ok");
+				$(paiement).modal("show");
+			}else{
+				$(dialogPanier).modal("hide");
+				$(dialogLogin).modal("show");
+			}
+		}
     }
 ]);   
 
- routeAppControllers.controller('loginValidateCtrl', ['$scope', '$modal', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
-	function($scope, $location, $routeParams, $http, $rootScope, modal, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
-			
-			/*var vm = $scope;
-			$scope.login = function(){
-				alert(AuthenticationService.Authentication().Login("hh","jj"));
-			}
+
+ routeAppControllers.controller('loginValidateCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
+	function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
+	
+		$scope.login = function(){
+			$scope.vm.dataLoading = true;
+			var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
+			AuthenticationService.Authentication().Login(userLog, function (response) {				
+				if (response.success) {
+					AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);			
+					$scope.$apply();					
+					$scope.vm.dataLoading = false;
+					$(dialogLogin).modal("hide");
+					$scope.usert=true;
+					window.location.reload();
+				} else {
+					FlashService.Error(response.message);
+					$scope.vm.dataLoading = false;
+				}
+			});
+		};	
 		
-			/*var vm = this;
-			vm.login = login; 
-			(function initController() {
-				// reset login status
-				AuthenticationService.ClearCredentials();
-			})();*/
-	 
-			$scope.login = function(){
-				$scope.vm.dataLoading = true;
-				var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
-				AuthenticationService.Authentication().Login(userLog, function (response) {
-					if (response.success) {
-						AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);
-						// $location.path('#/home');						
-						$scope.$apply();
-						// $location.path('/');
-						$scope.vm.dataLoading = false;
-
-						usert[0]=true;
-
-					} else {
-						FlashService.Error(response.message);
-						$scope.vm.dataLoading = false;
-						//alert(response.message);
-					}
-				});
-			};	
+		$scope.signUp = function(){
+			var user={"lastName":$scope.user.nom, 
+						"firstName":$scope.user.pName, 
+						"address":$scope.user.adress, 
+						"zipcode":$scope.user.zipCode, 
+						"country":"France", 
+						"city":"Grenoble",
+						"phone":$scope.user.tel, 
+						"mail":$scope.user.email, 
+						"password":$scope.user.pwd1,
+						"notification":$scope.user.notif};
 			
-			$scope.signUp = function(){
-				var user={"lastName":$scope.user.nom, 
-							"firstName":$scope.user.pName, 
-							"address":$scope.user.adress, 
-							"zipcode":$scope.user.zipCode, 
-							"country":"France",
-							"city":"Grenoble",
-							"phone":$scope.user.tel, 
-							"mail":$scope.user.email, 
-							"password":$scope.user.pwd1,
-							"notification":$scope.user.notif};
-				
-				$scope.dataLoadingSign_up = true;
-				
-				UserService.userManage().Create(user).then(function (response) {
-					console.log(user);
-						if (response.success) {							
-							FlashService.Success('Registration successful', true);
-							alert("good");
-							$location.path('/');
-							$scope.dataLoadingSign_up = false;
-							usert[0]=true;
-						} else {
-							alert(response.message);
-							FlashService.Error(response.message);
-							$scope.dataLoadingSign_up = false;
-						}
-				});
-			};
+			$scope.dataLoadingSign_up = true;
+			
+			UserService.userManage().Create(user).then(function (response) {
+				if (response !== null && response.status=="200") {						
+				//if ((response.success!="undefined")||(response.success=="200")||(response.success==true)) {							
+				//if (response.success) {							
+					FlashService.Success('Registration successful', true);
+					 alert("good");
+					$location.path('/');
+					$(dialogSign_up).modal("hide");
+					$scope.login;
+					$scope.dataLoadingSign_up = false;
+					$scope.usert=true;
+				} else {
+					alert("not good");
+					FlashService.Error(response.message);
+					$scope.dataLoadingSign_up = false;
+				}
+			});
+		};
 
 						
 	}    

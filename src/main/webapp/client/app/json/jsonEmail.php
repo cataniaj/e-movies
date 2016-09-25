@@ -1,3 +1,3 @@
 {
-	"email":"jj@jj.jj","password":"admin"
+	"mail":"jj@jj.jj","password":"admin"
 }
