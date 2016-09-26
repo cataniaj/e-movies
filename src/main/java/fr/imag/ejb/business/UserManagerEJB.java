@@ -18,8 +18,8 @@ import fr.imag.utilities.LoginData;
 public class UserManagerEJB {
 	@EJB private UserDatabaseAccessEJB dbAccess;
 	
-	public void createNewAccount(User user){
-		dbAccess.createNewAccount(user);
+	public boolean createNewAccount(User user){
+		return dbAccess.createNewAccount(user);
 	}
 	
 	public User login(LoginData data){

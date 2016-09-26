@@ -26,9 +26,16 @@ import fr.imag.utilities.LoginData;
 public class UserDatabaseAccessEJB {
 	
 	@Inject EntityManager em;
-	
-	public synchronized void createNewAccount(User user){
-		em.persist(user);
+	public synchronized boolean createNewAccount(User user){
+		if(em.contains(user)){
+			return false;
+		}
+		try{
+			em.persist(user);
+		}catch (Exception e){
+			return false;
+		}		
+		return true;
 	}
 	
 	public synchronized String removeUser(String user){

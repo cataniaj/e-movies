@@ -1,56 +1,82 @@
-﻿(function () {
-    'use strict';
+﻿
+'use strict'
 
-    routeAppControllers.factory('UserService', UserService);
+routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout',
+    function ($http, $q, $filter, $timeout) {
+		return{
+			userManage:function(){				
+				var service = {};
+				
+				service.GetAll = GetAll;
+				service.GetByUser = GetByUser;
+				service.Create = Create;
+				service.Update = Update;
+				service.Delete = Delete;			
+				return service;
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
-        var service = {};
+				function GetAll() {
+					return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
+				}
 
-        service.GetAll = GetAll;
-        service.GetById = GetById;
-        service.GetByUsername = GetByUsername;
-        service.Create = Create;
-        service.Update = Update;
-        service.Delete = Delete;
+				function GetByUser(user) {
 
-        return service;
+					//alert(user.mail+','+user.password);
 
-        function GetAll() {
-            return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
-        }
+					var req = {
+						 method: 'POST',
+						 url: 'http://localhost:8080/e-movies/rest/users/login',
+						 headers: {
+						   'Content-Type': "application/json"                             
+                        },
+						 data: {"mail":user.mail,
+						 		"password":user.password }
+					}
+					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
+					// return	$http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Erreur: email est deja pris')); 
+				}
 
-        function GetById(id) {
-            return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
-        }
+				function Create(user) {
+					var req = {
+						 method: 'POST',
+						 url: 'http://localhost:8080/e-movies/rest/users/createNewAccount',
+						 headers: {
+						   'Content-Type': "application/json"
+						 },
+						 data: {"lastName":user.lastName, 
+							"firstName":user.firstName, 
+							"address":user.address, 
+							"zipcode":user.zipcode, 
+							"country":user.country,
+							"city":user.city,
+							"phone":user.phone, 
+							"mail":user.mail, 
+							"password":user.password                             
+                        }
+                    }
+					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
+				}
 
-        function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
-        }
+				function Update(user) {
+					return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
+				}
 
-        function Create(user) {
-            return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
-        }
+				function Delete(email) {
+					return $http.delete('/api/users/' + email).then(handleSuccess, handleError('Error deleting user'));
+				}
 
-        function Update(user) {
-            return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
-        }
+				// private functions
+				function handleSuccess(res) {
+					//return res.data;
+					return res;
+				}
 
-        function Delete(id) {
-            return $http.delete('/api/users/' + id).then(handleSuccess, handleError('Error deleting user'));
-        }
+				function handleError(error) {
+					return function () {
+						return { success: false, message: error };
+					};
+				}
+			}	
+		}
+	}
+]);
 
-        // private functions
-
-        function handleSuccess(res) {
-            return res.data;
-        }
-
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
-        }
-    }
-
-})();
