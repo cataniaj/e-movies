@@ -108,6 +108,7 @@ public class OrderAllDatabaseAccessEJB {
 								.add("idOrder", order.getIdOrder())
 								.add("title", title)
 								.add("year", year)
+								.add("review", false)
 								.add("date", order.getDate())
 								.build();
 						if(first){
