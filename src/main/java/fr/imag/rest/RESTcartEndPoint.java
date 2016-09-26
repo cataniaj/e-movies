@@ -46,29 +46,33 @@ public class RESTcartEndPoint {
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getCart(String data){
-		JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-    	String user = obj.getString("mail");
-    	return cartMngr.cartInJson(user);
-    }
+     public Response getCart(String data){
+      try{
+           JsonReader r = Json.createReader(new StringReader(data));
+           JsonObject obj = r.readObject();
+           String user = obj.getString("mail");
+           return Response.status(200).entity(cartMngr.cartInJson(user)).build();
+       }catch(Exception e){
+           return Response.status(204).entity("Erreur lors de l'envoi du panier").build();
+       }
+     }
 	
     @POST
     @Path("/addToCart")
-	@Consumes({"application/json"})
-	@Produces({"application/json"})
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
     public Response addToCart(String data) { 
 		try{
-    	JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-		Cart cartToAdd = new Cart(obj);
-		Cart cartFound = cartMngr.isPresentInTheCart(cartToAdd);
-		if(cartFound == null){
-			cartMngr.addToCart(cartToAdd);
-		}else{
-			cartFound.setQuantity(cartFound.getIdProduct()+1);
-		}
-		return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
+        	JsonReader r = Json.createReader(new StringReader(data));
+    		JsonObject obj = r.readObject();
+    		Cart cartToAdd = new Cart(obj);
+    		Cart cartFound = cartMngr.isPresentInTheCart(cartToAdd);
+    		if(cartFound == null){
+    			cartMngr.addToCart(cartToAdd);
+    		}else{
+    			cartFound.setQuantity(cartFound.getIdProduct()+1);
+    		}
+		    return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
 		}catch(Exception e){
 			return Response.status(204).entity("Une erreur est survenue").build();
 		}
@@ -167,8 +171,10 @@ public class RESTcartEndPoint {
     	
     	User user1 = new User();
     	User user2 = new User();
-    	user1.setMail("Client 1");
-    	user2.setMail("Client 2");
+    	user1.setMail("user1@gmail.com");
+        user1.setPassword("user1");
+    	user2.setMail("user2@gmail.com");
+        user2.setPassword("user2");
     	userMngr.createNewAccount(user1);
     	userMngr.createNewAccount(user2);
     	
@@ -179,7 +185,7 @@ public class RESTcartEndPoint {
     	//{"idProduct":54,"title":"Spider-Man","year":"2002","support":"BR","stock":11,"price":7}
     	//{"idProduct":55,"title":"Spider-Man 3","year":"2007","support":"CN","stock":0,"price":9},
     	//{"idProduct":79,"title":"2 Fast 2 Furious","year":"2003","support":"CN","stock":0,"price":15}
-    	Cart film1 = new Cart();
+    	/*******Cart film1 = new Cart();
     	film1.setIdProduct(54);
     	film1.setMailUser("Client 1");
     	film1.setTitle("Spider-Man");

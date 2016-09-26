@@ -32,7 +32,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 						 		"password":user.password }
 					}
 					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
-					// return	$http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Erreur: email est deja pris')); 
+					 //return	$http.get('client/app/json/jsonEmail.php').then(handleSuccess, handleError('Erreur: email est deja pris')); 
 				}
 
 				function Create(user) {
