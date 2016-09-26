@@ -1,4 +1,4 @@
-Z<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
     <head>
@@ -59,7 +59,7 @@ Z<!DOCTYPE html>
 			      </li>
 			      <li>
 			      	<p ng-show="BtnSearch" class="searchIndex">
-			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, acteur, realisateur ..." pattern="[a-z]{1,50}"/>
+			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, acteur, realisateur ..."/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
 
@@ -124,7 +124,7 @@ Z<!DOCTYPE html>
 			   		</div>
 
 			    	<div ng-show="usert">
-			    		<!-- <li>{{usert[1]}}</li> -->
+			    		<li>{{globals.currentUser.firstName}}</li>
 
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
@@ -138,7 +138,7 @@ Z<!DOCTYPE html>
 
 
 					<!-- Panier -->
-					<li><a  href="" ng-click="loadPanierI()" data-toggle="modal" data-target="#dialogPanier"  class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a  href="" data-toggle="modal" data-target="#dialogPanier"  class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
 			    </ul>
 			    </div>

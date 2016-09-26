@@ -21,12 +21,13 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 					AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);			
 					//$scope.$apply();				
 					$scope.usert=true;
+					$scope.user = $rootScope.globals.currentUser;
 				} else {
 					AuthenticationService.Authentication().ClearCredentials();	
 				}
 			});
         }
-		
+
 		// deconnexion		
 		$scope.deconnexion=function(){
 			AuthenticationService.Authentication().ClearCredentials();
@@ -67,11 +68,12 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			$scope.datasPanier=[];
 		}
 		
-		function loadPanier(){
+		function loadPanier(){			
 			if($rootScope.globals.currentUser.email){				
-				var user={"mail":$rootScope.globals.currentUser.email};				
-				PanierService.myPanier(user).success(function(data){ 
-					//alert(data.cart[0]);
+				var user={"mail":$rootScope.globals.currentUser.email};	
+				alert(user.mail);			
+				PanierService.panierManage().myPanier(user).success(function(data){ 
+					alert(data.cart[0]);
 					$scope.datasPanier = data.cart;
 					$scope.dansPanier[0]=true;
 				});
