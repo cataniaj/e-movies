@@ -15,7 +15,6 @@ import fr.imag.utilities.LoginData;
 /**
  * The users endpoint
  * @author le06
- *
  */
 @Path("/users")
 public class RESTusersEndpoint {
@@ -47,19 +46,10 @@ public class RESTusersEndpoint {
 	@Path("/login")
 	public Response login(LoginData data){
 		User res = userMngr.login(data);
-<<<<<<< HEAD
-		if(res != null)
-			System.out.println(res.convertToJson());
-		//System.out.println(data.getMail()+" "+data.getPassword());
-		return Response.status(200).entity(res).build();
-=======
 
 		if(res != null){
-			System.out.println("TESTTTTT/"+res.toString());
 			return Response.status(200).entity(res).build();			
-		}//System.out.println(data.getMail()+" "+data.getPassword());
+		}
 		return Response.status(204).entity(res).build();
-
->>>>>>> development
 	}
 }
