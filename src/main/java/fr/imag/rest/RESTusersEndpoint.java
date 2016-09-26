@@ -35,7 +35,7 @@ public class RESTusersEndpoint {
 		
 		if(res == true){
 			return Response.status(200).build();			
-		}//System.out.println(data.getMail()+" "+data.getPassword());
+		}
 		return Response.status(204).build();
 
 	}
