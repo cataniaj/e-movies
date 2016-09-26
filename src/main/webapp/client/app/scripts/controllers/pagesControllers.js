@@ -1,4 +1,4 @@
-﻿
+
 
 // Contrôleur de la page d'accueil
 routeAppControllers.controller('homeCtrl', ['$scope', '$location','$routeParams','$http',
@@ -47,6 +47,7 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		
 		
 		servicesSearch.searchFilm($scope.query).success(function(data){	
+            
 			// $scope.datas = data;
 			$scope.datas = data.movies;
 
@@ -172,20 +173,6 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
         }		
 		//setTimeout(function() { alert($scope.addInfoId); }, 1000);
 	}
-]);
-
-
-
-// Contrôleur de la page paramètres
-routeAppControllers.controller('userCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch',
-   function($scope, $location, $routeParams, $http, $timeout, servicesSearch){
-		$scope.id = $routeParams.id;	
-
-		servicesUser.detailsUser($scope.id).success(function(data)){
-			$scope.user = $rootScope.globals.currentUser;
-		}	
-
-   }
 ]);
 
 

@@ -10,6 +10,7 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 		  return $http.get('json/jsonListDeFilm.php');
 		},
 		searchFilm:function(chaine){  
+			alert(chaine);
       //declaration de la variable représentant l'espace = '+' 
         var plus='+';
       // déclaration de la  variable à chercher ici "espace"
