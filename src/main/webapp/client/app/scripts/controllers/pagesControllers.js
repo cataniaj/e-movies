@@ -47,8 +47,9 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		
 		
 		servicesSearch.searchFilm($scope.query).success(function(data){	
-			$scope.datas = data;
-			//$scope.datas = data.movies;
+			// $scope.datas = data;
+			$scope.datas = data.movies;
+
 			for(i=0;i<data.movies.length;i++){
 				if($scope.datas[i].poster == "N/A"){
 					$scope.datas[i].poster = "client/app/images/logos/no-image.jpg";
@@ -75,14 +76,13 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
 
-                    $scope.details = data;
 		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
 			//alert(data.movies[0].title);
 			$scope.details = data[0];
 		});*/
 
                     // $scope.details = data[0];
-					//$scope.details = data;
+					$scope.details = data;
 
                 });
         
