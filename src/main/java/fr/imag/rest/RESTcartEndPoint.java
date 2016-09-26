@@ -178,7 +178,7 @@ public class RESTcartEndPoint {
     	
     	System.out.println("---------- Users 1  & 2 ----------\n");
     	userMngr.printTable();
-    	
+    	/*
     	// Ajout des 3 films au panier du client 1
     	//{"idProduct":54,"title":"Spider-Man","year":"2002","support":"BR","stock":11,"price":7}
     	//{"idProduct":55,"title":"Spider-Man 3","year":"2007","support":"CN","stock":0,"price":9},
@@ -279,12 +279,13 @@ public class RESTcartEndPoint {
     	System.out.println("----------  Remove all user ----------\n");
     	userMngr.clean();
     	userMngr.printTable();
-*/
+
     	System.out.println("----------  All order ----------\n");
     	orderAllMngr.printTable();
 
     	System.out.println("----------  All order lines ----------\n");
     	orderLineMngr.printTable();
+    	*/
     	
     }
 
