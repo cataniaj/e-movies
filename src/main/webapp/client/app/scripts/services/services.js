@@ -35,56 +35,8 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
   }
 }]);
 
-/*********
-//	SERVICE POUR LA CRÉATION D'UN OBJECT User JSON
-********/
-routeAppControllers.factory('userCreationJSON',['$http',function($http){
-  return{
-  ObjectJsonUser : function(lastname,firstname,address,codePostal,city,country,phone,email,passwd){
-       var user={"LastName": lastname, "Firstname":firstname, "Address":address, "ZipCode":codePostal, "City":city, "Country":country, "Phone":phone, "Email":email ,"Password":passwd};
-    return user;
-     
-  }
-}}]);
-
-/*
- * Service de cration d'envoie d'un Object Nouveau user à la base de donnée
- * avec url à définir ,
- * et l'objet data en json comme donnée à envoyé
- */
-routeAppControllers.factory('userCreationService',['$http',function($http){
-	return{
-		create:function(lastname,firstname,address,codePostal,city,country,phone,email,passwd){
-			// creation d'un object javascript
-			var dataObj='{"LastName":lastname, "Firstname":firstname, "Address":address, "ZipCode":codePostal, "City":city, "Country":country, "Email":email ,"Password":passwd}';
-			// Url à définir
-			var url="http://"+way+"/e-movies/rest/users/CreateNewAccount";
-			// transformation sous format json 
-			var data=eval('('+dataObj+')');			
-			//console.log(data);
-			// tester le contenu de data
-			//return  data.LastName;
-			// requete post
-			return $http.post(url,data);
-		}
-	}
-}]);
 
 
-/*********
-//	SERVICE AUTHENTIFICATION
-********/
-routeAppControllers.factory('userAuthService',['$http',function($http){
-	return{
-		authenfication: function(pseudo,passwd){
-			var dataObj ='{"Pseudo":pseudo,"Password":passwd}';
-			var url="";
-			var data=eval('('+dataObj+')');
-			//console.log(data)
-			return $http.post(url,data);
-		}
-	}
-}]);
 
 
 /*

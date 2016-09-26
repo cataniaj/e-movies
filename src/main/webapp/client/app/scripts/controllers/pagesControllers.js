@@ -47,14 +47,11 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		
 		
 		servicesSearch.searchFilm($scope.query).success(function(data){	
-			//$scope.datas = data;
-
-			$scope.datas = data.movies;
-			// alert(data.movies.length);
+			$scope.datas = data;
+			//$scope.datas = data.movies;
 			for(i=0;i<data.movies.length;i++){
 				if($scope.datas[i].poster == "N/A"){
 					$scope.datas[i].poster = "client/app/images/logos/no-image.jpg";
-					// alert("inside N/A");
 				}
 				if($scope.datas[i].year == "N/A"){
 					$scope.datas[i].year = "(date inconnue)";
@@ -77,11 +74,16 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 		$scope.details = [];
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
+
                     $scope.details = data;
 		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
 			//alert(data.movies[0].title);
 			$scope.details = data[0];
 		});*/
+
+                    // $scope.details = data[0];
+					//$scope.details = data;
+
                 });
         
         /** fonction ajout dans panier  **/
@@ -100,6 +102,7 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 			
             function panierFunction(id, titre, annee, support, quantite, pu){
                 if(dataPanier.length>0){					// test si panier non vide **
+
                         for(i=0; i<dataPanier.length; i++){
                                 if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
                                         dataPanier[i][4]=dataPanier[i][4]+1;
@@ -123,6 +126,31 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                         dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
                         dansPanier.shift();
                         dansPanier.push(true);
+
+					// for(i=0; i<dataPanier.length; i++){
+					// 	if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
+					// 		dataPanier[i][4]=dataPanier[i][4]+1;
+					// 		// on actualiste le panier total
+					// 		dataPanierTotal[0]=0;
+					// 		for(j=0;j<dataPanier.length;j++){
+					// 				dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
+					// 		}
+					// 		i=dataPanier.length;
+					// 	}
+					// 	else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
+					// 		dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+					// 		dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+					// 		dansPanier.shift();
+					// 		dansPanier.push(true);
+					// 		i=dataPanier.length;
+					// 	}
+					// }
+     //            }else{ 						// la video n'est pas dans le panier, et panier vide, on l'ajoute donc **/			
+					// dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+					// dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+					// dansPanier.shift();
+					// dansPanier.push(true);
+
                 }
                 $timeout(function() {$scope.addInfo = false;}, 1000);
             }
@@ -137,11 +165,11 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 
                 $scope.txtDtlPu = prix;
             }                
-        }
-		
+        }		
 		//setTimeout(function() { alert($scope.addInfoId); }, 1000);
 	}
 ]);
+
 
 //
 //// Contrôleur de la page paramètres
@@ -154,3 +182,32 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 //
 //    }
 //]);
+
+
+// Contrôleur de la page achat
+routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout','$interval','PanierService',
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval,PanierService){
+		if(!$rootScope.globals.currentUser){
+			$location.path("/home");
+		}
+		
+		$scope.toto=0;
+		$scope.datasOrder = [];
+		var user={"mail":$rootScope.globals.currentUser.email};
+		
+		PanierService.getOrder(user).success(function(data){ 
+			$scope.datasOrder = data.order;
+		});
+						
+        $scope.download = function () {
+            //ngDialog.open({ template: 'dialogDownload' });  
+			$interval(function() {$scope.toto= $scope.toto+1;}, 2000, 100);
+        };
+        
+        $rootScope.$on('ngDialog.setPadding', function (event, padding){
+            angular.element( document.querySelector('.paddingHeader') ).css('padding-right', padding + 'px');
+        });
+
+    }
+]);
+

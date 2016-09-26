@@ -15,32 +15,16 @@
                 <th>Avis</th>                
                 <th>Date Achat</th>
             </tr>
-            </thead>
+            </thead>    
 
-            <!-- <tr>
-                <td>{{d[0]}} </td>
-				<td>{{d[1]}}</td>
-                <td><button type="button" class="btn openPaddingLink" ng-click="download()">TELECHARGER</button></td>
-                <td><button type="button" class="btn" ng-click="addAvis()">DONNER AVIS</button></td>
-                <td>14/09/2016</td>
-            </tr> -->
-
-            <tbody ng-controller="detailCtrl">
-            <tr>
-                <td>00545</td>
-                <td>Xmen</td>
-                <td>2016</td>
-                <td><button type="button" class="btn openPaddingLink" data-toggle="modal" data-target="#dialogDownload" ng-click="download()" ><span class="glyphicon glyphicon-download-alt"/> TELECHARGER</button></td>
-                <td><button type="button" class="btn openPaddingLink disabled" data-toggle="modal" data-target="#dialogComment">DONNER AVIS</button></td>
-                <td>01/05/2016</td>
-            </tr>
-            <tr>
-                <td>00156</td>
-                <td>Titanic</td>
-                <td>2013</td>
-                <td> <a href="images/Cats.jpg" download="w3logo"> <button type="button" class="btn openPaddingLink"> <span class="glyphicon glyphicon-download-alt"/> TELECHARGER</button></a></td>
-                <td><button type="button" class="btn openPaddingLink" data-toggle="modal" data-target="#dialogComment">DONNER AVIS</button></td>
-                <td>15/06/2015</td>
+            <tbody>
+			<tr ng-repeat="data in datasOrder">
+                <td>{{data.idReference}} </td>
+				<td>{{data.title}}</td>
+				<td>{{data.year}}</td>
+                <td><!--a href="images/Cats.jpg" download="w3logo"--><button type="button" class="btn openPaddingLink" data-toggle="modal" data-target="#dialogDownload" ng-click="download()" ><span class="glyphicon glyphicon-download-alt"/> TELECHARGER</button><!--/a--></td>
+                <td><button type="button" class="btn openPaddingLink " data-toggle="modal" data-target="#dialogComment" ng-disabled={{data.avis}}>DONNER AVIS</button></td>
+                <td>{{data.date}}</td>
             </tr>
             </tbody>
         </table>
