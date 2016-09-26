@@ -5,6 +5,7 @@
 
 package fr.imag.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -78,10 +79,9 @@ public class OrderAll {
 	}
 	
 	public String getDate() {
-		int month = date.getMonth();
-		int day = date.getDay();
-		int year = date.getYear();
-		return ""+day+" "+month+" "+year;
+		SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+		System.out.println(formater.format(date));
+		return formater.format(date);
 	}
 
 	public void addOneOrderLine(OrderLine orderLine){

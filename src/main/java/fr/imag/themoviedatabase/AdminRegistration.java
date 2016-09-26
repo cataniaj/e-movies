@@ -6,6 +6,7 @@
 package fr.imag.themoviedatabase;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -17,6 +18,9 @@ import javax.json.JsonReader;
 
 import fr.imag.ejb.dbaccess.AdminDatabaseAccessEJB;
 import fr.imag.ejb.dbaccess.MovieDatabaseAccessEJB;
+import fr.imag.ejb.dbaccess.OrderAllDatabaseAccessEJB;
+import fr.imag.ejb.dbaccess.OrderLineDatabaseAccessEJB;
+import fr.imag.ejb.dbaccess.UserDatabaseAccessEJB;
 import fr.imag.entities.Admin;
 import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
@@ -26,6 +30,9 @@ public class AdminRegistration {
 
 	@EJB private AdminDatabaseAccessEJB adminDBaccess;
 	@EJB private MovieDatabaseAccessEJB movieDBaccess;
+	@EJB private UserDatabaseAccessEJB userDBaccess;
+	@EJB private OrderAllDatabaseAccessEJB orderDBaccess;
+	@EJB private OrderLineDatabaseAccessEJB orderLineDBaccess;
   
 	private String manyFilm = ""
 			+ "{\"movies\":["
@@ -68,11 +75,6 @@ public class AdminRegistration {
 			+ "{\"title\":\"Transformers 4 : L'Âge de l'extinction\",\"director\":\"Michael Bay\",\"year\":\"2014\",\"actors\":\"Mark Wahlberg, Stanley Tucci, Nicola Peltz, Jack Reynor, Li Bingbing\",\"overview\":\"Alors que l’humanité panse ses plaies, après les événements de Transformers : La Face cachée de la Lune, les Autobots et les Decepticons ont disparu de la surface de la Terre. Mais un groupe formé de financiers et scientifiques puissants et ingénieux étudient les invasions successives des Transformers, afin de repousser les limites de la technologie au-delà de ce qu’ils peuvent contrôler. Et pendant ce temps, une menace Transformer ancienne et puissante prend la Terre pour cible.\",\"genre\":\"Science-Fiction, Action, Aventure\",\"poster\":\"https://image.tmdb.org/t/p/w300/qNrQD5arbk10PTCTMB8Xh2VejLr.jpg\",\"id\":\"91314\",\"runtime\":\"2 h 45 min\",\"video\":\"N/A\"},"
 			+ "{\"title\":\"Transformers 2 : La Revanche\",\"director\":\"Michael Bay\",\"year\":\"2009\",\"actors\":\"Shia LaBeouf, Megan Fox, Josh Duhamel, Rainn Wilson, Tyrese Gibson\",\"overview\":\"Si Sam a fait ce qu'il a pu pour tirer un trait sur le conflit qui a eu lieu à Mission City et revenir à ses préoccupations quotidiennes, la guerre entre les Autobots et les Decepticons, tout en étant classée secret défense, a entraîné plusieurs changements. Le secteur 7 a ainsi été dissout et son plus fidèle soldat, l'agent Simmons, a été révoqué sans ménagement. Résultat : une nouvelle agence, NEST, a été mise en place...\",\"genre\":\"Science-Fiction, Action, Aventure\",\"poster\":\"https://image.tmdb.org/t/p/w300/eKeSLc1l3urEgyOzaXXpSy9DmqC.jpg\",\"id\":\"8373\",\"runtime\":\"2 h 31 min\",\"video\":\"https://www.youtube.com/embed/CbNnFiedYtM\"},"
 			+ "{\"title\":\"Transformers 3 : La Face cachée de la Lune\",\"director\":\"Michael Bay\",\"year\":\"2011\",\"actors\":\"Shia LaBeouf, John Malkovich, Ken Jeong, Frances McDormand, Josh Duhamel\",\"overview\":\"Les Autobots Bumblebee, Ironhide, Ratchet et Sideswipe menés par Optimus Prime sont de retour en action, toujours contre les maléfiques Decepticons, bien décidés à se venger de leur défaite. Dans ce nouvel opus, Autobots et Decepticons s'avèrent avoir été impliqués dans la course à l'espace que s'étaient lancés les États-Unis et l'URSS. Une course qui va remonter jusqu'à Sam Witwicky, qui aura à nouveau besoin de l'aide de ses amis robots. De nouveaux Transformers rejoignent la bataille dont l'ancien Decepticons Shockwave, devenu dictateur sur la planète Cybertron alors que les Autobots et les Decepticons poursuivent leur guerre sur Terre.\",\"genre\":\"Action, Science-Fiction, Aventure\",\"poster\":\"https://image.tmdb.org/t/p/w300/tPAZjcLPXgjc3GztVmZNj1SHOZ3.jpg\",\"id\":\"38356\",\"runtime\":\"2 h 18 min\",\"video\":\"https://www.youtube.com/embed/4Iec8A7NR1s\"},"
-
-
-
-			
-			
 			
 			+ "{\"title\":\"Deadpool\",\"director\":\"Tim Miller\",\"year\":\"2016\",\"actors\":\"Ryan Reynolds, Morena Baccarin, T.J. Miller, Ed Skrein, Brianna Hildebrand\",\"overview\":\"Deadpool, est l'anti-héros le plus atypique de l'univers Marvel. À l'origine, il s'appelle Wade Wilson : un ancien militaire des Forces Spéciales devenu mercenaire. Après avoir subi une expérimentation hors norme qui va accélérer ses pouvoirs de guérison, il va devenir Deadpool. Armé de ses nouvelles capacités et d'un humour noir survolté, Deadpool va traquer l'homme qui a bien failli anéantir sa vie.\",\"genre\":\"Action, Aventure, Comédie, Romance\",\"poster\":\"https://image.tmdb.org/t/p/w300/eJyRzC5uFjQryu8Hm61yqtrzj4S.jpg\",\"id\":\"293660\",\"runtime\":\"1 h 48 min\",\"video\":\"https://www.youtube.com/embed/XWtH7anz7io\"}"
 			
@@ -91,6 +93,26 @@ public class AdminRegistration {
     		}
     	}
     	return false;
+    }
+    
+    public ArrayList<String> allUser(){
+    	return userDBaccess.all();
+    }
+    
+    public String removeUser(String user){
+    	return userDBaccess.removeUser(user);
+    }
+    
+    public String infoUser(String user){
+    	return userDBaccess.infoUser(user).toString();
+    }
+    
+    public String allOrder(String user){
+    	return orderDBaccess.getAllOrder(user).toString();
+    }
+    
+    public String getAllOrderLine(String idOrder){
+    	return orderLineDBaccess.getAllOrderLine(idOrder).toString();
     }
     
     public MovieList allMovies(){
