@@ -60,35 +60,36 @@ public class CartDatabaseAccessEJB {
 		em.persist(item);
 	}
 	
-	public void removeToCart(int idProduct, String mail){
+	public void removeToCart(String idProduct, String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
     	for(Cart cart : allCart){
     		if(cart.getMailUser().compareTo(mail) == 0
-    				&& cart.getIdProduct()==idProduct){
+    				&& cart.getIdProduct().compareTo(idProduct)==0){
     			em.remove(cart);
     		}
     	}
 	}
 	
-	public void incrementOneProduct(int idProduct,  String mail){
+	public void incrementOneProduct(String idProduct,  String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
     	for(Cart cart : allCart){
     		if(cart.getMailUser().compareTo(mail) == 0
-    				&& cart.getIdProduct()==idProduct){
+    				&& cart.getIdProduct().compareTo(idProduct)==0){
     			cart.setQuantity(cart.getQuantity()+1);
     		}
     	}
 	}
 	
-	public void decrementOneProduct(int idProduct,  String mail){
+	public void decrementOneProduct(String idProduct,  String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
     	for(Cart cart : allCart){
     		if(cart.getMailUser().compareTo(mail) == 0
-    				&& cart.getIdProduct()==idProduct){
-    			cart.setQuantity(cart.getQuantity()-1);
+    				&& cart.getIdProduct().compareTo(idProduct)==0){
+    			cart.setQuantity(
+    					String.valueOf(Integer.parseInt(cart.getQuantity())-1)) ;
     		}
     	}
 	}

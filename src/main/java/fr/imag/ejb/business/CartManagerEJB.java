@@ -26,7 +26,7 @@ public class CartManagerEJB {
 		dbAccess.addToCart(item);
 	}
 	
-	public void removeToCart(int idProduct, String mail){
+	public void removeToCart(String idProduct, String mail){
 		dbAccess.removeToCart(idProduct, mail);
 	}
 	
@@ -34,11 +34,11 @@ public class CartManagerEJB {
 		dbAccess.removeCart(mail);
 	}
 	
-	public void incrementOneProduct(int idProduct,  String mail){
+	public void incrementOneProduct(String idProduct,  String mail){
 		dbAccess.incrementOneProduct(idProduct, mail);
 	}
 	
-	public void decrementOneProduct(int idProduct,  String mail){
+	public void decrementOneProduct(String idProduct,  String mail){
 		dbAccess.decrementOneProduct(idProduct, mail);
 	}
 	

@@ -18,25 +18,25 @@ public class Cart {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idCartItem;
-	private int idProduct;
+	private String idProduct;
 	private String mailUser;
 	private String title;
 	private String year;
 	private String support;
-	private int quantity;
-	private int unitPrice;
+	private String quantity;
+	private String unitPrice;
 	
 	public Cart(){
 	}
 	
 	public Cart(JsonObject item){
-		idProduct = item.getInt("idProduct");
+		idProduct = item.getString("idProduct");
 		mailUser = item.getString("mail");
 		title = item.getString("title");
 		year = item.getString("year");
 		support = item.getString("support");
-		quantity = 1;
-		unitPrice = item.getInt("unitPrice");
+		quantity = ""+1;
+		unitPrice = item.getString("unitPrice");
 	}
 
 	public int getIdCartItem() {
@@ -47,16 +47,32 @@ public class Cart {
 		this.idCartItem = idCartItem;
 	}
 
-	public int getIdProduct() {
+	public String getMailUser() {
+		return mailUser;
+	}
+
+	public String getIdProduct() {
 		return idProduct;
 	}
 
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(String idProduct) {
 		this.idProduct = idProduct;
 	}
 
-	public String getMailUser() {
-		return mailUser;
+	public String getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 	public void setMailUser(String mailUser) {
@@ -85,22 +101,6 @@ public class Cart {
 
 	public void setSupport(String support) {
 		this.support = support;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public int getUnitPrice() {
-		return unitPrice;
-	}
-
-	public void setUnitPrice(int unitPrice) {
-		this.unitPrice = unitPrice;
 	}
 	
 	public JsonObject convertToJson(){
