@@ -6,6 +6,7 @@
 package fr.imag.rest;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 import javax.json.Json;
@@ -50,6 +51,45 @@ public class RESTadminEndPoint {
     	MovieList allMovie;
     	allMovie = adminRegistration.allMovies();
         return allMovie.convertToJsonArray().toString();
+    }
+	
+    @POST
+    @Path("/getOrder")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getOrder(String user) {
+        return adminRegistration.allOrder(user);
+    }
+	
+    @POST
+    @Path("/infoUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String infoUser(String user) {
+        return adminRegistration.infoUser(user);
+    }
+	
+    @POST
+    @Path("/removeUser")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String removeUser(String user) {
+        return adminRegistration.removeUser(user);
+    }
+	
+    @POST
+    @Path("/getOrderLine")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getOrderLine(String idOrder) {
+        return adminRegistration.getAllOrderLine(idOrder);
+    }
+	
+    @GET
+    @Path("/getUsers")
+    @Produces("application/json")
+    public ArrayList<String> getUsers() {
+    	return adminRegistration.allUser();
     }
 	
     @GET

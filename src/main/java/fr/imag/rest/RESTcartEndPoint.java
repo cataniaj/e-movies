@@ -46,16 +46,17 @@ public class RESTcartEndPoint {
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-     public Response getCart(String data){
-      try{
-           JsonReader r = Json.createReader(new StringReader(data));
-           JsonObject obj = r.readObject();
-           String user = obj.getString("mail");
-           return Response.status(200).entity(cartMngr.cartInJson(user)).build();
-       }catch(Exception e){
-           return Response.status(204).entity("Erreur lors de l'envoi du panier").build();
-       }
-     }
+
+    public Response getCart(String data){
+    	try{
+    		JsonReader r = Json.createReader(new StringReader(data));
+    		JsonObject obj = r.readObject();
+        	String user = obj.getString("mail");
+        	return Response.status(200).entity(cartMngr.cartInJson(user)).build();
+    	}catch(Exception e){
+        	return Response.status(204).entity("Erreur lors de l'envoi du panier").build();
+    	}
+    }
 	
     @POST
     @Path("/addToCart")
@@ -180,13 +181,18 @@ public class RESTcartEndPoint {
     	
     	System.out.println("---------- Users 1  & 2 ----------\n");
     	userMngr.printTable();
-    	
+    	/*
     	// Ajout des 3 films au panier du client 1
     	//{"idProduct":54,"title":"Spider-Man","year":"2002","support":"BR","stock":11,"price":7}
     	//{"idProduct":55,"title":"Spider-Man 3","year":"2007","support":"CN","stock":0,"price":9},
     	//{"idProduct":79,"title":"2 Fast 2 Furious","year":"2003","support":"CN","stock":0,"price":15}
+<<<<<<< HEAD
     	/*******Cart film1 = new Cart();
     	film1.setIdProduct(54);
+=======
+    	Cart film1 = new Cart();
+    	film1.setIdProduct(1550);
+>>>>>>> a856d2f69893a8c02daea20f1880899e42a98f1d
     	film1.setMailUser("Client 1");
     	film1.setTitle("Spider-Man");
     	film1.setYear("2002");
@@ -195,7 +201,7 @@ public class RESTcartEndPoint {
     	film1.setSupport("BR");
 
     	Cart film2 = new Cart();
-    	film2.setIdProduct(55);
+    	film2.setIdProduct(1551);
     	film2.setMailUser("Client 1");
     	film2.setTitle("Spider-Man 3");
     	film2.setYear("2007");
@@ -204,7 +210,7 @@ public class RESTcartEndPoint {
     	film2.setSupport("CN");
 
     	Cart film3 = new Cart();
-    	film3.setIdProduct(80);
+    	film3.setIdProduct(1559);
     	film3.setMailUser("Client 1");
     	film3.setTitle("2 Fast 2 Furious");
     	film3.setYear("2003");
@@ -215,7 +221,7 @@ public class RESTcartEndPoint {
     	//{"idProduct":92,"title":"Predator","year":"1987","support":"DVD","stock":13,"price":9},
     	//{"idProduct":96,"title":"Grease","year":"1978","support":"BR","stock":16,"price":11}]}
     	Cart film4 = new Cart();
-    	film4.setIdProduct(92);
+    	film4.setIdProduct(1578);
     	film4.setMailUser("Client 2");
     	film4.setTitle("Predator");
     	film4.setYear("1987");
@@ -224,7 +230,7 @@ public class RESTcartEndPoint {
     	film4.setSupport("DVD");
 
     	Cart film5 = new Cart();
-    	film5.setIdProduct(96);
+    	film5.setIdProduct(1600);
     	film5.setMailUser("Client 2");
     	film5.setTitle("Grease");
     	film5.setYear("1978");
@@ -263,11 +269,11 @@ public class RESTcartEndPoint {
     	System.out.println("---------- Remove product 92 to cart user 2 ----------\n");
     	cartMngr.removeToCart(film4.getIdProduct(), user2.getMail());
     	cartMngr.printTable();
-    	/*
+    	
     	System.out.println("---------- Pay cart user 1 ----------\n");
     	cartMngr.payCart(user1.getMail());
     	cartMngr.printTable();
-    	
+    	/*
     	System.out.println("---------- Remove all cart user 2 ----------\n");
     	cartMngr.removeCart(user2.getMail());
     	cartMngr.printTable();
@@ -288,6 +294,7 @@ public class RESTcartEndPoint {
     	System.out.println("----------  All order lines ----------\n");
     	orderLineMngr.printTable();
     	*/
+    	
     }
 
     
