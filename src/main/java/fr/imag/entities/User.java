@@ -3,6 +3,8 @@ package fr.imag.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -133,6 +135,21 @@ public class User {
 
 	public void addAnOrder(OrderAll order){
 		this.allOrders.add(order);
+	}
+	
+	public JsonObject convertToJson(){
+		JsonObject user = Json.createObjectBuilder()
+				.add("mail", mail)
+				.add("password", password)
+				.add("firstName", firstName)
+				.add("lastName", lastName)
+				.add("address", address)
+				.add("zipcode", zipcode)
+				.add("city", city)
+				.add("country", country)
+				.add("phone", phone)
+				.build();
+		return user;
 	}
 	
 	public void print(){

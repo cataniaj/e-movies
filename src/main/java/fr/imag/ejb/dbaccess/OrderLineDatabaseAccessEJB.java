@@ -5,6 +5,7 @@
 
 package fr.imag.ejb.dbaccess;
 
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,14 @@ import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import fr.imag.entities.Cart;
+import fr.imag.entities.Movie;
 import fr.imag.entities.OrderAll;
 import fr.imag.entities.OrderLine;
 
@@ -38,6 +43,41 @@ public class OrderLineDatabaseAccessEJB {
 			result.add(orderLine);
 		}
 		return result;
+	}
+	
+	public JsonObject getAllOrderLine(String idOrder){
+		Query query = em.createQuery("SELECT o FROM OrderLine o");
+		List<OrderLine> orderLineList = (List<OrderLine>) query.getResultList();
+
+		String orderLineListJson = "{\"orderLine\":[";
+		boolean first = true;
+		
+		for(OrderLine orderLine : orderLineList){
+			if(Integer.parseInt(idOrder) == orderLine.getOrder().getIdOrder()){
+				int idProduct = orderLine.getIdProduct();
+				Movie m = em.find(Movie.class, idProduct);
+				String title = m.getTitle();
+				String year = m.getYear();
+				JsonObject obj = Json.createObjectBuilder()
+					.add("idProduct", orderLine.getIdProduct())
+					.add("title", title)
+					.add("year", year)
+					.add("quantity", orderLine.getQuantity())
+					.add("unitaryPrice", orderLine.getUnitaryPrice())
+					.build();
+				if(first){
+					orderLineListJson = orderLineListJson + obj.toString();
+					first = false;
+				}else{
+					orderLineListJson = orderLineListJson + "," + obj.toString();
+				}
+			}
+		}
+	
+		orderLineListJson = orderLineListJson + "]}";
+		JsonReader r = Json.createReader(new StringReader(orderLineListJson));
+		JsonObject obj = r.readObject();
+		return obj;
 	}
 	
 	public void printTable(){
