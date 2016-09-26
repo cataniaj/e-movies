@@ -21,7 +21,8 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 					AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);			
 					//$scope.$apply();				
 					$scope.usert=true;
-					$scope.user = $rootScope.globals.currentUser;
+					$scope.userEmail = $rootScope.globals.currentUser.email;
+					// $scope.user = $rootScope.globals.currentUser;
 				} else {
 					AuthenticationService.Authentication().ClearCredentials();	
 				}

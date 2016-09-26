@@ -124,8 +124,6 @@
 			   		</div>
 
 			    	<div ng-show="usert">
-			    		<li>{{globals.currentUser.firstName}}</li>
-
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -140,8 +138,12 @@
 					<!-- Panier -->
 					<li><a  href="" data-toggle="modal" data-target="#dialogPanier"  class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
+				</ul>
+			    <ul class="nav navbar-nav navbar-right" ng-show="usert" style="margin: auto; text-align: center;">
+			    	<li><h1 id="userName">{{userEmail}}</h1></li>
 			    </ul>
 			    </div>
+			 
   
 			</nav> 
 			<!-- Menu -->
