@@ -143,15 +143,14 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 	}
 ]);
 
-
-// Contrôleur de la page paramètres
-routeAppControllers.controller('userCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch',
-    function($scope, $location, $routeParams, $http, $timeout, servicesSearch){
-		$scope.id = $routeParams.id;	
-
-		servicesUser.detailsUser($scope.id).success(function(data)){
-			$scope.user = data;
-		}	
-
-    }
-]);
+//
+//// Contrôleur de la page paramètres
+//routeAppControllers.controller('userCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch',
+//    function($scope, $location, $routeParams, $http, $timeout, servicesSearch){
+//		$scope.id = $routeParams.id;	
+//		servicesUser.detailsUser($scope.id).success(function(data)){
+//			$scope.user = data;
+//		}	
+//
+//    }
+//]);
