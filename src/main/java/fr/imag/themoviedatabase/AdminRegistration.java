@@ -231,8 +231,8 @@ public class AdminRegistration {
 				dvd.setSupport("DVD");
 			}catch(Exception e){
 			}
-			dvd.setStock((int)(Math.random()*(20-9) + 9));
-			dvd.setPrice((int)(Math.random()*(20-3) + 3));
+			dvd.setStock(12);
+			dvd.setPrice(7);
 			filmList.add(dvd);
 			
 			Movie bluray = new Movie();
@@ -271,8 +271,8 @@ public class AdminRegistration {
 				bluray.setSupport("BR");
 			}catch(Exception e){
 			}
-			bluray.setStock((int)(Math.random()*(20-9) + 9));
-			bluray.setPrice((int)(Math.random()*(20-3) + 3));
+			bluray.setStock(15);
+			bluray.setPrice(15);
 			filmList.add(bluray);
 			
 			Movie numeric = new Movie();
@@ -312,7 +312,7 @@ public class AdminRegistration {
 			}catch(Exception e){
 			}
 			numeric.setStock(0);
-			numeric.setPrice((int)(Math.random()*(20-3) + 3));
+			numeric.setPrice(4);
 			
 			adminDBaccess.addProduct(numeric);
 			adminDBaccess.addProduct(dvd);
