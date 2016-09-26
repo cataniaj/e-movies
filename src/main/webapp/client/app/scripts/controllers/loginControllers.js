@@ -13,16 +13,16 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		
 		// charger l'identifiant du user qui s'etait connecté et qui ne s'est pas déconnecté
         function loadCurrentUser() {
-
-            UserService.userManage().GetByEmail($rootScope.globals.currentUser.email)
-                .then(function (user) {
-                	usert[0]=true;
-                	usert[1]= $rootScope.globals.currentUser.email;
-					// $scope.usert = true;
-					//location.reload();
-					// alert($scope.user.email);
-                });
-
+// <<<<<<< HEAD
+//             UserService.userManage().GetByEmail($rootScope.globals.currentUser.email)
+//                 .then(function (user) {
+//                 	usert[0]=true;
+//                 	usert[1]= $rootScope.globals.currentUser.email;
+// 					// $scope.usert = true;
+// 					//location.reload();
+// 					// alert($scope.user.email);
+//                 });
+// =======
 			/*alert(AuthenticationService.Authentication().Base64().encode($rootScope.globals.currentUser.authdata));
 			alert(AuthenticationService.Authentication().Base64().decode($rootScope.globals.currentUser.authdata));*/
 			var userLog={"mail":$rootScope.globals.currentUser.email,"password":$rootScope.globals.currentUser.authdata};
@@ -35,7 +35,7 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 					AuthenticationService.Authentication().ClearCredentials();	
 				}
 			});
-
+// >>>>>>> Lazizgueye
         }
 		
 		// deconnexion		
@@ -130,7 +130,37 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
     }
 ]);   
 
+// <<<<<<< HEAD
+//  routeAppControllers.controller('loginValidateCtrl', ['$scope', '$modal', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
+// 	function($scope, $location, $routeParams, $http, $rootScope, modal, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
+			
+			/*var vm = $scope;
+			$scope.login = function(){
+				alert(AuthenticationService.Authentication().Login("hh","jj"));
+			}
+		
+			/*var vm = this;
+			vm.login = login; 
+			(function initController() {
+				// reset login status
+				AuthenticationService.ClearCredentials();
+			})();*/
+	 
+// 			$scope.login = function(){
+// 				$scope.vm.dataLoading = true;
+// 				var userLog={"mail":$scope.vm.email,"password":$scope.vm.pwd};
+// 				AuthenticationService.Authentication().Login(userLog, function (response) {
+					
+// 					if (response.success==true) {
+// 						AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);
+// 						// $location.path('#/home');						
+// 						$scope.$apply();
+// 						// $location.path('/');
 
+// 						$(dialogLogin).modal("hide");
+// 						$scope.vm.dataLoading = false;
+// =======
+// >>>>>>> Lazizgueye
 
  routeAppControllers.controller('loginValidateCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
 	function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
@@ -165,7 +195,42 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 						"password":$scope.user.pwd1,
 						"notification":$scope.user.notif};
 			
+// <<<<<<< HEAD
+// 			$scope.signUp = function(){
+// 				var user={"lastName":$scope.user.nom, 
+// 							"firstName":$scope.user.pName, 
+// 							"address":$scope.user.adress, 
+// 							"zipcode":$scope.user.zipCode, 
+// 							"country":"France", 
+// 							"city":"Grenoble",
+// 							"phone":$scope.user.tel, 
+// 							"mail":$scope.user.email, 
+// 							"password":$scope.user.pwd1,
+// 							"notification":$scope.user.notif};
+				
+// 				$scope.dataLoadingSign_up = true;
+				
+// 				UserService.userManage().Create(user).then(function (response) {
+// 						console.log(user);
+// 						alert("yoouut "+response);
+// 						if ((response.success!="undefined")||(response.success=="200")||(response.success==true)) {							
+// 							FlashService.Success('Registration successful', true);
+// 							// alert("good");
+// 							$location.path('/');
 
+
+// 							$(dialogSign_up).modal("hide");
+// 							$scope.login;
+// 							$scope.dataLoadingSign_up = false;
+// 							usert[0]=true;
+// 						} else {
+// 							alert("not good");
+// 							FlashService.Error(response.message);
+// 							$scope.dataLoadingSign_up = false;
+// 						}
+// 				});
+// 			};
+// =======
 			$scope.dataLoadingSign_up = true;
 			
 			UserService.userManage().Create(user).then(function (response) {
@@ -186,6 +251,8 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				}
 			});
 		};
+// >>>>>>> Lazizgueye
+
 						
 	}    
  ]);   
