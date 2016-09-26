@@ -42,7 +42,7 @@ public class RESTusersEndpoint {
 	public Response login(LoginData data){
 		User res = userMngr.login(data);
 		if(res != null)
-			System.out.println(res.toString());
+			System.out.println(res.convertToJson());
 		//System.out.println(data.getMail()+" "+data.getPassword());
 		return Response.status(200).entity(res).build();
 	}

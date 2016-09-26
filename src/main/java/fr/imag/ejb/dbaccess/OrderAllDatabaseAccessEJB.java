@@ -59,20 +59,44 @@ public class OrderAllDatabaseAccessEJB {
 		return false;
 	}
 	
-	public JsonObject getAllOrderLine(String user){
-		Query query = em.createQuery("SELECT o FROM OrderAll");
+	public JsonObject getAllOrder(String user){
+		Query query = em.createQuery("SELECT o FROM OrderAll o");
 		List<OrderAll> orderList = (List<OrderAll>) query.getResultList();
 		ArrayList<OrderLine> result = new ArrayList<OrderLine>();
-		
-		
-		
 
 		String orderLineListJson = "{\"order\":[";
 		boolean first = true;
 		for(OrderAll order : orderList){
 			if(order.getUser().getMail().compareTo(user) == 0){
-				ArrayList<OrderLine> orderLineList = (ArrayList<OrderLine>) order.getAllOrderLine();
-				for(OrderLine orderLine : orderLineList){
+				JsonObject obj = Json.createObjectBuilder()
+					.add("idOrder", order.getIdOrder())
+					.add("date", order.getDate())
+					.add("price", order.getPrice())
+					.build();
+				if(first){
+					orderLineListJson = orderLineListJson + obj.toString();
+					first = false;
+				}else{
+					orderLineListJson = orderLineListJson + "," + obj.toString();
+				}
+			}
+		}
+		orderLineListJson = orderLineListJson + "]}";
+		JsonReader r = Json.createReader(new StringReader(orderLineListJson));
+		JsonObject obj = r.readObject();
+		return obj;
+	}
+	
+	public JsonObject getAllOrderLine(String user){
+		Query query = em.createQuery("SELECT o FROM OrderAll o");
+		List<OrderAll> orderList = (List<OrderAll>) query.getResultList();
+		ArrayList<OrderLine> result = new ArrayList<OrderLine>();
+
+		String orderLineListJson = "{\"order\":[";
+		boolean first = true;
+		for(OrderAll order : orderList){
+			if(order.getUser().getMail().compareTo(user) == 0){
+				for(OrderLine orderLine : order.getAllOrderLine()){
 					if(!contains(result, orderLine.getIdProduct())){
 						result.add(orderLine);
 						int idProduct = orderLine.getIdProduct();
