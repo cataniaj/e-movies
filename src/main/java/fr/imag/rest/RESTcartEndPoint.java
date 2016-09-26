@@ -46,11 +46,15 @@ public class RESTcartEndPoint {
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public JsonObject getCart(String data){
-		JsonReader r = Json.createReader(new StringReader(data));
-		JsonObject obj = r.readObject();
-    	String user = obj.getString("mail");
-    	return cartMngr.cartInJson(user);
+    public Response getCart(String data){
+    	try{
+    		JsonReader r = Json.createReader(new StringReader(data));
+    		JsonObject obj = r.readObject();
+        	String user = obj.getString("mail");
+        	return Response.status(200).entity(cartMngr.cartInJson(user)).build();
+    	}catch(Exception e){
+        	return Response.status(204).entity("Erreur lors de l'envoi du panier").build();
+    	}
     }
 	
     @POST
