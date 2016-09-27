@@ -1,15 +1,11 @@
 package fr.imag.rest;
 
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.xml.bind.JAXBElement;
 
 import fr.imag.ejb.business.UserManagerEJB;
 import fr.imag.entities.User;
@@ -34,6 +30,7 @@ public class RESTusersEndpoint {
 	@Consumes({"application/json"})
 	@Path("/createNewAccount")
 	public Response createAnAccount(User user){
+
 		boolean res=userMngr.createNewAccount(user);
 		System.out.println(user.toString());
 		
@@ -41,6 +38,7 @@ public class RESTusersEndpoint {
 			return Response.status(200).build();			
 		}//System.out.println(data.getMail()+" "+data.getPassword());
 		return Response.status(204).build();
+
 	}
 	
 	@POST
@@ -49,10 +47,12 @@ public class RESTusersEndpoint {
 	@Path("/login")
 	public Response login(LoginData data){
 		User res = userMngr.login(data);
+
 		if(res != null){
 			System.out.println("TESTTTTT/"+res.toString());
 			return Response.status(200).entity(res).build();			
 		}//System.out.println(data.getMail()+" "+data.getPassword());
 		return Response.status(204).entity(res).build();
+
 	}
 }

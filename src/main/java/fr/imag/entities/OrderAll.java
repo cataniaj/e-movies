@@ -41,12 +41,6 @@ public class OrderAll {
 
 	@OneToMany(mappedBy="order", cascade=CascadeType.REMOVE)
 	private Collection<OrderLine> allOrderLine;
-	public Collection<OrderLine> getAllOrderLine() {
-		return allOrderLine;
-	}
-	public void setAllOrderLine(Collection<OrderLine> allOrderLine) {
-		this.allOrderLine = allOrderLine;
-	}
 
 	public OrderAll(){
 		price = 0;
@@ -63,28 +57,33 @@ public class OrderAll {
 	public int getPrice() {
 		return price;
 	}
-
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public User getUser() {
 		return user;
 	}
-
 	public void setUser(User user) {
 		this.user = user;
 		this.user.addAnOrder(this);
 	}
 	
+	public Collection<OrderLine> getAllOrderLine() {
+		return allOrderLine;
+	}
+
+	public void setAllOrderLine(Collection<OrderLine> allOrderLine) {
+		this.allOrderLine = allOrderLine;
+	}
+	
+	public String getDate() {
+		int month = date.getMonth();
+		int day = date.getDay();
+		int year = date.getYear();
+		return ""+day+" "+month+" "+year;
+	}
+
 	public void addOneOrderLine(OrderLine orderLine){
 		allOrderLine.add(orderLine);
 	}

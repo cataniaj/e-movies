@@ -21,7 +21,16 @@ public class UserManagerEJB {
 	public boolean createNewAccount(User user){
 		return dbAccess.createNewAccount(user);
 	}
+	
 	public User login(LoginData data){
 		return dbAccess.login(data);
+	}
+	
+	public void clean(){
+		dbAccess.clean();
+	}
+	
+	public void printTable(){
+		dbAccess.printTable();
 	}
 }

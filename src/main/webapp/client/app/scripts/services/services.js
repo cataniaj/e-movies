@@ -9,21 +9,20 @@ routeAppControllers.factory('servicesSearch',['$http' ,function ($http) {
 		search:function(){
 		  return $http.get('json/jsonListDeFilm.php');
 		},
-		searchFilm:function(chaine){  
-			//declaration de la variable représentant l'espace = '+' 
-			var plus='+';
-			// // déclaration de la  variable à chercher ici "espace"
-			var myRegEx=new RegExp(" ","gm");
-			// // newMot reçoit le nouveau mot dans lequel espace est remplacé par '+'
-			var newMot=chaine.replace(myRegEx,plus);
-			
-			//return $http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+newMot);
+		searchFilm:function(chaine){ 
+      //declaration de la variable représentant l'espace = '+' 
+        var plus='+';
+      // déclaration de la  variable à chercher ici "espace"
+        var myRegEx=new RegExp(" ","gm");
+      // newMot reçoit le nouveau mot dans lequel espace est remplacé par '+'
+        var newMot=chaine.replace(myRegEx,plus);
+  			return $http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+newMot);
 
-			return	$http.get('client/app/json/jsonListDeFilm.php');     
+			//return	$http.get('client/app/json/jsonListDeFilm.php');     
 		},
 		detailsFilm:function(id){  
-			//return	$http.get('http://localhost:8080/e-movies/rest/videos/search/exact/movie/'+id);
-			return	$http.get('client/app/json/jsonUnSeulFilm2.php');     
+			return	$http.get('http://localhost:8080/e-movies/rest/videos/search/exact/movie/'+id);
+			//return	$http.get('client/app/json/jsonUnSeulFilm2.php');     
 		},		
 		searchSerie:function(chaine){      
 			return	$http.get('http://'+way+'/e-movies/rest/videos/search/all/tv/'+chaine);
