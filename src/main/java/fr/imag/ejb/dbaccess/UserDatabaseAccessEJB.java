@@ -1,5 +1,7 @@
 package fr.imag.ejb.dbaccess;
 
+import java.util.ArrayList;
+>>>>>>> development
 import java.util.List;
 
 import javax.ejb.ConcurrencyManagement;
@@ -38,6 +40,16 @@ public class UserDatabaseAccessEJB {
 		}		
 		return true;
 	}
+	public synchronized String removeUser(String user){
+		User res = em.find(User.class, user);
+		em.remove(res);
+		return "ok";
+	}
+	
+	public synchronized String infoUser(String user){
+		User res = em.find(User.class, user);
+		return res.convertToJson().toString();
+	}
 	
 	public synchronized User login(LoginData data){
 		User res = em.find(User.class, data.getMail());
@@ -50,6 +62,16 @@ public class UserDatabaseAccessEJB {
     	for(User u : allUser){
     		em.remove(u);
     	}
+	}
+	
+	public ArrayList<String> all(){
+    	Query query = em.createQuery("SELECT u FROM User u ");
+    	List<User> allUser =  (List<User>) query.getResultList();
+    	ArrayList<String> allUserString = new ArrayList<String>();
+    	for(User u : allUser){
+    		allUserString.add(u.getMail());
+    	}
+    	return allUserString;
 	}
 	
 	public void printTable(){
