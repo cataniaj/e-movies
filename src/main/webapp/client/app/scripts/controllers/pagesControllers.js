@@ -67,19 +67,18 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page detail
-routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http', '$timeout','servicesSearch','PanierService',
-    function($scope, $location, $routeParams, $http, $timeout, servicesSearch,PanierService){
+routeAppControllers.controller('detailCtrl', ['$scope', '$location','$rootScope', '$routeParams', '$http', '$timeout','servicesSearch','PanierService',
+    function($scope, $location, $rootScope, $routeParams, $http, $timeout, servicesSearch,PanierService){
 		$scope.id = $routeParams.id;	
 
 
 		$scope.details = [];
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
-		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
-			//alert(data.movies[0].title);
-			$scope.details = data[0];
-		});*/
-
+            		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
+            			//alert(data.movies[0].title);
+            			$scope.details = data[0];
+            		});*/
                     // $scope.details = data[0];
 					$scope.details = data;
                     if($scope.details.trailer == "N/A"){
@@ -107,7 +106,7 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
             function panierFunction(id, titre, annee, support, quantite, pu){
 
                 var user={"idProduct":id,
-                    "mail":"user1@gmail.com",
+                    "mail":$rootScope.globals.currentUser.email,
                     "title":titre,
                     "year":annee,
                     "support":support,
