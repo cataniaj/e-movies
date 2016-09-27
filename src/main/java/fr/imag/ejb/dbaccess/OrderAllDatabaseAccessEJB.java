@@ -87,6 +87,7 @@ public class OrderAllDatabaseAccessEJB {
 		return obj;
 	}
 	
+	//TODO: Mes achats
 	public JsonObject getAllOrderLine(String user){
 		Query query = em.createQuery("SELECT o FROM OrderAll o");
 		List<OrderAll> orderList = (List<OrderAll>) query.getResultList();

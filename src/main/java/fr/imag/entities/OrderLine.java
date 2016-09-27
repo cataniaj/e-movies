@@ -25,55 +25,34 @@ public class OrderLine {
 	private OrderAll order;
 	
 	public OrderLine(){
-		quantity = ""+0;
+		quantity = "" + 0;
 		order = null;
-		unitaryPrice = ""+0;
+		unitaryPrice = "" + 0;
 	}
-	
-
-
 
 	public String getIdProduct() {
 		return idProduct;
 	}
-
-
-
-
+	
 	public void setIdProduct(String idProduct) {
 		this.idProduct = idProduct;
 	}
-
-
-
 
 	public String getQuantity() {
 		return quantity;
 	}
 
-
-
-
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
-
-
-
 
 	public String getUnitaryPrice() {
 		return unitaryPrice;
 	}
 
-
-
-
 	public void setUnitaryPrice(String unitaryPrice) {
 		this.unitaryPrice = unitaryPrice;
 	}
-
-
-
 
 	public OrderAll getOrder() {
 		return order;
