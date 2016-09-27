@@ -102,15 +102,20 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
             // dansPanier[0]=false;            
         };
 		
-        $scope.deletePanier=function(index){   
-        	var user={"mail":$rootScope.globals.currentUser.email};	                    
-            dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
-            dataPanier.splice(index, 1); 
+        $scope.deletePanier = function (idP){   
 
-            if(dataPanier.length == 0){
-                dansPanier.shift();
-                dansPanier[0]=false;
-            }
+        	var json={"mail":$rootScope.globals.currentUser.email,"idProduct":idP};	  
+        	PanierService.panierManage().deleteProduct(json).then(function(response){ 
+        		$scope.datasPanier = response.data.cart;
+        	});
+
+            // dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
+            // dataPanier.splice(index, 1); 
+
+            // if(dataPanier.length == 0){
+            //     dansPanier.shift();
+            //     dansPanier[0]=false;
+            // }
         };
 		
 		$scope.payer=function(){

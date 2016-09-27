@@ -85,14 +85,14 @@ public class RESTcartEndPoint {
     public Response removeToCart(String data) { 
 		JsonReader r = Json.createReader(new StringReader(data));
 		JsonObject obj = r.readObject();
-		Cart cartToRemove = new Cart(obj);
-		Cart cartFound = cartMngr.isPresentInTheCart(cartToRemove);
-		if(cartFound != null){
-			cartMngr.removeToCart(cartToRemove.getIdProduct(), cartToRemove.getMailUser());
+//		Cart cartToRemove = new Cart(obj);
+//		Cart cartFound = cartMngr.isPresentInTheCart(cartToRemove);
+//		if(cartFound != null){
+			cartMngr.removeToCart(obj.getString("idProduct"), obj.getString("mail"));
 			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
-		}else{
-			return Response.status(204).entity("Une erreur est survenue").build();
-		}
+//		}else{
+//			return Response.status(204).entity("Une erreur est survenue").build();
+//		}
     }
     
     @POST

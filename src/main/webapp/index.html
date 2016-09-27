@@ -374,8 +374,9 @@
 							<td><input type="number" class="form-control" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:80px" value={{data.quantity}} ng-change="updateQuantite($index, data.quantity)" min="1" max="5"/></td>
 							<td>{{data.unitPrice}}€</td>
 							<td>{{data.quantity*data.unitPrice}}€</td>
-							<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
-							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
+							<td><button type="button" class="btn btn-primary" ng-click="deletePanier(data.idProduct)" data-dismiss="modal"><span class="glyphicon glyphicon-trash"></span></button>
+							<!-- <button type="button" ng-click="deletePanier({{data.idProduct}})"><span class="glyphicon glyphicon-trash"></span></a> -->
+							<!-- <a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						 -->
 						</tr>
 					<!--tr ng-repeat="data in dataPanier1">
 						<td>{{data[1]}} </td>
