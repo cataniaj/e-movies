@@ -38,7 +38,7 @@ public class CartDatabaseAccessEJB {
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
     	for(Cart cart : allCart){
-    		if(cart.getIdProduct() == item.getIdProduct()
+    		if(cart.getIdProduct().compareTo(item.getIdProduct())==0
     				&& (cart.getMailUser().compareTo(item.getMailUser())==0)){
     			return cart;
     		}

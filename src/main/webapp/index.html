@@ -464,7 +464,7 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Parametres</h4>
 			</div>
-			<div class="modal-body" ng-controller="userCtrl">
+			<div class="modal-body">
 				<table class="table table-hover">
 				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
@@ -511,7 +511,7 @@
 	</div>
 
 	  <!-- Suppression élément -->
-	  <div class="modal fade" id="deleteP" role="dialog">
+	  <div class="modal fade" id="deleteP" role="dialog"> 
 		<div class="modal-dialog" style="margin-right:1%;">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
@@ -523,8 +523,10 @@
 				        <p>Voulez-vous supprimer tout le panier ?</p>
 				    </div>
 				    <div class="modal-footer" ng-controller="panierCtrl">
+				    	
 				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Non</a>
-				  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Oui</a>
+				      <!-- <button type="button" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Valider</button> -->
+				  	  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Oui</a>
 		    	</div>
 			</div>
 		</div>

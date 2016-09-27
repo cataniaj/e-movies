@@ -70,6 +70,7 @@ header{
 	color:#B3B3B3;
 	margin-top: 15px;
 	font-size: 17px;
+	text-transform: lowercase;
 }
 
 .navbar-right a{
