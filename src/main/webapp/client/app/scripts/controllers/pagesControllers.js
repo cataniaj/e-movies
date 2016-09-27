@@ -165,7 +165,26 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 // Contrôleur de la page achat
 routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout','$interval','PanierService',
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval,PanierService){
-		if(!$rootScope.globals.currentUser){
+		
+
+        if($rootScope.globals.currentUser){
+            loadAchat();
+        }else{
+            $scope.datasOrders=[];
+        }
+        
+        function loadAchat(){          
+            if($rootScope.globals.currentUser.email){               
+                var user={"mail":$rootScope.globals.currentUser.email}; 
+                PanierService.panierManage().getOrder(user).then(function(response){ 
+                    $scope.datasOrders = response.data.cart;
+                });
+            }
+        }
+        
+
+
+        if(!$rootScope.globals.currentUser){
 			$location.path("/home");
 		}
 		
