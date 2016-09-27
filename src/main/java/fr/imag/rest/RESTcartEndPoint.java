@@ -46,7 +46,6 @@ public class RESTcartEndPoint {
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-
     public Response getCart(String data){
     	try{
     		JsonReader r = Json.createReader(new StringReader(data));
