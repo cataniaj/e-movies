@@ -8,13 +8,13 @@
     text-align:center;
 }
 .table{
-	width: 100%;
 	margin-top: 3%;
 	text-align: center;
 	color:black;
 	background-color: white;
 	text-align:center;
 	border-collapse: collapse;
+	table-layout:auto;
 }
 
 .table th{

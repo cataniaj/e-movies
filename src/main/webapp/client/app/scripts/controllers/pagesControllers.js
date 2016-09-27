@@ -163,14 +163,13 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page achat
-routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout','$interval','PanierService',
+routeAppControllers.controller('achatCtrl', ['$scope','$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout','$interval','PanierService',
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval,PanierService){
 
         $scope.datasOrders = [];
                 
         if($rootScope.globals.currentUser.email){               
             var user={"mail":$rootScope.globals.currentUser.email}; 
-
             PanierService.panierManage().getOrder(user).then(function(response){ 
                 $scope.datasOrders = response.data.order;
             });
