@@ -1,5 +1,6 @@
 ﻿
 'use strict'
+var way = "localhost:8080";
 
 routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout',
     function ($http, $q, $filter, $timeout) {
@@ -24,7 +25,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 
 					var req = {
 						 method: 'POST',
-						 url: 'http://localhost:8080/e-movies/rest/users/login',
+						 url: 'http://'+way+'/e-movies/rest/users/login',
 						 headers: {
 						   'Content-Type': "application/json"                             
                         },
@@ -38,7 +39,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				function Create(user) {
 					var req = {
 						 method: 'POST',
-						 url: 'http://localhost:8080/e-movies/rest/users/createNewAccount',
+						 url: 'http://'+way+'/e-movies/rest/users/createNewAccount',
 						 headers: {
 						   'Content-Type': "application/json"
 						 },
@@ -59,7 +60,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				function InfoUser(user){
 					var req = {
 						 method: 'POST',
-						 url: 'http://localhost:8080/e-movies/rest/users/infoUser',
+						 url: 'http://'+way+'/e-movies/rest/users/infoUser',
 						 headers: {
 						   'Content-Type': "application/json"                             
                         },

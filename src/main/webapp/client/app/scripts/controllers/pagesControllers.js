@@ -40,7 +40,7 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		/** pre: string; 
 			post: list de films ou series */
 		//$http.get('json/jsonListDeFilm.php').success(function(data){
-        //$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
+        //$http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
         //$http.get('https://api.themoviedb.org/3/search/movie?query=jurassic+park&language=fr&api_key=db1096cd136c906c06e7d77b313df0d4').success(function(data){
 		
 		
