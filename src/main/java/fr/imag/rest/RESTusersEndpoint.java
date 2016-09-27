@@ -51,5 +51,6 @@ public class RESTusersEndpoint {
 			return Response.status(200).entity(res).build();			
 		}
 		return Response.status(204).entity(res).build();
+
 	}
 }

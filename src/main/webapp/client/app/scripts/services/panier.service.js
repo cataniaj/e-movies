@@ -25,20 +25,27 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 		
 		
 			/** Etat: recuperer les donnees du panier;	Entrée: mail de l'utilisateur;		Sortie: le panier sous Json avec les données;	**/
-			function myPanier(dataJson){
-				var endUrl="cart/getCart";
-				var data={"mail":dataJson.email};
-				return httpSendRequestFunction(data, endUrl, "Erreur: Le produit n\'a pas pu etre supprim\é du panier");
-				 //return	$http.get('client/app/json/jsonPanier.php');
+			function myPanier(dataJson){				 
+				var req = {
+					method: 'POST',
+					url: 'http://localhost:8080/e-movies/rest/cart/getCart',
+					headers: {'Content-Type': "application/json" },
+					data: dataJson
+				};		
+				return	$http(req);
 			}
 			
 			/**	Etat: ajouter un produit du panier;	  
 				Entrée: id du produit, mail de l'utilisateur, titre produit, annee produit, support produit, prix produit;		
 				Sortie: le panier avec update;	**/
-			function addProduct(dataJson){	
-				var endUrl="cart/addToCart";
-				var data={"idProduct":dataJson.idProduct, "mail":dataJson.mail,	"title":dataJson.title, "year":dataJson.year,"support":dataJson.support,"unitPrice":dataJson.price};			
-				return httpSendRequestFunction(data, endUrl, "Erreur: Le produit n\'est plus disponible");
+			function addProduct(dataJson){					
+				var req = {
+					method: 'POST',
+					url: 'http://localhost:8080/e-movies/rest/cart/addToCart',
+					headers: {'Content-Type': "application/json" },
+					data: dataJson
+				};				
+				return	$http(req);
 			}
 			
 			/**	Etat: supprimer un produit du panier;	  Entrée: id du produit, mail de l'utilisateur;		Sortie: le panier avec update;	**/
@@ -98,17 +105,17 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function httpSendRequestFunction (dataJson, endUrl, error) {
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/'+endUrl,
+					url: 'http://localhost:8080/e-movies/rest/cart/getCart',
 					headers: {'Content-Type': "application/json" },
-					data: dataJson
-				};
-				return	$http.get(req);//.then(handleSuccess, handleError(error)); 
-				//return	$http.get('client/app/json/jsonPanier.php');
+					data: {"mail":dataJson.email}
+				};				
+				return	$http.get(req).then(handleSuccess, handleError(error)); 
+				//return	$http('client/app/json/jsonPanier.php').then(handleSuccess, handleError(error));
 			}
 			
 			function handleSuccess (res) {
 				//return res.data;
-				alert(res);
+				alert("panier "+res);
 				return res;
 			}
 

@@ -52,7 +52,7 @@ public class OrderAllDatabaseAccessEJB {
 	
 	private boolean contains(List<OrderLine> list, int idProduct){
 		for(OrderLine order : list){
-			if(idProduct == order.getIdProduct()){
+			if(idProduct == Integer.parseInt(order.getIdProduct())){
 				return true;
 			}
 		}
@@ -97,9 +97,9 @@ public class OrderAllDatabaseAccessEJB {
 		for(OrderAll order : orderList){
 			if(order.getUser().getMail().compareTo(user) == 0){
 				for(OrderLine orderLine : order.getAllOrderLine()){
-					if(!contains(result, orderLine.getIdProduct())){
+					if(!contains(result, Integer.parseInt(orderLine.getIdProduct()))){
 						result.add(orderLine);
-						int idProduct = orderLine.getIdProduct();
+						int idProduct = Integer.parseInt(orderLine.getIdProduct());
 						Movie m = em.find(Movie.class, idProduct);
 						String title = m.getTitle();
 						String year = m.getYear();

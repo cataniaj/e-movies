@@ -39,14 +39,13 @@ public class RESTcartEndPoint {
     @Path("/getTest")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getTest(String data){
-    	return cartMngr.cartInJson("Client 1");
+    	return cartMngr.cartInJson("user1@gmail.com");
     }
 
     @POST
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-
     public Response getCart(String data){
     	try{
     		JsonReader r = Json.createReader(new StringReader(data));
@@ -186,13 +185,10 @@ public class RESTcartEndPoint {
     	//{"idProduct":54,"title":"Spider-Man","year":"2002","support":"BR","stock":11,"price":7}
     	//{"idProduct":55,"title":"Spider-Man 3","year":"2007","support":"CN","stock":0,"price":9},
     	//{"idProduct":79,"title":"2 Fast 2 Furious","year":"2003","support":"CN","stock":0,"price":15}
-<<<<<<< HEAD
     	/*******Cart film1 = new Cart();
     	film1.setIdProduct(54);
-=======
     	Cart film1 = new Cart();
     	film1.setIdProduct(1550);
->>>>>>> a856d2f69893a8c02daea20f1880899e42a98f1d
     	film1.setMailUser("Client 1");
     	film1.setTitle("Spider-Man");
     	film1.setYear("2002");
@@ -294,7 +290,6 @@ public class RESTcartEndPoint {
     	System.out.println("----------  All order lines ----------\n");
     	orderLineMngr.printTable();
     	*/
-    	
     }
 
     

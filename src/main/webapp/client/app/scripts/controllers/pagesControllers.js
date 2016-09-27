@@ -105,14 +105,14 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 			
             function panierFunction(id, titre, annee, support, quantite, pu){
 
-                var user={"idProduct":234,
+                var user={"idProduct":id,
                     "mail":"user1@gmail.com",
                     "title":titre,
                     "year":annee,
                     "support":support,
-                    "unitPrice":34};
-                PanierService.panierManage().addProduct(user).success(function(data) { 
-                    alert("yess add"+data);
+                    "unitPrice":pu};
+                PanierService.panierManage().addProduct(user).then(function(response) { 
+                    //alert("yess add"+response.data.cart[0].title);
                     /*$scope.datasPanier = data.cart;
                     $scope.dansPanier[0]=true;*/
                 });

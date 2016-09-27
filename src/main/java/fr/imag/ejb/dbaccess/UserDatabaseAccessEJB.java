@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import fr.imag.entities.Admin;
+import fr.imag.entities.Cart;
 import fr.imag.entities.User;
 import fr.imag.utilities.LoginData;
 
@@ -37,7 +39,6 @@ public class UserDatabaseAccessEJB {
 		}		
 		return true;
 	}
-	
 	public synchronized String removeUser(String user){
 		User res = em.find(User.class, user);
 		em.remove(res);
