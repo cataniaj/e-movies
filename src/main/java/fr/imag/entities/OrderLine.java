@@ -17,40 +17,40 @@ public class OrderLine {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idOrderLine;
-	private int idProduct;
-	private int quantity;
-	private int unitaryPrice;
+	private String idProduct;
+	private String quantity;
+	private String unitaryPrice;
 
 	@ManyToOne
 	private OrderAll order;
 	
 	public OrderLine(){
-		quantity = 0;
+		quantity = "" + 0;
 		order = null;
-		unitaryPrice = 0;
+		unitaryPrice = "" + 0;
 	}
-	
-	public int getIdProduct() {
+
+	public String getIdProduct() {
 		return idProduct;
 	}
 
-	public void setIdProduct(int idProduct) {
+	public void setIdProduct(String idProduct) {
 		this.idProduct = idProduct;
 	}
 
-	public int getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 
-	public int getUnitaryPrice() {
+	public String getUnitaryPrice() {
 		return unitaryPrice;
 	}
 
-	public void setUnitaryPrice(int unitaryPrice) {
+	public void setUnitaryPrice(String unitaryPrice) {
 		this.unitaryPrice = unitaryPrice;
 	}
 

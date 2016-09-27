@@ -54,7 +54,7 @@ public class OrderLineDatabaseAccessEJB {
 		
 		for(OrderLine orderLine : orderLineList){
 			if(Integer.parseInt(idOrder) == orderLine.getOrder().getIdOrder()){
-				int idProduct = orderLine.getIdProduct();
+				int idProduct = Integer.parseInt(orderLine.getIdProduct());
 				Movie m = em.find(Movie.class, idProduct);
 				String title = m.getTitle();
 				String year = m.getYear();
