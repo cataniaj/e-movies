@@ -75,6 +75,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){ 
 					$scope.datasPanier = response.data.cart;
+					$scope.dansPanier[0]=true;
 				});
 			}
 		}
