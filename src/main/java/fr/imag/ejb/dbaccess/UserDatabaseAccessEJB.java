@@ -1,7 +1,6 @@
 package fr.imag.ejb.dbaccess;
 
 import java.util.ArrayList;
->>>>>>> development
 import java.util.List;
 
 import javax.ejb.ConcurrencyManagement;

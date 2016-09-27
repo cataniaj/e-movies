@@ -104,7 +104,7 @@ public class CartDatabaseAccessEJB {
 	private int totalPrice(List<OrderLine> allCart){
 		int total = 0;
 		for(OrderLine ol : allCart){
-			total += ol.getQuantity()*ol.getUnitaryPrice();
+			total += Integer.parseInt(ol.getQuantity())*Integer.parseInt(ol.getUnitaryPrice());
 		}
 		return total;
 	}

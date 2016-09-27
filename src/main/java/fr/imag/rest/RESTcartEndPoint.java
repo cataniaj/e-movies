@@ -39,15 +39,13 @@ public class RESTcartEndPoint {
     @Path("/getTest")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getTest(String data){
-    	return cartMngr.cartInJson("Client 1");
+    	return cartMngr.cartInJson("user1@gmail.com");
     }
 
     @POST
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-
-
     public Response getCart(String data){
     	try{
     		JsonReader r = Json.createReader(new StringReader(data));
