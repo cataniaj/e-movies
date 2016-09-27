@@ -70,7 +70,7 @@ public class RESTcartEndPoint {
     		if(cartFound == null){
     			cartMngr.addToCart(cartToAdd);
     		}else{
-    			cartFound.setQuantity(String.valueOf(Integer.parseInt(cartFound.getQuantity())+1));
+    			cartMngr.incrementOneProduct(obj.getString("idProduct"), obj.getString("mail"));
     		}
 		    return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
 		}catch(Exception e){
