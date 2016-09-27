@@ -39,7 +39,7 @@ public class RESTcartEndPoint {
     @Path("/getTest")
     @Produces(MediaType.APPLICATION_JSON)
     public JsonObject getTest(String data){
-    	return cartMngr.cartInJson("Client 1");
+    	return cartMngr.cartInJson("user1@gmail.com");
     }
 
     @POST
@@ -70,7 +70,7 @@ public class RESTcartEndPoint {
     		if(cartFound == null){
     			cartMngr.addToCart(cartToAdd);
     		}else{
-    			cartFound.setQuantity(cartFound.getIdProduct()+1);
+    			cartFound.setQuantity(String.valueOf(Integer.parseInt(cartFound.getQuantity())+1));
     		}
 		    return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
 		}catch(Exception e){
@@ -85,14 +85,14 @@ public class RESTcartEndPoint {
     public Response removeToCart(String data) { 
 		JsonReader r = Json.createReader(new StringReader(data));
 		JsonObject obj = r.readObject();
-		Cart cartToRemove = new Cart(obj);
-		Cart cartFound = cartMngr.isPresentInTheCart(cartToRemove);
-		if(cartFound != null){
-			cartMngr.removeToCart(cartToRemove.getIdProduct(), cartToRemove.getMailUser());
+//		Cart cartToRemove = new Cart(obj);
+//		Cart cartFound = cartMngr.isPresentInTheCart(cartToRemove);
+//		if(cartFound != null){
+			cartMngr.removeToCart(obj.getString("idProduct"), obj.getString("mail"));
 			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
-		}else{
-			return Response.status(204).entity("Une erreur est survenue").build();
-		}
+//		}else{
+//			return Response.status(204).entity("Une erreur est survenue").build();
+//		}
     }
     
     @POST
@@ -185,13 +185,10 @@ public class RESTcartEndPoint {
     	//{"idProduct":54,"title":"Spider-Man","year":"2002","support":"BR","stock":11,"price":7}
     	//{"idProduct":55,"title":"Spider-Man 3","year":"2007","support":"CN","stock":0,"price":9},
     	//{"idProduct":79,"title":"2 Fast 2 Furious","year":"2003","support":"CN","stock":0,"price":15}
-<<<<<<< HEAD
     	/*******Cart film1 = new Cart();
     	film1.setIdProduct(54);
-=======
     	Cart film1 = new Cart();
     	film1.setIdProduct(1550);
->>>>>>> a856d2f69893a8c02daea20f1880899e42a98f1d
     	film1.setMailUser("Client 1");
     	film1.setTitle("Spider-Man");
     	film1.setYear("2002");
@@ -293,7 +290,6 @@ public class RESTcartEndPoint {
     	System.out.println("----------  All order lines ----------\n");
     	orderLineMngr.printTable();
     	*/
-    	
     }
 
     

@@ -33,7 +33,7 @@ public class OrderLine {
 	public String getIdProduct() {
 		return idProduct;
 	}
-
+	
 	public void setIdProduct(String idProduct) {
 		this.idProduct = idProduct;
 	}

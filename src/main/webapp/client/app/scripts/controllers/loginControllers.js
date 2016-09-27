@@ -21,7 +21,8 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 					AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);			
 					//$scope.$apply();				
 					$scope.usert=true;
-					$scope.user = $rootScope.globals.currentUser;
+					$scope.userEmail = $rootScope.globals.currentUser.email;
+					// $scope.user = $rootScope.globals.currentUser;
 				} else {
 					AuthenticationService.Authentication().ClearCredentials();	
 				}
@@ -71,10 +72,9 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 		function loadPanier(){			
 			if($rootScope.globals.currentUser.email){				
 				var user={"mail":$rootScope.globals.currentUser.email};	
-				alert(user.mail);			
-				PanierService.panierManage().myPanier(user).success(function(data){ 
-					alert(data.cart[0]);
-					$scope.datasPanier = data.cart;
+				//alert(user.mail);			
+				PanierService.panierManage().myPanier(user).then(function(response){ 
+					$scope.datasPanier = response.data.cart;
 					$scope.dansPanier[0]=true;
 				});
 			}
@@ -82,33 +82,47 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         
         $scope.updateQuantite = function (index, qte){                     
             $scope.dataPanier1[index][4]=qte;
-			
 			$scope.dataPanierTotal[0]=0;
 			for(i=0;i<$scope.dataPanier1.length;i++){
 				$scope.dataPanierTotal[0]=$scope.dataPanierTotal[0]+($scope.dataPanier1[i][4]*$scope.dataPanier1[i][5]);
 			}
         };
 		
-        $scope.clearPanier=function(){
-            while(dataPanier.length){                
-                dataPanier.shift();                
-            }
-            dansPanier.shift();
-            dataPanierTotal[0]=0;
-            dansPanier[0]=false;            
-        }
+        $scope.clearPanier = function(){
+        	var user={"mail":$rootScope.globals.currentUser.email};	
+        	PanierService.panierManage().clearPanier(user).then(function(response){ 
+					$scope.datasPanier = response.data.cart;
+					$scope.dansPanier[0]=false;
+				});
+            // while(dataPanier.length){                
+            //     dataPanier.shift();                
+            // }
+            // dansPanier.shift();
+            // dataPanierTotal[0]=0;
+            // dansPanier[0]=false;            
+        };
 		
-        $scope.deletePanier=function(index){                       
-            dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
-            dataPanier.splice(index, 1); 
+        $scope.deletePanier = function (idP){   
 
-            if(dataPanier.length == 0){
-                dansPanier.shift();
-                dansPanier[0]=false;
-            }
-        }
+        	var json={"mail":$rootScope.globals.currentUser.email,"idProduct":idP};	  
+        	PanierService.panierManage().deleteProduct(json).then(function(response){ 
+        		$scope.datasPanier = response.data.cart;
+        	});
+
+            // dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
+            // dataPanier.splice(index, 1); 
+
+            // if(dataPanier.length == 0){
+            //     dansPanier.shift();
+            //     dansPanier[0]=false;
+            // }
+        };
 		
 		$scope.payer=function(){
+			// PanierService.panierManage().payment(user).then(function(response){ 
+					
+			// 	});
+
 			//alert("yoooo "+$rootScope.globals.currentUser.email);
 			if($rootScope.globals.currentUser){
 				//alert("paiement ok");
@@ -117,7 +131,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				$(dialogPanier).modal("hide");
 				$(dialogLogin).modal("show");
 			}
-		}
+		};
     }
 ]);   
 

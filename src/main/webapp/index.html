@@ -124,8 +124,6 @@
 			   		</div>
 
 			    	<div ng-show="usert">
-			    		<li>{{globals.currentUser.firstName}}</li>
-
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
@@ -140,8 +138,12 @@
 					<!-- Panier -->
 					<li><a  href="" data-toggle="modal" data-target="#dialogPanier"  class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
+				</ul>
+			    <ul class="nav navbar-nav navbar-right" ng-show="usert" style="margin: auto; text-align: center;">
+			    	<li><h1 id="userName">{{userEmail}}</h1></li>
 			    </ul>
 			    </div>
+			 
   
 			</nav> 
 			<!-- Menu -->
@@ -372,8 +374,9 @@
 							<td><input type="number" class="form-control" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:80px" value={{data.quantity}} ng-change="updateQuantite($index, data.quantity)" min="1" max="5"/></td>
 							<td>{{data.unitPrice}}€</td>
 							<td>{{data.quantity*data.unitPrice}}€</td>
-							<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
-							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
+							<td><button type="button" class="btn btn-primary" ng-click="deletePanier(data.idProduct)" data-dismiss="modal"><span class="glyphicon glyphicon-trash"></span></button>
+							<!-- <button type="button" ng-click="deletePanier({{data.idProduct}})"><span class="glyphicon glyphicon-trash"></span></a> -->
+							<!-- <a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						 -->
 						</tr>
 					<!--tr ng-repeat="data in dataPanier1">
 						<td>{{data[1]}} </td>
@@ -462,7 +465,7 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Parametres</h4>
 			</div>
-			<div class="modal-body" ng-controller="userCtrl">
+			<div class="modal-body">
 				<table class="table table-hover">
 				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
@@ -509,7 +512,7 @@
 	</div>
 
 	  <!-- Suppression élément -->
-	  <div class="modal fade" id="deleteP" role="dialog">
+	  <div class="modal fade" id="deleteP" role="dialog"> 
 		<div class="modal-dialog" style="margin-right:1%;">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
@@ -521,8 +524,10 @@
 				        <p>Voulez-vous supprimer tout le panier ?</p>
 				    </div>
 				    <div class="modal-footer" ng-controller="panierCtrl">
+				    	
 				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Non</a>
-				  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Oui</a>
+				      <!-- <button type="button" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Valider</button> -->
+				  	  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Oui</a>
 		    	</div>
 			</div>
 		</div>
