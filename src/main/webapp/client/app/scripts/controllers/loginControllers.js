@@ -75,11 +75,12 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){ 
 					$scope.datasPanier = response.data.cart;
-					$scope.dansPanier[0]=true;
 				});
 			}
 		}
         
+
+        // A FAIRE
         $scope.updateQuantite = function (index, qte){                     
             $scope.dataPanier1[index][4]=qte;
 			$scope.dataPanierTotal[0]=0;
@@ -112,25 +113,25 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
             // dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
             // dataPanier.splice(index, 1); 
 
-            // if(dataPanier.length == 0){
-            //     dansPanier.shift();
-            //     dansPanier[0]=false;
-            // }
         };
 		
 		$scope.payer=function(){
+			var user={"mail":$rootScope.globals.currentUser.email};	  
+        	PanierService.panierManage().payment(user).then(function(response){ 
+        		$scope.datasPanier = response.data.cart;
+        		$scope.dansPanier[0]=false;
+        	});
 			// PanierService.panierManage().payment(user).then(function(response){ 
 					
 			// 	});
 
-			//alert("yoooo "+$rootScope.globals.currentUser.email);
-			if($rootScope.globals.currentUser){
-				//alert("paiement ok");
-				$(paiement).modal("show");
-			}else{
-				$(dialogPanier).modal("hide");
-				$(dialogLogin).modal("show");
-			}
+			// if($rootScope.globals.currentUser){
+			// 	//alert("paiement ok");
+			// 	$(paiement).modal("show");
+			// }else{
+			// 	$(dialogPanier).modal("hide");
+			// 	$(dialogLogin).modal("show");
+			// }
 		};
     }
 ]);   

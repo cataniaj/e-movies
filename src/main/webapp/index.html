@@ -402,7 +402,7 @@
 				<h3>Le panier est vide !</h3>
 			</div>	
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" ng-disabled="!dansPanier[0] || !dataPanierTotal[0]" ng-click="payer()">Payer</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="dansPanier[0]==false" ng-click="payer()">Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		</div>		  
