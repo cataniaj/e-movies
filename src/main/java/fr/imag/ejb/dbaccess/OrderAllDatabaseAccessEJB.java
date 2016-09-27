@@ -53,7 +53,7 @@ public class OrderAllDatabaseAccessEJB {
 	private boolean contains(List<OrderLine> list, int idProduct){
 		for(OrderLine order : list){
 			Movie m = em.find(Movie.class, order.getIdProduct());
-			if(idProduct == m.getIdProduct()){
+			if(idProduct == m.getIdTMDB()){
 				return true;
 			}
 		}
