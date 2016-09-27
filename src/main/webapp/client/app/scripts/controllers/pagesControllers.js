@@ -67,9 +67,10 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page detail
-routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch','PanierService',
+routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http', '$timeout','servicesSearch','PanierService',
     function($scope, $location, $routeParams, $http, $timeout, servicesSearch,PanierService){
 		$scope.id = $routeParams.id;	
+
 
 		$scope.details = [];
                 
@@ -113,38 +114,38 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
                     "unitPrice":pu};
                 PanierService.panierManage().addProduct(user).then(function(response) { 
                     //alert("yess add"+response.data.cart[0].title);
-                    /*$scope.datasPanier = data.cart;
-                    $scope.dansPanier[0]=true;*/
+                    $scope.datasPanier = response.data.cart;
+                    $scope.dansPanier[0]=true;
                 });
 
-                if(dataPanier.length>0){					// test si panier non vide **
+          //       if(dataPanier.length>0){					// test si panier non vide **
 
-                        for(i=0; i<dataPanier.length; i++){
-                                if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
-                                        dataPanier[i][4]=dataPanier[i][4]+1;
-                                        // on actualiste le panier total
-                                        dataPanierTotal[0]=0;
-                                        for(j=0;j<dataPanier.length;j++){
-                                                dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
-                                        }
-										i=dataPanier.length;
-                                }
-                                else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
-                                        dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
-                                        dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-                                        dansPanier.shift();
-                                        dansPanier.push(true);
-										i=dataPanier.length;
-                                }
-                        }
-                }else{ 						// la video n'est pas dans le panier, et panier vide, on l'ajoute donc **		
-                        dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
-                        dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-                        dansPanier.shift();
-                        dansPanier.push(true);
+          //               for(i=0; i<dataPanier.length; i++){
+          //                       if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
+          //                               dataPanier[i][4]=dataPanier[i][4]+1;
+          //                               // on actualiste le panier total
+          //                               dataPanierTotal[0]=0;
+          //                               for(j=0;j<dataPanier.length;j++){
+          //                                       dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
+          //                               }
+										// i=dataPanier.length;
+          //                       }
+          //                       else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
+          //                               dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+          //                               dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+          //                               dansPanier.shift();
+          //                               dansPanier.push(true);
+										// i=dataPanier.length;
+          //                       }
+          //               }
+          //       }else{ 						// la video n'est pas dans le panier, et panier vide, on l'ajoute donc **		
+          //               dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+          //               dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+          //               dansPanier.shift();
+          //               dansPanier.push(true);
 
-                }
-                $timeout(function() {$scope.addInfo = false;}, 1000);
+          //       }
+          //       $timeout(function() {$scope.addInfo = false;}, 1000);
             }
         };
         
