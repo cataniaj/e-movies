@@ -119,7 +119,7 @@ public class RESTcartEndPoint {
     	try{
     		JsonReader r = Json.createReader(new StringReader(data));
     		JsonObject obj = r.readObject();
-        	cartMngr.incrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
+        	cartMngr.incrementOneProduct(obj.getString("idProduct"), obj.getString("mail"));
 			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
     	}catch(Exception e){
 			return Response.status(204).entity("Une erreur est survenue").build();
@@ -134,7 +134,7 @@ public class RESTcartEndPoint {
     	try{
     		JsonReader r = Json.createReader(new StringReader(data));
     		JsonObject obj = r.readObject();
-        	cartMngr.decrementOneProduct(obj.getInt("idProduct"), obj.getString("mail"));
+        	cartMngr.decrementOneProduct(obj.getString("idProduct"), obj.getString("mail"));
 			return Response.status(200).entity(cartMngr.cartInJson(obj.getString("mail"))).build();
     	}catch(Exception e){
 			return Response.status(204).entity("Une erreur est survenue").build();
