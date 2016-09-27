@@ -54,7 +54,7 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'PanierService',
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, PanierService){	
         /** tester dialogue ***/
-        $scope.dataPanier1=dataPanier;
+        // $scope.dataPanier1=dataPanier;
         $scope.dansPanier=dansPanier;
         
 		$scope.datasPanier = [];
@@ -75,13 +75,22 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){ 
 					$scope.datasPanier = response.data.cart;
+					$scope.dansPanier[0]=true;
 				});
 			}
 		}
         
 
         // A FAIRE
-        $scope.updateQuantite = function (index, qte){                     
+        $scope.updateQuantite = function (index, qte){        
+   //      	if($rootScope.globals.currentUser.email){				
+			// 	var user={"mail":$rootScope.globals.currentUser.email};	
+			// 	//alert(user.mail);			
+			// 	PanierService.panierManage().myPanier(user).then(function(response){ 
+			// 		$scope.datasPanier = response.data.cart;
+			// 	});
+			// }
+
             $scope.dataPanier1[index][4]=qte;
 			$scope.dataPanierTotal[0]=0;
 			for(i=0;i<$scope.dataPanier1.length;i++){

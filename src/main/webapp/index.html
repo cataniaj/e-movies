@@ -371,7 +371,7 @@
 							<td>{{data.title}} </td>
 							<td>{{data.year}}</td>
 							<td>{{data.support}}</td>
-							<td><input type="number" class="form-control" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:80px" value={{data.quantity}} ng-change="updateQuantite($index, data.quantity)" min="1" max="5"/></td>
+							<td><input type="number" class="form-control" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:80px" value={{data.quantity}} ng-change="updateQuantite(data.idProduct, data.quantity)" min="1" max="5"/></td>
 							<td>{{data.unitPrice}}€</td>
 							<td>{{data.quantity*data.unitPrice}}€</td>
 							<td><button type="button" class="btn btn-primary" ng-click="deletePanier(data.idProduct)" data-dismiss="modal"><span class="glyphicon glyphicon-trash"></span></button>
