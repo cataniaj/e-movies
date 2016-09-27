@@ -38,7 +38,7 @@ public class CartDatabaseAccessEJB {
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
     	for(Cart cart : allCart){
-    		if(cart.getIdProduct() == item.getIdProduct()
+    		if(cart.getIdProduct().compareTo(item.getIdProduct())==0
     				&& (cart.getMailUser().compareTo(item.getMailUser())==0)){
     			return cart;
     		}
@@ -57,6 +57,17 @@ public class CartDatabaseAccessEJB {
 	}
 	
 	public void addToCart(Cart item){
+    	Query query = em.createQuery("SELECT c FROM Cart c");
+    	List<Cart> allCart = (List<Cart>) query.getResultList();
+    	for(Cart cart : allCart){
+    		if(cart.getIdProduct().compareTo(item.getIdProduct())==0
+    				&& (cart.getMailUser().compareTo(item.getMailUser())==0)){
+    			Cart c = em.find(Cart.class, cart.getIdCartItem());
+    			c.setQuantity(String.valueOf(Integer.parseInt(c.getQuantity())+1));
+    			//em.persist(item);
+    			return;
+    		}
+    	}
 		em.persist(item);
 	}
 	
@@ -77,7 +88,8 @@ public class CartDatabaseAccessEJB {
     	for(Cart cart : allCart){
     		if(cart.getMailUser().compareTo(mail) == 0
     				&& cart.getIdProduct().compareTo(idProduct)==0){
-    			cart.setQuantity(cart.getQuantity()+1);
+    			Cart c = em.find(Cart.class, cart.getIdCartItem());
+    			c.setQuantity(String.valueOf(Integer.parseInt(c.getQuantity())+1));
     		}
     	}
 	}
@@ -104,7 +116,7 @@ public class CartDatabaseAccessEJB {
 	private int totalPrice(List<OrderLine> allCart){
 		int total = 0;
 		for(OrderLine ol : allCart){
-			total += ol.getQuantity()*ol.getUnitaryPrice();
+			total += Integer.parseInt(ol.getQuantity())*Integer.parseInt(ol.getUnitaryPrice());
 		}
 		return total;
 	}
