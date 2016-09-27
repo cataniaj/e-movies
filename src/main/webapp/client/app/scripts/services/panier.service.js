@@ -114,7 +114,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function getOrder(dataJson){  
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/getOrder',
+					url: 'http://localhost:8080/e-movies/rest/order/getOrder',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		

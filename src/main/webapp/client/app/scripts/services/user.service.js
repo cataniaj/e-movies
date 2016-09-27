@@ -56,6 +56,19 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
 				}
 
+				function InfoUser(user){
+					var req = {
+						 method: 'POST',
+						 url: 'http://localhost:8080/e-movies/rest/users/infoUser',
+						 headers: {
+						   'Content-Type': "application/json"                             
+                        },
+						 data: {"mail":user.mail}
+					}
+					return $http(req).then(handleSuccess, handleError('Erreur: email est deja pris'));
+
+				}
+
 				function Update(user) {
 					return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));
 				}

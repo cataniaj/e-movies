@@ -165,37 +165,22 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
 // Contrôleur de la page achat
 routeAppControllers.controller('achatCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout','$interval','PanierService',
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval,PanierService){
-		
 
-        if($rootScope.globals.currentUser){
-            loadAchat();
-        }else{
-            $scope.datasOrders=[];
-        }
-        
-        function loadAchat(){          
-            if($rootScope.globals.currentUser.email){               
-                var user={"mail":$rootScope.globals.currentUser.email}; 
-                PanierService.panierManage().getOrder(user).then(function(response){ 
-                    $scope.datasOrders = response.data.cart;
-                });
-            }
-        }
-        
+        $scope.datasOrders = [];
+                
+        if($rootScope.globals.currentUser.email){               
+            var user={"mail":$rootScope.globals.currentUser.email}; 
 
+            PanierService.panierManage().getOrder(user).then(function(response){ 
+                $scope.datasOrders = response.data.order;
+            });
+        }        
 
         if(!$rootScope.globals.currentUser){
 			$location.path("/home");
 		}
 		
-		$scope.toto=0;
-		$scope.datasOrder = [];
-		var user={"mail":$rootScope.globals.currentUser.email};
-		
-		PanierService.getOrder(user).success(function(data){ 
-			$scope.datasOrder = data.order;
-		});
-						
+		$scope.toto=0;						
         $scope.download = function () {
             //ngDialog.open({ template: 'dialogDownload' });  
 			$interval(function() {$scope.toto= $scope.toto+1;}, 2000, 100);
