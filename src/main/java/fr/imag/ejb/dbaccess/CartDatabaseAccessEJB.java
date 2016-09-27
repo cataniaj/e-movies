@@ -64,7 +64,7 @@ public class CartDatabaseAccessEJB {
     				&& (cart.getMailUser().compareTo(item.getMailUser())==0)){
     			Cart c = em.find(Cart.class, cart.getIdCartItem());
     			c.setQuantity(String.valueOf(Integer.parseInt(c.getQuantity())+1));
-    			//em.persist(item);
+    			//em.persist(c);
     			return;
     		}
     	}
