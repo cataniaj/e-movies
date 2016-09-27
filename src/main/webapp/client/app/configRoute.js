@@ -57,6 +57,9 @@ var dansPanier = [false];
 
 //var usert = [false];
 
+var dataAchat=[];
+var dataAvis=[];
+
 var ListMenu=false;
 var GenreFilm = false;
 var GenreSerie = false;
