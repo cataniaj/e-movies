@@ -33,6 +33,7 @@ public class RESTorderAllEndPoint {
     		JsonReader r = Json.createReader(new StringReader(data));
     		JsonObject obj = r.readObject();
         	String user = obj.getString("mail");
+        	System.out.println("TEST ---------- "+orderAllMngr.getAllOrderLine(user));
     		return Response.status(200).entity(orderAllMngr.getAllOrderLine(user)).build();
     	}catch(Exception e){
     		return Response.status(204).entity("Une erreur est survenue").build();
