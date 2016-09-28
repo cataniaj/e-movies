@@ -87,7 +87,8 @@ public class CartDatabaseAccessEJB {
     	List<Cart> allCart = (List<Cart>) query.getResultList();
     	for(Cart cart : allCart){
     		if(cart.getMailUser().compareTo(mail) == 0
-    				&& cart.getIdProduct().compareTo(idProduct)==0){
+    				&& cart.getIdProduct().compareTo(idProduct)==0
+    				&& cart.getSupport().compareTo("CN")!=0){
     			Cart c = em.find(Cart.class, cart.getIdCartItem());
     			c.setQuantity(String.valueOf(Integer.parseInt(c.getQuantity())+1));
     		}
