@@ -113,9 +113,10 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location','$rootScope'
                     "unitPrice":pu};
                 PanierService.panierManage().addProduct(user).then(function(response) { 
                     //alert("yess add"+response.data.cart[0].title);
-                    $scope.datasPanier = response.data.cart;
-                    $scope.dansPanier[0]=true;
+                    $scope.userIn.datasPanier = response.data.cart;
+                    //$scope.dansPanier[0]=true;
                 });
+				$timeout(function() {$scope.addInfo = false;}, 1000);
 
           //       if(dataPanier.length>0){					// test si panier non vide **
 
@@ -167,17 +168,17 @@ routeAppControllers.controller('achatCtrl', ['$scope','$location', '$routeParams
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval,PanierService){
 
         $scope.datasOrders = [];
+		
+		if(!$rootScope.globals.currentUser){
+			$location.path("/home");
+		}
                 
         if($rootScope.globals.currentUser.email){               
             var user={"mail":$rootScope.globals.currentUser.email}; 
             PanierService.panierManage().getOrder(user).then(function(response){ 
                 $scope.datasOrders = response.data.order;
             });
-        }        
-
-        if(!$rootScope.globals.currentUser){
-			$location.path("/home");
-		}
+        }                
 		
 		$scope.toto=0;						
         $scope.download = function () {
