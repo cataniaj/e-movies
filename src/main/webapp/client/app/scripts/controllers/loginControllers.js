@@ -1,4 +1,4 @@
-﻿
+
 routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'UserService', 'AuthenticationService', 'PanierService',
     function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, UserService, AuthenticationService, PanierService){	
         //$scope.usert = usert;
@@ -58,6 +58,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         $scope.dansPanier=dansPanier;
         
 		$scope.datasPanier = [];
+        //$scope.totalPrice = totalPrice;
 
         $scope.dataAchat1=dataAchat;
         $scope.dataAvis1=dataAvis;
@@ -75,6 +76,8 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){ 
 					$scope.datasPanier = response.data.cart;
+                                                                 alert(response.data.totalPrice);
+                    $scope.totalPrice = response.data.totalPrice;
 					$scope.dansPanier[0]=true;
 				});
 			}
