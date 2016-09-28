@@ -41,7 +41,7 @@ public class RESTadminEndPoint {
     @GET
     @Path("/reboot")
     public void reboot() {
-    	adminRegistration.cleanMovies();
+    	adminRegistration.cleanAll();
     	adminRegistration.chargeAllMovies();
     }
 	

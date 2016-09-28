@@ -1,6 +1,11 @@
 package fr.imag.rest;
 
+import java.io.StringReader;
+
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -53,4 +58,20 @@ public class RESTusersEndpoint {
 		return Response.status(204).entity(res).build();
 
 	}
+
+	@POST
+	@Produces({"application/json"})
+	@Consumes({"application/json"})
+	@Path("/information")
+	public Response getInformation(String data){
+		try{
+			JsonReader r = Json.createReader(new StringReader(data));
+			JsonObject obj = r.readObject();
+	    	String user = obj.getString("mail");
+			return Response.status(200).entity(userMngr.getInformation(user)).build();	
+		}catch(Exception e){
+			return Response.status(204).entity("Une erreur est survenue.").build();
+		}
+	}
+
 }

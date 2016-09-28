@@ -63,7 +63,7 @@ public class MovieDatabaseAccessEJB {
 	    	return movies;
 	    }
 	    
-	    public synchronized void cleanMovies(){
+	    public synchronized void clean(){
 	    	em.createNativeQuery("TRUNCATE Table Product").executeUpdate();
 	    }
 	    

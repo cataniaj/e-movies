@@ -118,8 +118,11 @@ public class AdminRegistration {
     	return movieDBaccess.allMovies();
     }
     
-    public void cleanMovies(){
-    	movieDBaccess.cleanMovies();
+    public void cleanAll(){
+    	userDBaccess.clean();
+    	orderDBaccess.clean();
+    	orderLineDBaccess.clean();
+    	movieDBaccess.clean();
     }
     
     public void updateProduct(String idProduct, String newStock, String newPrice){
