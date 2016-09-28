@@ -33,9 +33,9 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 		$scope.deconnexion=function(){
 			AuthenticationService.Authentication().ClearCredentials();
 			$scope.usert=false;
-			//$scope.$apply();
-			window.location.reload();
+			$scope.$apply();
 			$location.path("/home");
+			window.location.reload();			
 		}
 
 		// deconnexion
@@ -75,15 +75,26 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				var user={"mail":$rootScope.globals.currentUser.email};	
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){ 
+<<<<<<< HEAD
 					$scope.datasPanier = response.data.cart;
                                                                  alert(response.data.totalPrice);
                     $scope.totalPrice = response.data.totalPrice;
+=======
+					$scope.userIn.datasPanier = response.data.cart;
+>>>>>>> development
 					$scope.dansPanier[0]=true;
 				});
 			}
 		}
         
-
+		$scope.disabledCopieNum=function(support){
+			if(support=="Copie Numerique"){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
         // A FAIRE
         $scope.updateQuantite = function (index, qte){        
    //      	if($rootScope.globals.currentUser.email){				
@@ -188,14 +199,14 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				//if ((response.success!="undefined")||(response.success=="200")||(response.success==true)) {							
 				//if (response.success) {							
 					FlashService.Success('Registration successful', true);
-					 alert("good");
+					 //alert("good");
 					$location.path('/');
 					$(dialogSign_up).modal("hide");
 					$scope.login;
 					$scope.dataLoadingSign_up = false;
 					$scope.usert=true;
 				} else {
-					alert("not good");
+					//alert("not good");
 					FlashService.Error(response.message);
 					$scope.dataLoadingSign_up = false;
 				}
