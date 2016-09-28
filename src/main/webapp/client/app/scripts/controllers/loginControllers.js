@@ -74,14 +74,12 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			if($rootScope.globals.currentUser.email){				
 				var user={"mail":$rootScope.globals.currentUser.email};	
 				//alert(user.mail);			
-				PanierService.panierManage().myPanier(user).then(function(response){ 
-<<<<<<< HEAD
+				PanierService.panierManage().myPanier(user).then(function(response){
 					$scope.datasPanier = response.data.cart;
-                                                                 alert(response.data.totalPrice);
                     $scope.totalPrice = response.data.totalPrice;
-=======
+
 					$scope.userIn.datasPanier = response.data.cart;
->>>>>>> development
+
 					$scope.dansPanier[0]=true;
 				});
 			}
