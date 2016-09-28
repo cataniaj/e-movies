@@ -1,8 +1,26 @@
-
-
 .detail {
 	display: flex;
 }
+
+#descriptif p{
+	font-family:"palatino linotype", palatino, serif;
+	font-weight: normal;
+}
+
+h4{
+	font-family:"palatino linotype", palatino, serif;
+}
+
+#synopsis {
+	font-family:"palatino linotype", palatino, serif;
+	font-weight: normal;
+}
+
+#info h2{
+	font-family:"palatino linotype", palatino, serif;
+}
+
+
 #poster{
 	width:270px;
 	height:auto;
