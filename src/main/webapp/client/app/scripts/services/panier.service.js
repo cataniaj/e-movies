@@ -1,4 +1,5 @@
 'use strict'
+var way = "localhost:8080";
 
 /********* 
 	la factory de la gestion du panier 
@@ -28,7 +29,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function myPanier(dataJson){				 
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/getCart',
+					url: 'http://'+way+'/e-movies/rest/cart/getCart',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -41,7 +42,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function addProduct(dataJson){					
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/addToCart',
+					url: 'http://'+way+'/e-movies/rest/cart/addToCart',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};				
@@ -52,7 +53,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function deleteProduct(dataJson){
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/removeToCart',
+					url: 'http://'+way+'/e-movies/rest/cart/removeToCart',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -63,7 +64,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function addOneQuantity(dataJson){
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/increment',
+					url: 'http://'+way+'/e-movies/rest/cart/increment',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -74,7 +75,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function deleteOneQuantity(dataJson){
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/decrement',
+					url: 'http://'+way+'/e-movies/rest/cart/decrement',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -85,7 +86,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function clearPanier(dataJson){
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/removeCart',
+					url: 'http://'+way+'/e-movies/rest/cart/removeCart',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -103,7 +104,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function payment(dataJson){  
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/pay',
+					url: 'http://'+way+'/e-movies/rest/cart/pay',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -114,7 +115,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function getOrder(dataJson){  
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/order/getOrder',
+					url: 'http://'+way+'/e-movies/rest/order/getOrder',
 					headers: {'Content-Type': "application/json" },
 					data: dataJson
 				};		
@@ -128,7 +129,7 @@ routeAppControllers.factory('PanierService',['$http' ,function ($http) {
 			function httpSendRequestFunction (dataJson, endUrl, error) {
 				var req = {
 					method: 'POST',
-					url: 'http://localhost:8080/e-movies/rest/cart/'+endUrl,
+					url: 'http://'+way+'/e-movies/rest/cart/'+endUrl,
 					headers: {'Content-Type': "application/json" },
 					data: {"mail":dataJson.email}
 				};				

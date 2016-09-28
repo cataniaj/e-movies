@@ -40,7 +40,7 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 		/** pre: string; 
 			post: list de films ou series */
 		//$http.get('json/jsonListDeFilm.php').success(function(data){
-        //$http.get('http://localhost:8080/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
+        //$http.get('http://'+way+'/e-movies/rest/videos/search/all/movie/'+$scope.query).success(function(data){
         //$http.get('https://api.themoviedb.org/3/search/movie?query=jurassic+park&language=fr&api_key=db1096cd136c906c06e7d77b313df0d4').success(function(data){
 		
 		
@@ -67,18 +67,18 @@ routeAppControllers.controller('searchCtrl', ['$scope', '$location', '$routePara
 
 
 // Contrôleur de la page detail
-routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routeParams', '$http','$timeout','servicesSearch','PanierService',
-    function($scope, $location, $routeParams, $http, $timeout, servicesSearch,PanierService){
+routeAppControllers.controller('detailCtrl', ['$scope', '$location','$rootScope', '$routeParams', '$http', '$timeout','servicesSearch','PanierService',
+    function($scope, $location, $rootScope, $routeParams, $http, $timeout, servicesSearch,PanierService){
 		$scope.id = $routeParams.id;	
+
 
 		$scope.details = [];
                 
                 servicesSearch.detailsFilm($scope.id).success(function(data){	
-		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
-			//alert(data.movies[0].title);
-			$scope.details = data[0];
-		});*/
-
+            		/*$http.get('client/app/json/jsonUnSeulFilm2.php').success(function(data){
+            			//alert(data.movies[0].title);
+            			$scope.details = data[0];
+            		});*/
                     // $scope.details = data[0];
 					$scope.details = data;
                     if($scope.details.trailer == "N/A"){
@@ -106,45 +106,45 @@ routeAppControllers.controller('detailCtrl', ['$scope', '$location', '$routePara
             function panierFunction(id, titre, annee, support, quantite, pu){
 
                 var user={"idProduct":id,
-                    "mail":"user1@gmail.com",
+                    "mail":$rootScope.globals.currentUser.email,
                     "title":titre,
                     "year":annee,
                     "support":support,
                     "unitPrice":pu};
                 PanierService.panierManage().addProduct(user).then(function(response) { 
                     //alert("yess add"+response.data.cart[0].title);
-                    /*$scope.datasPanier = data.cart;
-                    $scope.dansPanier[0]=true;*/
+                    $scope.datasPanier = response.data.cart;
+                    $scope.dansPanier[0]=true;
                 });
 
-                if(dataPanier.length>0){					// test si panier non vide **
+          //       if(dataPanier.length>0){					// test si panier non vide **
 
-                        for(i=0; i<dataPanier.length; i++){
-                                if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
-                                        dataPanier[i][4]=dataPanier[i][4]+1;
-                                        // on actualiste le panier total
-                                        dataPanierTotal[0]=0;
-                                        for(j=0;j<dataPanier.length;j++){
-                                                dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
-                                        }
-										i=dataPanier.length;
-                                }
-                                else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
-                                        dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
-                                        dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-                                        dansPanier.shift();
-                                        dansPanier.push(true);
-										i=dataPanier.length;
-                                }
-                        }
-                }else{ 						// la video n'est pas dans le panier, et panier vide, on l'ajoute donc **		
-                        dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
-                        dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
-                        dansPanier.shift();
-                        dansPanier.push(true);
+          //               for(i=0; i<dataPanier.length; i++){
+          //                       if(dataPanier[i][0]==id){			// test si la video n'est pas deja present dans le panier **
+          //                               dataPanier[i][4]=dataPanier[i][4]+1;
+          //                               // on actualiste le panier total
+          //                               dataPanierTotal[0]=0;
+          //                               for(j=0;j<dataPanier.length;j++){
+          //                                       dataPanierTotal[0]=dataPanierTotal[0]+(dataPanier[j][4]*dataPanier[j][5]);
+          //                               }
+										// i=dataPanier.length;
+          //                       }
+          //                       else if((i==(dataPanier.length-1))&&(dataPanier[i][0]!=id)){
+          //                               dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+          //                               dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+          //                               dansPanier.shift();
+          //                               dansPanier.push(true);
+										// i=dataPanier.length;
+          //                       }
+          //               }
+          //       }else{ 						// la video n'est pas dans le panier, et panier vide, on l'ajoute donc **		
+          //               dataPanier.push(new Array(id, titre, annee, support, quantite, pu));
+          //               dataPanierTotal[0]= (dataPanierTotal[0] + (quantite*pu));
+          //               dansPanier.shift();
+          //               dansPanier.push(true);
 
-                }
-                $timeout(function() {$scope.addInfo = false;}, 1000);
+          //       }
+          //       $timeout(function() {$scope.addInfo = false;}, 1000);
             }
         };
         
