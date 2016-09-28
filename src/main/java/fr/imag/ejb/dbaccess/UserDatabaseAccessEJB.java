@@ -8,11 +8,10 @@ import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Local;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
+import javax.json.JsonObject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import fr.imag.entities.Admin;
-import fr.imag.entities.Cart;
 import fr.imag.entities.User;
 import fr.imag.utilities.LoginData;
 
@@ -71,6 +70,11 @@ public class UserDatabaseAccessEJB {
     		allUserString.add(u.getMail());
     	}
     	return allUserString;
+	}
+	
+	public JsonObject getInformation(String mail){
+		User res = em.find(User.class, mail);
+		return res.convertToJson();
 	}
 	
 	public void printTable(){

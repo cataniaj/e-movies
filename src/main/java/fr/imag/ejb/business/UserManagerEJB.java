@@ -3,6 +3,7 @@ package fr.imag.ejb.business;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
+import javax.json.JsonObject;
 
 import fr.imag.ejb.dbaccess.UserDatabaseAccessEJB;
 import fr.imag.entities.User;
@@ -28,6 +29,10 @@ public class UserManagerEJB {
 	
 	public void clean(){
 		dbAccess.clean();
+	}
+	
+	public JsonObject getInformation(String mail){
+		return dbAccess.getInformation(mail);
 	}
 	
 	public void printTable(){
