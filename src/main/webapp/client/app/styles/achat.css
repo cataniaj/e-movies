@@ -12,8 +12,13 @@
 	text-align: center;
 	color:black;
 	background-color: white;
-
+	text-align:center;
 	border-collapse: collapse;
+	table-layout:auto;
+}
+
+.table th{
+	text-align:center;
 }
 
 

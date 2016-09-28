@@ -6,27 +6,31 @@
         <meta charset="utf-8">
 		
 		
-		<!-- ajouter -->
-					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- 					<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  					<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  					<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
-
-                    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-                    <link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog.css">
-                    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
-                    <link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog-theme-default.css">
-                    <link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog-theme-plain.css">
-                    <link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog-custom-width.css">
-                    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>    
+					<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">					
                     
                 <!-- FIN AJOUT -->
-                <link rel="stylesheet" type="text/css" href="client/app/styles/bibliotheques/ngDialog.min.css" />
+				<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+				
+				<link rel="stylesheet" type="text/css" href="client/app/styles/bibliotheques/bootstrap.min.css" />
+				<link rel="stylesheet" type="text/css" href="client/app/styles/bibliotheques/bootstrap.min-alpha.css" />
+				<link rel="stylesheet" type="text/css" href="client/app/styles/bibliotheques/googleapisFonts.css" />
+                <link rel="stylesheet" type="text/css" href="client/app/styles/bibliotheques/ngDialog.min.css" /> 
+				
+				<link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog.css">
+				<link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog-theme-default.css">
+                <link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog-theme-plain.css">
+                <link rel="stylesheet" href="client/app/styles/bibliotheques/dialogues/ngDialog-custom-width.css">                
+				
 				<link rel="stylesheet" type="text/css" href="client/app/styles/search.css" />
 				<link rel="stylesheet" type="text/css" href="client/app/styles/home.css" />
 				<link rel="stylesheet" type="text/css" href="client/app/styles/detail.css" />
                 <link rel="stylesheet" type="text/css" href="client/app/styles/index.css" />
                 <link rel="stylesheet" type="text/css" href="client/app/styles/achat.css" />
+                <link rel="stylesheet" type="text/css" href="client/app/styles/paiement.css" />
+				
+				<script src="client/app/scripts/bibliotheques/jquery.min.js"></script>
+				<script src="client/app/scripts/bibliotheques/bootstrap.min.js"></script>
+				<script src="client/app/scripts/bibliotheques/angular.min.js"></script>
 
 		
 		
@@ -42,20 +46,20 @@
 			</header>
 			
 			<div data-spy="affix" data-offset-top="156">
-			 <nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
+			<nav class="navbar navbar-inverse"   ng-controller="loginCtrl">
 			    <div class="navbar-header">
 			      <a class="navbar-brand" href="#home">e-movies</a>
 			    </div>
 
 			    <ul class="nav navbar-nav">
-			      <li><a href="#back"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
+			      <li><a href="" ng-click="back()"><span class="glyphicon glyphicon-circle-arrow-left"/></a></li>
 			      <li><a href="#home" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-home"/></a></li>
 
 			      <li><a href="" ng-click="BtnSearch = !BtnSearch"><span class="glyphicon glyphicon-search"/></a> <!--ng-hide="BtnSearch"-->
 			      </li>
 			      <li>
 			      	<p ng-show="BtnSearch" class="searchIndex">
-			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, Acteur, Realisateur ..." pattern="[a-z]{1,50}"/>
+			            <input ng-model="queryIndex" type="text" class="txtSearchIndex" placeholder="Rechercher titre, acteur, realisateur ..."/>
 
 			            <button type="submit" ng-click="searchAction2()" ><span class="glyphicon glyphicon-search"></span></button>
 
@@ -112,36 +116,41 @@
 			    <div>
 
 			    <ul class="nav navbar-nav navbar-right" >
-			    	<div ng-show="!isConnect" class="ConnexInscr">
+
+			    	<div ng-show="!usert" class="ConnexInscr">
+
 			    		<li><a href="" data-toggle="modal" data-target="#dialogLogin"><b>Connexion</b></a> / 
 			    		<a href="" data-toggle="modal" data-target="#dialogSign_up"><b>Inscription</b></a></li>
 			   		</div>
 
-			    
-			    	<div ng-show="isConnect">
+			    	<div ng-show="usert">
 						<li><button class="btn" type="button" data-toggle="dropdown" id="userIcone"><span class="glyphicon glyphicon-user"/>
 						  <span class="caret"></span></button>
 						  <ul class="dropdown-menu">
 						    <li><a href="#achat"><span class="glyphicon glyphicon-barcode"/> Mes achats</a></li>
 						    <li><a href="" class="btn" data-toggle="modal" data-target="#dialogParameter"><span class="glyphicon glyphicon-cog" style="margin-right:7%;" /> Paramètres</a></li>
-						    <li><a href="#home" ng-click="isConnect = !isConnect""><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
+						    <li><a href="" ng-click="deconnexion()"><span class="glyphicon glyphicon-off"/> Déconnexion</a></li>
 						  </ul>
 						</li>
 					</div>
 
 
 					<!-- Panier -->
-					<li><a  href="" data-toggle="modal" data-target="#dialogPanier" ng-click="loadPanier()" class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+					<li><a  href="" data-toggle="modal" data-target="#dialogPanier"  class="btn" style=" margin-right:30%; padding-top:20%;"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
 			    	
+				</ul>
+			    <ul class="nav navbar-nav navbar-right" ng-show="usert" style="margin: auto; text-align: center;">
+			    	<li><h1 id="userName">{{userEmail}}</h1></li>
 			    </ul>
 			    </div>
+			 
   
 			</nav> 
 			<!-- Menu -->
 			<div class="middleLeft" id="menu">
                     <nav>
                         <!-- Menu <input type="checkbox" ng-model="displayFavoriteSeries"> -->
-                        <a href="" ng-click="ListMenu=!ListMenu">Menu</a>
+                        <a href="" ng-click="ListMenu=!ListMenu; GenreFilm=false; GenreSerie=false">Menu</a>
 
                         <!-- <p ng-model="displayFavoriteSeries">Menu</p> -->
                         <ul ng-show="ListMenu">
@@ -191,7 +200,7 @@
 			
 			<footer> 
 				<div class="infoFooter">
-					Contact
+					<a href="">Contact</a>
 				</div>
 			</footer> 
 		</div>
@@ -213,33 +222,24 @@
 		<script type="text/javascript" src="client/app/configRoute.js"></script>
 		<script type="text/javascript" src="client/app/scripts/controllers/pagesControllers.js"></script>
 		<script type="text/javascript" src="client/app/scripts/controllers/loginControllers.js"></script>
-		<script type="text/javascript" src="client/app/scripts/controllers/jquery-3.1.0.min.js"></script>
-		
+		<script type="text/javascript" src="client/app/scripts/services/services.js"></script>
+		<!-- <script type="text/javascript" src="client/app/scripts/controllers/jquery-3.1.0.min.js"></script> -->
 
 		
-		<!-- DIALOG LOGIN -->
-    <!-- <script type="text/ng-template" id="dialogLogin" >
-    
-       <div class="ngdialog-message" ng-controller="loginCtrl">
-            <h3>Connexion</h3>
-            <form>
-                <div class="form-group">
-                    <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd">
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox"> Remember me</label>
-                </div>
-                <button type="submit" class="btn btn-default" ng-click="isConnect=!isConnect;test()">Envoyer</button>
+		<!-- LOGIN / LOGOUT / SIGNUP SERVICES -->
+		<!-- Real user service that uses an api -->
+		<!-- <script src="app-services/user.service.js"></script> -->
+		<!-- Fake user service for demo that uses local storage -->
+		<script src="client/app/scripts/services/user.service.js"></script>
+		<script src="client/app/scripts/services/authentication.service.js"></script>
+		<script src="client/app/scripts/services/flash.service.js"></script>
+		<script src="client/app/scripts/services/panier.service.js"></script>
+		<!-- END SERVICES -->
 
-            </form>
-            <button class="inline close-this-dialog" ng-click="closeThisDialog()">Close</button>
-        </div>
-    </script> -->
+		
+
+<div ng-controller="loginValidateCtrl">	
+		<!-- DIALOG LOGIN --> 
     <div class="modal fade" id="dialogLogin" role="dialog">
 		<div class="modal-dialog">
 		<div class="modal-content">
@@ -247,36 +247,44 @@
 	    	<button type="button" class="close" data-dismiss="modal">&times;</button>
 	          <h4>Connexion</h4>
 	        </div>
-
+			<div ng-class="{'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 	        <div class="modal-body" style="padding:40px 50px;">
-	          <form role="form">
+	        
+	          <form role="form" name="myFormLogin" >
 	            <div class="form-group">
-	              <label for="email">Adresse e-mail:</label>
-	              <input type="email" class="form-control" id="email">
+					<label for="email">E-mail : </label>
+					<!--error email-->
+					<span style="color:red" ng-show="myFormLogin.email.$dirty && myFormLogin.email.$invalid">
+						<span ng-show="myFormLogin.email.$error.required">Entrer votre adresse mail *</span>
+						<span ng-show="myFormLogin.email.$error.email">Adresse mail invalide *</span>
+					</span>
+					<input type="email" name="email" id="email"  class="form-control" ng-model="vm.email" required>                    
 	            </div>
 	            <div class="form-group">
-	              <label for="psw">Mot de passe</label>
-	              <input type="password" class="form-control" id="pwd">
-	              <p style="text-align:right; "><a href="">Mot de passe oublié</a></p>
+					<label for="psw">Mot de passe : </label> 
+					<!-- error password-->
+					<span style="color:red" ng-show="myFormLogin.pwd.$touched && myFormLogin.pwd.$invalid">Entrer votre mot de passe *</span> 
+					<input type="password" class="form-control" name="pwd" id="pwd" ng-model="vm.pwd" required>					              
 	            </div>
+				<p style="text-align:right; "><a href="">Mot de passe oublié</a></p>				
 
 	            <div class="checkbox">
-	                    <label><input type="checkbox">Se souvenir de moi</label>
+	                <label><input type="checkbox" name="notif" id="notif" ng-model="vm.notif"> Se souvenir de moi</label>
 	            </div>
-	              <button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">Se connecter</button>
+	            <button type="submit" class="btn btn-block" ng-disabled="myFormLogin.pwd.$invalid || (myFormLogin.email.$dirty && myFormLogin.email.$invalid) || myFormLogin.email.$invalid" ng-click="login()"> Se connecter
+					<img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
+				</button>	
 
-	          </form>
-
+	        </form>		
 	        </div>
 	        <div class="modal-footer">
 	        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
-	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" >S'inscrire</a></p>
+	          <p><a href="" data-toggle="modal" data-target="#dialogSign_up" data-dismiss="modal" ng-click="flash=false;">S'inscrire</a></p>
 	        </div>
 	    </div>
+
 	    </div>
 	</div>
-
-
 	<!-- END DIALOG LOGIN -->
 		
 	<!-- Modal SIGN UP -->
@@ -288,31 +296,40 @@
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Inscription</h4>
 			</div>
+			<div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash" ng-bind="flash.message"></div>
 			<div class="modal-body">
-
-				<form class="form-group">					  
-					<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
-					<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
-					<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
-					<p style="display: flex;">
-					<input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" id="sel1"> <option>France</option> </select>
+				<form class="form-group" name="myFormSign_up" role="form">	
+					<span style="color:red" ng-show="myFormSign_up.nom.$touched && myFormSign_up.nom.$invalid">Nom obligatoire *</span>
+					<input type="text"  class="form-control" name="nom" id="nom" ng-model="user.nom" placeholder="Nom" required>
+					<span style="color:red" ng-show="myFormSign_up.pName.$touched && myFormSign_up.pName.$invalid">Prenom obligatoire *</span>
+					<input width="50%" type="text" class="form-control" name="pName" id="pName" ng-model="user.pName" placeholder="Prenom" required>
+					<input type="text" class="form-control" name="adress" id="adress" ng-model="user.adress" placeholder="Adresse">
+					<p style="display: flex;" >
+					<input type="number" class="form-control" name="zipCode" id="zipCode" ng-model="user.zipCode" placeholder="Code Postal" min="0" max="99999" title="Ex: 38000"> <select id="country" class="form-control" style="margin-left:1%;" name="country"> <option>France</option> </select>
 					</p>
-					<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
-					<p><input type="email" class="form-control" id="mail" placeholder="E-mail"></p>
-					<p><input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> </p>
-					<p><input type="password" class="form-control" id="pwd2" placeholder="Confirmer le mot de Passe"></p>
+					<input type="tel" class="form-control"  name="tel" id="tel" ng-model="user.tel" placeholder="Telephone">
+					<span style="color:red" ng-show="(myFormSign_up.email.$dirty && myFormSign_up.email.$invalid) || myFormSign_up.email.$touched">
+						<span ng-show="myFormSign_up.email.$error.required">Email obligatoire *</span>
+						<span ng-show="myFormSign_up.email.$error.email">Adresse mail invalide *</span>
+					</span>
+					<input type="email" name="email" id="email" class="form-control" ng-model="user.email" placeholder="E-mail" required>
+					<span style="color:red" ng-show="myFormSign_up.pwd1.$touched && myFormSign_up.pwd1.$invalid">Mot de passe obligatoire *</span>
+					<input type="password" class="form-control" name="pwd1" id="pwd1" ng-model="user.pwd1" placeholder="Mot de Passe" required>
+					<span style="color:red" ng-show="myFormSign_up.pwd2.$touched && myFormSign_up.pwd2.$invalid">Confirmer mot de passe obligatoire *</span>
+					<span style="color:red" ng-show="(user.pwd1 != user.pwd2)&& (user.pwd2)">Mots de passe differents *</span>					
+					<input type="password" class="form-control" name="pwd2" id="pwd2" ng-model="user.pwd2" placeholder="Confirmer le mot de Passe" required>
 					<div class="checkbox">
-						<label><input type="checkbox"> <b>Je souhaite être averti par e-mail des nouveaux ajouts  </b></label>
-					</div>		
-
-					<button type="submit" class="btn btn-block" data-dismiss="modal" ng-click="isConnect = !isConnect">S'inscrire</button>			  
+						<label><input type="checkbox" name="notif" id="notif" ng-model="user.notif"> <b>Je souhaite être averti par e-mail des nouveaux ajouts  </b></label>
+					</div>	
+				
+					<button type="submit" class="btn btn-block" ng-disabled="myFormSign_up.nom.$invalid || myFormSign_up.pName.$invalid || myFormSign_up.pwd1.$invalid || (myFormSign_up.email.$dirty && myFormSign_up.email.$invalid) || myFormSign_up.email.$invalid || (user.pwd1 != user.pwd2) || !user.pwd1 || !user.pwd2" ng-click="signUp()" >S'inscrire
+						<img ng-if="dataLoadingSign_up" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /> 
+					</button>		
 				</form>
-				
 			</div>
-			<div class="modal-footer">
-				
+			<div class="modal-footer">				
 				<button type="button" class="btn btn-default pull-left" data-dismiss="modal" >Quitter</button>
-				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" >Se connecter</a></p>
+				<p><a href="" data-toggle="modal" data-target="#dialogLogin" data-dismiss="modal" ng-click="flash=false;">Se connecter</a></p>
 
 			</div>
 		  </div>
@@ -320,18 +337,23 @@
 		</div>
 	  </div>
 	 <!-- End Modal SIGN UP --> 
-	 
+
+</div>
+
+
+
 	 <!-- Modal PANIER -->
 
-	  <div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
+	<div class="modal fade" id="dialogPanier" role="dialog" ng-controller="panierCtrl">
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
-		  <div class="modal-content" ng-controller="panierCtrl">
+		<div class="modal-content" ng-controller="panierCtrl">
 			<div class="modal-header">
 			  <button type="button" class="close" data-dismiss="modal">&times;</button>
 			  <h4 class="modal-title">Mon Panier</h4>
 			</div>
 			<div class="modal-body" ng-show="dansPanier[0]">
+				<form name="myFormPanier">
 				<table class="table table-hover">
 					<thead>
 					<tr>
@@ -344,17 +366,28 @@
 						<th>Options</th>
 					</tr>
 					</thead>
-					<tbody>					
-					<tr ng-repeat="data in dataPanier1">
-						<td>{{data[0]}} </td>
-						<td>{{data[1]}}</td>
+					<tbody>		
+						<tr ng-repeat="data in datasPanier">
+							<td>{{data.title}} </td>
+							<td>{{data.year}}</td>
+							<td>{{data.support}}</td>
+							<td><input type="number" class="form-control" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:80px" value={{data.quantity}} ng-change="updateQuantite(data.idProduct, data.quantity)" min="1" max="5"/></td>
+							<td>{{data.unitPrice}}€</td>
+							<td>{{data.quantity*data.unitPrice}}€</td>
+							<td><button type="button" class="btn btn-primary" ng-click="deletePanier(data.idProduct)" data-dismiss="modal"><span class="glyphicon glyphicon-trash"></span></button>
+							<!-- <button type="button" ng-click="deletePanier({{data.idProduct}})"><span class="glyphicon glyphicon-trash"></span></a> -->
+							<!-- <a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						 -->
+						</tr>
+					<!--tr ng-repeat="data in dataPanier1">
+						<td>{{data[1]}} </td>
 						<td>{{data[2]}}</td>
 						<td>{{data[3]}}</td>
-						<td>{{data[4]}}€</td>
-						<td>{{data[3]*data[4]}}€</td>
+						<td><input type="number" class="form-control" ng-init="txtQuantite=data[4]" ng-model="data[4]" style="width:80px" value={{data[4]}} ng-change="updateQuantite($index, data[4])" min="1" max="5"/></td>
+						<td>{{data[5]}}€</td>
+						<td>{{data[4]*data[5]}}€</td>
 						<td><a href="" ng-click="deletePanier($index)"><span class="glyphicon glyphicon-trash"></span></a>
 							<a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a></td>						
-					</tr>	
+					</tr-->	
 					<tfoot>
 					<tr><td colspan="7"></td></tr>
 
@@ -362,23 +395,69 @@
 
 					</tbody>
 				</table>
+				</form>
 					<a href="" data-toggle="modal" data-target="#deleteP"> Vider Panier<span class="glyphicon glyphicon-trash"></span></a>
 			</div>	
 			<div class="PanierVide" ng-show="!dansPanier[0]">
 				<h3>Le panier est vide !</h3>
 			</div>	
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" >Payer</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="dansPanier[0]==false" ng-click="payer()">Payer</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
-		  </div>		  
+		</div>		  
 		</div>		
-	  </div>
-	 <!-- End Modal PANIER --> 
+
+	</div>
+		<!-- End Modal PANIER --> 
+		
+	<!-- PAIEMENT -->
+	<!--div class="modal fade" id="paiement" role="dialog">
+	    <div class="modal-dialog">		
+		  <!-- Modal content->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Paiement</h4>
+			</div-->
+			<div class="modal fade" id="paiement" role="dialog">
+				<div class="modal-dialog">
+				<div class="card-bounding">
+					<aside>Card Number:</aside>
+					<div class="card-container">
+						<div class="card-type"></div>
+						<input placeholder="0000 0000 0000 0000" onkeyup="$cc.validate(event)" />
+						<div class="card-valid">&#xea10;</div>
+					</div>
+
+					<div class="card-details clearfix">
+						<div class="expiration">
+							<aside>Expiration Date</aside>
+							<input onkeyup="$cc.expiry.call(this,event)" maxlength="7" placeholder="mm/yyyy" />
+						</div>
+
+						<div class="cvv">
+							<aside>CVV</aside>
+							<input placeholder="XXX"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+					<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
+					</div>
+				</div>				
+			</div>
+			</div>
+			<!--div class="modal-footer">
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" >Ok</button>
+			</div>
+		</div>
+	</div-->
+	<!-- End PAIEMENT -->
 	 
 	 
-<!-- Modal PARAMETER -->
-	  <div class="modal fade" id="dialogParameter" role="dialog">
+	<!-- Modal PARAMETER -->
+	<div class="modal fade" id="dialogParameter" role="dialog">
+
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
@@ -388,28 +467,37 @@
 			</div>
 			<div class="modal-body">
 				<table class="table table-hover">
+				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
-							<div class="paramLeft">
-								<p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
-					<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
-					<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
-					<p style="display: flex; width:40%;">
-					<input type="text" class="form-control" id="zipCode" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" width:40%;" id="sel1"> <option>France</option> </select>
-					</p>
-					<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p>
-							</div>
-						</td><td>	
+						<div class="paramLeft">
+							<!-- <p>{{user.lastName}}</p>
+							<p>{{user.firstName}}</p>
+							<p>{{user.address}}</p>
+							<p>{{user.zipcode}} {{user.country}}</p>
+							<p>{{user.city}}</p>
+							<p>{{user.phone}}</p>
+							<p>{{user.coins}}</p>
+ -->
+							<!-- <p><input type="text" class="form-control" id="name" placeholder="Nom"></p>
+							<p><input width="50%" type="text" class="form-control" id="pName" placeholder="Prenom"></p>
+							<p><input type="text" class="form-control" id="adress" placeholder="Adresse"> </p>
+							<p style="display: flex;">
+							<input type="text" class="form-control" id="zipCode" style="width:80px" placeholder="Code Postal" title="Ex: 38000"> <select id="country" class="form-control" id="sel1"> <option>France</option> </select>
+							</p>
+							<p><input type="tel" class="form-control" id="phone" placeholder="Telephone"></p> -->
+						</div>
+						<!-- </td><td>	
 							<div class="paramRight">
 								<input type="email" class="form-control" id="mail" placeholder="Email">
 								<input type="password" class="form-control" id="pwd" placeholder="Mot de Passe"> 
 								</b> <input type="password" class="form-control" id="pwd2" placeholder="Mot de Passe">	
 							</div>
-						</td></tr>
+						</td></tr> -->
 					<tr><td colspan="2"></td></tr>
 					<tr><td colspan="2">
-						<div class="checkbox">
-								<label><input type="checkbox"> <b>j'aimerais de recevoir des notifications par mail</b></label>
-						</div>
+					<div class="checkbox">
+						<label><input type="checkbox"> <b>Je souhaite être averti par e-mail des nouveaux ajouts</b></label>
+					</div>
 					</td></tr>
 					<tr><td colspan="2"><a href="" class="btn" data-toggle="modal" data-target="#deleteC">Supprimer Compte<span class="glyphicon glyphicon-trash"></span></a></td></tr>
 				</table>					
@@ -421,10 +509,10 @@
 		  </div>
 		  
 		</div>
-	  </div>
+	</div>
 
 	  <!-- Suppression élément -->
-	  <div class="modal fade" id="deleteP" role="dialog">
+	  <div class="modal fade" id="deleteP" role="dialog"> 
 		<div class="modal-dialog" style="margin-right:1%;">		
 		  <!-- Modal content-->
 		  <div class="modal-content">
@@ -436,8 +524,10 @@
 				        <p>Voulez-vous supprimer tout le panier ?</p>
 				    </div>
 				    <div class="modal-footer" ng-controller="panierCtrl">
+				    	
 				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Non</a>
-				  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Oui</a>
+				      <!-- <button type="button" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Valider</button> -->
+				  	  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Oui</a>
 		    	</div>
 			</div>
 		</div>

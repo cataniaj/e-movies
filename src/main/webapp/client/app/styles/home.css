@@ -1,16 +1,19 @@
-.best table{
+table{
 	margin-top: 1%;
 	margin-bottom: 4%;
 	text-decoration:none;
 	text-align: center;
-	border-collapse: collapse;
-	width: 90%;
-	border-spacing:100px 200px;
+	/*border-collapse: collapse;*/
+	/*width: 90%;*/
+	border-spacing:37px 0px;
+
+    border-collapse: separate;
 
 }
 
-.best table>tr>td>a>img{
-	width: 100px;
+img{
+	width: 140px;
+	height: 200px;
 }
 
 #dataSuggest{
@@ -19,13 +22,14 @@
 #dataBest{
 	padding-top: 5%;
 }
+/*
+.best table>tr>td{
+	width: 450px;
+	background-color: yellow;
+	margin: auto
 
-
-.poster1{
-	width: 80%;
 }
-
-
+*/
 
 h1{
 	font-family:"palatino linotype", palatino, serif;
