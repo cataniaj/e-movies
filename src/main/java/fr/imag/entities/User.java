@@ -7,6 +7,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 

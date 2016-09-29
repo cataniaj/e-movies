@@ -7,8 +7,10 @@ package fr.imag.entities;
 
 import javax.json.Json;
 import javax.json.JsonObject;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 /**
  * This is the ejb which represents a movie
@@ -26,6 +28,7 @@ public class Movie extends Product{
 	private String poster;
 	private String director;
 	private String actors;
+	@Column(name="text", columnDefinition="LONGTEXT")
 	private String overview;
 	private String runtime;
 	private String trailer;
@@ -105,7 +108,8 @@ public class Movie extends Product{
 	}
 
 	public void setOverview(String overview) {
-		this.overview = (overview.length() > 254) ? overview.substring(0, 254): overview;
+		this.overview = overview;
+		//this.overview = (overview.length() > 254) ? overview.substring(0, 254): overview;
 	}
 
 	public String getRuntime() {
