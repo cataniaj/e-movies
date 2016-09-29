@@ -54,6 +54,7 @@ var routeAppControllers = angular.module('routeAppControllers', ['ngDialog', 'ng
 var dataPanier=[];
 var dataPanierTotal=[0];
 var dansPanier = [false];
+var totalPanier = [0];
 
 //var usert = [false];
 
