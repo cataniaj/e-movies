@@ -19,7 +19,7 @@ routeAppControllers.controller('loginCtrl', ['$scope', '$location', '$routeParam
 			AuthenticationService.Authentication().Login(userLog, function (response) {
 				if (response.success) {
 					AuthenticationService.Authentication().SetCredentials(userLog.mail, userLog.password);			
-					//$scope.$apply();				
+					//$scope.$apply();	
 					$scope.usert=true;
 					$scope.userEmail = $rootScope.globals.currentUser.email;
 					// $scope.user = $rootScope.globals.currentUser;
@@ -57,7 +57,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         // $scope.dataPanier1=dataPanier;
         $scope.dansPanier=dansPanier;
         
-		$scope.datasPanier = [];
+		//$scope.datasPanier = [];
 
         $scope.dataAchat1=dataAchat;
         $scope.dataAvis1=dataAvis;
@@ -66,7 +66,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 		if($rootScope.globals.currentUser){
 			loadPanier();
 		}else{
-			$scope.datasPanier=[];
+			$scope.userIn.datasPanier=[];
 		}
 		
 		function loadPanier(){			
@@ -75,6 +75,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){ 
 					$scope.userIn.datasPanier = response.data.cart;
+					alert(response.data.totalPrice);
 					$scope.dansPanier[0]=true;
 				});
 			}
@@ -89,26 +90,33 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 		}
 		
         // A FAIRE
-        $scope.updateQuantite = function (index, qte){        
-   //      	if($rootScope.globals.currentUser.email){				
-			// 	var user={"mail":$rootScope.globals.currentUser.email};	
-			// 	//alert(user.mail);			
-			// 	PanierService.panierManage().myPanier(user).then(function(response){ 
-			// 		$scope.datasPanier = response.data.cart;
-			// 	});
-			// }
-
-            $scope.dataPanier1[index][4]=qte;
+        $scope.updateQuantitePlus = function (index, idP){    
+			var user={"idProduct":idP, "mail":$rootScope.globals.currentUser.email};	
+				PanierService.panierManage().addOneQuantity(user).then(function(response){ 
+						$scope.userIn.datasPanier = response.data.cart;
+				});
+            /*$scope.dataPanier1[index][4]=qte;
 			$scope.dataPanierTotal[0]=0;
 			for(i=0;i<$scope.dataPanier1.length;i++){
 				$scope.dataPanierTotal[0]=$scope.dataPanierTotal[0]+($scope.dataPanier1[i][4]*$scope.dataPanier1[i][5]);
-			}
+			}*/
+        };
+		$scope.updateQuantiteMoins = function (index, idP){        			
+			var user={"idProduct":idP, "mail":$rootScope.globals.currentUser.email};	
+				PanierService.panierManage().deleteOneQuantity(user).then(function(response){ 
+						$scope.userIn.datasPanier = response.data.cart;
+				});
+            /*$scope.dataPanier1[index][4]=qte;
+			$scope.dataPanierTotal[0]=0;
+			for(i=0;i<$scope.dataPanier1.length;i++){
+				$scope.dataPanierTotal[0]=$scope.dataPanierTotal[0]+($scope.dataPanier1[i][4]*$scope.dataPanier1[i][5]);
+			}*/
         };
 		
         $scope.clearPanier = function(){
         	var user={"mail":$rootScope.globals.currentUser.email};	
         	PanierService.panierManage().clearPanier(user).then(function(response){ 
-					$scope.datasPanier = response.data.cart;
+					$scope.userIn.datasPanier = response.data.cart;
 					$scope.dansPanier[0]=false;
 				});
             // while(dataPanier.length){                
@@ -123,7 +131,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 
         	var json={"mail":$rootScope.globals.currentUser.email,"idProduct":idP};	  
         	PanierService.panierManage().deleteProduct(json).then(function(response){ 
-        		$scope.datasPanier = response.data.cart;
+        		$scope.userIn.datasPanier = response.data.cart;
         	});
 
             // dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
@@ -134,7 +142,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 		$scope.payer=function(){
 			var user={"mail":$rootScope.globals.currentUser.email};	  
         	PanierService.panierManage().payment(user).then(function(response){ 
-        		$scope.datasPanier = response.data.cart;
+        		$scope.userIn.datasPanier = response.data.cart;
         		$scope.dansPanier[0]=false;
         	});
 			// PanierService.panierManage().payment(user).then(function(response){ 

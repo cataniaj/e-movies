@@ -122,6 +122,14 @@ public class CartDatabaseAccessEJB {
 		return total;
 	}
 	
+	private int totalPriceCart(List<Cart> allCart){
+		int total = 0;
+		for(Cart c : allCart){
+			total += Integer.parseInt(c.getQuantity())*Integer.parseInt(c.getUnitPrice());
+		}
+		return total;
+	}
+	
 	public void payCart(String user){
 		
 		User customer = em.find(User.class, user);
@@ -174,7 +182,7 @@ public class CartDatabaseAccessEJB {
 				cartListJson = cartListJson + "," + allCart.get(i).convertToJson().toString();
 			}
 		}
-		cartListJson = cartListJson + "]}";
+		cartListJson = cartListJson + "], \"totalPrice\":\"" + totalPriceCart(allCart) + "\"}";
 		JsonReader r = Json.createReader(new StringReader(cartListJson));
 		JsonObject obj = r.readObject();
 		return obj;

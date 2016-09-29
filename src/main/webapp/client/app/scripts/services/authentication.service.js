@@ -20,7 +20,7 @@ routeAppControllers.factory('AuthenticationService', ['$http', '$cookieStore', '
 						UserService.userManage().GetByUser(userLog)
 							.then(function (user) {
 								if (user !== null && user.status=="200" && user.data.password === userLog.password && user.data.mail === userLog.mail) {
-									response = { success: true, data: user.data};
+									response = { success: true, data: user.data};									
 								} else {
 									response = { success: false, message: 'email ou mot de passe incorrect' };
 								}

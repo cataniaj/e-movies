@@ -13,6 +13,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				service.Create = Create;
 				service.Update = Update;
 				service.Delete = Delete;			
+				service.InfoUser = InfoUser;			
 				return service;
 
 				function GetAll() {
@@ -60,7 +61,7 @@ routeAppControllers.factory('UserService', ['$http', '$q', '$filter', '$timeout'
 				function InfoUser(user){
 					var req = {
 						 method: 'POST',
-						 url: 'http://'+way+'/e-movies/rest/users/infoUser',
+						 url: 'http://'+way+'/e-movies/rest/users/information',
 						 headers: {
 						   'Content-Type': "application/json"                             
                         },
