@@ -193,3 +193,33 @@ routeAppControllers.controller('achatCtrl', ['$scope','$location', '$routeParams
     }
 ]);
 
+
+// Contrôleur de la page achat
+routeAppControllers.controller('settingCtrl', ['$scope','$location', '$http', '$rootScope', '$timeout','$interval','UserService',
+    function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, $interval, UserService){
+		var logID={'mail':'user1@gmail.com'};
+									UserService.userManage().InfoUser(logID).then(function (info) {
+										//alert(info.data.mail);
+										$rootScope.userIn.firstName = info.data.firstName;
+										$rootScope.userIn.lastName = info.data.lastName;
+										$rootScope.userIn.address = info.data.address;
+										//$rootScope.userIn.zipcode = info.data.zipcode;
+										$rootScope.userIn.phone = info.data.phone;
+										//$rootScope.userIn.city = info.data.city;
+										//$rootScope.userIn.country = info.data.country;
+										$rootScope.userIn.mail = info.data.mail;									
+										
+									});
+		
+		//$scope.userIn.firstName = $rootScope.userIn.firstName;
+		$scope.userIn.lastName = $rootScope.userIn.lastName;
+		$scope.userIn.address = $rootScope.userIn.address;
+		//$rootScope.userIn.zipcode = info.data.zipcode;
+		$scope.userIn.phone = $rootScope.userIn.phone;
+		/*$rootScope.userIn.city = info.data.city;
+		$rootScope.userIn.country = info.data.country;*/
+		$scope.userIn.mail = $rootScope.userIn.mail;
+		
+		alert($rootScope.userIn.mail);
+    }
+]);
