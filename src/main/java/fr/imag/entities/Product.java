@@ -14,7 +14,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Transient;
 
-
+/**
+ * L'EJB qui représente le produit
+ * @author Jerem
+ *
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="TYPE_CATEGORY")
@@ -30,6 +34,9 @@ public abstract class Product {
 	protected int price;
 	protected int stock;
 		
+	/**
+	 * Constructeur par defaut
+	 */
 	public Product(){
 		support = "DVD";
 		stock = 0;
@@ -64,6 +71,9 @@ public abstract class Product {
 		this.stock = stock;
 	}
 	
+	/**
+	 * Affiche le produit en console
+	 */
 	public void print(){
 		System.out.println("idProduct: "+idProduct);
 		System.out.println("support: "+support);

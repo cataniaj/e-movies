@@ -26,9 +26,16 @@ public class Cart {
 	private String quantity;
 	private String unitPrice;
 	
+	/**
+	 * Constructeur par défaut
+	 */
 	public Cart(){
 	}
 	
+	/**
+	 * Constructeur selon un json
+	 * @param item
+	 */
 	public Cart(JsonObject item){
 		idProduct = item.getString("idProduct");
 		mailUser = item.getString("mail");
@@ -103,6 +110,10 @@ public class Cart {
 		this.support = support;
 	}
 	
+	/**
+	 * Convertit au format Json un item du panier
+	 * @return Le json representant un item du panier
+	 */
 	public JsonObject convertToJson(){
 		JsonObject obj = Json.createObjectBuilder()
 				.add("idProduct", idProduct)
@@ -116,6 +127,9 @@ public class Cart {
 		return obj;
 	}
 	
+	/**
+	 * Affiche en console un item du panier
+	 */
 	public void print(){
 		System.out.println("idCartItem: "+idCartItem);
 		System.out.println("idProduct: "+idProduct);

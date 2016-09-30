@@ -10,6 +10,11 @@ import javax.json.Json;
 
 import javax.json.JsonObject;
 
+/**
+ * Représente une série télé
+ * @author Jerem
+ *
+ */
 public class FullTv {
 	
 	private final String defaultValue = "N/A ";

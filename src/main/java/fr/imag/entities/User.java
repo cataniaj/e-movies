@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  * This is the ejb which represents an user
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class User {
 	
+	@Transient
 	private String defaultValue = "N/A";
 	
 	@Id
@@ -36,6 +38,9 @@ public class User {
 	@OneToMany(mappedBy="user", cascade=CascadeType.REMOVE)
 	private Collection<OrderAll> allOrders;
 
+	/**
+	 * Constructeur par defaut
+	 */
 	public User(){
 		mail = defaultValue;
 		password = defaultValue;
@@ -134,10 +139,18 @@ public class User {
 		this.allOrders = allOrders;
 	}
 
+	/**
+	 * Ajoute une commande au client
+	 * @param order La commande a ajouter
+	 */
 	public void addAnOrder(OrderAll order){
 		this.allOrders.add(order);
 	}
 	
+	/**
+	 * Convertit un utilisateur au format Json
+	 * @return Le client au format json
+	 */
 	public JsonObject convertToJson(){
 		JsonObject user = Json.createObjectBuilder()
 				.add("mail", mail)
@@ -153,6 +166,9 @@ public class User {
 		return user;
 	}
 	
+	/**
+	 * Affiche un utilisateur en console
+	 */
 	public void print(){
 		System.out.println("mail: "+mail);
 		System.out.println("password: "+password);

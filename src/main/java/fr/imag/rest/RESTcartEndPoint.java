@@ -26,6 +26,12 @@ import fr.imag.ejb.business.UserManagerEJB;
 import fr.imag.entities.Cart;
 import fr.imag.entities.User;
 
+/**
+ * Module REST pour les acces cart
+ * @author Jerem
+ *
+ */
+
 @Path("/cart")
 public class RESTcartEndPoint {
 	@Inject private CartManagerEJB cartMngr;
@@ -35,6 +41,11 @@ public class RESTcartEndPoint {
 	@Inject private OrderAllManagerEJB orderAllMngr;
 	@Inject private OrderLineManagerEJB orderLineMngr;
 
+	/**
+	 * Un test
+	 * @param data
+	 * @return
+	 */
     @GET
     @Path("/getTest")
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,6 +53,11 @@ public class RESTcartEndPoint {
     	return cartMngr.cartInJson("user1@gmail.com");
     }
 
+    /**
+     * Renvoie le contenu du panier d'un client
+     * @param data Un json contenant le mail du client : "mail"
+     * @return Un json contenant le panier du client
+     */
     @POST
     @Path("/getCart")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,6 +73,11 @@ public class RESTcartEndPoint {
     	}
     }
 	
+    /**
+     * Ajoute un produit dans le panier
+     * @param data Un json : "mail", "idProduct"
+     * @return Un json représentant le panier ou "Une erreur est survenue"
+     */
     @POST
     @Path("/addToCart")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -78,6 +99,11 @@ public class RESTcartEndPoint {
 		}
     }
     
+    /**
+     * Retire un produit du panier d'un client
+     * @param data Un json: "mail", "idProduct"
+     * @return Le nouveau panier du client en json
+     */
     @POST
     @Path("/removeToCart")
 	@Consumes({"application/json"})
@@ -95,6 +121,11 @@ public class RESTcartEndPoint {
 //		}
     }
     
+    /**
+     * Efface le panier d'un client
+     * @param data Un json: "mail"
+     * @return Le nouveau panier du client en json
+     */
     @POST
     @Path("/removeCart")
 	@Consumes({"application/json"})
@@ -110,6 +141,11 @@ public class RESTcartEndPoint {
 		}
     }
 
+    /**
+     * L'incremente la quantité d'un produit dans le panier d'un client
+     * @param data Un json: "mail", "idProduct"
+     * @return Le nouveau panier du client en json
+     */
     @POST
     @Path("/increment")
 	@Consumes({"application/json"})
@@ -125,6 +161,11 @@ public class RESTcartEndPoint {
     	}
     }
 
+    /**
+     * Decremente la quantité d'un produit dans le panier d'un client
+     * @param data Un json: "mail", "idProduct"
+     * @return Le nouveau panier du client en json
+     */
     @POST
     @Path("/decrement")
 	@Consumes({"application/json"})
@@ -140,6 +181,11 @@ public class RESTcartEndPoint {
     	}
     }
     
+    /**
+     * Paie le panier d'un client
+     * @param data Un json: "mail"
+     * @return true ou false
+     */
     @POST
     @Path("/pay")
 	@Consumes({"application/json"})
@@ -156,6 +202,9 @@ public class RESTcartEndPoint {
     }
     
 
+    /**
+     * Un test
+     */
     @GET
     @Path("/test")
     public void test() {

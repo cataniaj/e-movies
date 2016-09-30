@@ -11,6 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+/**
+ * L'EJB qui represente une ligne de commande
+ * @author Jerem
+ *
+ */
 @Entity
 public class OrderLine {
 
@@ -24,6 +29,9 @@ public class OrderLine {
 	@ManyToOne
 	private OrderAll order;
 	
+	/**
+	 * Constructeur par defaut
+	 */
 	public OrderLine(){
 		quantity = "" + 0;
 		order = null;
@@ -66,6 +74,9 @@ public class OrderLine {
 		return idOrderLine;
 	}
 
+	/**
+	 * Affiche en console une commande
+	 */
 	public void print(){
 		System.out.print("idOrderLine: "+idOrderLine);
 		System.out.print("idProduct: "+idProduct);

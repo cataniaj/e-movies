@@ -33,6 +33,9 @@ public class Movie extends Product{
 	private String runtime;
 	private String trailer;
 	
+	/**
+	 * Constructeur par defaut
+	 */
 	public Movie(){
 		super();
 		idTMDB = 0;
@@ -128,6 +131,9 @@ public class Movie extends Product{
 		this.trailer = trailer;
 	}
 	
+	/**
+	 * Affiche en console le film
+	 */
 	public void print(){
 		super.print();
 		System.out.println("idTMDB: "+idTMDB);
@@ -142,6 +148,10 @@ public class Movie extends Product{
 		System.out.println("trailer: "+trailer);
 	}
 
+	/**
+	 * Convertit en Json minimal un film
+	 * @return La description minimale d'un film en json
+	 */
 	public JsonObject convertToShortJson(){		
 		JsonObject film = Json.createObjectBuilder()
 				.add("title", title)
@@ -152,7 +162,10 @@ public class Movie extends Product{
 		return film;
 	}
 	
-	// For the administrator: view stock
+	/**
+	 * Convertit au format json un produit
+	 * @return Le produit au format Json
+	 */
 	public JsonObject convertToJsonProduct(){
 		JsonObject film = Json.createObjectBuilder()
 				.add("idProduct", idProduct)
@@ -165,7 +178,10 @@ public class Movie extends Product{
 		return film;
 	}
 	
-	// For the site web: json which represent the film
+	/**
+	 * Convertit au format json la description complete d'un film
+	 * @return Le film au format json
+	 */
 	public JsonObject convertToJsonFull(){
 		JsonObject film = Json.createObjectBuilder()
 				.add("idProduct", idProduct)

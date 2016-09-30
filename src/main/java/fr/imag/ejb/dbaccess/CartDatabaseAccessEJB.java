@@ -25,7 +25,11 @@ import fr.imag.entities.Cart;
 import fr.imag.entities.OrderAll;
 import fr.imag.entities.OrderLine;
 import fr.imag.entities.User;
-
+/**
+ * L'EJB qui gère les accès à la table Cart
+ * @author Jerem
+ *
+ */
 @Singleton
 @Local
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
@@ -34,6 +38,11 @@ public class CartDatabaseAccessEJB {
 	@Inject OrderAllManagerEJB orderAllMngr;
 	@Inject OrderLineManagerEJB orderLineMngr;
 	
+	/**
+	 * Recherche si un produit est présent dans le panier
+	 * @param item Le produit concerne
+	 * @return Le produit trouvé ou null
+	 */
 	public Cart isPresentInTheCart(Cart item){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -46,6 +55,10 @@ public class CartDatabaseAccessEJB {
     	return null;
 	}
 	
+	/**
+	 * Efface le panier d'un utilisateur
+	 * @param mail L'utilisateur concerne
+	 */
 	public void removeCart(String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -56,6 +69,10 @@ public class CartDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Ajoute au panier un produit
+	 * @param item Le produit concerne
+	 */
 	public void addToCart(Cart item){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -71,6 +88,11 @@ public class CartDatabaseAccessEJB {
 		em.persist(item);
 	}
 	
+	/**
+	 * Retire du panier un produit 
+	 * @param idProduct Le produit a retire
+	 * @param mail L'utilisateur concerne
+	 */
 	public void removeToCart(String idProduct, String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -82,6 +104,11 @@ public class CartDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Ajoute une quantité d'un produit deja présent
+	 * @param idProduct Le produit concerne
+	 * @param mail L'utilisateur concerne
+	 */
 	public void incrementOneProduct(String idProduct,  String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -95,6 +122,11 @@ public class CartDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Retire une quantité d'un produit deja present
+	 * @param idProduct Le produit concerne
+	 * @param mail L'utilisateur concerne
+	 */
 	public void decrementOneProduct(String idProduct,  String mail){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -107,6 +139,11 @@ public class CartDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Renvoie le panier d'un utilisateur
+	 * @param user L'utilisateur concerne
+	 * @return Une liste de "Cart" représentant le panier
+	 */
 	private List<Cart> allCartForUser(String user){
 		Query query = em.createQuery("SELECT c FROM Cart c "+
 				"WHERE c.mailUser=:param");
@@ -114,6 +151,11 @@ public class CartDatabaseAccessEJB {
 		return (List<Cart>) query.getResultList();
 	}
 	
+	/**
+	 * Calcule le prix total du panier
+	 * @param allCart Le panier
+	 * @return Le prix du panier
+	 */
 	private int totalPrice(List<OrderLine> allCart){
 		int total = 0;
 		for(OrderLine ol : allCart){
@@ -122,6 +164,11 @@ public class CartDatabaseAccessEJB {
 		return total;
 	}
 	
+	/**
+	 * Calcule le prix total du panier
+	 * @param allCart Le panier
+	 * @return Le prix du panier
+	 */
 	private int totalPriceCart(List<Cart> allCart){
 		int total = 0;
 		for(Cart c : allCart){
@@ -130,6 +177,10 @@ public class CartDatabaseAccessEJB {
 		return total;
 	}
 	
+	/**
+	 * Paye le panier d'un utilisateur
+	 * @param user L'utilisateur concerne
+	 */
 	public void payCart(String user){
 		
 		User customer = em.find(User.class, user);
@@ -156,6 +207,9 @@ public class CartDatabaseAccessEJB {
     	
 	}
 	
+	/**
+	 * Efface la table Cart
+	 */
 	public void clean(){
     	Query query = em.createQuery("SELECT c FROM Cart c");
     	List<Cart> allCart = (List<Cart>) query.getResultList();
@@ -164,6 +218,9 @@ public class CartDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Affiche la table en console
+	 */
 	public void printTable(){
     	Query query = em.createQuery("SELECT c FROM Cart c ");
     	List<Cart> cartList = (List<Cart>) query.getResultList();
@@ -172,6 +229,11 @@ public class CartDatabaseAccessEJB {
     	}
 	}
 
+	/**
+	 * Convertit le panier d'un utilisateur au format Json 
+	 * @param user L'utilisateur concerne
+	 * @return Le panier au format Json
+	 */
 	public JsonObject convertToJsonArray(String user){
 		List<Cart> allCart = allCartForUser(user);
 		String cartListJson = "{\"cart\":[";

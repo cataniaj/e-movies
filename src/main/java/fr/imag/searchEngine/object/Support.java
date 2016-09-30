@@ -1,10 +1,10 @@
 package fr.imag.searchEngine.object;
 
-/*
- *	Author:      Jérémy Leyvraz
- *	Date:        11 sept. 2016
+/**
+ * Enumeration décrivant le support d'un produit
+ * @author Jerem
+ *
  */
-
 public enum Support {
 	
 	DVD("DVD"),

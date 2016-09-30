@@ -19,10 +19,20 @@ public class VideoManagerEJB {
 	@Inject private SearchEngine engine;
 	@EJB private MovieDatabaseAccessEJB dbAccess;
 	
+	/**
+	 * Recherche un produit (film) dans la base de donnees
+	 * @param url L'url de la recherche 
+	 * @return Un objet Json contenant la liste des résultats
+	 */
 	public JsonObject search(String url){
 		return engine.search(url);
 	}
 	
+	/**
+	 * Demande le stock disponible d'un produit
+	 * @param idProduct Le produit concerne
+	 * @return Le stock disponible du produit
+	 */
 	public int getStock(int idProduct){
 		return dbAccess.getStock(idProduct);
 	}

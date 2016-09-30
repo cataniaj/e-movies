@@ -25,12 +25,23 @@ import fr.imag.entities.Movie;
 import fr.imag.entities.OrderAll;
 import fr.imag.entities.OrderLine;
 
+/**
+ * L'EJB qui gère les acces à la table OrderLine
+ * @author Jerem
+ *
+ */
 @Singleton
 @Local
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class OrderLineDatabaseAccessEJB {
 	@Inject EntityManager em;
 
+	/**
+	 * Construit une commande
+	 * @param allCart La liste des produits représentant le panier 
+	 * @param order La commande a créer
+	 * @return La liste de toutes les lignes de commandes
+	 */
 	public List<OrderLine> buildOrderLine(List<Cart> allCart, OrderAll order){
 		List<OrderLine> result = new ArrayList<OrderLine>();
 		for(Cart c : allCart){
@@ -45,6 +56,11 @@ public class OrderLineDatabaseAccessEJB {
 		return result;
 	}
 	
+	/**
+	 * Renvoie la liste de toutes les lignes de commandes d'une commande
+	 * @param idOrder La commande concernee
+	 * @return La liste de toutes les lignes de commande au format Json
+	 */
 	public JsonObject getAllOrderLine(String idOrder){
 		Query query = em.createQuery("SELECT o FROM OrderLine o");
 		List<OrderLine> orderLineList = (List<OrderLine>) query.getResultList();
@@ -80,6 +96,9 @@ public class OrderLineDatabaseAccessEJB {
 		return obj;
 	}
 	
+	/**
+	 * Affiche la table en console
+	 */
 	public void printTable(){
     	Query query = em.createQuery("SELECT o FROM OrderLine o");
     	List<OrderLine> allOrder = (List<OrderLine>) query.getResultList();
@@ -88,6 +107,9 @@ public class OrderLineDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Efface la table
+	 */
 	public void clean(){
     	Query query = em.createQuery("SELECT c FROM OrderLine c");
     	List<OrderLine> allOrder = (List<OrderLine>) query.getResultList();

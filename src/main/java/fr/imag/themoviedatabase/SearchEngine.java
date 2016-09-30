@@ -47,9 +47,17 @@ public class SearchEngine {
 	private final String tvKeyword = "tv";
 	private final String multiKeyword = "multi";
 	
+	/**
+	 * Constructeur par défaut
+	 */
 	public SearchEngine(){
 	}
 	
+	/**
+	 * Recherche un film selon l'url
+	 * @param url L'url du film
+	 * @return Un json représentant les resultats d'une recherche
+	 */
 	public JsonObject search(String url){
 		String[] elementUrl = url.split("/");
 		String target = elementUrl[0];
@@ -67,6 +75,12 @@ public class SearchEngine {
 		}
 	}
 
+	/**
+	 * Recherche selon le type de video recherchee: film ou serie
+	 * @param type
+	 * @param title
+	 * @return
+	 */
 	private JsonObject searchAll(String type, String title){
 		if(type.compareTo(movieKeyword)==0){
 			return searchAllMovies(title);
@@ -74,6 +88,12 @@ public class SearchEngine {
 		return null;
 	}
 	
+	/**
+	 * Recherche exactement un film
+	 * @param type Film ou Serie
+	 * @param id L'id TMDB du produit
+	 * @return Un json contenant la description du produit
+	 */
 	private JsonObject searchExact(String type, String id){
 		if(type.compareTo(movieKeyword)==0){
 			return searchExactMovie(id);
@@ -81,6 +101,11 @@ public class SearchEngine {
 		return null;
 	}
 	
+	/**
+	 * Recherche tous les films à partir de mot clés
+	 * @param title Les mots clés
+	 * @return Un json représentant la liste des résultats
+	 */
 	private JsonObject searchAllMovies(String title){
     	MovieList movieList = findAllFilmInOurDataBase();
     	String lowerTitle = title.toLowerCase();
@@ -94,6 +119,11 @@ public class SearchEngine {
     	return result.convertToJsonArrayResultSiteWeb();
 	}
 	
+	/**
+	 * Recherche exactement un film selon son id
+	 * @param id L'id TMDB a chercher
+	 * @return Le json contenant la description du film
+	 */
     private JsonObject searchExactMovie(String id){
 		
     	String idProductDvd = defaultValue;
@@ -173,10 +203,13 @@ public class SearchEngine {
 				.add("trailer", trailer)
 				.add("idTMDB", idTMDB)
 				.build();
-    	
     	return movie;
     }
 
+    /**
+     * Renvoi la liste de tous les films de la base de données
+     * @return La liste de tous les films
+     */
 	private MovieList findAllFilmInOurDataBase(){
 		MovieList m = new MovieList(dbAccess.findAllFilmInOurDataBase());
     	return m;

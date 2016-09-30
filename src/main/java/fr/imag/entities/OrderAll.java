@@ -43,6 +43,9 @@ public class OrderAll {
 	@OneToMany(mappedBy="order", cascade=CascadeType.REMOVE)
 	private Collection<OrderLine> allOrderLine;
 
+	/**
+	 * Constructeur par defaut
+	 */
 	public OrderAll(){
 		price = 0;
 		Calendar today = Calendar.getInstance();
@@ -84,10 +87,17 @@ public class OrderAll {
 		return formater.format(date);
 	}
 
+	/**
+	 * Ajoute une ligne de commande a la commande
+	 * @param orderLine La ligne de commande a ajouter
+	 */
 	public void addOneOrderLine(OrderLine orderLine){
 		allOrderLine.add(orderLine);
 	}
 	
+	/**
+	 * Affiche la commande en console
+	 */
 	public void print(){
 		System.out.println("idOrder: "+ idOrder);
 		System.out.println("date: "+date);

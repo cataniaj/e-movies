@@ -25,6 +25,11 @@ import fr.imag.entities.Admin;
 import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
 
+/**
+ * EJB qui se charge d'initialiser la base de données
+ * @author Jerem
+ *
+ */
 @Stateless
 public class AdminRegistration {
 
