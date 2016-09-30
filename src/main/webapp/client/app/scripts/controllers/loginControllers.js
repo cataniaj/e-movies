@@ -68,6 +68,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			loadPanier();
 		}else{
 			$scope.userIn.datasPanier=[];
+			$scope.userIn.totalPrice=0;
 		}
 		
 		function loadPanier(){			
@@ -75,11 +76,12 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				var user={"mail":$rootScope.globals.currentUser.email};	
 				//alert(user.mail);			
 				PanierService.panierManage().myPanier(user).then(function(response){
-					$scope.datasPanier = response.data.cart;
-                    $scope.totalPrice = response.data.totalPrice;
+					//$scope.datasPanier = response.data.cart;
+                    //$scope.totalPrice = response.data.totalPrice;
 
 					$scope.userIn.datasPanier = response.data.cart;
-					alert(response.data.totalPrice);
+					$scope.userIn.totalPrice = response.data.totalPrice;
+					//alert(response.data.totalPrice);
 					
 					$scope.dansPanier[0]=true;
 				});
@@ -99,6 +101,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			var user={"idProduct":idP, "mail":$rootScope.globals.currentUser.email};	
 				PanierService.panierManage().addOneQuantity(user).then(function(response){ 
 						$scope.userIn.datasPanier = response.data.cart;
+						$scope.userIn.totalPrice = response.data.totalPrice;
 				});
             /*$scope.dataPanier1[index][4]=qte;
 			$scope.dataPanierTotal[0]=0;
@@ -106,11 +109,14 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 				$scope.dataPanierTotal[0]=$scope.dataPanierTotal[0]+($scope.dataPanier1[i][4]*$scope.dataPanier1[i][5]);
 			}*/
         };
-		$scope.updateQuantiteMoins = function (index, idP){        			
-			var user={"idProduct":idP, "mail":$rootScope.globals.currentUser.email};	
-				PanierService.panierManage().deleteOneQuantity(user).then(function(response){ 
-						$scope.userIn.datasPanier = response.data.cart;
-				});
+		$scope.updateQuantiteMoins = function (index, idP, qte){ 
+			if(qte > 1){
+				var user={"idProduct":idP, "mail":$rootScope.globals.currentUser.email};	
+					PanierService.panierManage().deleteOneQuantity(user).then(function(response){ 
+							$scope.userIn.datasPanier = response.data.cart;
+							$scope.userIn.totalPrice = response.data.totalPrice;
+					});
+			}
             /*$scope.dataPanier1[index][4]=qte;
 			$scope.dataPanierTotal[0]=0;
 			for(i=0;i<$scope.dataPanier1.length;i++){
@@ -122,6 +128,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         	var user={"mail":$rootScope.globals.currentUser.email};	
         	PanierService.panierManage().clearPanier(user).then(function(response){ 
 					$scope.userIn.datasPanier = response.data.cart;
+					$scope.userIn.totalPrice = response.data.totalPrice;
 					$scope.dansPanier[0]=false;
 				});
             // while(dataPanier.length){                
@@ -137,6 +144,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
         	var json={"mail":$rootScope.globals.currentUser.email,"idProduct":idP};	  
         	PanierService.panierManage().deleteProduct(json).then(function(response){ 
         		$scope.userIn.datasPanier = response.data.cart;
+				$scope.userIn.totalPrice = response.data.totalPrice;
         	});
 
             // dataPanierTotal[0]= dataPanierTotal[0] - (dataPanier[index][4]*dataPanier[index][5]);
@@ -148,6 +156,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 			var user={"mail":$rootScope.globals.currentUser.email};	  
         	PanierService.panierManage().payment(user).then(function(response){ 
         		$scope.userIn.datasPanier = response.data.cart;
+				$scope.userIn.totalPrice = response.data.totalPrice;
         		$scope.dansPanier[0]=false;
         	});
 			// PanierService.panierManage().payment(user).then(function(response){ 
@@ -164,6 +173,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 		};
     }
 ]);   
+
 
  routeAppControllers.controller('loginValidateCtrl', ['$scope', '$location', '$routeParams', '$http', '$rootScope', 'ngDialog', '$timeout', 'AuthenticationService', 'FlashService', 'UserService',
 	function($scope, $location, $routeParams, $http, $rootScope, ngDialog, $timeout, AuthenticationService, FlashService, UserService){   
@@ -208,7 +218,7 @@ routeAppControllers.controller('panierCtrl', ['$scope', '$location', '$routePara
 					 //alert("good");
 					$location.path('/');
 					$(dialogSign_up).modal("hide");
-					$scope.login;
+					//$scope.login;
 					$scope.dataLoadingSign_up = false;
 					$scope.usert=true;
 				} else {

@@ -371,7 +371,7 @@
 							<td>{{data.title}} </td>
 							<td>{{data.year}}</td>
 							<td>{{data.support}}</td>
-							<td valign="center"><input type="text" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:40px" value={{data.quantity}} ng-disabled="true"/>	<button type="button" class="glyphicon btn btn-sm btn-primary glyphicon-plus" ng-click="updateQuantitePlus($index, data.idProduct)" ng-disabled="disabledCopieNum(data.support)"></button> <button type="button" class="glyphicon btn btn-primary btn-sm glyphicon-minus" ng-click="updateQuantiteMoins($index, data.idProduct)" ng-disabled="disabledCopieNum(data.support)"></button></td>
+							<td valign="center"><input type="text" ng-init="txtQuantite=data.quantity" ng-model="data.quantity" style="width:40px" value={{data.quantity}} ng-disabled="true"/>	<button type="button" class="glyphicon btn btn-sm btn-primary glyphicon-plus" ng-click="updateQuantitePlus($index, data.idProduct)" ng-disabled="disabledCopieNum(data.support)"></button> <button type="button" class="glyphicon btn btn-primary btn-sm glyphicon-minus" ng-click="updateQuantiteMoins($index, data.idProduct, data.quantity)" ng-disabled="disabledCopieNum(data.support)"></button></td>
 							<td>{{data.unitPrice}}€</td>
 							<td>{{data.quantity*data.unitPrice}}€</td>
 							<td><button class="btn btn-primary" ng-click="deletePanier(data.idProduct)"><span class="glyphicon glyphicon-trash"></span></button>
@@ -391,7 +391,7 @@
 					<tfoot>
 					<tr><td colspan="7"></td></tr>
 
-					<tr><td colspan="3"></td><td colspan="2"><b>Total du panier</b></td><td><b>{{totalPrice}}€</b></td><td></td></tr>
+					<tr><td colspan="3"></td><td colspan="2"><b>Total du panier</b></td><td><b>{{userIn.totalPrice}}€</b></td><td></td></tr>
 
 					</tbody>
 				</table>
