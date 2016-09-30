@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 /**
  * This is the ejb which represents an user
@@ -19,6 +20,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class User {
 	
+	@Transient
 	private String defaultValue = "N/A";
 	
 	@Id
