@@ -406,7 +406,29 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
 			</div>
 		</div>		  
-		</div>		
+		</div>	
+
+		 <!-- Suppression élément -->
+	<div class="modal fade" id="deleteP" role="dialog"> 
+		<div class="modal-dialog" style="margin-right:1%;">		
+		  <!-- Modal content-->
+		  <div class="modal-content">
+		    	<div class="modal-header" style="background-color:red; height: 30px; color:black; text-align:center;">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h1>Vider le panier</h1>
+				    </div>
+				    <div class="modal-body">
+				        <p>Voulez-vous supprimer tout le panier ?</p>
+				    </div>
+				    <div class="modal-footer" ng-controller="panierCtrl">
+				    	
+				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Non</a>
+				      <!-- <button type="button" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Valider</button> -->
+				  	  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Oui</a>
+		    	</div>
+			</div>
+		</div>
+	</div>
 
 	</div>
 		<!-- End Modal PANIER --> 
@@ -456,7 +478,7 @@
 	 
 	 
 	<!-- Modal PARAMETER -->
-	<div class="modal fade" id="dialogParameter" role="dialog">
+	<div class="modal fade" id="dialogParameter" role="dialog" ng-controller="settingCtrl">
 
 		<div class="modal-dialog">		
 		  <!-- Modal content-->
@@ -470,8 +492,8 @@
 				<!--a href="" ng-click=""><span class="glyphicon glyphicon-edit"></span></a-->
 					<tr><td>
 						<div class="paramLeft">
-							<!-- <p>{{user.lastName}}</p>
-							<p>{{user.firstName}}</p>
+							<p>{{userIn.firstName}}</p>
+							<!--p>{{user.firstName}}</p>
 							<p>{{user.address}}</p>
 							<p>{{user.zipcode}} {{user.country}}</p>
 							<p>{{user.city}}</p>
@@ -511,27 +533,7 @@
 		</div>
 	</div>
 
-	  <!-- Suppression élément -->
-	  <div class="modal fade" id="deleteP" role="dialog"> 
-		<div class="modal-dialog" style="margin-right:1%;">		
-		  <!-- Modal content-->
-		  <div class="modal-content">
-		    	<div class="modal-header" style="background-color:red; height: 30px; color:black; text-align:center;">
-			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				  <h1>Vider le panier</h1>
-				    </div>
-				    <div class="modal-body">
-				        <p>Voulez-vous supprimer tout le panier ?</p>
-				    </div>
-				    <div class="modal-footer" ng-controller="panierCtrl">
-				    	
-				      <a href="" class="btn" data-dismiss="modal" data-toggle="modal" data-target="#dialogPanier">Non</a>
-				      <!-- <button type="button" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Valider</button> -->
-				  	  <a href="" class="btn btn-primary" ng-click="clearPanier()" data-dismiss="modal">Oui</a>
-		    	</div>
-			</div>
-		</div>
-	</div>
+	 
 
 <!-- Suppression compte -->
 	  <div class="modal fade" id="deleteC" role="dialog">

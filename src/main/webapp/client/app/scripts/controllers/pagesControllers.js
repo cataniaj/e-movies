@@ -200,26 +200,26 @@ routeAppControllers.controller('settingCtrl', ['$scope','$location', '$http', '$
 		var logID={'mail':'user1@gmail.com'};
 									UserService.userManage().InfoUser(logID).then(function (info) {
 										//alert(info.data.mail);
-										$rootScope.userIn.firstName = info.data.firstName;
-										$rootScope.userIn.lastName = info.data.lastName;
+										$scope.userIn.firstName = info.data.firstName;
+										/*$rootScope.userIn.lastName = info.data.lastName;
 										$rootScope.userIn.address = info.data.address;
 										//$rootScope.userIn.zipcode = info.data.zipcode;
 										$rootScope.userIn.phone = info.data.phone;
 										//$rootScope.userIn.city = info.data.city;
 										//$rootScope.userIn.country = info.data.country;
-										$rootScope.userIn.mail = info.data.mail;									
+										$rootScope.userIn.mail = info.data.mail;	*/								
 										
 									});
 		
-		//$scope.userIn.firstName = $rootScope.userIn.firstName;
+		/*/$scope.userIn.firstName = $rootScope.userIn.firstName;
 		$scope.userIn.lastName = $rootScope.userIn.lastName;
 		$scope.userIn.address = $rootScope.userIn.address;
 		//$rootScope.userIn.zipcode = info.data.zipcode;
 		$scope.userIn.phone = $rootScope.userIn.phone;
 		/*$rootScope.userIn.city = info.data.city;
-		$rootScope.userIn.country = info.data.country;*/
+		$rootScope.userIn.country = info.data.country;
 		$scope.userIn.mail = $rootScope.userIn.mail;
 		
-		alert($rootScope.userIn.mail);
+		alert($rootScope.userIn.mail);*/
     }
 ]);
