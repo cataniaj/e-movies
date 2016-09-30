@@ -1,8 +1,9 @@
 package fr.imag.searchEngine.object;
 
-/*
- *	Author:      Jérémy Leyvraz
- *	Date:        11 sept. 2016
+/**
+ * Représente une video
+ * @author Jerem
+ *
  */
 public class VideoEJB {
 

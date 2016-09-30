@@ -27,6 +27,12 @@ import fr.imag.utilities.LoginData;
 public class UserDatabaseAccessEJB {
 	
 	@Inject EntityManager em;
+	
+	/**
+	 * Creer un nouveau compte utilisateur 
+	 * @param user L'utilisateur a créer
+	 * @return true or false
+	 */
 	public synchronized boolean createNewAccount(User user){
 		if(em.contains(user)){
 			return false;
@@ -38,22 +44,42 @@ public class UserDatabaseAccessEJB {
 		}		
 		return true;
 	}
+	
+	// TODO changer le retour
+	/**
+	 * Efface un utilisateur
+	 * @param user L'utilisateur a effacer
+	 * @return "ok"
+	 */
 	public synchronized String removeUser(String user){
 		User res = em.find(User.class, user);
 		em.remove(res);
 		return "ok";
 	}
 	
+	/**
+	 * Renvoie les information d'un utilisateur
+	 * @param user L'utilisateur concerne
+	 * @return Une chaine contenant les informations au format Json
+	 */
 	public synchronized String infoUser(String user){
 		User res = em.find(User.class, user);
 		return res.convertToJson().toString();
 	}
 	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
 	public synchronized User login(LoginData data){
 		User res = em.find(User.class, data.getMail());
 		return res;
 	}
 	
+	/**
+	 * Efface la table
+	 */
 	public void clean(){
     	Query query = em.createQuery("SELECT u FROM User u");
     	List<User> allUser = (List<User>) query.getResultList();
@@ -62,6 +88,10 @@ public class UserDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Renvoie la liste de tous les identifiants des utilisateurs
+	 * @return La liste de tous les identifiant des utilisateurs
+	 */
 	public ArrayList<String> all(){
     	Query query = em.createQuery("SELECT u FROM User u ");
     	List<User> allUser =  (List<User>) query.getResultList();
@@ -72,11 +102,19 @@ public class UserDatabaseAccessEJB {
     	return allUserString;
 	}
 	
+	/**
+	 * Renvoie les informations d'un utilisateur au format Json
+	 * @param mail L'utilisateur concerne
+	 * @return Les informations au format Json
+	 */
 	public JsonObject getInformation(String mail){
 		User res = em.find(User.class, mail);
 		return res.convertToJson();
 	}
 	
+	/**
+	 * Affiche la table en console
+	 */
 	public void printTable(){
     	Query query = em.createQuery("SELECT u FROM User u ");
     	List<User> userList = query.getResultList();

@@ -20,10 +20,20 @@ import javax.ws.rs.core.Response;
 
 import fr.imag.ejb.business.OrderAllManagerEJB;
 
+/**
+ * Module REST pour les acces orderAll
+ * @author Jerem
+ *
+ */
 @Path("/order")
 public class RESTorderAllEndPoint {
 	@Inject private OrderAllManagerEJB orderAllMngr;
 
+	/**
+	 * Renvoie la liste des commandes d'un client
+	 * @param data Un json: "mail"
+	 * @return La liste des commandes en json ou "Une erreur est survenue"
+	 */
     @POST
     @Path("/getOrder")
 	@Consumes({"application/json"})
@@ -33,7 +43,6 @@ public class RESTorderAllEndPoint {
     		JsonReader r = Json.createReader(new StringReader(data));
     		JsonObject obj = r.readObject();
         	String user = obj.getString("mail");
-        	System.out.println("TEST ---------- "+orderAllMngr.getAllOrderLine(user));
     		return Response.status(200).entity(orderAllMngr.getAllOrderLine(user)).build();
     	}catch(Exception e){
     		return Response.status(204).entity("Une erreur est survenue").build();

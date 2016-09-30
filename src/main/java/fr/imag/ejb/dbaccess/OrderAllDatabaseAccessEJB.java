@@ -24,16 +24,28 @@ import fr.imag.entities.Movie;
 import fr.imag.entities.OrderAll;
 import fr.imag.entities.OrderLine;
 
+/**
+ * L'EJB qui gère l'accès à la table OrderAll
+ * @author Jerem
+ *
+ */
 @Singleton
 @Local
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class OrderAllDatabaseAccessEJB {
 	@Inject EntityManager em;
 	
+	/**
+	 * Valide une commande
+	 * @param order La commande a valider
+	 */
 	public void validateOrder(OrderAll order){
 		em.persist(order);
 	}
 	
+	/**
+	 * Affiche la table en console
+	 */
 	public void printTable(){
     	Query query = em.createQuery("SELECT o FROM OrderAll o");
     	List<OrderAll> allOrder = (List<OrderAll>) query.getResultList();
@@ -42,6 +54,9 @@ public class OrderAllDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Efface la table
+	 */
 	public void clean(){
     	Query query = em.createQuery("SELECT c FROM OrderAll c");
     	List<OrderAll> allOrder = (List<OrderAll>) query.getResultList();
@@ -50,6 +65,12 @@ public class OrderAllDatabaseAccessEJB {
     	}
 	}
 	
+	/**
+	 * Recherche si un produit a ete commande
+	 * @param list La liste de toutes les lignes de commandes
+	 * @param idProduct Le produit concerne
+	 * @return true or false
+	 */
 	private boolean contains(List<OrderLine> list, int idProduct){
 		for(OrderLine order : list){
 			Movie m = em.find(Movie.class, Integer.parseInt(order.getIdProduct()));
@@ -60,6 +81,11 @@ public class OrderAllDatabaseAccessEJB {
 		return false;
 	}
 	
+	/**
+	 * Renvoie toutes les commandes effectuees par un utilisateur
+	 * @param user Le client concerne
+	 * @return Les commandes du client au format Json
+	 */
 	public JsonObject getAllOrder(String user){
 		Query query = em.createQuery("SELECT o FROM OrderAll o");
 		List<OrderAll> orderList = (List<OrderAll>) query.getResultList();
@@ -88,7 +114,11 @@ public class OrderAllDatabaseAccessEJB {
 		return obj;
 	}
 	
-	//TODO: Mes achats
+	/**
+	 * Renvoie la liste de toutes les lignes de commandes d'un client 
+	 * @param user Le client concerne
+	 * @return La liste des commandes au format Json
+	 */
 	public JsonObject getAllOrderLine(String user){
 		Query query = em.createQuery("SELECT o FROM OrderAll o");
 		List<OrderAll> orderList = (List<OrderAll>) query.getResultList();

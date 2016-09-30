@@ -20,17 +20,29 @@ import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
 import fr.imag.entities.Product;
 
+/**
+ * L'EJB qui gère les accès à la table Movie
+ * @author Jerem
+ *
+ */
 @Singleton
 @Local
 @ConcurrencyManagement(ConcurrencyManagementType.BEAN)
 public class MovieDatabaseAccessEJB {
 		@Inject EntityManager em;
 
+		/**
+		 * Recherche tous les films de la base
+		 * @return La liste des films présents dans la base
+		 */
 		public synchronized List<Movie> findAllFilmInOurDataBase(){
 	    	Query query = em.createQuery("SELECT m FROM Movie m");
 	    	return (List<Movie>) query.getResultList();
 		}
 
+		/**
+		 * Efface tous les films
+		 */
 		public synchronized void removeAllMovies(){
 	    	Query query = em.createQuery("SELECT o FROM Movie o ");
 	    	List<Movie> allMovie = query.getResultList();
@@ -39,6 +51,10 @@ public class MovieDatabaseAccessEJB {
 	    	}
 		}
 		
+		/**
+		 * Charge une liste de film dans la table
+		 * @param movieList La liste des films a charger
+		 */
 		public synchronized void chargeDatabase(MovieList movieList){
 			for(Movie m : movieList){
 		    	Query query = em.createQuery("SELECT o FROM Movie o ");
@@ -56,6 +72,11 @@ public class MovieDatabaseAccessEJB {
 				find = false;
 			}
 		}
+		
+		/**
+		 * Renvoie la liste de tous les films
+		 * @return
+		 */
 	    public synchronized MovieList allMovies(){
 	    	Query query = em.createQuery("SELECT o FROM Movie o ");
 	    	List<Movie> allMovie = query.getResultList();
@@ -63,16 +84,30 @@ public class MovieDatabaseAccessEJB {
 	    	return movies;
 	    }
 	    
+	    /**
+	     * Efface la table Movie
+	     */
 	    public synchronized void clean(){
 	    	em.createNativeQuery("TRUNCATE Table Product").executeUpdate();
 	    }
 	    
+	    /**
+	     * Mise a jour d'un produit
+	     * @param idProduct Le produit concerne
+	     * @param newStock Le nouveau stock
+	     * @param newPrice Le nouveau prix
+	     */
 	    public synchronized void updateProduct(String idProduct, String newStock, String newPrice){
 	    	Product p = (Product)em.find(Product.class, Integer.parseInt(idProduct));
 	    	p.setStock(Integer.parseInt(newStock));
 	    	p.setPrice(Integer.parseInt(newPrice));
 	    }
 	    
+	    /**
+	     * Recherche si un film est present dans la base
+	     * @param idTMDB L'ID TMDB du film concerne
+	     * @return true ou false
+	     */
 	    public synchronized boolean containsMovie(int idTMDB){
 	    	MovieList movieList = allMovies();
 	    	for(Movie m : movieList){
@@ -83,6 +118,11 @@ public class MovieDatabaseAccessEJB {
 	    	return false;
 	    }
 	    
+	    /**
+	     * Renvoie le stock d'un produit
+	     * @param idProduct Le produit concerne
+	     * @return Le stock du produit
+	     */
 	    public int getStock(int idProduct){
 			Query query = em.createQuery("SELECT m FROM Movie m "+
 					"WHERE m.idProduct=:param");

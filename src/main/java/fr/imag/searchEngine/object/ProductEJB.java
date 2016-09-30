@@ -1,11 +1,10 @@
 package fr.imag.searchEngine.object;
 
-/*
- *	Author:      Jérémy Leyvraz
- *	Date:        11 sept. 2016
+/**
+ * Le produit
+ * @author Jerem
+ *
  */
-
-
 public class ProductEJB {
 
 	private long idProduct;
@@ -56,7 +55,5 @@ public class ProductEJB {
 	public void setPrice(String price) {
 		this.price = price;
 	}
-	
-	
-	
+
 }

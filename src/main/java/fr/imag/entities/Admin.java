@@ -10,6 +10,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * L'EJB Entity représentant l'administrateur
+ * @author Jerem
+ *
+ */
 @Entity
 public class Admin {
 
@@ -18,6 +23,9 @@ public class Admin {
 	@Column(length= 20)
 	private String password;
 		
+	/**
+	 * Constructeur par défaut
+	 */
 	public Admin(){
 		idAdmin = "N/A";
 		password = "N/A";
@@ -39,6 +47,9 @@ public class Admin {
 		this.password = password;
 	}
 	
+	/**
+	 * Affiche en console les informations de l'admin
+	 */
 	public void print(){
 		System.out.println("login: "+idAdmin);
 		System.out.println("password: "+password);

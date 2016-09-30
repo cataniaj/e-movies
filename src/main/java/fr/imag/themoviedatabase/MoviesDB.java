@@ -22,7 +22,11 @@ import fr.imag.searchEngine.object.Movie;
 import fr.imag.searchEngine.object.MovieList;
 
 
-
+/**
+ * Module communicant avec la base de données externe TMDB
+ * @author Jerem
+ *
+ */
 public class MoviesDB {
 	
 	private final String apiKey = "api_key=db1096cd136c906c06e7d77b313df0d4";
@@ -47,6 +51,9 @@ public class MoviesDB {
 	private final String urlYoutube = "https://www.youtube.com/watch?v=";
 	private final String jsonTmdbVideoKey = "key";
 		
+	/**
+	 * Constructeur par defaut
+	 */
 	public MoviesDB(){
 	}
 	
@@ -103,6 +110,11 @@ public class MoviesDB {
 		return allActors;
 	}
 	
+	/**
+	 * Connexion a la base et recupere une liste de films
+	 * @param title Les mots clés 
+	 * @return La liste de film au format json
+	 */
 	private String connectionAndRequestManyFilm(String title){
 		URLConnection urlConnection;
 		try {
@@ -118,6 +130,11 @@ public class MoviesDB {
 		return "";
 	}
 
+	/**
+	 * Connexion a la base et recupere la fiche d'un film
+	 * @param idFilm L'id TMDB d'un film
+	 * @return La fiche detaillee d'un film en json
+	 */
 	private String connectionAndRequestJustOneFilm(String idFilm){
 		try {
 		    URLConnection urlConnection;
@@ -134,6 +151,11 @@ public class MoviesDB {
 		return "";
 	}
 
+	/**
+	 * Connexion a la base et recupere l'url du trailer
+	 * @param idFilm L'id TMDB d'un film
+	 * @return L'url du trailer du film
+	 */
 	private String connectionAndRequestTrailerLink(String idFilm){
 	    URLConnection urlConnection;
 		try {
@@ -149,6 +171,11 @@ public class MoviesDB {
 		return "";
 	}
 
+	/**
+	 * Connexion a la base et recupere l'url du trailer
+	 * @param film Le film en question
+	 * @return L'url du trailer du film
+	 */
 	private String getTrailer(Movie film){
 		String jsonTrailer = connectionAndRequestTrailerLink(film.getId());
 		JsonReader r = Json.createReader(new StringReader(jsonTrailer));
@@ -161,6 +188,11 @@ public class MoviesDB {
 		return "";
 	}
 
+	/**
+	 * Construit la liste des films trouves
+	 * @param title Les mots clés désignant le film
+	 * @return Une liste de film
+	 */
 	public MovieList buildFilmList(String title){
 			MovieList filmList = new MovieList();
 			String jsonFilmList = connectionAndRequestManyFilm(title);
@@ -195,6 +227,11 @@ public class MoviesDB {
 			return filmList;
 	}
 	
+	/**
+	 * Construit un film
+	 * @param idFilm L'id TMDB d'un film
+	 * @return Le film
+	 */
 	public Movie buildFilm(String idFilm){
 		Movie movie = new Movie();
 		try {

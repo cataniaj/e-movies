@@ -25,6 +25,11 @@ import fr.imag.entities.Movie;
 import fr.imag.entities.MovieList;
 import fr.imag.themoviedatabase.AdminRegistration;
 
+/**
+ * Module REST pour les acces admin
+ * @author Jerem
+ *
+ */
 
 @Path("/admin")
 public class RESTadminEndPoint {
@@ -38,6 +43,9 @@ public class RESTadminEndPoint {
     @Inject
     AdminRegistration adminRegistration;
 	
+    /**
+     * Initialise la base de données
+     */
     @GET
     @Path("/reboot")
     public void reboot() {
@@ -45,6 +53,10 @@ public class RESTadminEndPoint {
     	adminRegistration.chargeAllMovies();
     }
 	
+    /**
+     * Renvoi les produits
+     * @return Les produits au format json
+     */
     @GET
     @Path("/getProduct")
     public String getProduct() {
@@ -53,6 +65,11 @@ public class RESTadminEndPoint {
         return allMovie.convertToJsonArray().toString();
     }
 	
+    /**
+     * Renvoie la liste des commandes au format Json
+     * @param user L'utilisateur concerne
+     * @return La liste des commandes de l'utilisateurs au format json 
+     */
     @POST
     @Path("/getOrder")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,6 +78,11 @@ public class RESTadminEndPoint {
         return adminRegistration.allOrder(user);
     }
 	
+    /**
+     * Renvoie les informations de l'utilisateur 
+     * @param user L'utilisateur concerne
+     * @return Les informations au format json
+     */
     @POST
     @Path("/infoUser")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -69,6 +91,11 @@ public class RESTadminEndPoint {
         return adminRegistration.infoUser(user);
     }
 	
+    /**
+     * Efface un utilisateur
+     * @param user L'utilisateur concerne
+     * @return true or false en json
+     */
     @POST
     @Path("/removeUser")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -77,6 +104,11 @@ public class RESTadminEndPoint {
         return adminRegistration.removeUser(user);
     }
 	
+    /**
+     * Renvoie la liste des lignes des commandes d'une commande
+     * @param idOrder La commande concernee
+     * @return La liste des lignes commandes au format json
+     */
     @POST
     @Path("/getOrderLine")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -85,6 +117,10 @@ public class RESTadminEndPoint {
         return adminRegistration.getAllOrderLine(idOrder);
     }
 	
+    /**
+     * Renvoie la liste des utilisateurs inscrits
+     * @return La liste des utilisateurs au format json
+     */
     @GET
     @Path("/getUsers")
     @Produces("application/json")
@@ -92,6 +128,10 @@ public class RESTadminEndPoint {
     	return adminRegistration.allUser();
     }
 	
+    /**
+     * Renvoie la liste de tous les films
+     * @return La liste de tous les films au format json
+     */
     @GET
     @Path("/allMovies")
     public String getAllMovies() {
@@ -104,6 +144,11 @@ public class RESTadminEndPoint {
         return result;
     }
     
+    /**
+     * Verifie la connexion d'un administrateur
+     * @param data Les informations de connexion: login, password
+     * @return true ou false dans un json
+     */
     @POST
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -132,6 +177,11 @@ public class RESTadminEndPoint {
         return Response.status(201).entity(result).build(); 
     }
     
+    /**
+     * Demande la mise a jour d'un produit
+     * @param data Un json contenant les champs: (idProduct, stock, price)
+     * @return une chaine "updateProduct ok"
+     */
     @POST
     @Path("/updateProduct")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -146,6 +196,11 @@ public class RESTadminEndPoint {
         return "/updateProduct ok"; 
     }
     
+    /**
+     * Ajoute un film dans la base de données
+     * @param product Le film a ajouter au format json
+     * @return une chaine "updateProduct ok"
+     */
     @POST
     @Path("/addMovie")
     @Consumes(MediaType.APPLICATION_JSON)

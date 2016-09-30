@@ -3,11 +3,11 @@ package fr.imag.searchEngine.object;
 import javax.json.Json;
 import javax.json.JsonObject;
 
-/*
- *	Author:      Jérémy Leyvraz
- *	Date:        3 sept. 2016
+/**
+ * Représente un film
+ * @author Jerem
+ *
  */
-
 public class Movie {
 	
 	private final String defaultValue = "N/A";
@@ -23,6 +23,9 @@ public class Movie {
 	private String runtime;
 	private String video;
 		
+	/**
+	 * Constructeur par défaut
+	 */
 	public Movie(){
 		title = defaultValue;
 		director = defaultValue;
@@ -156,7 +159,10 @@ public class Movie {
 		}
 	}
 	
-	
+	/**
+	 * Convertit la durée en chaine de caractere
+	 * @return une chaine representant la durée du film
+	 */
 	private String convertRuntime(){
 		if(runtime.compareTo(defaultValue)==0){
 			return "0 min";
@@ -166,7 +172,10 @@ public class Movie {
 		}
 	}
 	
-	
+	/**
+	 * Convertit le film en json minimal
+	 * @return
+	 */
 	public JsonObject convertToShortJson(){		
 		JsonObject film = Json.createObjectBuilder()
 				.add("title", title)
@@ -177,6 +186,10 @@ public class Movie {
 		return film;
 	}
 	
+	/**
+	 * Convertit le film en json complet
+	 * @return
+	 */
 	public JsonObject convertToFullJson(){
 		JsonObject film = Json.createObjectBuilder()
 				.add("title", title)

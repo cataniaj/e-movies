@@ -25,6 +25,13 @@ import fr.imag.ejb.business.VideoManagerEJB;
 public class RESTvideosEndpoint {
 	@Inject private VideoManagerEJB videosMngr;
 	
+	/**
+	 * Recherche un produit
+	 * @param target All or exact
+	 * @param type Le type de produit
+	 * @param title Les mots clés de la recherche
+	 * @return Un json contenant le resultat de la recherche
+	 */
 	@GET
 	@Produces({"application/json"})
 	@Path("/search/{target}/{type}/{title}")
@@ -37,6 +44,11 @@ public class RESTvideosEndpoint {
 		return Response.status(200).entity(obj).build();
 	}
 	
+	/**
+	 * Renvoie le stock d'un produit
+	 * @param data L'identifiant du produit: "idProduct"
+	 * @return Le stock du produit
+	 */
 	@POST
 	@Consumes({"application/json"})
 	@Produces({"application/json"})

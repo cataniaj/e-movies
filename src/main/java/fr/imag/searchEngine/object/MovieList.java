@@ -13,6 +13,11 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 
+/**
+ * Représente une liste de film
+ * @author Jerem
+ *
+ */
 public class MovieList extends ArrayList<Movie> {
 	
 	public MovieList(){
